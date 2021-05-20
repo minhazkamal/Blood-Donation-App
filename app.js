@@ -20,6 +20,7 @@ var app = express();
 
 // file modules
 var landing = require ('./controllers/landing');
+var signup = require ('./controllers/signup');
 
 // view engine
 app.set('view engine', 'ejs');
@@ -28,6 +29,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('./public'));
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
+//app.use(expressValidator());
 app.use(cookie());
 app.use(session({
     cookieName: "session",
@@ -36,10 +38,12 @@ app.use(session({
     activeDuration: 5 * 60 * 1000
 }));
 
+
 var server =app.listen(port , function(){
 
     hl.rainbow('App Running');
 });
 
 app.use ('/', landing);
+app.use('/signup', signup);
 

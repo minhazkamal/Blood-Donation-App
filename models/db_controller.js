@@ -20,3 +20,40 @@ db.connect(function(err){
 
     }
 });
+
+module.exports.signup = function(user,callback) {
+    bcrypt.hash(user.password, null, null, (error, hash) => {
+        user.password = hash
+        if(error) throw error;
+
+    var query =  "INSERT INTO `users`(`email`,`password`,`joined`) VALUES (?, ?, ?)";
+    db.query(query,[user.email, user.password, user.joined],callback);
+    })
+}
+
+module.exports.query = (q, data) => {
+    return new Promise((resolve, reject) => {
+        db.query(q, data, (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.createUser = (user) => {
+    return new Promise((resolve, reject) => {
+        bcrypt.hash(user.password, null, null, (error, hash) => {
+            user.password = hash
+            db.query('INSERT INTO users SET ?', user, (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
+        })
+    })
+}
+
+module.exports.comparePassword = (password, hash) => {
+    return new Promise((resolve, reject) => {
+        bcrypt.compare(password, hash, (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
