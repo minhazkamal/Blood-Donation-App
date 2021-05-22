@@ -22,16 +22,30 @@ db.connect(function(err){
 });
 
 module.exports.signup = function(user,callback) {
-    bcrypt.hash(user.password, null, null, (error, hash) => {
-        user.password = hash
-        if(error) throw error;
-
-    var query =  "INSERT INTO `users`(`email`,`password`,`joined`) VALUES (?, ?, ?)";
-    db.query(query,[user.email, user.password, user.joined],callback);
-    })
+        bcrypt.hash(user.password, null, null, (error, hash) => {
+            user.password = hash
+            if(error) throw error;
+    
+            var query =  "INSERT INTO `users`(`email`,`password`,`joined`) VALUES (?, ?, ?)";
+            db.query(query,[user.email, user.password, user.joined], function(err, result, fields){
+                if(err) throw err;
+                else{
+                    //console.log(result.insertId);
+                    callback(result.insertId);
+                }
+                
+            })
+        })
 }
 
-module.exports.query = (q, data) => {
+module.exports.getuserid = function (email,callback){
+    var query = "SELECT * from `users` where `email` = ?";
+    db.query(query,[email],callback, (err, res) => {
+        err ? reject(err) : resolve (res)
+    })
+    console.log(query);
+}
+module.exports.direct_query = (q, data) => {
     return new Promise((resolve, reject) => {
         db.query(q, data, (err, res) => {
             err ? reject(err) : resolve(res)
@@ -56,4 +70,20 @@ module.exports.comparePassword = (password, hash) => {
             err ? reject(err) : resolve(res)
         })
     })
+}
+
+module.exports.isEmailVerified = function (id,callback) {
+    var query = "SELECT * from `users` where `id` = ?";
+    db.query(query,[id],callback, (err, res) => {
+        err ? reject(err) : resolve (res)
+    })
+    //console.log(query);
+}
+
+module.exports.verify_email = function (id,callback) {
+    var query = "UPDATE `users`SET `email_verified`='yes' where `id` = ?";
+    db.query(query,[id],callback, (err, res) => {
+        err ? reject(err) : resolve (res)
+    })
+    //console.log(query);
 }

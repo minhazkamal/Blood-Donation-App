@@ -21,12 +21,14 @@ var app = express();
 // file modules
 var landing = require ('./controllers/landing');
 var signup = require ('./controllers/signup');
-
+var verification = require('./controllers/verification');
+var profile_update = require('./controllers/profile_update');
 // view engine
 app.set('view engine', 'ejs');
 
 // middlewares
 app.use(express.static('./public'));
+// app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 //app.use(expressValidator());
@@ -46,4 +48,9 @@ var server =app.listen(port , function(){
 
 app.use ('/', landing);
 app.use('/signup', signup);
-
+app.use('/activate', verification);
+app.use('/profile-update', profile_update);
+// app.get('/activate/:id', function(req,res){
+//     let {id} = req.params;
+//     res.render('email_activate.ejs', {id});
+// });

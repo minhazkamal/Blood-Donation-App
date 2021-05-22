@@ -9,6 +9,7 @@ let transporter = nodemailer.createTransport({
 })
 
 let mail = options => {
+    //console.log('Mail!!!');
     return new Promise((resolve, reject) => {
         let o = Object.assign({}, {from: `"GLEAM App" <${process.env.MAIL}>`}, options )
         transporter.sendMail(o, (err, res) => {
