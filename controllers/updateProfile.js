@@ -11,7 +11,7 @@ router.use(bodyParser.urlencoded({extended : true}));
 router.use(bodyParser.json());
 
 router.get('/', function(req,res){
-    res.render('login.ejs');
+    res.render('updateProfile.ejs');
 });
 
 module.exports = router;

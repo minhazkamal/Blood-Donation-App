@@ -60,13 +60,19 @@
                     <div class="input-container password">
                         <!-- <label for="password">Password</label> -->
                         <input id="password" name="password" placeholder="Password" type="password">
-                        <i class="fa fa-eye-slash"></i>
+                        <span class="eye-password" onclick="toggleEyeButtonForPassword()">
+                            <i id="hide-eye-password" class="fa fa-eye"></i>
+                            <i id="hide-eye-slash-password" class="fa fa-eye-slash"></i>
+                        </span>
                     </div>
 
                     <div class="input-container password">
-                        <!-- <label for="password">Password</label> -->
-                        <input id="password" name="password" placeholder="Confirm Password" type="password">
-                        <i class="fa fa-eye-slash"></i>
+                        <!-- <label for="password">Confirm Password</label> -->
+                        <input id="confirm-password" name="password" placeholder="Confirm Password" type="password">
+                        <span class="eye-confirm-password" onclick="toggleEyeButtonForConfirmPassword()">
+                            <i id="hide-eye-confirm-password" class="fa fa-eye"></i>
+                            <i id="hide-eye-slash-confirm-password" class="fa fa-eye-slash"></i>
+                        </span>
                     </div>
     
                     <div class="input-container cta">
@@ -91,6 +97,42 @@
             
     
         </div>
+
+        <script>
+            function toggleEyeButtonForPassword(){
+                var input = document.getElementById("password");
+                var eye = document.getElementById("hide-eye-password");
+                var eye_slash = document.getElementById("hide-eye-slash-password");
+
+                if(input.type === 'password'){
+                    input.type = "text";
+                    eye.style.display = "block";
+                    eye_slash.style.display = "none";
+                }
+                else{
+                    input.type = "password";
+                    eye.style.display = "none";
+                    eye_slash.style.display = "block";
+                }
+            }
+
+            function toggleEyeButtonForConfirmPassword(){
+                var input = document.getElementById("confirm-password");
+                var eye = document.getElementById("hide-eye-confirm-password");
+                var eye_slash = document.getElementById("hide-eye-slash-confirm-password");
+
+                if(input.type === 'password'){
+                    input.type = "text";
+                    eye.style.display = "block";
+                    eye_slash.style.display = "none";
+                }
+                else{
+                    input.type = "password";
+                    eye.style.display = "none";
+                    eye_slash.style.display = "block";
+                }
+            }
+        </script>
 
         
       
