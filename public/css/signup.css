@@ -7,6 +7,9 @@
     --primary-blue: #2f6690;
 }
 
+html{
+    height: 100%;
+}
 
 body{
     padding: 0;
@@ -43,10 +46,7 @@ a:hover{
 .split-screen{
     display: flex;
     flex-direction: column;
-}
-
-.left{
-    height: 200px;
+    overflow: auto;
 }
 
 .left, .right{
@@ -55,6 +55,7 @@ a:hover{
     align-items: center;
     flex-wrap: wrap;
     flex-grow: inherit;
+    overflow: auto;
 }
 
 .left{
@@ -62,7 +63,7 @@ a:hover{
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;     
+    background-size: cover;
 }
 
 .left .copy{

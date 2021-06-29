@@ -44,7 +44,7 @@ a:hover{
 
 .split-screen{
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
 }
 
 .right{
