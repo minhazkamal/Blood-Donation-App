@@ -16,6 +16,7 @@ router.get('/', function(req,res){
     res.render('signup.ejs');
 });
 
+
 // Sign Up Form Validation
 router.post('/', [check('email', 'Email is empty').notEmpty(),
 check('email', 'Email is invalid').isEmail(),
@@ -24,7 +25,7 @@ check('repeat_password', 'Password field is empty').notEmpty(),
 body('repeat_password').custom((value, { req }) => {
 
     if (value !== req.body.password) {
-      throw new Error('Repeat Password does not match password');
+      throw new Error('Confirm Password does not match password');
     }
 
     // Indicates the success of this synchronous custom validator
