@@ -22,7 +22,7 @@ var app = express();
 var landing = require ('./controllers/landing');
 var signup = require ('./controllers/signup');
 var verification = require('./controllers/verification');
-var profile_update = require('./controllers/profile_update');
+var profile_update = require('./controllers/updateProfile');
 var login = require ('./controllers/login');
 // view engine
 app.set('view engine', 'ejs');
