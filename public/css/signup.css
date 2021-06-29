@@ -53,11 +53,16 @@ a:hover{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    flex-grow: inherit;
 }
 
 .left{
     background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.5)),url(https://images.unsplash.com/photo-1503455637927-730bce8583c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit);
-    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;     
 }
 
 .left .copy{
