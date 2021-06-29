@@ -23,6 +23,7 @@ var landing = require ('./controllers/landing');
 var signup = require ('./controllers/signup');
 var verification = require('./controllers/verification');
 var profile_update = require('./controllers/profile_update');
+var login = require ('./controllers/login');
 // view engine
 app.set('view engine', 'ejs');
 
@@ -50,6 +51,7 @@ app.use ('/', landing);
 app.use('/signup', signup);
 app.use('/activate', verification);
 app.use('/profile-update', profile_update);
+app.use('/login', login);
 // app.get('/activate/:id', function(req,res){
 //     let {id} = req.params;
 //     res.render('email_activate.ejs', {id});
