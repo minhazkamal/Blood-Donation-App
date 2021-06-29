@@ -4,13 +4,62 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="img/Logo-01.png">
     <title>Login - G L E A M</title>
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css" >
 </head>
 <body>
-    <h1>Hello World</h1>
+    <div class="split-screen">
+        <div class="left">
+            <form>
+                <section class="copy">
+                    <h2>Log In</h2>
+                    <div class="signup-container">
+                        <p>Don't have an account? 
+                            <a href="/signup">
+                                <strong>Create an account</strong>
+                            </a>
+                        </p>
+                    </div>
+                </section>
+
+                <div class="input-container email">
+                    <!-- <label for="email">Email</label> -->
+                    <input id="email" name="email" placeholder="Email" type="email">
+                </div>
+
+                <div class="input-container password">
+                    <!-- <label for="password">Password</label> -->
+                    <input id="password" name="password" placeholder="Password" type="password">
+                    <i class="fa fa-eye-slash"></i>
+                </div>
+
+                <div class="input-container cta">
+                    <label class="checkbox-container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        Remember me
+                        <a href="#">Forgot Password?</a>
+                    </label>
+                </div>
+
+                <button class="login-btn" type="submit">Log In</button>
+           </form>
+
+        </div>
+
+        <div class="right">
+            <section class="copy">
+                <h1>Welcome Back to G L E A M</h1>
+                <p>Donating blood is a great act of kindness.</p>
+            </section>
+        </div>
+        
+
+    </div>
 </body>
 </html>
