@@ -26,12 +26,13 @@ module.exports.signup = function(user,callback) {
             user.password = hash
             if(error) throw error;
     
-            var query =  "INSERT INTO `users`(`email`,`password`,`joined`) VALUES (?, ?, ?)";
-            db.query(query,[user.email, user.password, user.joined], function(err, result, fields){
+            var query =  "INSERT INTO `users`(`first_name`,`last_name`,`email`,`password`,`joined`) VALUES (?, ?, ?, ?, ?)";
+            db.query(query,[user.f_name, user.l_name, user.email, user.password, user.joined], function(err, result, fields){
                 if(err) throw err;
                 else{
-                    //console.log(result.insertId);
-                    callback(result.insertId);
+                    // console.log(result.insertId);
+                    // console.log(user.f_name);
+                    callback(result.insertId, user.f_name);
                 }
                 
             })

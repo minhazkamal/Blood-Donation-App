@@ -18,25 +18,21 @@
 </head>
 
 <body>
-    <!-- <h2><%= id %></h2> -->
     <div class="main-wrapper  account-wrapper">
         <div class="account-page">
             <div class="account-center">
                 <div class="account-box">
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        Your Email is verified!!!
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">×</span>
-                        </button>
-                      </div>
                     <form action="" method="Post" class="form-signin">
 						<div class="account-logo">
                             <a href="#"><img src="/img/Logo-01.png" alt=""></a>
                         </div>
-                        <div class="form-group text-center">
-                            <a href="<%= link %>"class="btn btn-primary account-btn" role="button" onMouseOver="this.style.color='#f00'" onMouseOut="this.style.color='#fff'">Update Profile</a>
-                        </div>
+                        <div class="alert alert-<%= alert_type %> alert-dismissible fade show" role="alert">
+                            <span><%-message%></span>
                     </form>
+                </div>
+                <% if (type == 'verification') { %>
+                <div>Redirecting to Log in page</div>
+                <%} %>
                 </div>
             </div>
         </div>
