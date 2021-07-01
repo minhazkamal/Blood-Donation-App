@@ -1,17 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="img/Logo-01.png">
-    <title>Update Profile - G L E A M</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" type="image/x-icon" href="img/Logo-01.png">
+	<title>Update Profile - G L E A M</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/updateProfile.css">
 </head>
+
 <body>
-    <h1>Bye World</h1>
+	<div class="container">
+		<div class="row gutters">
+			<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+				<div class="card h-100">
+					<div class="card-body">
+						<div class="account-settings">
+							<div class="user-profile">
+								<div class="user-avatar">
+									<img src="https://pic.onlinewebfonts.com/svg/img_212908.png" alt="">
+								</div>
+								<input id="username" name="username" placeholder="Username" type="text" required>
+								<h6 class="note">*This is a one-time username</h6>
+							</div>
+							<div class="about">
+								<h5>About</h5>
+								<div class="form-group">
+									<input id="bio" name="bio" class="bio" placeholder="Write something about yourself." type="text"  required>
+								</div>							
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+				<div class="card h-100">
+					<div class="card-body">
+						<div class="row gutters">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<h6 class="mb-2 ">Personal Details</h6>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="form-group">
+									<input type="text" class="form-control" id="fname" placeholder="First name">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" id="lname" placeholder="Last name">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" id="age" placeholder="Age">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" id="profession" placeholder="Profession">
+								</div>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="form-group">
+									<input type="text" class="form-control" id="phone" placeholder="Contact Number">
+								</div>
+								<div class="form-group">
+									<input type="email" class="form-control" id="eMail" placeholder="Email Address">
+								</div>
+								<div class="dropdown">
+									<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
+										style="border: 1px solid;opacity:0.8; font-weight: 500;" data-toggle="dropdown"
+										aria-haspopup="true" aria-expanded="false">
+										Blood Group
+									</button>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<a class="dropdown-item" href="#">Action</a>
+										<a class="dropdown-item" href="#">Another action</a>
+										<a class="dropdown-item" href="#">Something else here</a>
+									</div>
+								</div>
+								<div style="margin-top: 1.75rem;">
+									<div class="dropdown">
+										<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
+											style="border: 1px solid;opacity:0.8; font-weight: 500;" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false">
+											Gender
+										</button>
+										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+											<a class="dropdown-item" href="#">Action</a>
+											<a class="dropdown-item" href="#">Another action</a>
+											<a class="dropdown-item" href="#">Something else here</a>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+						<div class="row gutters">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<h6 class="mt-3 mb-2 ">Address Details</h6>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="form-group">
+									<input type="text" class="form-control" id="house" placeholder="House">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" id="street" placeholder="Street">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" id="thana" placeholder="Thana">
+								</div>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="form-group">
+									<input type="text" class="form-control" id="district" placeholder="District">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" id="Division" placeholder="Division">
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" id="additionalDetails"
+										placeholder="Additional Details(if any)">
+								</div>
+							</div>
+						</div>
+						<div class="row gutters">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<div class="text-right">
+									<button type="button" id="submit" name="submit"
+										class="btn1" >Save Changes</button>
+									<button type="button" id="submit" name="submit"
+										class="btn2" style>Update</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </body>
+
 </html>
