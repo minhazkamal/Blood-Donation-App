@@ -26,15 +26,26 @@
                         </p>
                     </div>
                 </section>
+                <!-- Alert Message -->
+                <% if(typeof alert != 'undefined') { %>
+                    <% alert.forEach(function(error) { %>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <%= error.msg %>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                    <% }) %>
+                <% } %>
 
                 <div class="input-container email">
                     <!-- <label for="email">Email</label> -->
-                    <input id="email" name="email" placeholder="Email" type="email">
+                    <input id="email" name="email" placeholder="Email" type="email" required>
                 </div>
 
                 <div class="input-container password">
                     <!-- <label for="password">Password</label> -->
-                    <input id="password" name="password" placeholder="Password" type="password">
+                    <input id="password" name="password" placeholder="Password" type="password" required>
                     <span class="eye-password" onclick="toggleEyeButtonForPassword()">
                         <i id="hide-eye-password" class="fa fa-eye"></i>
                         <i id="hide-eye-slash-password" class="fa fa-eye-slash"></i>
@@ -43,7 +54,7 @@
 
                 <div class="input-container cta">
                     <label class="checkbox-container">
-                        <input type="checkbox">
+                        <input type="checkbox" name="remember">
                         <span class="checkmark"></span>
                         Remember me
                         <a href="#">Forgot Password?</a>

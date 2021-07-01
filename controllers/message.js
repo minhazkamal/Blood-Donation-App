@@ -20,7 +20,7 @@ router.get('/:id', function(req,res){
     db.isEmailVerified([id], function (err, result, fields){
         if (err) throw err;
 
-        if(result[0].email_verified == "yes") res.render('message.ejs', {alert_type: 'warning', message: `Email is already verified`, type:'verification'});
+        if(result[0].email_verified == "yes") res.send("Email is already verified");
         else {
             db.verify_email([id], function (err, result, fields) {
                 if(err) throw err;
@@ -28,7 +28,7 @@ router.get('/:id', function(req,res){
                 {
                     req.session.name = 'Hello' + id;
                     //user_id = id;
-                    res.render('message.ejs', {alert_type: 'success', message: `Your email is verified`, type:'verification'});
+                    res.render('verification.ejs', {id, link: `/profile-update/${id}`});
                 }
             })
         }
