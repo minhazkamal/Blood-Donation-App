@@ -88,7 +88,11 @@ body('email').custom(value => {
         }
         else{
           req.session.email = User.email;
-          req.session.loggedin = true;
+          //req.session.loggedin = true;
+          if(req.body.remember){
+            req.session.loggedin = true;
+            req.session.cookie.maxAge = 2628000000;
+          }
           db.getuserid(User.email)
           .then(result => {
             //console.log(result[0].id);

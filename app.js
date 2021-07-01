@@ -37,8 +37,8 @@ app.use(cookie());
 app.use(session({
     cookieName: "session",
     secret: process.env.SESSION_SECRET_LETTER,
-    duration: 30 * 60 * 1000,
-    activeDuration: 5 * 60 * 1000,
+    //duration: 30 * 60 * 1000,
+    //activeDuration: 5 * 60 * 1000,
     resave: true,
     saveUninitialized: true
 }));
