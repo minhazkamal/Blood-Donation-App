@@ -22,10 +22,6 @@ db.connect(function(err){
 });
 
 module.exports.signup = function(user,callback) {
-        bcrypt.hash(user.password, null, null, (error, hash) => {
-            user.password = hash
-            if(error) throw error;
-    
             var query =  "INSERT INTO `users`(`first_name`,`last_name`,`email`,`password`,`joined`) VALUES (?, ?, ?, ?, ?)";
             db.query(query,[user.f_name, user.l_name, user.email, user.password, user.joined], function(err, result, fields){
                 if(err) throw err;
@@ -36,15 +32,23 @@ module.exports.signup = function(user,callback) {
                 }
                 
             })
-        })
 }
 
-module.exports.getuserid = function (email,callback){
+module.exports.getuserid = function (email){
     var query = "SELECT * from `users` where `email` = ?";
-    db.query(query,[email],callback, (err, res) => {
-        err ? reject(err) : resolve (res)
+    // db.query(query,[email], (err, res) => {
+    //     if(err) throw err;
+    //     else{
+    //         console.log(res[0].id);
+    //         return res[0].id;
+    //     }
+    // })
+    return new Promise((resolve, reject) => {
+        db.query(query, [email], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
     })
-    console.log(query);
+    //console.log(query);
 }
 module.exports.direct_query = (q, data) => {
     return new Promise((resolve, reject) => {
@@ -52,6 +56,32 @@ module.exports.direct_query = (q, data) => {
             err ? reject(err) : resolve(res)
         })
     })
+}
+
+module.exports.comparePassword = (password, hash) => {
+    return new Promise((resolve, reject) => {
+        bcrypt.compare(password, hash, (err, res) => {
+            err ? reject(err) : resolve(res)
+        });
+    });
+}
+
+module.exports.isEmailVerified = function (id) {
+    var query = "SELECT * from `users` where `id` = ?";
+    return new Promise((resolve, reject) => {
+        db.query(query, [id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+    //console.log(query);
+}
+
+module.exports.verify_email = function (id,callback) {
+    var query = "UPDATE `users`SET `email_verified`='yes' where `id` = ?";
+    db.query(query,[id],callback, (err, res) => {
+        err ? reject(err) : resolve (res)
+    })
+    //console.log(query);
 }
 
 module.exports.createUser = (user) => {
@@ -65,26 +95,16 @@ module.exports.createUser = (user) => {
     })
 }
 
-module.exports.comparePassword = (password, hash) => {
-    return new Promise((resolve, reject) => {
-        bcrypt.compare(password, hash, (err, res) => {
-            err ? reject(err) : resolve(res)
+module.exports.credentialCheck = function(user){
+        var query =  "SELECT `password` from `users` where `email`=?";
+        // db.query(query,[user.email], function(err, result, fields){
+        //     if(err) throw err;
+        //     if(user.password === result[0].password) return true;
+        //     else return false; 
+        // })
+        return new Promise((resolve, reject) => {
+            db.query(query, [user.email], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
         })
-    })
-}
-
-module.exports.isEmailVerified = function (id,callback) {
-    var query = "SELECT * from `users` where `id` = ?";
-    db.query(query,[id],callback, (err, res) => {
-        err ? reject(err) : resolve (res)
-    })
-    //console.log(query);
-}
-
-module.exports.verify_email = function (id,callback) {
-    var query = "UPDATE `users`SET `email_verified`='yes' where `id` = ?";
-    db.query(query,[id],callback, (err, res) => {
-        err ? reject(err) : resolve (res)
-    })
-    //console.log(query);
-}
+    }

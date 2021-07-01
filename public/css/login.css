@@ -204,6 +204,10 @@ label.checkbox-container{
     cursor: pointer;
 }
 
+#hide-eye-password{
+    display: none;
+}
+
 @media screen and (min-width:900px) {
     .split-screen{
         flex-direction: row;

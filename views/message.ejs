@@ -31,12 +31,24 @@
                     </form>
                 </div>
                 <% if (type == 'verification') { %>
-                <div>Redirecting to Log in page</div>
+                <p>You will be redirected in <span id="counter">5</span> second(s) to the <a href='/login' style="color: aqua; text-decoration: underline;">Log in</a> page</p>
                 <%} %>
                 </div>
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        function countdown() {
+        var i = document.getElementById('counter');
+        if (parseInt(i.innerHTML)<=0) {
+            location.href = '/login';
+        }
+        if (parseInt(i.innerHTML)!=0) {
+        i.innerHTML = parseInt(i.innerHTML)-1;
+        }
+    }
+    setInterval(function(){ countdown(); },1000);
+    </script>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
 	<script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
