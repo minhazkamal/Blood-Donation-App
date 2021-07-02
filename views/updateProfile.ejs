@@ -25,14 +25,43 @@
 								<div class="user-avatar">
 									<img src="https://pic.onlinewebfonts.com/svg/img_212908.png" alt="">
 								</div>
-								<input id="username" name="username" placeholder="Username" type="text" required>
-								<h6 class="note">*This is a one-time username</h6>
+								<!-- <input id="username" name="username" placeholder="Username" type="text" required>
+								<h6 class="note">*This is a one-time username</h6> -->
+
+								<section class="section-preview">
+
+									<div class="input-group my-3">
+										<div class="input-group-prepend">
+											<!-- <span class="input-group-text" id="inputGroupFileAddon01">Upload</span> -->
+										</div>
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" id="inputGroupFile01"
+												aria-describedby="inputGroupFileAddon01">
+											<label class="custom-file-label" for="inputGroupFile01"
+												style="text-align: left; background: transparent; border:1px solid;">Choose
+												file</label>
+										</div>
+
+									</div>
+
+								</section>
+
+								<button type="button" class="btn btn-light">Upload</button>
+
 							</div>
 							<div class="about">
 								<h5>About</h5>
+								<!-- <div class="form-group">
+									<input id="bio" name="bio" class="bio" placeholder="Write something about yourself."
+										type="text" required>
+								</div> -->
+
 								<div class="form-group">
-									<input id="bio" name="bio" class="bio" placeholder="Write something about yourself." type="text"  required>
-								</div>							
+									<!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
+									<textarea class="form-control" id="exampleFormControlTextarea1" rows="10"
+										placeholder="Write something about yourself."></textarea>
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -81,8 +110,8 @@
 								<div style="margin-top: 1.75rem;">
 									<div class="dropdown">
 										<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
-											style="border: 1px solid;opacity:0.8; font-weight: 500;" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false">
+											style="border: 1px solid;opacity:0.8; font-weight: 500;"
+											data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											Gender
 										</button>
 										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -92,7 +121,7 @@
 										</div>
 									</div>
 								</div>
-								
+
 							</div>
 						</div>
 						<div class="row gutters">
@@ -106,30 +135,76 @@
 								<div class="form-group">
 									<input type="text" class="form-control" id="street" placeholder="Street">
 								</div>
+
 								<div class="form-group">
-									<input type="text" class="form-control" id="thana" placeholder="Thana">
+									<!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
+									<textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
+										placeholder="Additional Details(if any)"></textarea>
 								</div>
+
+								<!-- <div class="form-group">
+									<input type="text" class="form-control" id="thana" placeholder="Thana">
+								</div> -->
 							</div>
 							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<input type="text" class="form-control" id="district" placeholder="District">
+								</div> -->
+
+								<div class="dropdown">
+									<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
+										style="border: 1px solid;opacity:0.8; font-weight: 500;" data-toggle="dropdown"
+										aria-haspopup="true" aria-expanded="false">
+										Division
+									</button>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<a class="dropdown-item" href="#">Action</a>
+										<a class="dropdown-item" href="#">Another action</a>
+										<a class="dropdown-item" href="#">Something else here</a>
+									</div>
 								</div>
-								<div class="form-group">
+								<div style="margin-top: 1.75rem;">
+									<div class="dropdown">
+										<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
+											style="border: 1px solid;opacity:0.8; font-weight: 500;"
+											data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											District
+										</button>
+										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+											<a class="dropdown-item" href="#">Action</a>
+											<a class="dropdown-item" href="#">Another action</a>
+											<a class="dropdown-item" href="#">Something else here</a>
+										</div>
+									</div>
+								</div>
+
+								<div style="margin-top: 1.75rem;">
+									<div class="dropdown" style="display: block;">
+										<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
+											style="border: 1px solid;opacity:0.8; font-weight: 500;"
+											data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											Thana
+										</button>
+										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+											<a class="dropdown-item" href="#">Action</a>
+											<a class="dropdown-item" href="#">Another action</a>
+											<a class="dropdown-item" href="#">Something else here</a>
+										</div>
+									</div>
+								</div>
+
+
+								<!-- <div class="form-group">
 									<input type="text" class="form-control" id="Division" placeholder="Division">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="additionalDetails"
-										placeholder="Additional Details(if any)">
-								</div>
+								</div> -->
+
 							</div>
 						</div>
 						<div class="row gutters">
 							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 								<div class="text-right">
-									<button type="button" id="submit" name="submit"
-										class="btn1" >Save Changes</button>
-									<button type="button" id="submit" name="submit"
-										class="btn2" style>Update</button>
+									<button type="button" id="submit" name="submit" class="btn2" style>Save
+										Changes</button>
 								</div>
 							</div>
 						</div>
