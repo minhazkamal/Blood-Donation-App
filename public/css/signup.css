@@ -212,6 +212,32 @@ label.checkbox-container{
     display: none;
 }
 
+#or-button {
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  #or-button:before,
+  #or-button:after {
+    background-color: rgb(182, 181, 181);
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+  }
+  
+  #or-button:before {
+    right: 0.5em;
+    margin-left: -50%;
+  }
+  
+  #or-button:after {
+    left: 0.5em;
+    margin-right: -50%;
+  }
+
 @media screen and (min-width:900px) {
     .split-screen{
         flex-direction: row;
