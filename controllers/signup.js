@@ -61,7 +61,8 @@ body('confirm_password').custom((value, { req }) => {
       l_name: req.body.lname,
       email: req.body.email,
       password,
-      joined: new Date()
+      joined: new Date(),
+      provider: "self"
       }
       db.signup(newUser, function(insert_id, f_name){
         //console.log(insert_id);

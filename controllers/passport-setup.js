@@ -20,16 +20,28 @@ passport.deserializeUser(function(user, done) {
     done(null, user);
 });
 
-passport.use(new GoogleStrategy({
+passport.use('google-signup', new GoogleStrategy({
     clientID:process.env.GOOGLE_CLIENT_ID,
     clientSecret:process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL:process.env.CALLBACK_GOOGLE_URL,
+    callbackURL:process.env.CALLBACK_GOOGLE_URL_SIGNUP,
     passReqToCallback:true
   },
   function(request, accessToken, refreshToken, profile, done) {
     //console.log(profile)
     return done(null, profile);
   }
+));
+
+passport.use('google-login', new GoogleStrategy({
+  clientID:process.env.GOOGLE_CLIENT_ID,
+  clientSecret:process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL:process.env.CALLBACK_GOOGLE_URL_LOGIN,
+  passReqToCallback:true
+},
+function(request, accessToken, refreshToken, profile, done) {
+  //console.log(profile)
+  return done(null, profile);
+}
 ));
 
 passport.use(new FacebookStrategy({

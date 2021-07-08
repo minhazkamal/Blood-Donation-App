@@ -22,16 +22,31 @@ db.connect(function(err){
 });
 
 module.exports.signup = function(user,callback) {
-            var query =  "INSERT INTO `users`(`first_name`,`last_name`,`email`,`password`,`joined`) VALUES (?, ?, ?, ?, ?)";
-            db.query(query,[user.f_name, user.l_name, user.email, user.password, user.joined], function(err, result, fields){
-                if(err) throw err;
-                else{
-                    // console.log(result.insertId);
-                    // console.log(user.f_name);
-                    callback(result.insertId, user.f_name);
-                }
+
+    if(user.provider === "google" || user.provider === "facebook") {
+        var query =  "INSERT INTO `users`(`first_name`,`last_name`,`email`,`email_verified`,`joined`,`provider`) VALUES (?, ?, ?, ?, ?, ?)";
+        db.query(query,[user.f_name, user.l_name, user.email, 'yes', user.joined, user.provider], function(err, result, fields){
+            if(err) throw err;
+            else{
+                // console.log(result.insertId);
+                // console.log(user.f_name);
+                callback(result.insertId, user.f_name);
+            }
                 
-            })
+        })
+    }
+    else {
+    var query =  "INSERT INTO `users`(`first_name`,`last_name`,`email`,`password`,`joined`,`provider`) VALUES (?, ?, ?, ?, ?, ?)";
+    db.query(query,[user.f_name, user.l_name, user.email, user.password, user.joined, user.provider], function(err, result, fields){
+            if(err) throw err;
+            else{
+                // console.log(result.insertId);
+                // console.log(user.f_name);
+                callback(result.insertId, user.f_name);
+            }
+                
+        })
+    }
 }
 
 module.exports.getuserid = function (email){
@@ -66,6 +81,16 @@ module.exports.comparePassword = (password, hash) => {
     });
 }
 
+module.exports.EmailCheck = function (email) {
+    var query = "SELECT COUNT(*) as emailCount FROM users WHERE email = ?";
+    return new Promise((resolve, reject) => {
+        db.query(query, [email], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+    //console.log(query);
+}
+
 module.exports.isEmailVerified = function (id) {
     var query = "SELECT * from `users` where `id` = ?";
     return new Promise((resolve, reject) => {
@@ -96,7 +121,7 @@ module.exports.createUser = (user) => {
 }
 
 module.exports.credentialCheck = function(user){
-        var query =  "SELECT `password` from `users` where `email`=?";
+        var query =  "SELECT `password`, `provider` from `users` where `email`=?";
         // db.query(query,[user.email], function(err, result, fields){
         //     if(err) throw err;
         //     if(user.password === result[0].password) return true;

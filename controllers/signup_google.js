@@ -22,9 +22,9 @@ const isLoggedIn = (req, res, next) => {
 }
 
 // Auth Routes
-router.get('/', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/', passport.authenticate('google-signup', { scope: ['profile', 'email'] }));
 
-router.get('/callback', passport.authenticate('google', { failureRedirect: '/signup-google/failed' }),
+router.get('/callback', passport.authenticate('google-signup', { failureRedirect: '/signup-google/failed' }),
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/signup-google/good');
@@ -35,11 +35,30 @@ router.get('/callback', passport.authenticate('google', { failureRedirect: '/sig
 router.get('/failed', (req, res) => res.send('You Failed to log in!'));
 
 router.get('/good', (req, res) =>{
+
     //console.log("profile");
     var user = req.session.passport.user;
     //console.log(user);
+    db.EmailCheck(user.emails[0].value)
+    .then(result =>{
+        if(result[0].emailCount == 1) {
+            res.render('signup', {alert: [{msg: 'Email already exists'}]});
+        }
+        else{
+        let newUser = {
+            f_name: user.given_name,
+            l_name: user.family_name,
+            email: user.emails[0].value,
+            joined: new Date(),
+            provider: "google"
+            }
+            db.signup(newUser, function(insert_id, f_name){
+                res.render('message.ejs', {alert_type: 'success', message: `Your email is verified`, type:'verification'});
+            })
+        }
+    })
     //console.log(req.user.displayName);
-    res.render('profile.ejs',{name:user.displayName, pic:user.photos[0].value, email:user.emails[0].value});
+    //res.render('profile.ejs',{name:user.displayName, pic:user.photos[0].value, email:user.emails[0].value});
 })
 
 router.get('/logout', (req, res) => {
