@@ -22,19 +22,12 @@ const isLoggedIn = (req, res, next) => {
 }
 
 // Auth Routes
-router.get('/', passport.authenticate('facebook', { scope : 'email' }));
+router.get('/', passport.authenticate('facebook-signup', { scope : 'email' }));
 
-router.get('/callback', passport.authenticate('facebook', {
+router.get('/callback', passport.authenticate('facebook-signup', {
     successRedirect : '/signup-facebook/good',
     failureRedirect : '/signup-facebook/failed'
 }));
-// passport.authenticate('google', { failureRedirect: '/signup-google/failed' }),
-//   function(req, res) {
-//     // Successful authentication, redirect home.
-//     res.redirect('/signup-google/good');
-//     //res.render('profile.ejs',{name:req.user.displayName,pic:req.user.photos[0].value,email:req.user.emails[0].value});
-//   }
-// );
 
 router.get('/failed', (req, res) => res.send('You Failed to log in!'));
 
@@ -42,9 +35,24 @@ router.get('/good', (req, res) =>{
     //console.log("profile");
     var user = req.session.passport.user;
     //console.log(user);
-    //res.send("Hello World");
-    //console.log(req.user.displayName);
-    res.render('profile.ejs',{name:user.displayName, pic:user.photos[0].value, email:user.emails[0].value});
+    db.EmailCheck(user.emails[0].value)
+    .then(result =>{
+        if(result[0].emailCount == 1) {
+            res.render('signup', {alert: [{msg: 'Email already exists'}]});
+        }
+        else{
+        let newUser = {
+            f_name: user.name.givenName,
+            l_name: user.name.familyName,
+            email: user.emails[0].value,
+            joined: new Date(),
+            provider: "facebook"
+            }
+            db.signup(newUser, function(insert_id, f_name){
+                res.render('message.ejs', {alert_type: 'success', message: `Your email is verified`, type:'verification'});
+            })
+        }
+    })
 })
 
 router.get('/logout', (req, res) => {

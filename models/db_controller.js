@@ -92,6 +92,7 @@ module.exports.EmailCheck = function (email) {
 }
 
 module.exports.isEmailVerified = function (id) {
+    //console.log('isEmailVerified?');
     var query = "SELECT * from `users` where `id` = ?";
     return new Promise((resolve, reject) => {
         db.query(query, [id], (err, res) => {

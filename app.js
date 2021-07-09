@@ -24,8 +24,9 @@ var cookieSession = require('cookie-session')
 var landing = require ('./controllers/landing');
 var signup = require ('./controllers/signup');
 var signup_google = require('./controllers/signup_google');
-var login_google = require('./controllers/login_google')
-var signup_facebook = require('./controllers/signup_facebook')
+var login_google = require('./controllers/login_google');
+var signup_facebook = require('./controllers/signup_facebook');
+var login_facebook = require('./controllers/login_facebook');
 var verification = require('./controllers/verification');
 var profile_update = require('./controllers/updateProfile');
 var login = require ('./controllers/login');
@@ -66,6 +67,7 @@ app.use('/login', login);
 app.use('/signup-google', signup_google);
 app.use('/login-google', login_google);
 app.use('/signup-facebook', signup_facebook);
+app.use('/login-facebook', login_facebook);
 // app.get('/activate/:id', function(req,res){
 //     let {id} = req.params;
 //     res.render('email_activate.ejs', {id});

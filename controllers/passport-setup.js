@@ -44,12 +44,26 @@ function(request, accessToken, refreshToken, profile, done) {
 }
 ));
 
-passport.use(new FacebookStrategy({
+passport.use('facebook-signup', new FacebookStrategy({
 
   // pull in our app id and secret from our auth.js file
   clientID        : process.env.FACEBOOK_APP_ID,
   clientSecret    : process.env.FACEBOOK_APP_SECRET,
-  callbackURL     : process.env.CALLBACK_FACEBOOK_URL,
+  callbackURL     : process.env.CALLBACK_FACEBOOK_URL_SIGNUP,
+  profileFields: ['id', 'displayName', 'name', 'gender', 'picture.type(large)','email']
+
+},// facebook will send back the token and profile
+function(token, refreshToken, profile, done) {
+    //console.log(profile)
+    return done(null, profile);
+  }));
+
+passport.use('facebook-login', new FacebookStrategy({
+
+  // pull in our app id and secret from our auth.js file
+  clientID        : process.env.FACEBOOK_APP_ID,
+  clientSecret    : process.env.FACEBOOK_APP_SECRET,
+  callbackURL     : process.env.CALLBACK_FACEBOOK_URL_LOGIN,
   profileFields: ['id', 'displayName', 'name', 'gender', 'picture.type(large)','email']
 
 },// facebook will send back the token and profile

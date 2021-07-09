@@ -67,6 +67,7 @@ body('confirm_password').custom((value, { req }) => {
       db.signup(newUser, function(insert_id, f_name){
         //console.log(insert_id);
         let url = `http://localhost:${process.env.PORT}/activate/${insert_id}`
+        //console.log(url);
         let options = {
           to: email,
           subject: "Activate your GLEAM App account",
