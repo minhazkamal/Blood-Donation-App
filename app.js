@@ -30,6 +30,7 @@ var login_facebook = require('./controllers/login_facebook');
 var verification = require('./controllers/verification');
 var profile_update = require('./controllers/updateProfile');
 var login = require ('./controllers/login');
+var eligibilityTest = require('./controllers/eligibilityTest');
 // view engine
 app.set('view engine', 'ejs');
 
@@ -67,7 +68,15 @@ app.use('/login', login);
 app.use('/signup-google', signup_google);
 app.use('/login-google', login_google);
 app.use('/signup-facebook', signup_facebook);
+<<<<<<< Updated upstream
 app.use('/login-facebook', login_facebook);
+=======
+<<<<<<< HEAD
+app.use('/eligibility-test', eligibilityTest);
+=======
+app.use('/login-facebook', login_facebook);
+>>>>>>> 8e1d113da8cd9c700707dc2a979defe2fff21a31
+>>>>>>> Stashed changes
 // app.get('/activate/:id', function(req,res){
 //     let {id} = req.params;
 //     res.render('email_activate.ejs', {id});
