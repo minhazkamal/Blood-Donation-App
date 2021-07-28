@@ -53,7 +53,7 @@ router.get('/good', (req, res) =>{
             provider: "google"
             }
             db.signup(newUser, function(insert_id, f_name){
-                res.render('message.ejs', {alert_type: 'success', message: `Your email is verified`, type:'verification'});
+                res.render('message.ejs', {alert_type: 'success', message: `Your account is verified`, type:'verification'});
             })
         }
     })
