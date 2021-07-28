@@ -31,7 +31,7 @@ router.get('/', function(req,res){
 
 
           // Profile Build
-          res.send("Profile Build");
+          res.send("<h1>Home Page</h1><br><span>Under Progress....</span>");
         }
         else{
           res.render('message.ejs', {alert_type: 'danger', message: `Please verify your email`, type:'mail'})
