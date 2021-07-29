@@ -58,16 +58,23 @@ a:hover{
     overflow: auto;
 }
 
+.copy{
+    margin-top: 4rem;
+}
 .left{
-    background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.5)),url(https://images.unsplash.com/photo-1503455637927-730bce8583c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit);
+    /* background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.5)),url(https://images.unsplash.com/photo-1503455637927-730bce8583c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit); */
+    background-image: url(/img/wave.png);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    /* transform: rotate(180deg); */
 }
 
 .left .copy{
-    color: white;
+    /* transform: rotate(-180deg); */
+    margin: 2em;
+    color: black;
     text-align: center;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -227,7 +234,7 @@ label.checkbox-container{
     vertical-align: middle;
     width: 50%;
   }
-  
+
   #or-button:before {
     right: 0.5em;
     margin-left: -50%;
@@ -236,6 +243,22 @@ label.checkbox-container{
   #or-button:after {
     left: 0.5em;
     margin-right: -50%;
+  }
+
+  .fa-google {
+    background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .fa-facebook-square {
+    color: #3b5998;
+    background-image: linear-gradient( to bottom, transparent 20%, white 20%, white 93%, transparent 93% );
+    background-size: 55%;
+    background-position: 70% 0;
+    background-repeat: no-repeat;
   }
 
 @media screen and (min-width:900px) {
