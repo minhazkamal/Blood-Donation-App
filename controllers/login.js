@@ -83,7 +83,7 @@ body('email').custom(value => {
       }
       db.credentialCheck(User)
       .then(result =>{
-        if(password !== result[0].password || result[0].provider !== "self") {
+        if(result === false) {
           res.render('login', {alert: [{msg: 'Your Password is wrong'}]});
         }
         else{

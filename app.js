@@ -11,6 +11,7 @@ var path = require ('path');
 var async = require ('async');
 var nodmailer = require ('nodemailer');
 var crypto = require ('crypto');
+var cryptr = require ('cryptr');
 var expressValidator = require ('express-validator');
 var sweetalert = require('sweetalert2');
 var port = process.env.PORT;

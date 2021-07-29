@@ -8,7 +8,7 @@ var hl = require('handy-log');
 const { body, check, validationResult } = require('express-validator');
 const { array } = require('prop-types');
 const passport = require('passport');
-require('./passport-setup');
+require('../models/passport-setup');
 
 router.use(bodyParser.urlencoded({extended : true}));
 router.use(bodyParser.json());

@@ -5,6 +5,9 @@ var db = require ('../models/db_controller');
 var mail = require('../models/mail');
 var mysql = require('mysql');
 var hl = require('handy-log');
+var Cryptr = require('cryptr');
+var cryptr = new Cryptr(process.env.SECURITY_KEY);
+
 const { body, check, validationResult } = require('express-validator');
 
 
@@ -25,7 +28,7 @@ check('confirm_password', 'Confirm Password field is empty').notEmpty(),
 body('confirm_password').custom((value, { req }) => {
 
     if (value !== req.body.password) {
-      throw new Error('Confirm Password does not match password');
+      throw new Error('Confirm Password does not match with Password');
     }
 
     // Indicates the success of this synchronous custom validator
@@ -66,7 +69,8 @@ body('confirm_password').custom((value, { req }) => {
       }
       db.signup(newUser, function(insert_id, f_name){
         //console.log(insert_id);
-        let url = `http://localhost:${process.env.PORT}/activate/${insert_id}`
+        var encrypted_insert_id = cryptr.encrypt(insert_id);
+        let url = `http://localhost:${process.env.PORT}/activate/${encrypted_insert_id}`
         //console.log(url);
         let options = {
           to: email,

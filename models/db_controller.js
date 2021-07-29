@@ -36,16 +36,28 @@ module.exports.signup = function(user,callback) {
         })
     }
     else {
-    var query =  "INSERT INTO `users`(`first_name`,`last_name`,`email`,`password`,`joined`,`provider`) VALUES (?, ?, ?, ?, ?, ?)";
-    db.query(query,[user.f_name, user.l_name, user.email, user.password, user.joined, user.provider], function(err, result, fields){
-            if(err) throw err;
-            else{
-                // console.log(result.insertId);
-                // console.log(user.f_name);
-                callback(result.insertId, user.f_name);
-            }
+        var query =  "INSERT INTO `users`(`first_name`,`last_name`,`email`,`password`,`joined`,`provider`) VALUES (?, ?, ?, ?, ?, ?)";
+        bcrypt.hash(user.password, null, null, (error, hash) => {
+            user.password = hash
+            db.query(query,[user.f_name, user.l_name, user.email, user.password, user.joined, user.provider], function(err, result, fields){
+                if(err) throw err;
+                else{
+                    //  console.log(result.insertId);
+                    //  console.log(user.f_name);
+                    callback(result.insertId, user.f_name);
+                 }
                 
+            })
         })
+        // db.query(query,[user.f_name, user.l_name, user.email, user.password, user.joined, user.provider], function(err, result, fields){
+        //         if(err) throw err;
+        //         else{
+        //             // console.log(result.insertId);
+        //             // console.log(user.f_name);
+        //             callback(result.insertId, user.f_name);
+        //         }
+                
+        //     })
     }
 }
 
@@ -130,7 +142,18 @@ module.exports.credentialCheck = function(user){
         // })
         return new Promise((resolve, reject) => {
             db.query(query, [user.email], (err, res) => {
-                err ? reject(err) : resolve(res)
+                if(err) throw err;
+                if(res[0].provider === 'self')
+                {
+                    bcrypt.compare(user.password, res[0].password, (err, result) => {
+
+                        // console.log(result);
+                        err ? reject(err) : resolve(result)
+                    });
+                }
+                else{
+                    err ? reject(err) : resolve(false)
+                }
             })
         })
     }

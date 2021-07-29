@@ -7,6 +7,8 @@ var mysql = require('mysql');
 var hl = require('handy-log');
 const { body, check, validationResult } = require('express-validator');
 const session = require('express-session');
+var Cryptr = require('cryptr');
+var cryptr = new Cryptr(process.env.SECURITY_KEY);
 
 
 
@@ -15,9 +17,11 @@ router.use(bodyParser.json());
 
 //var user_id;
 
-router.get('/:id', function(req,res){
+router.get('/:encrypted_id', function(req,res){
     //console.log('Email Verification');
-    let {id} = req.params;
+    let {encrypted_id} = req.params;
+    let id = cryptr.decrypt(encrypted_id);
+    //console.log(id);
     db.isEmailVerified([id])
     .then(result => {
         //console.log(result);
@@ -28,7 +32,7 @@ router.get('/:id', function(req,res){
                 if(err) throw err;
                 else
                 {
-                    req.session.name = 'Hello' + id;
+                    //req.session.name = 'Hello' + id;
                     //console.log(req.session.name);
                     //user_id = id;
                     res.render('message.ejs', {alert_type: 'success', message: `Your email is verified`, type:'verification'});

@@ -70,7 +70,7 @@
     
                     <div class="input-container password">
                         <!-- <label for="password">Password</label> -->
-                        <input id="password" name="password" placeholder="Password" type="password" required>
+                        <input id="password" name="password" placeholder="Password" type="password" pattern=".{6,}"   required title="6 characters minimum">
                         <span class="eye-password" onclick="toggleEyeButtonForPassword()">
                             <i id="hide-eye-password" class="fa fa-eye"></i>
                             <i id="hide-eye-slash-password" class="fa fa-eye-slash"></i>
