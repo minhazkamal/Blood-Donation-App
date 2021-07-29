@@ -68,11 +68,12 @@ a:hover{
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    transform: rotateY(180deg);
     /* transform: rotate(180deg); */
 }
 
 .left .copy{
-    /* transform: rotate(-180deg); */
+    transform: rotateY(-180deg);
     margin: 2em;
     color: black;
     text-align: center;
@@ -245,21 +246,21 @@ label.checkbox-container{
     margin-right: -50%;
   }
 
-  .fa-google {
+.fa-google {
     background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
-  }
+    }
 
-  .fa-facebook-square {
+.fa-facebook-square {
     color: #3b5998;
     background-image: linear-gradient( to bottom, transparent 20%, white 20%, white 93%, transparent 93% );
     background-size: 55%;
     background-position: 70% 0;
     background-repeat: no-repeat;
-  }
+}
 
 @media screen and (min-width:900px) {
     .split-screen{
