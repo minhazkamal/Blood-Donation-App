@@ -48,6 +48,7 @@ body{
     border-radius: 20px;
     border: 1rem;
     margin-bottom: 1rem;
+    overflow: auto;
 }
 
 input {

@@ -75,7 +75,7 @@ body('confirm_password').custom((value, { req }) => {
         let options = {
           to: email,
           subject: "Activate your GLEAM App account",
-          html: `<span>Hello, <b>${f_name}</b> <br>You received this message because you created an account on GLEAM App.<span><br><span>Click on button below to activate your account and explore.</span><br><br><a href='${url}' style='border: 1px solid #1b9be9; font-weight: 600; color: #fff; border-radius: 3px; cursor: pointer; outline: none; background: #1b9be9; padding: 4px 15px; display: inline-block; text-decoration: none;'>Activate</a>`
+          html: `<span>Hello, <b>${f_name}</b> <br>You received this message because you created an account on GLEAM App.</span><br><span>Click on button below to activate your account and explore.</span><br><br><a href='${url}' style='border: 1px solid #1b9be9; font-weight: 600; color: #fff; border-radius: 3px; cursor: pointer; outline: none; background: #1b9be9; padding: 4px 15px; display: inline-block; text-decoration: none;'>Activate</a>`
         }
         mail(options)
           .then(m =>{

@@ -133,6 +133,19 @@ module.exports.createUser = (user) => {
     })
 }
 
+
+
+module.exports.resetPassword = (password, id) => {
+    return new Promise((resolve, reject) => {
+        bcrypt.hash(password, null, null, (error, hash) => {
+            password = hash
+            db.query('UPDATE users SET password = ? WHERE id = ?', [password, id], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
+        })
+    })
+}
+
 module.exports.credentialCheck = function(user){
         var query =  "SELECT `password`, `provider` from `users` where `email`=?";
         // db.query(query,[user.email], function(err, result, fields){
@@ -143,17 +156,41 @@ module.exports.credentialCheck = function(user){
         return new Promise((resolve, reject) => {
             db.query(query, [user.email], (err, res) => {
                 if(err) throw err;
-                if(res[0].provider === 'self')
-                {
-                    bcrypt.compare(user.password, res[0].password, (err, result) => {
+            if(res[0].provider === 'self') {
+                bcrypt.compare(user.password, res[0].password, (err, result) => {
 
-                        // console.log(result);
-                        err ? reject(err) : resolve(result)
-                    });
-                }
-                else{
-                    err ? reject(err) : resolve(false)
-                }
-            })
+                    // console.log(result);
+                    err ? reject(err) : resolve(result)
+                });
+            }
+            else{
+                err ? reject(err) : resolve(false)
+            }
         })
-    }
+    })
+}
+
+
+module.exports.oldPassCheck = function(password, id){
+    var query =  "SELECT `password`, `provider` from `users` where `id`=?";
+    // db.query(query,[user.email], function(err, result, fields){
+    //     if(err) throw err;
+    //     if(user.password === result[0].password) return true;
+    //     else return false; 
+    // })
+    return new Promise((resolve, reject) => {
+        db.query(query, [id], (err, res) => {
+            if(err) throw err;
+        if(res[0].password !== null && res[0].provider === 'self') {
+            bcrypt.compare(password, res[0].password, (err, result) => {
+
+                // console.log(result);
+                err ? reject(err) : resolve(result)
+            });
+        }
+        else{
+            err ? reject(err) : resolve('undefined')
+        }
+    })
+})
+}

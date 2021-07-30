@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="/img/Logo-01.png">
-    <title>Email Search - G L E A M</title>
+    <title>Reset Password - G L E A M</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
@@ -30,9 +30,22 @@
                 <h1>Forgot Password</h1>
                 <p>Enter the email address you use on <strong>G L E A M</strong> . We'll send you a link to reset your
                     password.</p>
-                <form action="">
+
+                <!-- Alert Message -->
+                <% if(typeof alert != 'undefined') { %>
+                    <% alert.forEach(function(error) { %>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <%= error.msg %>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                          </div>
+                    <% }) %>
+                <% } %>
+                
+                <form method="POST">
                     
-                    <input type="email" placeholder="Email">
+                    <input id="email" name="email" type="email" placeholder="Email" required>
                     <button class="signup-btn" type="submit">Continue</button>
                 </form>
 

@@ -32,6 +32,9 @@ var verification = require('./controllers/verification');
 var profile_update = require('./controllers/updateProfile');
 var login = require ('./controllers/login');
 var eligibilityTest = require('./controllers/eligibilityTest');
+var resetPassword = require('./controllers/resetPassword');
+
+
 // view engine
 app.set('view engine', 'ejs');
 
@@ -72,19 +75,13 @@ app.use('/signup-facebook', signup_facebook);
 app.use('/login-facebook', login_facebook);
 app.use('/eligibility-test', eligibilityTest);
 app.use('/login-facebook', login_facebook);
+app.use('/reset-password', resetPassword);
 // app.get('/activate/:id', function(req,res){
 //     let {id} = req.params;
 //     res.render('email_activate.ejs', {id});
 // });
 
-app.get('/emailSearch', function(req,res){
-    res.render('emailSearch.ejs');
-});
 
 app.get('/KYC', function(req,res){
     res.render('KYC.ejs');
-});
-
-app.get('/changeForgotPassword', function(req,res){
-    res.render('changeForgotPassword.ejs');
 });
