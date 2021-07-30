@@ -103,5 +103,20 @@ body {
     
 }
 
+.btn-pink {
+    color: var(--primary-pink);
+    border-radius: 20px;
+    padding: 8px 20px;
+    margin: 0;
+    background: none;
+    transition: .4s;
+}
+
+.btn-pink:hover {
+    
+    color: white;
+    background: var(--primary-pink);
+}
+
 
 /*
