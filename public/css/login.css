@@ -18,6 +18,7 @@ body{
 h1{
     font-size: 2.25rem;
     font-weight: 700;
+    margin-top: 2rem;
 }
 
 h2{
@@ -91,7 +92,7 @@ a:hover{
 }
 
 .left{
-    background-color: #f8f9fa;
+    background-color: transparent;
 }
 
 form input[type="text"],form input[type="email"],
@@ -250,6 +251,15 @@ label.checkbox-container{
     background-size: 55%;
     background-position: 70% 0;
     background-repeat: no-repeat;
+}
+.blobLogin{
+    width: 700px;;
+    height: 500px;
+    top: -100px;
+    position: absolute;
+    left: -200px;
+    top: 180px;
+    z-index: -1;
 }
 
 @media screen and (min-width:900px) {

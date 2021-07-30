@@ -101,7 +101,7 @@ a:hover{
 }
 
 .right{
-    background-color: #f8f9fa;
+    background-color: transparent;
 }
 
 form input[type="text"],form input[type="email"],
@@ -260,6 +260,14 @@ label.checkbox-container{
     background-size: 55%;
     background-position: 70% 0;
     background-repeat: no-repeat;
+}
+
+.blobSignup{
+    width: 700px;;
+    height: 500px;
+    top: 100px;
+    position: absolute;
+    z-index: -1;
 }
 
 @media screen and (min-width:900px) {
