@@ -76,3 +76,15 @@ app.use('/login-facebook', login_facebook);
 //     let {id} = req.params;
 //     res.render('email_activate.ejs', {id});
 // });
+
+app.get('/emailSearch', function(req,res){
+    res.render('emailSearch.ejs');
+});
+
+app.get('/KYC', function(req,res){
+    res.render('KYC.ejs');
+});
+
+app.get('/changeForgotPassword', function(req,res){
+    res.render('changeForgotPassword.ejs');
+});
