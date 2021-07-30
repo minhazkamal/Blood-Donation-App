@@ -48,17 +48,26 @@ a:hover{
     text-decoration: underline;
 }
 
-#upload {
+#upload-front {
     opacity: 0;
-
 }
 
-#upload-label {
+#upload-label-front {
     position: absolute;
     top: 50%;
     left: 1rem;
     transform: translateY(-50%);
+}
 
+#upload-back {
+    opacity: 0;
+}
+
+#upload-label-back {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
 }
 
 .image-area {
@@ -84,6 +93,7 @@ a:hover{
     z-index: 2;
     position: relative;
 }
+
 
 
 
@@ -118,5 +128,3 @@ body {
     background: var(--primary-pink);
 }
 
-
-/*
