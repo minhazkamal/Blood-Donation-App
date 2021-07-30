@@ -81,6 +81,7 @@ a:hover{
     -moz-osx-font-smoothing: grayscale;
 }
 
+
 .left p{
     font-weight: 400;
     font-size: 1.25rem;
@@ -104,18 +105,6 @@ a:hover{
     background-color: transparent;
 }
 
-form input[type="text"],form input[type="email"],
-form input[type="password"]{
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #c4c4c4;
-    padding: 1em;
-    margin-bottom: 1.25rem;
-    font-size: 0.875rem;
-}
 
 label{
     display: block;
@@ -127,20 +116,7 @@ label.checkbox-container{
     justify-content: space-between;
 }
 
-.input-container.password{
-    position: relative;
-}
-.input-container.password i{
-    position: absolute;
-    top: 12px;
-    right: 16px;
-    font-size: 18px;
-    color: grey;
-}
 
-.input-container.password i:hover{
-    cursor: pointer;
-}
 
 .checkbox-container input{
     position: absolute;
@@ -216,59 +192,7 @@ label.checkbox-container{
     cursor: pointer;
 }
 
-#hide-eye-password, #hide-eye-confirm-password{
-    display: none;
-}
 
-#or-button {
-    overflow: hidden;
-    text-align: center;
-  }
-  
-  #or-button:before,
-  #or-button:after {
-    background-color: rgb(182, 181, 181);
-    content: "";
-    display: inline-block;
-    height: 1px;
-    position: relative;
-    vertical-align: middle;
-    width: 50%;
-  }
-
-  #or-button:before {
-    right: 0.5em;
-    margin-left: -50%;
-  }
-  
-  #or-button:after {
-    left: 0.5em;
-    margin-right: -50%;
-  }
-
-.fa-google {
-    background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-    }
-
-.fa-facebook-square {
-    color: #3b5998;
-    background-image: linear-gradient( to bottom, transparent 20%, white 20%, white 93%, transparent 93% );
-    background-size: 55%;
-    background-position: 70% 0;
-    background-repeat: no-repeat;
-}
-
-.blobSignup{
-    width: 700px;;
-    height: 500px;
-    top: 100px;
-    position: absolute;
-    z-index: -1;
-}
 
 @media screen and (min-width:900px) {
     .split-screen{
