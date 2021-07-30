@@ -24,12 +24,12 @@
     <div class="container py-5">
 
         <!-- For demo purpose -->
-        <header class="text-white text-center">
-            <h1 class="display-4">Identity Verification</h1>
+        <header class="text-dark text-center">
+            <h1 class="display-4 text-bold">Identity Verification</h1>
             <p class="lead mb-0">Helps us to make this plaform safe for all</p>
             <p class="mb-5 font-weight-light">Learn more about our KYC policies
                 <a href="https://www.facebook.com/minhaz.kamal9900" class="text-white">
-                    <u>here</u>.
+                    <u style="color: darkcyan;">here</u>.
                 </a>
             </p>
             <!-- <img src="https://res.cloudinary.com/mhmd/image/upload/v1564991372/image_pxlho1.svg" alt="" width="150"> -->
@@ -42,14 +42,14 @@
                 <!-- Upload image input-->
                 <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                     <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0">
-                    <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label>
+                    <label id="upload-label" for="upload" class="font-weight-light text-muted">Front Side</label>
                     <div class="input-group-append">
-                        <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                        <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-danger font-weight-bold text-muted">Choose file</small></label>
                     </div>
                 </div>
     
                 <!-- Uploaded image area-->
-                <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
+                <p class="font-italic text-white text-center">Front Preview</p>
                 <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
     
             </div>
@@ -62,14 +62,14 @@
                 <!-- Upload image input-->
                 <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                     <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0">
-                    <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label>
+                    <label id="upload-label" for="upload" class="font-weight-light text-muted">Back Side</label>
                     <div class="input-group-append">
                         <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
                     </div>
                 </div>
     
                 <!-- Uploaded image area-->
-                <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
+                <p class="font-italic text-white text-center">Back Preview</p>
                 <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
     
             </div>
