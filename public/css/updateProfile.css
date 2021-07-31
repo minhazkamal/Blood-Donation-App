@@ -265,12 +265,32 @@ h2{
     }
 }
 
-@media (min-width:0px) and (max-width:456px) {
+@media screen and (max-width:456px) {
     .blobUpdateProf{
         position: absolute;
         z-index: -1;
         width: 15rem;
         height: 25rem;
         left: 5rem;
+    }
+}
+
+@media screen and (max-width:416px) {
+    .blobUpdateProf{
+        position: absolute;
+        z-index: -1;
+        width: 15rem;
+        height: 27rem;
+        left: 4rem;
+    }
+}
+
+@media screen and (max-width:316px) {
+    .blobUpdateProf{
+        position: absolute;
+        z-index: -1;
+        width: 15rem;
+        height: 27rem;
+        left: 1rem;
     }
 }
