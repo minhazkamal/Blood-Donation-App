@@ -225,6 +225,12 @@ h2{
     left: 27rem;
 }
 
+.custom-file-label{
+    margin-top: 2rem;
+    border-color: black;
+    text-align: left;
+}
+
 @media screen and (max-width:1200px) {
     .blobUpdateProf{
         position: absolute;
