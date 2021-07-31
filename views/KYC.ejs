@@ -37,13 +37,15 @@
         </header>
 
         <!-- Front-side -->
-        <div class="row py-4">
+    <form class="form-container" action="#">
+        
+        <div class="py-4">
             <div class="col-lg-6 mx-auto">
     
                 <!-- Upload image input-->
                 <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                     <input id="upload-front" type="file" onchange="readURLfront(this);" class="form-control border-0">
-                    <label id="upload-label-front" for="upload-front" class="font-weight-light text-muted">Choose file</label>
+                    <label id="upload-label-front" for="upload-front" class="font-weight-light text-muted"><i class="fa fa-id-card" aria-hidden="true"></i>  Front File</label>
                     <!-- <label id="upload-label" for="upload" class="font-weight-normal m-0 rounded-pill p-2 bg-dark text-white"><i class="fa fa-id-card" aria-hidden="true"></i>  Front Side</label> -->
                     <div class="input-group-append">
                         <label for="upload-front" class="btn btn-pink m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2"></i><small class="font-weight-bold">Choose file</small></label>
@@ -52,21 +54,22 @@
     
                 <!-- Uploaded image area-->
                 <!-- <p class="font-weight-normal m-0 rounded-pill p-2 bg-dark text-white text-center"><i class="fa fa-id-card" aria-hidden="true"></i> Front Side Preview</p> -->
-                <p class="font-italic text-white text-center">Front Preview</p>
+                <p class="font-italic text-center"><i class="fa fa-id-card" aria-hidden="true"></i> Front Preview</p>
                 <div class="image-area mt-4"><img id="imageResultFront" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block" ></div>
     
             </div>
         </div>
-
+        
 
         <!-- Back-side -->
-        <div class="row py-4">
+        
+        <div class="py-4">
             <div class="col-lg-6 mx-auto">
     
                 <!-- Upload image input-->
                 <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                     <input id="upload-back" type="file" onchange="readURLback(this);" class="form-control border-0">
-                    <label id="upload-label-back" for="upload-back" class="font-weight-light text-muted">Choose file</label>
+                    <label id="upload-label-back" for="upload-back" class="font-weight-light text-muted"><i class="fa fa-credit-card" aria-hidden="true"></i>  Back File</label>
                     <!-- <label id="upload-label" for="upload" class="font-weight-normal m-0 rounded-pill p-2 bg-dark text-white"><i class="fa fa-id-card" aria-hidden="true"></i>  Front Side</label> -->
                     <div class="input-group-append">
                         <label for="upload-back" class="btn btn-pink m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2"></i><small class="font-weight-bold">Choose file</small></label>
@@ -75,12 +78,14 @@
     
                 <!-- Uploaded image area-->
                 <!-- <p class="font-weight-normal m-0 rounded-pill p-2 bg-dark text-white text-center"><i class="fa fa-id-card" aria-hidden="true"></i> Front Side Preview</p> -->
-                <p class="font-italic text-white text-center">Back Preview</p>
+                <p class="font-italic text-center"> <i class="fa fa-credit-card" aria-hidden="true"></i> Back Preview</p>
                 <div class="image-area mt-4"><img id="imageResultBack" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block" ></div>
     
             </div>
         </div>
-    </div>
+        
+        <button class="signup-btn" type="submit">Submit</button>
+    </form>
 
     <script>
     /*  ==========================================

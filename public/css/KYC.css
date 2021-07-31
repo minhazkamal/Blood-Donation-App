@@ -48,6 +48,21 @@ a:hover{
     text-decoration: underline;
 }
 
+/* .form-container {
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+}
+
+.front, .back{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-grow: inherit;
+    overflow: auto;
+} */
+
 #upload-front {
     opacity: 0;
 }
@@ -71,14 +86,15 @@ a:hover{
 }
 
 .image-area {
-    border: 2px dashed rgba(255, 255, 255, 0.7);
+    border: 2px dashed rgba(0, 0, 0, 0.5);
     padding: 1rem;
     position: relative;
 }
 
 .image-area::before {
     content: 'Uploaded image result';
-    color: #fff;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
     font-weight: bold;
     text-transform: uppercase;
     position: absolute;
@@ -110,6 +126,8 @@ body {
     /* background-color: #757f9a; */
     /* background-image: linear-gradient(147deg, #757f9a 0%, #d7dde8 100%); */
     background-image: url(/img/wavelogin.png);
+    background-size: cover;
+    background-repeat: no-repeat;
     
 }
 
@@ -128,3 +146,26 @@ body {
     background: var(--primary-pink);
 }
 
+
+.signup-btn{
+    margin: auto;
+    display: block;
+    width: 10rem;
+    background: var(--primary-blue);
+    color: white;
+    font-weight: 500;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: 0.3s;
+    font-size: 0.875rem;
+    margin-top: 2rem;
+}
+
+.signup-btn:hover{
+    background: #3a7ca5;
+    cursor: pointer;
+}
