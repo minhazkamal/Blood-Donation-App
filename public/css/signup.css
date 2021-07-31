@@ -39,6 +39,20 @@ a:hover{
     text-decoration: underline;
 }
 
+.brand-name {
+    font-weight: 900;
+    display: inline;
+}
+
+@media screen and (max-width:900px) {
+    .brand-name {
+        font-weight: 800;
+        display: block;
+    }   
+    
+}
+
+
 .small{
     font-size: 80%;
     text-align: center;
