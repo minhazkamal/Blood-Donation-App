@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding-top: 40px;
     color: #2e323c;
-    background: url(https://images.unsplash.com/photo-1514451380751-c374d1d0d4d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxhbGx8fHx8fHx8fHwxNjI1MTIwMjYz&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit);
+    /* background: url(https://images.unsplash.com/photo-1514451380751-c374d1d0d4d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxhbGx8fHx8fHx8fHwxNjI1MTIwMjYz&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit); */
     position: relative;
     height: 100%;
     background-size: cover;
@@ -142,7 +142,7 @@ h6{
 }
 
 .card {
-    background: rgba( 255, 255, 255, 0.25 );
+    background: rgba( 255, 255, 255, 1 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 16.0px );
     -webkit-backdrop-filter: blur( 20.0px );
@@ -198,4 +198,79 @@ h6{
 .btn2:hover{
     background: #3a7ca5;
     cursor: pointer;
+}
+
+.card-body{
+    padding: 4rem;
+    font-family: 'Montserrat',sans-serif;
+    background: transparent !important;
+    background: transparent !important;
+}
+h2{
+    text-align: center;
+    color: black;
+    font-family: 'Montserrat',sans-serif;
+    margin-bottom:4rem ;
+}
+
+.brandname{
+    display: inline;
+}
+
+.blobUpdateProf{
+    position: absolute;
+    z-index: -1;
+    width: 15rem;
+    height: 25rem;
+    left: 27rem;
+}
+
+@media screen and (max-width:1200px) {
+    .blobUpdateProf{
+        position: absolute;
+        z-index: -1;
+        width: 15rem;
+        height: 25rem;
+        left: 21.5rem;
+    }
+}
+
+@media screen and (max-width:992px) {
+    .blobUpdateProf{
+        position: absolute;
+        z-index: -1;
+        width: 15rem;
+        height: 25rem;
+        left: 14rem;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .blobUpdateProf{
+        position: absolute;
+        z-index: -1;
+        width: 15rem;
+        height: 23rem;
+        left: 8.5rem;
+    }
+}
+
+@media screen and (max-width:575px) {
+    .blobUpdateProf{
+        position: absolute;
+        z-index: -1;
+        width: 15rem;
+        height: 23rem;
+        left: 8.5rem;
+    }
+}
+
+@media (min-width:0px) and (max-width:456px) {
+    .blobUpdateProf{
+        position: absolute;
+        z-index: -1;
+        width: 15rem;
+        height: 25rem;
+        left: 5rem;
+    }
 }
