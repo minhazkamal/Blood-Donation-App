@@ -38,6 +38,19 @@ a:hover{
     text-decoration: underline;
 }
 
+.brand-name {
+    font-weight: 900;
+    display: inline;
+}
+
+@media screen and (max-width:900px) {
+    .brand-name {
+        font-weight: 800;
+        display: block;
+    }   
+    
+}
+
 .small{
     font-size: 80%;
     text-align: center;
@@ -173,12 +186,14 @@ label.checkbox-container{
 
 .signup-btn{
     display: block;
-    width: 100%;
+    width: 8rem;
+    padding: 1rem;
+    margin: auto;
+    margin-top: 2rem;
     background: var(--primary-blue);
     color: white;
     font-weight: 500;
     border: none;
-    padding: 1rem;
     border-radius: 8px;
     font-size: 0.75rem;
     text-transform: uppercase;
