@@ -54,7 +54,7 @@
     
                 <!-- Uploaded image area-->
                 <!-- <p class="font-weight-normal m-0 rounded-pill p-2 bg-dark text-white text-center"><i class="fa fa-id-card" aria-hidden="true"></i> Front Side Preview</p> -->
-                <p class="font-italic text-center"><i class="fa fa-id-card" aria-hidden="true"></i> Front Preview</p>
+                <p class="font-italic text-center" id="upload-label-front-text"><i class="fa fa-id-card" aria-hidden="true"></i> Front Preview</p>
                 <div class="image-area mt-4"><img id="imageResultFront" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block" ></div>
     
             </div>
@@ -78,7 +78,7 @@
     
                 <!-- Uploaded image area-->
                 <!-- <p class="font-weight-normal m-0 rounded-pill p-2 bg-dark text-white text-center"><i class="fa fa-id-card" aria-hidden="true"></i> Front Side Preview</p> -->
-                <p class="font-italic text-center"> <i class="fa fa-credit-card" aria-hidden="true"></i> Back Preview</p>
+                <p class="font-italic text-center" id="upload-label-back-text"> <i class="fa fa-credit-card" aria-hidden="true"></i> Back Preview</p>
                 <div class="image-area mt-4"><img id="imageResultBack" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block" ></div>
     
             </div>
@@ -134,26 +134,26 @@
                 SHOW UPLOADED IMAGE NAME
     * ========================================== */
     var input_front = document.getElementById( "upload-front" );
-    var infoArea_front = document.getElementById( "upload-label-front" );
+    var infoArea_front = document.getElementById( "upload-label-front-text" );
 
     input_front.addEventListener( "change", showFileNameFront );
 
     function showFileNameFront( event ) {
     var input_front = event.srcElement;
     var fileName = input_front.files[0].name;
-    infoArea_front.textContent = fileName;
+    infoArea_front.textContent = "File Name: " + fileName;
     }
 
 
     var input_back = document.getElementById( "upload-back" );
-    var infoArea_back = document.getElementById( "upload-label-back" );
+    var infoArea_back = document.getElementById( "upload-label-back-text" );
 
     input_back.addEventListener( "change", showFileNameBack );
 
     function showFileNameBack( event ) {
     var input_back = event.srcElement;
     var fileName = input_back.files[0].name;
-    infoArea_back.textContent = fileName;
+    infoArea_back.textContent = "File Name: " + fileName;
     }
     </script>
 
