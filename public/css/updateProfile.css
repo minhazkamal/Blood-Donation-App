@@ -10,7 +10,7 @@ body {
     background-size: cover;
     font-family: 'Montserrat',sans-serif;
     padding-bottom: 40px;
-    background: url(/img/wave.png);
+    background: url(/img/waveUpdateProfile.png);
 
 }
 .account-settings .user-profile {
@@ -370,7 +370,7 @@ hr{
     }
 }
 
-@media screen and (max-width:316px) {
+@media screen and (max-width:326px) {
     .blobUpdateProf{
         position: absolute;
         z-index: -1;
