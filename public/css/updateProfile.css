@@ -5,10 +5,13 @@ body {
     padding-top: 40px;
     color: #2e323c;
     /* background: url(https://images.unsplash.com/photo-1514451380751-c374d1d0d4d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxhbGx8fHx8fHx8fHwxNjI1MTIwMjYz&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit); */
-    position: relative;
-    height: 100%;
+    /* position: relative; */
+    /* height: 100%; */
     background-size: cover;
     font-family: 'Montserrat',sans-serif;
+    padding-bottom: 40px;
+    background: url(/img/wave.png);
+
 }
 .account-settings .user-profile {
     margin: 0 0 1rem 0;
@@ -26,7 +29,7 @@ body {
     border-radius: 100px;
     /* border-style: solid; */
 }
-input[type="text"],input[type="email"]{
+input[type="text"],input[type="email"],input[type="tel"]{
     /* margin: 0 0 0.5rem 0; */
 
     display: block;
@@ -92,12 +95,14 @@ input[type="textarea"]{
 
 .form-control{
     background: transparent;
-    border: 1px solid #1a1919;
+    /* border: 1px solid #1a1919; */
     border-radius: 5px;
     box-sizing: border-box;
-    color: black;
+    /* color: black; */
     font-weight: 500;
     font-size: 0.875rem;
+    border-color: black !important ;
+    margin-top: 3rem;
 }
 
 .account-settings .user-profile h6.note {
@@ -141,8 +146,8 @@ h6{
     border: 1px solid black;
 }
 
-.card {
-    background: rgba( 255, 255, 255, 1 );
+/* .card { */
+    /* background: rgba( 255, 255, 255, 1 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 16.0px );
     -webkit-backdrop-filter: blur( 20.0px );
@@ -152,10 +157,10 @@ h6{
     -moz-border-radius: 5px;
     border-radius: 5px;
     border: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1rem; */
      /* margin-top: 5rem;  */
 
-}
+/* } */
 
 .btn1{
 
@@ -217,18 +222,92 @@ h2{
     display: inline;
 }
 
+
+
+#upload{
+    margin-top: 3rem; 
+    border-color: black;
+    text-align: left;
+    text-decoration-color: black;
+}
+
+.input-group-append{
+    margin-top: 3rem; 
+}
+
+hr{
+    border-width: 1px;
+    background: rgba(0, 0, 0, 0.404);
+    margin-bottom: 2rem;
+}
+
+.hr1{
+    border-width: 0.5px;
+    background: rgba(0, 0, 0, 0.404);
+    margin-bottom: 2rem;
+}
+
+
+/* .btn.btn-secondary.dropdown-toggle{
+    display: inline;
+    box-sizing: border-box;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #c4c4c4;
+    /* padding: 1em; */
+   /* font-size: 0.875rem;
+    color: black;
+}*/
+
+.dropdown.show{
+    margin-top: 2rem;
+    display: flex;
+} 
+
+
+#basic_dob_day{
+    border-radius: 0.5rem;
+    border: 1px solid #1a1919;
+    color: #2e323c;
+    margin-top: 0;
+}
+
+#basic_dob_month{
+    border-radius: 0.5rem;
+    border: 1px solid #1a1919;
+    color: #2e323c;
+    margin-top: 0;
+}
+
+#basic_dob_year{
+    border-radius: 0.5rem;
+    border: 1px solid #1a1919;
+    color: #2e323c;
+    margin-top: 0;
+}
+
+.note{
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    font-style: italic;
+    margin-bottom: 2px;
+}
+
+
+.blood_group{
+    border-radius: 0.5rem;
+    border: 1px solid #1a1919;
+    color: #2e323c;
+    margin-top: 0;
+}
+
 .blobUpdateProf{
     position: absolute;
     z-index: -1;
     width: 15rem;
-    height: 25rem;
-    left: 27rem;
-}
-
-.custom-file-label{
-    margin-top: 2rem;
-    border-color: black;
-    text-align: left;
+    height: 17rem;
+    left: 28rem;
 }
 
 @media screen and (max-width:1200px) {
@@ -236,8 +315,8 @@ h2{
         position: absolute;
         z-index: -1;
         width: 15rem;
-        height: 25rem;
-        left: 21.5rem;
+        height: 17rem;
+        left: 22.5rem;
     }
 }
 
@@ -246,8 +325,8 @@ h2{
         position: absolute;
         z-index: -1;
         width: 15rem;
-        height: 25rem;
-        left: 14rem;
+        height: 17rem;
+        left: 15rem;
     }
 }
 
@@ -256,8 +335,8 @@ h2{
         position: absolute;
         z-index: -1;
         width: 15rem;
-        height: 23rem;
-        left: 8.5rem;
+        height: 16rem;
+        left: 9.5rem;
     }
 }
 
@@ -266,8 +345,8 @@ h2{
         position: absolute;
         z-index: -1;
         width: 15rem;
-        height: 23rem;
-        left: 8.5rem;
+        height: 16rem;
+        left: 9.5rem;
     }
 }
 
@@ -276,8 +355,8 @@ h2{
         position: absolute;
         z-index: -1;
         width: 15rem;
-        height: 25rem;
-        left: 5rem;
+        height: 16rem;
+        left: 6rem;
     }
 }
 
@@ -286,8 +365,8 @@ h2{
         position: absolute;
         z-index: -1;
         width: 15rem;
-        height: 27rem;
-        left: 4rem;
+        height: 16rem;
+        left: 3.5rem;
     }
 }
 
@@ -296,7 +375,7 @@ h2{
         position: absolute;
         z-index: -1;
         width: 15rem;
-        height: 27rem;
-        left: 1rem;
+        height: 19rem;
+        left: 1.5rem;
     }
 }

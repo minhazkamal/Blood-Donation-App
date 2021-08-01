@@ -15,8 +15,12 @@
 </head>
 
 <body>
+
 	<div class="container">
-		<div class="row gutters">
+
+		<div class="row gutters" style="padding-bottom: 5rem;">
+			
+
 			<!-- <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
 				<div class="card h-100">
 					<div class="card-body">
@@ -24,85 +28,298 @@
 					</div>
 				</div>
 			</div> -->
-			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
-				
-				<div class="card h-100">
-					<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blobUpdateProf">
-						<path fill="#E1E1E1" d="M59.7,-32.4C71.3,-14.4,70.4,12.8,58.3,34.2C46.3,55.6,23.2,71.1,1,70.6C-21.2,70,-42.4,53.4,-54.4,32C-66.3,10.7,-68.9,-15.3,-58.3,-32.7C-47.7,-50.2,-23.9,-59,0.1,-59.1C24.1,-59.2,48.1,-50.4,59.7,-32.4Z" transform="translate(100 100)" />
-					  </svg>
-					<div class="card-body">
-						<section>
-							<h2>Edit your <div class="brandname" style="font-weight: 600;"> G L E A M </div> Profile</h2>
-						</section>
 
-						<div class="account-settings">
-							<div class="user-profile">
-								<div class="user-avatar">
-									
-									<img src="https://pic.onlinewebfonts.com/svg/img_212908.png" alt="">
-								</div>
-								<!-- <input id="username" name="username" placeholder="Username" type="text" required>
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+				<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blobUpdateProf">
+					<path fill="#E1E1E1"
+						d="M59.7,-32.4C71.3,-14.4,70.4,12.8,58.3,34.2C46.3,55.6,23.2,71.1,1,70.6C-21.2,70,-42.4,53.4,-54.4,32C-66.3,10.7,-68.9,-15.3,-58.3,-32.7C-47.7,-50.2,-23.9,-59,0.1,-59.1C24.1,-59.2,48.1,-50.4,59.7,-32.4Z"
+						transform="translate(100 100)" />
+				</svg>
+				<section>
+					<h2>Edit your <div class="brandname" style="font-weight: 600;"> G L E A M </div> Profile
+					</h2>
+				</section>
+
+				<div class="account-settings">
+					<div class="user-profile">
+						<div class="user-avatar">
+
+							<img src="https://pic.onlinewebfonts.com/svg/img_212908.png" alt="">
+						</div>
+						<!-- <input id="username" name="username" placeholder="Username" type="text" required>
 								<h6 class="note">*This is a one-time username</h6> -->
 
-								<section class="section-preview">
+						<section class="section-preview">
 
-									<div class="input-group my-3">
-										<div class="input-group-prepend">
-											<!-- <span class="input-group-text" id="inputGroupFileAddon01">Upload</span> -->
-										</div>
-										<div class="custom-file">
+							<div class="input-group mb-3">
+								<!-- <div class="input-group-prepend"> -->
+								<!-- <span class="input-group-text" id="inputGroupFileAddon01">Upload</span> -->
+								<!-- </div> -->
+								<!-- <div class="custom-file">
 											<input type="file" class="custom-file-input" id="customFile">
 											<label class="custom-file-label" for="customFile">Choose file</label>
-										  </div>
+										  </div> -->
 
-									</div>
-
-								</section>
-
-								<button type="button" class="btn btn-outline-dark" style="margin-top: 2rem;">Upload</button>
+								<!-- <input type="text" class="form-control" id="upload" disabled
+											placeholder="Choose File" aria-label="Choose File"
+											aria-describedby="basic-addon1"> -->
+								<input class="form-control" type="file" id="formFile">
+								<!-- <div class="input-group-append">
+											<button type="button"
+												class="browse input-group-text btn btn-outline-secondary"
+												id="basic-addon2" style="font-weight: 500; "> Browse</button>
+										</div> -->
 
 							</div>
-							<div class="about">
-								<h5>About</h5>
-								<!-- <div class="form-group">
+
+						</section>
+
+						<button type="button" class="btn btn-lg btn-outline-dark"
+							style="margin-top: 1rem;">Upload</button>
+
+					</div>
+					<!-- <div class="about">
+								<h5>About</h5> -->
+					<!-- <div class="form-group">
 									<input id="bio" name="bio" class="bio" placeholder="Write something about yourself."
 										type="text" required>
 								</div> -->
 
-								<div class="form-group">
-									<!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
+					<!-- <div class="form-group"> -->
+					<!-- <label for="exampleFormControlTextarea1">Example textarea</label>
 									<textarea class="form-control" id="exampleFormControlTextarea1" rows="10"
 										placeholder="Write something about yourself."></textarea>
 								</div>
 
-							</div>
+							</div> -->
+
+				</div>
+				<hr>
+				<div class="row gutters">
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<h6 class="mb-2">Personal Details</h6>
+						<div class="input-container fname">
+							<input id="fname" name="fname" placeholder="First Name" type="text" required>
 						</div>
-						<div class="row gutters">
-							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
-								<h6 class="mb-2 ">Personal Details</h6>
-							</div>
-							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-								<div class="form-group">
-									<input type="text" class="form-control" id="fname" placeholder="First name">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="lname" placeholder="Last name">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="age" placeholder="Age">
-								</div>
-								<div class="form-group">
+						<div class="input-container lname">
+							<input id="lname" name="lname" placeholder="Last Name" type="text">
+						</div>
+						<div class="input-container lname">
+							<input id="contact" name="contact" placeholder="Contact Number (+880)" type="tel">
+						</div>
+						<div class="input-container lname">
+							<input id="email" name="email" placeholder="Email Address" type="email">
+						</div>
+
+
+
+						<!-- <div class="form-group">
 									<input type="text" class="form-control" id="profession" placeholder="Profession">
-								</div>
+								</div> -->
+
+					</div>
+
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<h6 class="mb-2">Date of Birth</h6>
+						<div class="row">
+							<div class="col-md-4 mb-4">
+								<select name="dob_day" class="form-control" id="basic_dob_day" tabindex="-1" "
+											aria-hidden=" true">
+									<option value="">Day</option>
+									<option value="01">1</option>
+									<option value="02">2</option>
+									<option value="03">3</option>
+									<option value="04">4</option>
+									<option value="05">5</option>
+									<option value="06">6</option>
+									<option value="07">7</option>
+									<option value="08">8</option>
+									<option value="09">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+									<option value="13">13</option>
+									<option value="14">14</option>
+									<option value="15">15</option>
+									<option value="16">16</option>
+									<option value="17">17</option>
+									<option value="18">18</option>
+									<option value="19">19</option>
+									<option value="20">20</option>
+									<option value="21">21</option>
+									<option value="22">22</option>
+									<option value="23">23</option>
+									<option value="24">24</option>
+									<option value="25">25</option>
+									<option value="26">26</option>
+									<option value="27">27</option>
+									<option value="28">28</option>
+									<option value="29">29</option>
+									<option value="30">30</option>
+									<option value="31">31</option>
+								</select>
 							</div>
-							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-								<div class="form-group">
-									<input type="text" class="form-control" id="phone" placeholder="Contact Number">
-								</div>
-								<div class="form-group">
-									<input type="email" class="form-control" id="eMail" placeholder="Email Address">
-								</div>
-								<div class="dropdown">
+							<div class="col-md-4 mb-4"><select name="dob_month" class="form-control"
+									id="basic_dob_month" tabindex="-1" aria-hidden="true">
+									<option value="">Month</option>
+									<option value="01">January</option>
+									<option value="02">February</option>
+									<option value="03">March</option>
+									<option value="04">April</option>
+									<option value="05">May</option>
+									<option value="06">June</option>
+									<option value="07">July</option>
+									<option value="08">August</option>
+									<option value="09">September</option>
+									<option value="10">October</option>
+									<option value="11">November</option>
+									<option value="12">December</option>
+								</select></div>
+							<div class="col-md-4 mb-4"><select name="dob_year" class="form-control" id="basic_dob_year"
+									tabindex="-1" aria-hidden="true">
+									<option value="">Year</option>
+									<option value="2003">2003</option>
+									<option value="2002">2002</option>
+									<option value="2001">2001</option>
+									<option value="2000">2000</option>
+									<option value="1999">1999</option>
+									<option value="1998">1998</option>
+									<option value="1997">1997</option>
+									<option value="1996">1996</option>
+									<option value="1995">1995</option>
+									<option value="1994">1994</option>
+									<option value="1993">1993</option>
+									<option value="1992">1992</option>
+									<option value="1991">1991</option>
+									<option value="1990">1990</option>
+									<option value="1989">1989</option>
+									<option value="1988">1988</option>
+									<option value="1987">1987</option>
+									<option value="1986">1986</option>
+									<option value="1985">1985</option>
+									<option value="1984">1984</option>
+									<option value="1983">1983</option>
+									<option value="1982">1982</option>
+									<option value="1981">1981</option>
+									<option value="1980">1980</option>
+									<option value="1979">1979</option>
+									<option value="1978">1978</option>
+									<option value="1977">1977</option>
+									<option value="1976">1976</option>
+									<option value="1975">1975</option>
+									<option value="1974">1974</option>
+									<option value="1973">1973</option>
+									<option value="1972">1972</option>
+									<option value="1971">1971</option>
+									<option value="1970">1970</option>
+									<option value="1969">1969</option>
+									<option value="1968">1968</option>
+									<option value="1967">1967</option>
+									<option value="1966">1966</option>
+									<option value="1965">1965</option>
+									<option value="1964">1964</option>
+									<option value="1963">1963</option>
+									<option value="1962">1962</option>
+									<option value="1961">1961</option>
+									<option value="1960">1960</option>
+									<option value="1959">1959</option>
+									<option value="1958">1958</option>
+									<option value="1957">1957</option>
+									<option value="1956">1956</option>
+									<option value="1955">1955</option>
+									<option value="1954">1954</option>
+									<option value="1953">1953</option>
+									<option value="1952">1952</option>
+									<option value="1951">1951</option>
+									<option value="1950">1950</option>
+									<option value="1949">1949</option>
+									<option value="1948">1948</option>
+									<option value="1947">1947</option>
+									<option value="1946">1946</option>
+									<option value="1945">1945</option>
+									<option value="1944">1944</option>
+									<option value="1943">1943</option>
+									<option value="1942">1942</option>
+									<option value="1941">1941</option>
+									<option value="1940">1940</option>
+									<option value="1939">1939</option>
+									<option value="1938">1938</option>
+									<option value="1937">1937</option>
+									<option value="1936">1936</option>
+									<option value="1935">1935</option>
+									<option value="1934">1934</option>
+									<option value="1933">1933</option>
+									<option value="1932">1932</option>
+									<option value="1931">1931</option>
+									<option value="1930">1930</option>
+									<option value="1929">1929</option>
+									<option value="1928">1928</option>
+									<option value="1927">1927</option>
+									<option value="1926">1926</option>
+									<option value="1925">1925</option>
+									<option value="1924">1924</option>
+									<option value="1923">1923</option>
+									<option value="1922">1922</option>
+									<option value="1921">1921</option>
+									<option value="1920">1920</option>
+									<option value="1919">1919</option>
+									<option value="1918">1918</option>
+									<option value="1917">1917</option>
+									<option value="1916">1916</option>
+									<option value="1915">1915</option>
+									<option value="1914">1914</option>
+									<option value="1913">1913</option>
+									<option value="1912">1912</option>
+									<option value="1911">1911</option>
+									<option value="1910">1910</option>
+									<option value="1909">1909</option>
+									<option value="1908">1908</option>
+									<option value="1907">1907</option>
+									<option value="1906">1906</option>
+									<option value="1905">1905</option>
+									<option value="1904">1904</option>
+									<option value="1903">1903</option>
+									<option value="1902">1902</option>
+									<option value="1901">1901</option>
+									<option value="1900">1900</option>
+								</select></div>
+						</div>
+						<h6 class="mb-2">Blood Group <div style="display: inline;" class="note">(You can select
+								it only once.)</div>
+						</h6>
+						<div class="row">
+							<div class="col-md-4 mb-4">
+								<select name="blood_group" class="form-control" id="basic_dob_day" tabindex="-1" "
+											aria-hidden=" true">
+									<option value="">Blood Group</option>
+									<option value="A+">A+</option>
+									<option value="A-">A-</option>
+									<option value="B+">B+</option>
+									<option value="B-">B-</option>
+									<option value="O+">O+</option>
+									<option value="O-">O-</option>
+									<option value="AB+">AB+</option>
+									<option value="AB-">AB-</option>
+								</select>
+							</div>
+
+						</div>
+						<h6 class="mb-2">Gender</h6>
+						<div class="row">
+							<div class="col-md-4 mb-4">
+								<select name="gender" class="form-control" id="basic_dob_day" tabindex="-1" "
+											aria-hidden=" true">
+									<option value="">Gender</option>
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+									<option value="Others">Others</option>
+								</select>
+							</div>
+
+						</div>
+
+
+						<!-- <div class="dropdown">
 									<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
 										style="border: 1px solid;opacity:0.8; font-weight: 500;" data-toggle="dropdown"
 										aria-haspopup="true" aria-expanded="false">
@@ -113,8 +330,8 @@
 										<a class="dropdown-item" href="#">Another action</a>
 										<a class="dropdown-item" href="#">Something else here</a>
 									</div>
-								</div>
-								<div style="margin-top: 1.75rem;">
+								</div> -->
+						<!-- <div style="margin-top: 1.75rem;">
 									<div class="dropdown">
 										<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
 											style="border: 1px solid;opacity:0.8; font-weight: 500;"
@@ -127,93 +344,156 @@
 											<a class="dropdown-item" href="#">Something else here</a>
 										</div>
 									</div>
-								</div>
+								</div> -->
 
-							</div>
+					</div>
+
+				</div>
+				<hr class="hr1" style="margin-top: 0; margin-bottom: 1rem;">
+				<div class="row gutters">
+					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+						<h6 class="mt-3 mb-2 ">Address Details</h6>
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<div class="input-container lname">
+							<input id="house" name="house" placeholder="House" type="text">
 						</div>
-						<div class="row gutters">
-							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-								<h6 class="mt-3 mb-2 ">Address Details</h6>
-							</div>
-							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-								<div class="form-group">
-									<input type="text" class="form-control" id="house" placeholder="House">
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" id="street" placeholder="Street">
-								</div>
+						<div class="input-container lname">
+							<input id="street" name="street" placeholder="Street" type="text">
+						</div>
 
-								<div class="form-group">
-									<!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
+						<!-- <div class="form-group">
 									<textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
 										placeholder="Additional Details(if any)"></textarea>
-								</div>
-
-								<!-- <div class="form-group">
-									<input type="text" class="form-control" id="thana" placeholder="Thana">
 								</div> -->
+
+
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+						<div class="row">
+							<div class="col-md-4 mb-4">
+								<select name="blood_group" class="form-control" id="basic_dob_day" tabindex="-1" "
+											aria-hidden=" true">
+									<option value="">Division</option>
+									<option value="Barisal">Barisal</option>
+									<option value="Chittagong">Chittagong</option>
+									<option value="Dhaka">Dhaka</option>
+									<option value="Khulna">Khulna</option>
+									<option value="Mymensingh">Mymensingh</option>
+									<option value="Rajshahi">Rajshahi</option>
+									<option value="Rangpur">Rangpur</option>
+									<option value="Sylhet">Sylhet</option>
+								</select>
 							</div>
-							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-								<!-- <div class="form-group">
-									<input type="text" class="form-control" id="district" placeholder="District">
-								</div> -->
 
-								<div class="dropdown">
-									<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
-										style="border: 1px solid;opacity:0.8; font-weight: 500;" data-toggle="dropdown"
-										aria-haspopup="true" aria-expanded="false">
-										Division
-									</button>
-									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-										<a class="dropdown-item" href="#">Action</a>
-										<a class="dropdown-item" href="#">Another action</a>
-										<a class="dropdown-item" href="#">Something else here</a>
-									</div>
-								</div>
-								<div style="margin-top: 1.75rem;">
-									<div class="dropdown">
-										<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
-											style="border: 1px solid;opacity:0.8; font-weight: 500;"
-											data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											District
-										</button>
-										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-											<a class="dropdown-item" href="#">Action</a>
-											<a class="dropdown-item" href="#">Another action</a>
-											<a class="dropdown-item" href="#">Something else here</a>
-										</div>
-									</div>
-								</div>
+							<div class="col-md-4 mb-4">
+								<select name="blood_group" class="form-control" id="basic_dob_day" tabindex="-1" "
+											aria-hidden=" true">
+									<!-- Barisal Division -->
+									<option value="">District</option>
+									<option value="Barguna">Barguna</option>
+									<option value="Barisal">Barisal</option>
+									<option value="Bhola">Bhola</option>
+									<option value="Jhalokathi">Jhalokathi</option>
+									<option value="Patuakhali">Patuakhali</option>
+									<option value="Pirojpur">Pirojpur</option>
+									<!-- Chittagong Division -->
+									<option value="Bandarban">Bandarban</option>
+									<option value="Brahmanbaria">Brahmanbaria</option>
+									<option value="Chandpur">Chandpur</option>
+									<option value="Chittagong">Chittagong</option>
+									<option value="Comilla">Comilla</option>
+									<option value="Cox's Bazar">Cox's Bazar</option>
+									<option value="Feni">Feni</option>
+									<option value="Khagrachhari">Khagrachhari</option>
+									<option value="Lakshmipur">Lakshmipur</option>
+									<option value="Noakhali">Noakhali</option>
+									<option value="Rangamati">Rangamati</option>
 
-								<div style="margin-top: 1.75rem;">
-									<div class="dropdown" style="display: block;">
-										<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
-											style="border: 1px solid;opacity:0.8; font-weight: 500;"
-											data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											Thana
-										</button>
-										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-											<a class="dropdown-item" href="#">Action</a>
-											<a class="dropdown-item" href="#">Another action</a>
-											<a class="dropdown-item" href="#">Something else here</a>
-										</div>
-									</div>
-								</div>
+									<!-- Dhaka Division -->
+									<option value="Dhaka">Dhaka</option>
+									<option value="Faridpur">Faridpur</option>
+									<option value="Gazipur">Gazipur</option>
+									<option value="Gopalganj">Gopalganj</option>
+									<option value="Kishoreganj">Kishoreganj</option>
+									<option value="Madaripur">Madaripur</option>
+									<option value="Manikganj">Manikganj</option>
+									<option value="Munshiganj">Munshiganj</option>
+									<option value="Narayanganj">Narayanganj</option>
+									<option value="Narsingdi">Narsingdi</option>
+									<option value="Rajbari">Rajbari</option>
+									<option value="Shariatput">Shariatput</option>
+									<option value="Tangail">Tangail</option>
+									<!-- Khulna Division -->
+									<option value="Bagerhat">Bagerhat</option>
+									<option value="Chuadanga">Chuadanga</option>
+									<option value="Jessore">Jessore</option>
+									<option value="Jhenaidah">Jhenaidah</option>
+									<option value="Khulna">Khulna</option>
+									<option value="Kushtia">Kushtia</option>
+									<option value="Magura">Magura</option>
+									<option value="Meherpur">Meherpur</option>
+									<option value="Narail">Narail</option>
+									<option value="Satkhira">Satkhira</option>
+									<!-- Mymensingh Division -->
+									<option value="Jamalpur">Jamalpur</option>
+									<option value="Mymensingh">Mymensingh</option>
+									<option value="Netrokona">Netrokona</option>
+									<option value="Sherpur">Sherpur</option>
+									<!-- Rajshahi Division -->
+									<option value="Bogra">Bogra</option>
+									<option value="Joypurhat">Joypurhat</option>
+									<option value="Naogaon">Naogaon</option>
+									<option value="Natore">Natore</option>
+									<option value="Chapainawabganj">Chapainawabganj</option>
+									<option value="Pabna">Pabna</option>
+									<option value="Rajshahi">Rajshahi</option>
+									<option value="Sirajganj">Sirajganj</option>
+									<!-- Rangpur Division -->
+									<option value="Dinajpur">Dinajpur</option>
+									<option value="Gaibandha">Gaibandha</option>
+									<option value="Kurigram">Kurigram</option>
+									<option value="Lalmonirhat">Lalmonirhat</option>
+									<option value="Nilphamari">Nilphamari</option>
+									<option value="Panchagarh">Panchagarh</option>
+									<option value="Rangpur">Rangpur</option>
+									<option value="Thakurgaon">Thakurgaon</option>
+									<!-- Sylhet Division -->
+									<option value="Habiganj">Habiganj</option>
+									<option value="Moulvibazar">Moulvibazar</option>
+									<option value="Sunamganj">Sunamganj</option>
+									<option value="Sylhet">Sylhet</option>
+								</select>
+							</div>
 
+							<div class="col-md-4 mb-4">
+								<select name="blood_group" class="form-control" id="basic_dob_day" tabindex="-1" "
+											aria-hidden=" true">
+									<!-- Eta thik kore nio -->
+									<option value="">Thana</option>
+									<option value="Barisal">Barisal</option>
+									<option value="Chittagong">Chittagong</option>
+									<option value="Dhaka">Dhaka</option>
+									<option value="Khulna">Khulna</option>
+									<option value="Mymensingh">Mymensingh</option>
+									<option value="Rajshahi">Rajshahi</option>
+									<option value="Rangpur">Rangpur</option>
+									<option value="Sylhet">Sylhet</option>
+								</select>
+							</div>
+						</div>
 
-								<!-- <div class="form-group">
+						<!-- <div class="form-group">
 									<input type="text" class="form-control" id="Division" placeholder="Division">
 								</div> -->
 
-							</div>
-						</div>
-						<div class="row gutters">
-							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-								<div class="text-right">
-									<button type="button" id="submit" name="submit" class="btn2" style>Save
-										Changes</button>
-								</div>
-							</div>
+					</div>
+				</div>
+				<div class="row gutters">
+					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+						<div class="text-right">
+							<button type="button" id="submit" name="submit" class="btn2" style>Save
+								Changes</button>
 						</div>
 					</div>
 				</div>
