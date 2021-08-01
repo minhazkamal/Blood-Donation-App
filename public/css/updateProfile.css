@@ -366,16 +366,56 @@ hr{
         z-index: -1;
         width: 15rem;
         height: 16rem;
-        left: 3.5rem;
+        left: 5rem;
     }
 }
 
-@media screen and (max-width:326px) {
+@media screen and (max-width:360px) {
     .blobUpdateProf{
         position: absolute;
         z-index: -1;
         width: 15rem;
-        height: 19rem;
-        left: 1.5rem;
+        height: 16rem;
+        left: 3.5rem;
+    }
+}
+
+@media screen and (max-width:375px) {
+    .blobUpdateProf{
+        position: absolute;
+        z-index: -1;
+        width: 15rem;
+        height: 16rem;
+        left: 1rem;
+    }
+    body{
+        background: cover;
+    }
+}
+
+
+@media screen and (max-width:320px) {
+    .blobUpdateProf{
+        position: absolute;
+        z-index: -1;
+        width: 15rem;
+        height: 16rem;
+        left: 2.5rem;
+    }
+    body{
+        background: cover;
+    }
+}
+
+@media screen and (max-width:280px) {
+    .blobUpdateProf{
+        position: absolute;
+        z-index: -1;
+        width: 15rem;
+        height: 18rem;
+        left: 1rem;
+    }
+    body{
+        background: cover;
     }
 }
