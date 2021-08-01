@@ -49,6 +49,7 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "mysql": "^2.18.1",
+    "node-tesseract-ocr": "^2.2.1",
     "nodemailer": "^6.4.2",
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
@@ -67,7 +68,8 @@
     "redux-thunk": "^2.2.0",
     "serve-favicon": "^2.5.0",
     "socket.io": "^2.4.1",
-    "sweetalert2": "^9.8.2"
+    "sweetalert2": "^9.8.2",
+    "tesseract.js": "^2.1.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

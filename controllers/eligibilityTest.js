@@ -8,12 +8,9 @@ var hl = require('handy-log');
 const { body, check, validationResult } = require('express-validator');
 const session = require('express-session');
 
-
-
 router.use(bodyParser.urlencoded({extended : true}));
 router.use(bodyParser.json());
 
-//var user_id;
 
 router.get('/', function(req,res){
     res.render('eligibilityTest');
