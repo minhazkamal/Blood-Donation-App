@@ -49,13 +49,7 @@ a:hover{
     display: inline;
 }
 
-@media screen and (max-width:900px) {
-    .brand-name {
-        font-weight: 800;
-        display: block;
-    }   
-    
-}
+
 .copy{
     margin: auto;
     padding-top: 2rem;
@@ -167,21 +161,11 @@ label.checkbox-container{
 }
 
 
-
-@media screen and (min-width:900px) {
-    .left, .right{
-        display: flex;
-        width: 100%;
-        height: auto;
-    }
-    
-}
-
 /* ############################################ */
 /* making the radio buttons invinsible */
-.form-check .form-check-input {
+/* .form-check .form-check-input { */
     /* display: none; */
-}
+/* } */
 
 /* button design for the options */
 .btn-ans {
@@ -206,15 +190,76 @@ label.checkbox-container{
     font-weight: 700;
 }
 
-.btn-ans:hover {
+
+/* .btn-ans:focus {
+   
+} */
+
+.yesbutton{
+    width: 3rem;
+    padding: 1rem;
+    padding-right: 1.5rem;
+    background: var(--primary-pink);
+    color: white;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.5px;
+    transition: 0.3s;
+}
+
+.yesbutton:hover{
     background: black;
     color: white;
     font-weight: 700;
 }
 
-
-.btn-ans:focus {
+.yesbutton:active{
     background: black;
     color: white;
     font-weight: 700;
+}
+
+.yesbutton:focus{
+    background: black;
+    color: white;
+    font-weight: 700;
+}
+
+.yesbutton:visited{
+    background: black;
+    color: white;
+    font-weight: 700;
+}
+
+.form-check-label.btn-ans:active{
+    background: black;
+    color: white;
+    font-weight: 700;
+}
+
+.form-check-label.btn-ans:focus{
+    background: black;
+    color: white;
+    font-weight: 700;
+}
+
+@media screen and (max-width:900px) {
+    .brand-name {
+        font-weight: 800;
+        display: block;
+    }   
+    
+}
+
+@media screen and (min-width:900px) {
+    .left, .right{
+        display: flex;
+        width: 100%;
+        height: auto;
+    }
+    
 }
