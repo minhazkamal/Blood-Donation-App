@@ -5,6 +5,7 @@
     font-size: 16px;
     line-height: 1.5;
     --primary-blue: #2f6690;
+    --primary-pink: #b9375e;
 }
 
 html{
@@ -16,6 +17,11 @@ body{
     margin: 0;
     font-family: 'Montserrat',sans-serif;
     font-weight: 500;
+    background-image: url(/img/wavelogin.png);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 h1{
@@ -50,72 +56,25 @@ a:hover{
     }   
     
 }
-
-.small{
-    font-size: 80%;
-    text-align: center;
-}
-
-.split-screen{
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-}
-
-.left, .right{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    flex-grow: inherit;
-    overflow: auto;
-}
-
 .copy{
-    margin-top: 4rem;
-}
-.left{
-    /* background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.5)),url(https://images.unsplash.com/photo-1503455637927-730bce8583c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit); */
-    background-image: url(/img/wave.png);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    transform: rotateY(180deg);
-    /* transform: rotate(180deg); */
-}
-
-.left .copy{
-    transform: rotateY(-180deg);
-    margin: 2em;
-    color: black;
-    text-align: center;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-
-.left p{
-    font-weight: 400;
-    font-size: 1.25rem;
-}
-
-.right .copy{
-    color: black;
+    margin: auto;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    /* border-left: 10px solid var(--primary-blue);
+    border-radius: .50% 20% / 10% .40%; */
     text-align: center;
 }
 
-.right .copy p{
-    margin: 1.5rem 0;
-    font-size: 0.875rem;
+.form-body {
+    text-align: center;
+    /* border-left: 10px solid var(--primary-blue);
+    border-radius: .50% 20% / 10% .40%; */
 }
 
-.right form{
-    width: 328px;
-}
-
-.right{
-    background-color: transparent;
+.section-legend {
+    text-align: center;
+    /* border-left: 10px solid var(--primary-blue);
+    border-radius: .50% 20% / 10% .40%; */
 }
 
 
@@ -210,14 +169,52 @@ label.checkbox-container{
 
 
 @media screen and (min-width:900px) {
-    .split-screen{
-        flex-direction: row;
-        height: 100vh;
-    }
     .left, .right{
         display: flex;
         width: 100%;
         height: auto;
     }
     
+}
+
+/* ############################################ */
+/* making the radio buttons invinsible */
+.form-check .form-check-input {
+    /* display: none; */
+}
+
+/* button design for the options */
+.btn-ans {
+    width: 3rem;
+    padding: 1rem;
+    padding-right: 1.5rem;
+    background: var(--primary-pink);
+    color: white;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.5px;
+    transition: 0.3s;
+}
+
+.btn-ans:hover {
+    background: black;
+    color: white;
+    font-weight: 700;
+}
+
+.btn-ans:hover {
+    background: black;
+    color: white;
+    font-weight: 700;
+}
+
+
+.btn-ans:focus {
+    background: black;
+    color: white;
+    font-weight: 700;
 }
