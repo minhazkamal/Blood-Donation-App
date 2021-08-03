@@ -220,3 +220,26 @@ module.exports.updateNID = (front, back, id) => {
     })
 }
 
+module.exports.getDivisions = () => {
+    return new Promise((resolve, reject) => {
+        db.query('SELECT * FROM divisions ORDER BY name ASC', (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.getDistrictsByDiv = (id) => {
+    return new Promise((resolve, reject) => {
+        db.query('SELECT * FROM districts WHERE division_id=? ORDER BY name ASC', [id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.getUpazillasByDist = (id) => {
+    return new Promise((resolve, reject) => {
+        db.query('SELECT * FROM upazillas WHERE district_id=? ORDER BY name ASC', [id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}

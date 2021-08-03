@@ -265,7 +265,7 @@ hr{
 } 
 
 
-#basic_dob_day{
+#basic_dob_day, #basic_bg, #basic_gender, #basic_division, #basic_district, #basic_upazilla{
     border-radius: 0.5rem;
     border: 1px solid #1a1919;
     color: #2e323c;
