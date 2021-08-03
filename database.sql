@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `bdapp` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `bdapp`;
 -- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
 --
 -- Host: localhost    Database: bdapp
@@ -18,6 +16,31 @@ USE `bdapp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `nid`
+--
+
+DROP TABLE IF EXISTS `nid`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `nid` (
+  `id` int NOT NULL,
+  `front` varchar(250) NOT NULL,
+  `back` varchar(250) NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `id` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `nid`
+--
+
+LOCK TABLES `nid` WRITE;
+/*!40000 ALTER TABLE `nid` DISABLE KEYS */;
+/*!40000 ALTER TABLE `nid` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -32,11 +55,12 @@ CREATE TABLE `users` (
   `password` varchar(500) DEFAULT NULL,
   `email_verified` enum('yes','no') NOT NULL DEFAULT 'no',
   `profile_build` enum('yes','no') NOT NULL DEFAULT 'no',
+  `nid_verified` enum('yes','no') NOT NULL DEFAULT 'no',
   `joined` date NOT NULL,
   `provider` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +69,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Minhaz','Kamal','minhaz.kamal9900@gmail.com',NULL,'yes','no','2021-07-30','google'),(2,'MINHAZ','KAMAL','minhazkamal@iut-dhaka.edu','$2a$10$d25V0RIEsgP0ZgaMSXdojOkiDxi0tmQUzpXzZSyaRNAcgqaa8y3Bu','yes','no','2021-07-31','self');
+INSERT INTO `users` VALUES (1,'Minhaz','Kamal','minhaz.kamal9900@gmail.com',NULL,'yes','no','no','2021-07-30','google'),(2,'MINHAZ','KAMAL','minhazkamal@iut-dhaka.edu','$2a$10$d25V0RIEsgP0ZgaMSXdojOkiDxi0tmQUzpXzZSyaRNAcgqaa8y3Bu','yes','no','no','2021-07-31','self'),(4,'Notredamian','Minhaz','ndcminhaz@gmail.com',NULL,'yes','no','no','2021-08-04','google');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +82,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-31  2:36:21
+-- Dump completed on 2021-08-04  0:30:42

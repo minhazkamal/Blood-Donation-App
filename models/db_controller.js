@@ -196,10 +196,27 @@ module.exports.oldPassCheck = function(password, id){
 }
 
 
-module.exports.verifyNID = (id) => {
+module.exports.getNID = (id) => {
     return new Promise((resolve, reject) => {
-            db.query('UPDATE users SET nid_verified = ? WHERE id = ?', ['yes', id], (err, res) => {
+            db.query('SELECT * FROM nid WHERE id = ?', [id], (err, res) => {
                 err ? reject(err) : resolve(res)
             })
     })
 }
+
+module.exports.setNID = (front, back, id) => {
+    return new Promise((resolve, reject) => {
+            db.query('INSERT INTO nid VALUES (?, ?, ?)', [id, front, back], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
+    })
+}
+
+module.exports.updateNID = (front, back, id) => {
+    return new Promise((resolve, reject) => {
+            db.query('UPDATE nid SET front = ?, back = ? WHERE id = ?', [front, back, id], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
+    })
+}
+

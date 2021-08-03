@@ -21,6 +21,7 @@ const config = {
 }
 
 const { body, check, validationResult } = require('express-validator');
+const { isBuffer } = require('util');
 
 router.use(bodyParser.urlencoded({extended : true}));
 router.use(bodyParser.json());
@@ -39,16 +40,23 @@ const storage = multer.diskStorage({
   filename:(req,file,cb)=>{
     db.getuserid(req.session.email)
     .then(result => {
-      let encrypted_id = cryptr.encrypt(result[0].id);
-      if(file.fieldname==="front_side"){
-        cb(null, encrypted_id+path.extname(file.originalname));
-      }
-      else if(file.fieldname==="back_side"){
-        cb(null, encrypted_id+path.extname(file.originalname));
+      if(result.length>0)
+      {
+        const encrypted_id = cryptr.encrypt(result[0].id);
+        //console.log(result[0].id, encrypted_id);
+        if(file.fieldname==="front_side"){
+          let file_name = encrypted_id+path.extname(file.originalname);
+          cb(null, file_name);
+        }
+        else if(file.fieldname==="back_side"){
+          let file_name = encrypted_id+path.extname(file.originalname);
+          cb(null, file_name);
+        }
       }
     })
     .catch(me => {
-      res.render('message.ejs', {alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type:'verification'});
+      hl.error(me)
+      //res.render('message.ejs', {alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type:'verification'});
     })
   }
 });
@@ -107,8 +115,59 @@ const validator = function(req, res, next) {
             res.render('KYC', {alert: [{msg: err.message}]});   
         }
         else {
+          db.getuserid(req.session.email)
+          .then(result=> {
+            if(result.length>0) {
+              let id = result[0].id;
+              db.getNID(result[0].id)
+              .then(result => {
+                // console.log(req.files.front_side[0].filename);
+                try {
+                  if(result.length>0){
+                    fs.unlink('./NID/front/'+result[0].front, (err) => {
+                      if(err) throw err;
+                    });
+                    fs.unlink('./NID/back/'+result[0].back, (err) => {
+                      if(err) throw err;
+                    });
+                    // console.log("Previous files are deleted.");
+
+                    db.updateNID(req.files.front_side[0].filename, req.files.back_side[0].filename, id)
+                    .then(result => {
+                      if(result.affectedRows === 1)
+                      {
+                        res.redirect('/profile-update');
+                      }
+                      else{
+                        res.render('message.ejs', {alert_type: 'danger', message: `Error!Try again later`, type:'mail'});
+                      } 
+                    })
+                  }
+                  else{
+                    db.setNID(req.files.front_side[0].filename, req.files.back_side[0].filename, id)
+                    .then(result => {
+                      // console.log(result.affectedRows);
+                      if(result.affectedRows === 1)
+                      {
+                        res.redirect('/profile-update');
+                      }
+                      else{
+                        res.render('message.ejs', {alert_type: 'danger', message: `Error!Try again later`, type:'mail'});
+                      } 
+                    })
+                  }
+                }
+                catch (error) {
+                  console.log(error);
+                }
+              })
+            }
+            else{
+              res.render('message.ejs', {alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type:'verification'});
+            }
+          })
           // console.log(req.session.email);
-          res.redirect('/profile-update');
+          // res.redirect('/profile-update');
         }
       })
     }
