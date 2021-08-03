@@ -27,14 +27,14 @@ router.get('/', passport.authenticate('google-login', { scope: ['profile', 'emai
 router.get('/callback', passport.authenticate('google-login', { failureRedirect: '/login-google/failed' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/login-google/good');
+    res.redirect('/login-google/good/');
     //res.render('profile.ejs',{name:req.user.displayName,pic:req.user.photos[0].value,email:req.user.emails[0].value});
   }
 );
 
 router.get('/failed', (req, res) => res.send('You Failed to log in!'));
 
-router.get('/good', (req, res) =>{
+router.get('/good/', (req, res) =>{
 
     //console.log("profile");
     var user = req.session.passport.user;
@@ -64,7 +64,8 @@ router.get('/good', (req, res) =>{
 
 
                         // Profile Build
-                        res.send("<h1>Home Page</h1><br><span>Under Progress....</span>");
+                        // res.send("<h1>Home Page</h1><br><span>Under Progress....</span>");
+                        res.redirect('/KYC');
                     }
                     else{
                         res.render('message.ejs', {alert_type: 'danger', message: `Please verify your email`, type:'mail'})

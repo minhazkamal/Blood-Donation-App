@@ -194,3 +194,12 @@ module.exports.oldPassCheck = function(password, id){
     })
 })
 }
+
+
+module.exports.verifyNID = (id) => {
+    return new Promise((resolve, reject) => {
+            db.query('UPDATE users SET nid_verified = ? WHERE id = ?', ['yes', id], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
+    })
+}

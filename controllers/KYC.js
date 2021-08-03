@@ -12,6 +12,7 @@ var path = require('path');
 var multer = require('multer');
 const {createWorker} = require('tesseract.js');
 const tesseract = require('node-tesseract-ocr');
+const {verify} = require('../models/nid_verify');
 
 const config = {
   lang: 'eng',
@@ -36,12 +37,19 @@ const storage = multer.diskStorage({
      }
   },
   filename:(req,file,cb)=>{
+    db.getuserid(req.session.email)
+    .then(result => {
+      let encrypted_id = cryptr.encrypt(result[0].id);
       if(file.fieldname==="front_side"){
-          cb(null, file.fieldname+Date.now()+path.extname(file.originalname));
+        cb(null, encrypted_id+path.extname(file.originalname));
       }
-    else if(file.fieldname==="back_side"){
-      cb(null, file.fieldname+Date.now()+path.extname(file.originalname));
-    }
+      else if(file.fieldname==="back_side"){
+        cb(null, encrypted_id+path.extname(file.originalname));
+      }
+    })
+    .catch(me => {
+      res.render('message.ejs', {alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type:'verification'});
+    })
   }
 });
 
@@ -85,58 +93,43 @@ function checkFileType(req, file, cb) {
   else cb(null, false);
 }
 
+const validator = function(req, res, next) {
+  // Do some validation and verification here
+  try {
+    // const result = verify({ nidNumber, fullName, dob });
+    const result = {
+      isValid: true,
+    }
+    if(result.isValid)
+    {
+      upload(req, res, (err) => {
+        if (err) {
+            res.render('KYC', {alert: [{msg: err.message}]});   
+        }
+        else {
+          // console.log(req.session.email);
+          res.redirect('/profile-update');
+        }
+      })
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.render('message.ejs', {alert_type: 'danger', message: `Error!Try again later`, type:'mail'});
+  }
+}
+
 router.get('/', function(req,res){
+  if(req.session.email)
+  {
     res.render('KYC.ejs');
+  }
+  else{
+    res.render('message.ejs', {alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type:'verification'});
+  }
+    
 });
 
 
-router.post('/', function(req,res){
-  upload(req, res, (err) => {
-    // console.log(req.fileValidationError);
-    if (err) {
-        //console.log(err.message);
-        res.render('KYC', {alert: [{msg: err.message}]});   
-    }
-    // if (req.fileValidationError) {
-    //   res.render('KYC', {alert: [{msg: req.fileValidationError}]});
-    // }
-    else {
-      console.log(req.files);
-      const front_image = req.files.front_side[0].path;
-      const back_image = req.files.back_side[0].path;
-
-      /* Tesseract implementation 
-      tesseract
-        .recognize(front_image, config)
-        .then((text) => {
-          console.log("Result: ", text);
-        })
-        .catch((error) => {
-          console.log(error.message);
-        })
-
-      tesseract
-        .recognize(back_image, config)
-        .then((text) => {
-          console.log("Result: ", text);
-        })
-        .catch((error) => {
-          console.log(error.message);
-        })
-      
-      */
-
-        // res.redirect(`http://localhost:${process.env.PORT}/` + front_image);
-
-      // console.log(front_image, back_image);
-      console.log("Saved successfully");
-    }
-  })
-  
-    // if(req.files){
-    //     console.log(res.files)
-
-    //     console.log("files uploaded")
-    // }  
+router.post('/', validator, function(req,res){
 });
 module.exports = router;

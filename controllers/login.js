@@ -111,7 +111,8 @@ body('email').custom(value => {
 
 
                 // Profile Build
-                res.send("<h1>Home Page</h1><br><span>Under Progress....</span>");
+                // res.send("<h1>Home Page</h1><br><span>Under Progress....</span>");
+                res.redirect('/KYC');
               }
               else{
                 res.render('message.ejs', {alert_type: 'danger', message: `Please verify your email`, type:'mail'})
