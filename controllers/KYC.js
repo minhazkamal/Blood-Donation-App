@@ -30,11 +30,17 @@ const storage = multer.diskStorage({
   destination: (req, file, cb)=>{
       if(file.fieldname==="front_side")
       {
-      cb(null, 'NID/front')
+        var path = 'NID/front';
+        fs.mkdirSync(path, { recursive: true })
+          return cb(null, path)
+        // cb(null, 'NID/front')
       }
      else if(file.fieldname==="back_side")
      {
-         cb(null, 'NID/back');
+        var path = 'NID/back';
+        fs.mkdirSync(path, { recursive: true })
+          return cb(null, path)
+        // cb(null, 'NID/back');
      }
   },
   filename:(req,file,cb)=>{

@@ -288,18 +288,18 @@
 
 	<script>
 	$(document).ready(function(){
-		if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position){
-                  console.log(position);
-                  $.get( "http://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false", function(data) {
-                    console.log(data);
-                  })
-                  var img = new Image();
-                  img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + position.coords.latitude + "," + position.coords.longitude + "&zoom=13&size=800x400&sensor=false";
-                  $('#output').html(img);
-                });
+		// if (navigator.geolocation) {
+        //         navigator.geolocation.getCurrentPosition(function(position){
+        //           console.log(position);
+        //           $.get( "http://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false", function(data) {
+        //             console.log(data);
+        //           })
+        //           var img = new Image();
+        //           img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + position.coords.latitude + "," + position.coords.longitude + "&zoom=13&size=800x400&sensor=false";
+        //           $('#output').html(img);
+        //         });
                 
-        	}
+        // 	}
 		for(var i=1; i<=31; i++) {
 			$('#basic_dob_day').append("<option value = '"+i+"' >"+i+" </option>");
 		}
@@ -341,7 +341,7 @@
 			data: { district_id: dist_id },
 			url: '/address/upazillas',
 			success: function(data){
-					console.log(data);
+					// console.log(data);
 					$('#basic_upazilla').empty();
 					$('#basic_upazilla').append("<option disabled selected>Upazilla</option>");
 					$.each(data, function (index, upazilla){

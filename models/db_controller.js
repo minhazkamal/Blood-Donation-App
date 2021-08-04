@@ -238,7 +238,7 @@ module.exports.getDistrictsByDiv = (id) => {
 
 module.exports.getUpazillasByDist = (id) => {
     return new Promise((resolve, reject) => {
-        db.query('SELECT * FROM upazillas WHERE district_id=? ORDER BY name ASC', [id], (err, res) => {
+        db.query("SELECT * FROM upazillas WHERE district_id=? ORDER BY case name when 'Others' then 1 else 0 end, name ASC", [id], (err, res) => {
             err ? reject(err) : resolve(res)
         })
     })
