@@ -220,6 +220,30 @@ module.exports.updateNID = (front, back, id) => {
     })
 }
 
+module.exports.getProfilePic = (id) => {
+    return new Promise((resolve, reject) => {
+            db.query('SELECT * FROM profile_picture WHERE id = ?', [id], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
+    })
+}
+
+module.exports.setProfilePic = (pic, id) => {
+    return new Promise((resolve, reject) => {
+            db.query('INSERT INTO profile_picture VALUES (?, ?)', [id, pic], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
+    })
+}
+
+module.exports.updateProfilePic = (pic, id) => {
+    return new Promise((resolve, reject) => {
+            db.query('UPDATE profile_picture SET profile_picture = ? WHERE id = ?', [pic, id], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
+    })
+}
+
 module.exports.getDivisions = () => {
     return new Promise((resolve, reject) => {
         db.query('SELECT * FROM divisions ORDER BY name ASC', (err, res) => {

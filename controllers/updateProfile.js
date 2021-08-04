@@ -1,23 +1,28 @@
 var express = require('express');
 var router = express.Router();
-var multer = require('multer');
 var bodyParser = require('body-parser');
 var db = require('../models/db_controller');
 var mail = require('../models/mail');
 var mysql = require('mysql');
 var hl = require('handy-log');
+var Cryptr = require('cryptr');
+var cryptr = new Cryptr(process.env.SECURITY_KEY);
+var fs = require('fs');
+var path = require('path');
+var multer = require('multer');
 const { body, check, validationResult } = require('express-validator');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
-router.use(multer().none());
+// router.use(multer().none());
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        var path = '/profile';
+        var path = 'profile';
         fs.mkdirSync(path, { recursive: true })
-        return cb(null, path)
-
+        {
+            return cb(null, path)
+        }
     },
     filename: (req, file, cb) => {
         db.getuserid(req.session.email)
@@ -35,7 +40,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({
+let upload = multer({
     storage: storage,
     limits: {
         fileSize: 1024 * 1024 * 10
@@ -43,14 +48,8 @@ const upload = multer({
     fileFilter: (req, file, cb) => {
         checkFileType(req, file, cb);
     }
-}).fields(
-    [
-        {
-            name: 'update',
-            maxCount: 1
-        }
-    ]
-);
+}).single('avatar');
+
 
 
 function checkFileType(req, file, cb) {
@@ -61,21 +60,14 @@ function checkFileType(req, file, cb) {
         file.mimetype === 'image/gif'
     ) { // check file type to be png, jpeg, or jpg
         cb(null, true);
-    } else if (file.fieldname === 'front_side') {
-        // req.fileValidationError = 'File type of Front Side must be .png/.jpg/.jpeg/.gif';
-        cb(new Error("File format of Front side should be PNG,JPG,JPEG"), false);
     }
-    else if (file.fieldname === 'back_side') {
-        // req.fileValidationError = 'File type of Back Side must be .png/.jpg/.jpeg/.gif';
-        cb(new Error("File format of Back side should be PNG,JPG,JPEG"), false); // else fails
-    }
-    else cb(null, false);
+    else cb(new Error("File format of Back side should be PNG,JPG,JPEG"), false);
 }
 
 const validator = function (req, res, next) {
     // Do some validation and verification here
     try {
-        upload(req, res, (err) => {
+        upload(req, res, err => {
             if (err) {
                 res.render('updateProfile', { alert: [{ msg: err.message }] });
             }
@@ -84,20 +76,22 @@ const validator = function (req, res, next) {
                     .then(result => {
                         if (result.length > 0) {
                             let id = result[0].id;
-                            db.getNID(result[0].id) // NID will be photo
+                            db.getProfilePic(result[0].id) // NID will be photo
                                 .then(result => {
                                     // console.log(req.files.front_side[0].filename);
                                     try {
-                                        if (result.length > 0) {
-                                            fs.unlink('./profile' + result[0].front, (err) => { // front should be changed accordingly
+                                        // console.log(result);
+                                        if (result.length>0) {
+                                            fs.unlink('./profile/' + result[0].profile_picture, (err) => { // front should be changed accordingly
                                                 if (err) throw err;
                                             });
                                             // console.log("Previous files are deleted.");
 
-                                            db.updateNID(req.files.front_side[0].filename, req.files.back_side[0].filename, id) // NID will  be photo
+                                            db.updateProfilePic(req.file.filename, id) // NID will  be photo
                                                 .then(result => {
                                                     if (result.affectedRows === 1) {
-                                                        res.redirect('/profile-update'); // Dashboard
+                                                        //res.redirect('/profile-update'); // Dashboard
+                                                        next();
                                                     }
                                                     else {
                                                         res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
@@ -106,11 +100,14 @@ const validator = function (req, res, next) {
                                         }
                                         else 
                                         {
-                                            db.setNID(req.files.front_side[0].filename, req.files.back_side[0].filename, id)
+                                            // console.log(req.file);
+                                            // console.log(req.files);
+                                            db.setProfilePic(req.file.filename, id)
                                             .then(result => {
                                                 // console.log(result.affectedRows);
                                                 if (result.affectedRows === 1) {
-                                                    res.redirect('/profile-update'); // Dashboard
+                                                    //res.send('Dashboard'); // Dashboard
+                                                    next();
                                                 }
                                                 else {
                                                     res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
@@ -130,7 +127,7 @@ const validator = function (req, res, next) {
                 // console.log(req.session.email);
                 // res.redirect('/profile-update');
             }
-        })
+        })    
     } catch (err) {
         console.error(err.message);
         res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
@@ -172,7 +169,8 @@ router.get('/', function (req, res) {
     }
 });
 
-router.post('/', function (req, res) {
+router.post('/', validator, function (req, res) {
+    // console.log("Hello");
     console.log(req.body);
 });
 
