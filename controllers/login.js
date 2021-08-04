@@ -18,7 +18,7 @@ router.get('/', function(req,res){
       //console.log(result[0].id);
       db.isEmailVerified(result[0].id)
       .then(result => {
-        if(result[0].email_verified === 'yes' && result[0].profile_build === 'yes'){
+        if(result[0].email_verified === 'yes' && result[0].profile_build === 'yes' && result[0].eligibility_test === 'yes'){
                  
                   
           // Dashboard
@@ -27,11 +27,18 @@ router.get('/', function(req,res){
 
 
         }
-        else if(result[0].email_verified === "yes" && result[0].profile_build === "no"){
+        else if(result[0].email_verified === "yes" && result[0].profile_build === "no" && result[0].eligibility_test === 'no'){
 
 
           // Profile Build
-          res.send("<h1>Home Page</h1><br><span>Under Progress....</span>");
+          // res.send("<h1>Home Page</h1><br><span>Under Progress....</span>");
+          res.redirect('/KYC');
+        }
+        else if(result[0].email_verified === "yes" && result[0].profile_build === "yes" && result[0].eligibility_test === 'no'){
+
+
+          // Profile Build
+          res.send("<h1>Eligibility Test</h1><br><span>Under Progress....</span>");
         }
         else{
           res.render('message.ejs', {alert_type: 'danger', message: `Please verify your email`, type:'mail'})
@@ -98,21 +105,27 @@ body('email').custom(value => {
             //console.log(result[0].id);
             db.isEmailVerified(result[0].id)
             .then(result => {
-              if(result[0].email_verified === 'yes' && result[0].profile_build === 'yes'){
-                  
+              if(result[0].email_verified === 'yes' && result[0].profile_build === 'yes' && result[0].eligibility_test === 'yes'){
+                 
                   
                 // Dashboard
                 res.send("Dash Board");
-
-
-
+      
+      
+      
               }
-              else if(result[0].email_verified === "yes" && result[0].profile_build === "no"){
-
-
+              else if(result[0].email_verified === "yes" && result[0].profile_build === "no" && result[0].eligibility_test === 'no'){
+      
+      
                 // Profile Build
                 // res.send("<h1>Home Page</h1><br><span>Under Progress....</span>");
                 res.redirect('/KYC');
+              }
+              else if(result[0].email_verified === "yes" && result[0].profile_build === "yes" && result[0].eligibility_test === 'no'){
+      
+      
+                // Profile Build
+                res.send("<h1>Eligibility Test</h1><br><span>Under Progress....</span>");
               }
               else{
                 res.render('message.ejs', {alert_type: 'danger', message: `Please verify your email`, type:'mail'})

@@ -18,11 +18,11 @@
 <body>
 
 	<div class="container">
-		<form method="POST" enctype="multipart/form-data">
-		<div class="row gutters" style="padding-bottom: 5rem;">
-			
+		<form method="Post" enctype="multipart/form-data">
+			<div class="row gutters" style="padding-bottom: 5rem;">
 
-			<!-- <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+
+				<!-- <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
 				<div class="card h-100">
 					<div class="card-body">
 						
@@ -30,163 +30,190 @@
 				</div>
 			</div> -->
 
-			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
-				<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blobUpdateProf">
-					<path fill="#E1E1E1"
-						d="M59.7,-32.4C71.3,-14.4,70.4,12.8,58.3,34.2C46.3,55.6,23.2,71.1,1,70.6C-21.2,70,-42.4,53.4,-54.4,32C-66.3,10.7,-68.9,-15.3,-58.3,-32.7C-47.7,-50.2,-23.9,-59,0.1,-59.1C24.1,-59.2,48.1,-50.4,59.7,-32.4Z"
-						transform="translate(100 100)" />
-				</svg>
-				<section>
-					<h2>Edit your <div class="brandname" style="font-weight: 600;"> G L E A M </div> Profile
-					</h2>
-				</section>
-				
-				<div class="account-settings">
-					<div class="user-profile">
-						<div class="user-avatar">
+				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+					<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blobUpdateProf">
+						<path fill="#E1E1E1"
+							d="M59.7,-32.4C71.3,-14.4,70.4,12.8,58.3,34.2C46.3,55.6,23.2,71.1,1,70.6C-21.2,70,-42.4,53.4,-54.4,32C-66.3,10.7,-68.9,-15.3,-58.3,-32.7C-47.7,-50.2,-23.9,-59,0.1,-59.1C24.1,-59.2,48.1,-50.4,59.7,-32.4Z"
+							transform="translate(100 100)" />
+					</svg>
+					<section>
+						<h2>Edit your <div class="brandname" style="font-weight: 600;"> G L E A M </div> Profile
+						</h2>
+						<!-- Alert Message -->
+						<% if(typeof alert !='undefined' ) { %>
+							<% alert.forEach(function(error) { %>
+								<div class="alert alert-warning alert-dismissible fade show" role="alert">
+									<%= error.msg %>
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">×</span>
+										</button>
+								</div>
+								<% }) %>
+									<% } %>
+					</section>
 
-							<img id="imageResult" src="https://pic.onlinewebfonts.com/svg/img_212908.png" alt="">
-						</div>
-						<!-- <input id="username" name="username" placeholder="Username" type="text" required>
+
+					<div class="account-settings">
+						<div class="user-profile">
+							<div class="user-avatar">
+
+								<img id="imageResult" src="https://pic.onlinewebfonts.com/svg/img_212908.png" alt="">
+							</div>
+							<!-- <input id="username" name="username" placeholder="Username" type="text" required>
 								<h6 class="note">*This is a one-time username</h6> -->
 
-						<section class="section-preview">
+							<section class="section-preview">
 
-							<div class="input-group mb-3">
-								<!-- <div class="input-group-prepend"> -->
-								<!-- <span class="input-group-text" id="inputGroupFileAddon01">Upload</span> -->
-								<!-- </div> -->
-								<!-- <div class="custom-file">
+								<div class="input-group mb-3">
+									<!-- <div class="input-group-prepend"> -->
+									<!-- <span class="input-group-text" id="inputGroupFileAddon01">Upload</span> -->
+									<!-- </div> -->
+									<!-- <div class="custom-file">
 											<input type="file" class="custom-file-input" id="customFile">
 											<label class="custom-file-label" for="customFile">Choose file</label>
 										  </div> -->
 
-								<!-- <input type="text" class="form-control" id="upload" disabled
+									<!-- <input type="text" class="form-control" id="upload" disabled
 											placeholder="Choose File" aria-label="Choose File"
 											aria-describedby="basic-addon1"> -->
-								<input class="form-control" type="file" id="upload" onchange="readURL(this);" accept="image/png, image/jpeg, image/jpg">
-								<!-- <div class="input-group-append">
+									<input class="form-control" type="file" id="upload" onchange="readURL(this);"
+										accept="image/png, image/jpeg, image/jpg">
+									<!-- <div class="input-group-append">
 											<button type="button"
 												class="browse input-group-text btn btn-outline-secondary"
 												id="basic-addon2" style="font-weight: 500; "> Browse</button>
 										</div> -->
 
-							</div>
+								</div>
 
-						</section>
+							</section>
 
-						<!-- <button type="button" class="btn btn-lg btn-outline-dark"
+							<!-- <button type="button" class="btn btn-lg btn-outline-dark"
 							style="margin-top: 1rem;">Upload</button> -->
 
-					</div>
-					<!-- <div class="about">
+						</div>
+						<!-- <div class="about">
 								<h5>About</h5> -->
-					<!-- <div class="form-group">
+						<!-- <div class="form-group">
 									<input id="bio" name="bio" class="bio" placeholder="Write something about yourself."
 										type="text" required>
 								</div> -->
 
-					<!-- <div class="form-group"> -->
-					<!-- <label for="exampleFormControlTextarea1">Example textarea</label>
+						<!-- <div class="form-group"> -->
+						<!-- <label for="exampleFormControlTextarea1">Example textarea</label>
 									<textarea class="form-control" id="exampleFormControlTextarea1" rows="10"
 										placeholder="Write something about yourself."></textarea>
 								</div>
 
 							</div> -->
 
-				</div>
-				<hr>
-				<div class="row gutters">
-					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-						<h6 class="mb-2">Personal Details</h6>
-						<div class="input-container fname">
-							<input id="fname" name="fname" placeholder="First Name" value="<%-f_name%>" type="text" required>
-						</div>
-						<div class="input-container lname">
-							<input id="lname" name="lname" placeholder="Last Name" value="<%-l_name%>" type="text">
-						</div>
-						<div class="input-container lname">
-							<input id="contact" name="contact" placeholder="Contact Number (+88)" title="Please give a valid phone number (018xxxxxxxx)" pattern="[0]{1}[1]{1}[3-9]{1}[0-9]{8}" type="tel" required>
-						</div>
-						<div class="input-container lname">
-							<input id="email" name="email" placeholder="Email Address" value="<%-email%>" type="email" readonly>
-						</div>
+					</div>
+					<hr>
+					<div class="row gutters">
+						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+							<h6 class="mb-2">Personal Details</h6>
+							<div class="input-container fname">
+								<input id="fname" name="fname" placeholder="First Name" value="<%-user.f_name%>"
+									type="text" required>
+							</div>
+							<div class="input-container lname">
+								<input id="lname" name="lname" placeholder="Last Name" value="<%-user.l_name%>"
+									type="text">
+							</div>
+							<div class="input-container lname">
+								<input id="contact" name="contact" placeholder="Contact Number (+88)"
+									title="Please give a valid phone number (018xxxxxxxx)"
+									pattern="[0]{1}[1]{1}[3-9]{1}[0-9]{8}" type="tel" required>
+							</div>
+							<div class="input-container lname">
+								<input id="email" name="email" placeholder="Email Address" value="<%-user.email%>"
+									type="email" readonly>
+							</div>
 
 
 
-						<!-- <div class="form-group">
+							<!-- <div class="form-group">
 									<input type="text" class="form-control" id="profession" placeholder="Profession">
 								</div> -->
 
-					</div>
-
-					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-						<h6 class="mb-2">Date of Birth</h6>
-						<div class="row">
-							<div class="col-md-4 mb-4">
-								<select name="dob_day" class="form-control" id="basic_dob_day" tabindex="-1" "
-											aria-hidden=" true">
-									<option disabled selected>Day</option>
-									
-								</select>
-							</div>
-							<div class="col-md-4 mb-4"><select name="dob_month" class="form-control"
-									id="basic_dob_month" tabindex="-1" aria-hidden="true">
-									<option disabled selected>Month</option>
-									<option value="01">January</option>
-									<option value="02">February</option>
-									<option value="03">March</option>
-									<option value="04">April</option>
-									<option value="05">May</option>
-									<option value="06">June</option>
-									<option value="07">July</option>
-									<option value="08">August</option>
-									<option value="09">September</option>
-									<option value="10">October</option>
-									<option value="11">November</option>
-									<option value="12">December</option>
-								</select></div>
-							<div class="col-md-4 mb-4"><select name="dob_year" class="form-control" id="basic_dob_year"
-									tabindex="-1" aria-hidden="true">
-									<option disabled selected>Year</option>
-								</select></div>
-						</div>
-						<h6 class="mb-2">Blood Group <div style="display: inline;" class="note">(You can select
-								it only once.)</div>
-						</h6>
-						<div class="row">
-							<div class="col-md-4 mb-4">
-								<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
-											aria-hidden=" true">
-									<option disabled selected>Blood Group</option>
-									<option value="A+">A+</option>
-									<option value="A-">A-</option>
-									<option value="B+">B+</option>
-									<option value="B-">B-</option>
-									<option value="O+">O+</option>
-									<option value="O-">O-</option>
-									<option value="AB+">AB+</option>
-									<option value="AB-">AB-</option>
-								</select>
-							</div>
-
-						</div>
-						<h6 class="mb-2">Gender</h6>
-						<div class="row">
-							<div class="col-md-4 mb-4">
-								<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
-											aria-hidden=" true">
-									<option disabled selected>Gender</option>
-									<option value="Male">Male</option>
-									<option value="Female">Female</option>
-									<option value="Others">Others</option>
-								</select>
-							</div>
-
 						</div>
 
+						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+							<h6 class="mb-2">Date of Birth</h6>
+							<div class="row">
+								<div class="col-md-4 mb-4">
+									<select name="dob_day" class="form-control" id="basic_dob_day" tabindex="-1" "
+											aria-hidden=" true">
+										<option disabled selected>Day</option>
 
-						<!-- <div class="dropdown">
+									</select>
+								</div>
+								<div class="col-md-4 mb-4"><select name="dob_month" class="form-control"
+										id="basic_dob_month" tabindex="-1" aria-hidden="true">
+										<option disabled selected>Month</option>
+										<option value="01">January</option>
+										<option value="02">February</option>
+										<option value="03">March</option>
+										<option value="04">April</option>
+										<option value="05">May</option>
+										<option value="06">June</option>
+										<option value="07">July</option>
+										<option value="08">August</option>
+										<option value="09">September</option>
+										<option value="10">October</option>
+										<option value="11">November</option>
+										<option value="12">December</option>
+									</select></div>
+								<div class="col-md-4 mb-4"><select name="dob_year" class="form-control"
+										id="basic_dob_year" tabindex="-1" aria-hidden="true">
+										<option disabled selected>Year</option>
+									</select></div>
+							</div>
+							<h6 class="mb-2">Blood Group <div style="display: inline;" class="note">(You can select
+									it only once.)</div>
+							</h6>
+							<div class="row">
+								<div class="col-md-4 mb-4">
+									<% if (user.profile_build==='yes' ) { %>
+										<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
+											aria-hidden=" true" disabled>
+											<option value="<%= user.bg %>" selected>
+												<%= user.bg %>
+											</option>
+										</select>
+										<%} else{ %>
+											<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
+											aria-hidden=" true">
+												<option disabled selected>Blood Group</option>
+												<option value="A+">A+</option>
+												<option value="A-">A-</option>
+												<option value="B+">B+</option>
+												<option value="B-">B-</option>
+												<option value="O+">O+</option>
+												<option value="O-">O-</option>
+												<option value="AB+">AB+</option>
+												<option value="AB-">AB-</option>
+											</select>
+											<% } %>
+								</div>
+
+							</div>
+							<h6 class="mb-2">Gender</h6>
+							<div class="row">
+								<div class="col-md-4 mb-4">
+									<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
+											aria-hidden=" true">
+										<option disabled selected>Gender</option>
+										<option value="Male">Male</option>
+										<option value="Female">Female</option>
+										<option value="Others">Others</option>
+									</select>
+								</div>
+
+							</div>
+
+
+							<!-- <div class="dropdown">
 									<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
 										style="border: 1px solid;opacity:0.8; font-weight: 500;" data-toggle="dropdown"
 										aria-haspopup="true" aria-expanded="false">
@@ -198,7 +225,7 @@
 										<a class="dropdown-item" href="#">Something else here</a>
 									</div>
 								</div> -->
-						<!-- <div style="margin-top: 1.75rem;">
+							<!-- <div style="margin-top: 1.75rem;">
 									<div class="dropdown">
 										<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
 											style="border: 1px solid;opacity:0.8; font-weight: 500;"
@@ -213,169 +240,175 @@
 									</div>
 								</div> -->
 
-					</div>
-
-				</div>
-				<hr class="hr1" style="margin-top: 0; margin-bottom: 1rem;">
-				<div class="row gutters">
-					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-						<h6 class="mt-3 mb-2 ">Address Details</h6>
-					</div>
-					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-						<div class="input-container lname">
-							<input id="house" name="house" placeholder="House" type="text">
-						</div>
-						<div class="input-container lname">
-							<input id="street" name="street" placeholder="Street" type="text">
 						</div>
 
-						<!-- <div class="form-group">
+					</div>
+					<hr class="hr1" style="margin-top: 0; margin-bottom: 1rem;">
+					<div class="row gutters">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<h6 class="mt-3 mb-2 ">Address Details</h6>
+						</div>
+						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+							<div class="input-container lname">
+								<input id="house" name="house" placeholder="House" type="text">
+							</div>
+							<div class="input-container lname">
+								<input id="street" name="street" placeholder="Street" type="text">
+							</div>
+
+							<!-- <div class="form-group">
 									<textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
 										placeholder="Additional Details(if any)"></textarea>
 								</div> -->
 
 
-					</div>
-					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-						<div class="row">
-							<div class="col-md-4 mb-4">
-								<select name="division" class="form-control" id="basic_division" tabindex="-1" "
-											aria-hidden=" true">
-								<option disabled selected>Division</option>
-								<% divisions.forEach((division) => { %>
-								<option value="<%= division.id %>" > <%=division.name %> </option>
-								<%  })  %>
-								</select>
-							</div>
-
-							<div class="col-md-4 mb-4">
-								<select name="district" class="form-control" id="basic_district" tabindex="-1" "
-											aria-hidden=" true">
-									<option disabled selected>District</option>
-									
-								</select>
-							</div>
-
-							<div class="col-md-4 mb-4">
-								<select name="upazilla" class="form-control" id="basic_upazilla" tabindex="-1" "
-											aria-hidden=" true">
-									<!-- Eta thik kore nio -->
-									<option disabled selected>Upazilla</option>
-									
-								</select>
-							</div>
 						</div>
+						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+							<div class="row">
+								<div class="col-md-4 mb-4">
+									<select name="division" class="form-control" id="basic_division" tabindex="-1" "
+											aria-hidden=" true">
+										<option disabled selected>Division</option>
+										<% divisions.forEach((division)=> { %>
+											<option value="<%= division.id %>">
+												<%=division.name %>
+											</option>
+											<% }) %>
+									</select>
+								</div>
 
-						<!-- <div class="form-group">
+								<div class="col-md-4 mb-4">
+									<select name="district" class="form-control" id="basic_district" tabindex="-1" "
+											aria-hidden=" true">
+										<option disabled selected>District</option>
+
+									</select>
+								</div>
+
+								<div class="col-md-4 mb-4">
+									<select name="upazilla" class="form-control" id="basic_upazilla" tabindex="-1" "
+											aria-hidden=" true">
+										<!-- Eta thik kore nio -->
+										<option disabled selected>Upazilla</option>
+
+									</select>
+								</div>
+							</div>
+
+							<!-- <div class="form-group">
 									<input type="text" class="form-control" id="Division" placeholder="Division">
 								</div> -->
 
+						</div>
 					</div>
-				</div>
-				<div class="row gutters">
-					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-						<div class="text-right">
-							<button type="submit" id="submit" name="submit" class="btn2" style>Save
-								Changes</button>
+					<div class="row gutters">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="text-right">
+								<button type="submit" class="btn2" style>Save
+									Changes</button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 		</form>
-		<div id="output"></div>
+		<!-- <div id="output"></div> -->
 	</div>
 
 	<script>
-	$(document).ready(function(){
-		// if (navigator.geolocation) {
-        //         navigator.geolocation.getCurrentPosition(function(position){
-        //           console.log(position);
-        //           $.get( "http://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false", function(data) {
-        //             console.log(data);
-        //           })
-        //           var img = new Image();
-        //           img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + position.coords.latitude + "," + position.coords.longitude + "&zoom=13&size=800x400&sensor=false";
-        //           $('#output').html(img);
-        //         });
-                
-        // 	}
-		for(var i=1; i<=31; i++) {
-			$('#basic_dob_day').append("<option value = '"+i+"' >"+i+" </option>");
-		}
-		for(var i=(new Date().getFullYear())-18; i>=1900; i--) {
-			$('#basic_dob_year').append("<option value = '"+i+"' >"+i+" </option>");
-		}
-	});	
+		$(document).ready(function () {
+			// if (navigator.geolocation) {
+			//         navigator.geolocation.getCurrentPosition(function(position){
+			//           console.log(position);
+			//           $.get( "http://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false", function(data) {
+			//             console.log(data);
+			//           })
+			//           var img = new Image();
+			//           img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + position.coords.latitude + "," + position.coords.longitude + "&zoom=13&size=800x400&sensor=false";
+			//           $('#output').html(img);
+			//         });
 
-	$(function(){
-		$('#basic_division').on("change", function(){
+			// 	}
+			for (var i = 1; i <= 31; i++) {
+				$('#basic_dob_day').append("<option value = '" + i + "' >" + i + " </option>");
+			}
+			for (var i = (new Date().getFullYear()) - 18; i >= 1900; i--) {
+				$('#basic_dob_year').append("<option value = '" + i + "' >" + i + " </option>");
+			}
+		});
 
-		var div_id = $('#basic_division').val();
-		//console.log(div_id);
+		$(function () {
+			$('#basic_division').on("change", function () {
 
-		$.ajax({
-			type: 'GET',
-			data: { division_id: div_id },
-			url: '/address/districts',
-			success: function(data){
-					//console.log(data);
-					$('#basic_district').empty();
-					$('#basic_district').append("<option disabled selected>District</option>");
-					$.each(data, function (index, district){
-						$('#basic_district').append("<option value = '"+district.id+"' >"+district.name+" </option>");
-					});
-				}
+				var div_id = $('#basic_division').val();
+				//console.log(div_id);
+
+				$.ajax({
+					type: 'GET',
+					data: { division_id: div_id },
+					url: '/address/districts',
+					success: function (data) {
+						//console.log(data);
+						$('#basic_district').empty();
+						$('#basic_district').append("<option disabled selected>District</option>");
+						$.each(data, function (index, district) {
+							$('#basic_district').append("<option value = '" + district.id + "' >" + district.name + " </option>");
+						});
+					}
+				});
 			});
 		});
-	});
-	
-	$(function(){
-		$('#basic_district').on("change", function(){
 
-		var dist_id = $('#basic_district').val();
-		// console.log(dist_id);
+		$(function () {
+			$('#basic_district').on("change", function () {
 
-		$.ajax({
-			type: 'GET',
-			data: { district_id: dist_id },
-			url: '/address/upazillas',
-			success: function(data){
-					// console.log(data);
-					$('#basic_upazilla').empty();
-					$('#basic_upazilla').append("<option disabled selected>Upazilla</option>");
-					$.each(data, function (index, upazilla){
-						$('#basic_upazilla').append("<option value = '"+upazilla.id+"' >"+upazilla.name+" </option>");
-					});
-				}
+				var dist_id = $('#basic_district').val();
+				// console.log(dist_id);
+
+				$.ajax({
+					type: 'GET',
+					data: { district_id: dist_id },
+					url: '/address/upazillas',
+					success: function (data) {
+						// console.log(data);
+						$('#basic_upazilla').empty();
+						$('#basic_upazilla').append("<option disabled selected>Upazilla</option>");
+						$.each(data, function (index, upazilla) {
+							$('#basic_upazilla').append("<option value = '" + upazilla.id + "' >" + upazilla.name + " </option>");
+						});
+					}
+				});
 			});
 		});
-	});
 
-	function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
 
-            reader.onload = function (e) {
-                $('#imageResult')
-                    .attr('src', e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
-            }
-    }
+				reader.onload = function (e) {
+					$('#imageResult')
+						.attr('src', e.target.result);
+				};
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
 
-    $(function () {
-        $('#upload').on('change', function () {
-            readURLfront(input_front);
-        });
-    });
+		$(function () {
+			$('#upload').on('change', function () {
+				readURLfront(input_front);
+			});
+		});
 	</script>
 	<script src="assets/js/jquery-3.2.1.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="assets/js/popper.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+		crossorigin="anonymous"></script>
 
 </body>
 
