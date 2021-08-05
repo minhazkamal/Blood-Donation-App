@@ -72,6 +72,9 @@ const validator = function (req, res, next) {
                 res.render('updateProfile', { alert: [{ msg: err.message }] });
             }
             else {
+                let FILE;
+                if(typeof req.file === 'undefined') FILE = 'avatar.png';
+                else FILE = req.file.filename;
                 db.getuserid(req.session.email)
                     .then(result => {
                         if (result.length > 0) {
@@ -82,12 +85,15 @@ const validator = function (req, res, next) {
                                     try {
                                         // console.log(result);
                                         if (result.length>0) {
-                                            fs.unlink('./profile/' + result[0].profile_picture, (err) => { // front should be changed accordingly
-                                                if (err) throw err;
-                                            });
+                                            if(typeof req.file !== 'undefined')
+                                            {
+                                                fs.unlink('./profile/' + result[0].profile_picture, (err) => { 
+                                                    if (err) throw err;
+                                                });
+                                            }
                                             // console.log("Previous files are deleted.");
 
-                                            db.updateProfilePic(req.file.filename, id) // NID will  be photo
+                                            db.updateProfilePic(FILE, id) // NID will  be photo
                                                 .then(result => {
                                                     if (result.affectedRows === 1) {
                                                         //res.redirect('/profile-update'); // Dashboard
@@ -102,7 +108,7 @@ const validator = function (req, res, next) {
                                         {
                                             // console.log(req.file);
                                             // console.log(req.files);
-                                            db.setProfilePic(req.file.filename, id)
+                                            db.setProfilePic(FILE, id)
                                             .then(result => {
                                                 // console.log(result.affectedRows);
                                                 if (result.affectedRows === 1) {
@@ -134,8 +140,44 @@ const validator = function (req, res, next) {
     }
 }
 
+const validateDOB = (value, {req}) => {
+    let day = req.body.dob_day;
+    let month = req.body.dob_month;
+    let year = req.body.dob_year;
+
+    // console.log(year, month, day);
+    let dob = new Date(year, month-1, day);
+    // console.log(dob);
+    // console.log(dob.getDate());
+    // console.log(dob.getMonth());
+    // console.log(new Date());
+    if(dob.getFullYear() == year && dob.getMonth() == month-1 && dob.getDate() == day)
+    {
+        // console.log(dob);
+        var today = new Date();
+        // var birthDate = new Date(dateString);
+        var age = today.getFullYear() - year;
+        var m = today.getMonth() - month;
+        if (m < 0 || (m === 0 && today.getDate() < day)) 
+        {
+            age--;
+        }
+        if(age<18)
+        {
+            throw new Error('Your age must be greater than 18');
+        }
+        
+    }
+    else
+    {
+        throw new Error('Date of Birth is not valid');
+    }
+    return true;
+}
+
 
 router.get('/', function (req, res) {
+    // req.session.email = 'minhaz.kamal9900@gmail.com';
     if (req.session.email) {
         db.getDivisions()
             .then(result => {
@@ -150,6 +192,9 @@ router.get('/', function (req, res) {
                                 profile_build: result[0].profile_build,
                                 bg: ''
                             }
+                            req.session.temp_user = user;
+                            req.session.div_results = div_result;
+                            // console.log(req.session.temp_user, req.session.div_results);
                             if (result[0].profile_build === 'no') {
                                 res.render('updateProfile.ejs', { user, divisions: div_result });
                             }
@@ -169,9 +214,87 @@ router.get('/', function (req, res) {
     }
 });
 
-router.post('/', validator, function (req, res) {
+router.post('/', validator, [
+    check('dob_year').custom(validateDOB),
+    check('blood_group', 'Blood Group field is empty').notEmpty(),
+    check('gender', 'Gender field is empty').notEmpty(),
+    check('division', 'Division field is empty').notEmpty(),
+    check('district', 'District field is empty').notEmpty(),
+    check('upazilla', 'Upazilla field is empty').notEmpty(),
+],
+function (req, res) {
+    let errors = validationResult(req)
+
+    if (!errors.isEmpty()) {
+        //console.log(errors);
+        const alert = errors.array();
+        res.render('updateProfile', {alert, user: req.session.temp_user, divisions: req.session.div_results});
+    }
+    else
+    {
+        let temp_dob = new Date(2000, 11, 30);
+        // console.log(temp_dob);
+        temp_dob.setTime( temp_dob.getTime() - temp_dob.getTimezoneOffset()*60*1000 );
+        // console.log(temp_dob);
+        
+
+        db.getuserid(req.session.email)
+        .then(result => {
+            if(result.length>0)
+            {
+                req.session.user_id = result[0].id;
+                let profile = {
+                    id: req.session.user_id,
+                    contact: req.body.contact,
+                    dob: temp_dob,
+                    bg: req.body.blood_group,
+                    gender: req.body.gender
+                }
+        
+                let address = {
+                    id: req.session.user_id,
+                    house: req.body.house,
+                    street: req.body.street,
+                    division: req.body.division,
+                    district: req.body.district,
+                    upazilla: req.body.upazilla
+                }
+
+                db.setUserProfile(profile)
+                .then(result => {
+                    // console.log(result);
+                    db.setUserAddress(address)
+                    .then(result => {
+                        // console.log(result);
+                        db.updateUsers(req.session.user_id, req.body.fname, req.body.lname, 'yes', 'yes')
+                        .then(result => {
+
+                            res.send("<h1>Eligibility Test</h1><br><span>Under Progress....</span>");
+                            // console.log('insertion successfull');
+                        })
+                    })
+                })
+                .catch(me => {
+                    console.log(me);
+                    hl.error(me);
+                    
+                    res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
+                })
+            }
+        })
+        .catch(me => {
+            console.log(me);
+            hl.error(me);
+            
+            res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
+        })
+
+    }
+    
     // console.log("Hello");
-    console.log(req.body);
+    // console.log(req.body.latitude);
+    delete req.session.temp_user;
+    delete req.session.div_results;
 });
 
 module.exports = router;

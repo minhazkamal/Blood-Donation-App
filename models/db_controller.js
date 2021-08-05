@@ -267,3 +267,28 @@ module.exports.getUpazillasByDist = (id) => {
         })
     })
 }
+
+module.exports.updateUsers = (id, f_name, l_name, nid_verified, profile_build) => {
+    return new Promise((resolve, reject) => {
+        db.query("UPDATE users SET first_name=?, last_name=?, nid_verified=?, profile_build=? WHERE id=?", [f_name, l_name, nid_verified, profile_build, id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.setUserProfile = (profile) => {
+    return new Promise((resolve, reject) => {
+        db.query("INSERT INTO user_profile VALUES (?, ?, ?, ?, ?)", [profile.id, profile.contact, profile.dob, profile.bg, profile.gender], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.setUserAddress = (address) => {
+    return new Promise((resolve, reject) => {
+        db.query("INSERT INTO user_address VALUES (?, ?, ?, ?, ?, ?)", [address.id, address.house, address.street, address.division, address.district, address.upazilla], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+

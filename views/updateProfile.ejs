@@ -39,17 +39,7 @@
 					<section>
 						<h2>Edit your <div class="brandname" style="font-weight: 600;"> G L E A M </div> Profile
 						</h2>
-						<!-- Alert Message
-						<% if(typeof alert !='undefined' ) { %>
-							<% alert.forEach(function(error) { %>
-								<div class="alert alert-warning alert-dismissible fade show" role="alert">
-									<%= error.msg %>
-										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-											<span aria-hidden="true">×</span>
-										</button>
-								</div>
-								<% }) %>
-									<% } %> -->
+						
 					</section>
 
 
@@ -57,7 +47,7 @@
 						<div class="user-profile">
 							<div class="user-avatar">
 
-								<img id="imageResult" src="https://pic.onlinewebfonts.com/svg/img_212908.png" alt="">
+								<img id="imageResult" src="img/avatar.png" alt="">
 							</div>
 							<!-- <input id="username" name="username" placeholder="Username" type="text" required>
 								<h6 class="note">*This is a one-time username</h6> -->
@@ -76,8 +66,8 @@
 									<!-- <input type="text" class="form-control" id="upload" disabled
 											placeholder="Choose File" aria-label="Choose File"
 											aria-describedby="basic-addon1"> -->
-									<input class="form-control" name="avatar" type="file" id="upload" onchange="readURL(this);"
-										accept="image/png, image/jpeg, image/jpg">
+									<input class="form-control" name="avatar" type="file" id="upload"
+										onchange="readURL(this);" accept="image/png, image/jpeg, image/jpg">
 									<!-- <div class="input-group-append">
 											<button type="button"
 												class="browse input-group-text btn btn-outline-secondary"
@@ -92,6 +82,17 @@
 							style="margin-top: 1rem;">Upload</button> -->
 
 						</div>
+						<!-- Alert Message -->
+						<% if(typeof alert !='undefined' ) { %>
+							<% alert.forEach(function(error) { %>
+								<div class="alert alert-warning alert-dismissible fade show" role="alert">
+									<%= error.msg %>
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">×</span>
+										</button>
+								</div>
+							<% }) %>
+						<% } %>
 						<!-- <div class="about">
 								<h5>About</h5> -->
 						<!-- <div class="form-group">
@@ -143,13 +144,13 @@
 							<div class="row">
 								<div class="col-md-4 mb-4">
 									<select name="dob_day" class="form-control" id="basic_dob_day" tabindex="-1" "
-											aria-hidden=" true">
+											aria-hidden=" true" required>
 										<option disabled selected>Day</option>
 
 									</select>
 								</div>
 								<div class="col-md-4 mb-4"><select name="dob_month" class="form-control"
-										id="basic_dob_month" tabindex="-1" aria-hidden="true">
+										id="basic_dob_month" tabindex="-1" aria-hidden="true" required>
 										<option disabled selected>Month</option>
 										<option value="01">January</option>
 										<option value="02">February</option>
@@ -165,7 +166,7 @@
 										<option value="12">December</option>
 									</select></div>
 								<div class="col-md-4 mb-4"><select name="dob_year" class="form-control"
-										id="basic_dob_year" tabindex="-1" aria-hidden="true">
+										id="basic_dob_year" tabindex="-1" aria-hidden="true" required>
 										<option disabled selected>Year</option>
 									</select></div>
 							</div>
@@ -183,7 +184,7 @@
 										</select>
 										<%} else{ %>
 											<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
-											aria-hidden=" true">
+											aria-hidden=" true" required>
 												<option disabled selected>Blood Group</option>
 												<option value="A+">A+</option>
 												<option value="A-">A-</option>
@@ -202,7 +203,7 @@
 							<div class="row">
 								<div class="col-md-4 mb-4">
 									<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
-											aria-hidden=" true">
+											aria-hidden=" true" required>
 										<option disabled selected>Gender</option>
 										<option value="Male">Male</option>
 										<option value="Female">Female</option>
@@ -267,7 +268,7 @@
 							<div class="row">
 								<div class="col-md-4 mb-4">
 									<select name="division" class="form-control" id="basic_division" tabindex="-1" "
-											aria-hidden=" true">
+											aria-hidden=" true" required>
 										<option disabled selected>Division</option>
 										<% divisions.forEach((division)=> { %>
 											<option value="<%= division.id %>">
@@ -279,7 +280,7 @@
 
 								<div class="col-md-4 mb-4">
 									<select name="district" class="form-control" id="basic_district" tabindex="-1" "
-											aria-hidden=" true">
+											aria-hidden=" true" required>
 										<option disabled selected>District</option>
 
 									</select>
@@ -287,7 +288,7 @@
 
 								<div class="col-md-4 mb-4">
 									<select name="upazilla" class="form-control" id="basic_upazilla" tabindex="-1" "
-											aria-hidden=" true">
+											aria-hidden=" true" required>
 										<!-- Eta thik kore nio -->
 										<option disabled selected>Upazilla</option>
 
@@ -301,6 +302,10 @@
 
 						</div>
 					</div>
+					<div id="output" style="display: none;">
+						<input id="latitude" name="lat" placeholder="House" type="text" value="">
+						<input id="longitude" name="lon" placeholder="House" type="text" value="">
+					</div>
 					<div class="row gutters">
 						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 							<div class="text-right">
@@ -312,23 +317,24 @@
 				</div>
 			</div>
 		</form>
-		<!-- <div id="output"></div> -->
 	</div>
 
 	<script>
 		$(document).ready(function () {
-			// if (navigator.geolocation) {
-			//         navigator.geolocation.getCurrentPosition(function(position){
-			//           console.log(position);
-			//           $.get( "http://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false", function(data) {
-			//             console.log(data);
-			//           })
-			//           var img = new Image();
-			//           img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + position.coords.latitude + "," + position.coords.longitude + "&zoom=13&size=800x400&sensor=false";
-			//           $('#output').html(img);
-			//         });
+			if (navigator.geolocation) {
+			    navigator.geolocation.getCurrentPosition(function(position){
+			        console.log(position);
+					$("#latitude").val(position.coords.latitude);
+					$("#longitude").val(position.coords.longitude);
 
-			// 	}
+			        //   $.get( "http://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false", function(data) {
+			        //     console.log(data);
+			        //   })
+			        //   var img = new Image();
+			        //   img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + position.coords.latitude + "," + position.coords.longitude + "&zoom=13&size=800x400&sensor=false";
+			        //   $('#output').html(img);
+			    });
+			}
 			for (var i = 1; i <= 31; i++) {
 				$('#basic_dob_day').append("<option value = '" + i + "' >" + i + " </option>");
 			}
@@ -382,7 +388,9 @@
 		});
 
 		function readURL(input) {
+			console.log(input);
 			if (input.files && input.files[0]) {
+				console.log(input.files);
 				var reader = new FileReader();
 
 				reader.onload = function (e) {
@@ -392,12 +400,6 @@
 				reader.readAsDataURL(input.files[0]);
 			}
 		}
-
-		$(function () {
-			$('#upload').on('change', function () {
-				readURLfront(input_front);
-			});
-		});
 	</script>
 	<script src="assets/js/jquery-3.2.1.min.js"></script>
 	<script src="assets/js/popper.min.js"></script>
