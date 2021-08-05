@@ -178,12 +178,13 @@ const validator = function (req, res, next) {
 }
 
 router.get('/', function (req, res) {
-  if (req.session.email) {
-    res.render('KYC.ejs');
-  }
-  else {
-    res.render('message.ejs', { alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type: 'verification' });
-  }
+  res.render('KYC.ejs');
+  // if (req.session.email) {
+  //   res.render('KYC.ejs');
+  // }
+  // else {
+  //   res.render('message.ejs', { alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type: 'verification' });
+  // }
 
 });
 
