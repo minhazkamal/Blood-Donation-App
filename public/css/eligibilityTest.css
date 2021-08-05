@@ -66,86 +66,24 @@ a:hover{
 }
 
 .form-body {
-    text-align: center;
-    /* border-left: 10px solid var(--primary-blue);
-    border-radius: .50% 20% / 10% .40%; */
+    margin-left: 15rem;
+
+ /* css for the form body */
 }
 
 .section-legend {
-    text-align: center;
-    /* border-left: 10px solid var(--primary-blue);
-    border-radius: .50% 20% / 10% .40%; */
-}
-
-
-label{
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 0.8rem;
-}
-label.checkbox-container{
-    display: flex;
-    justify-content: space-between;
-}
-
-
-
-.checkbox-container input{
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-
-.checkbox-container{
-    display: block;
-    position: relative;
+    /* text-align: center; */
+    margin-left: -5rem;
     padding-left: 2rem;
-    cursor: pointer;
-    user-select: none;
-    margin: 0 0 1.25rem 0;
+    padding-bottom: 1.7rem;
+    border-left: 6px solid var(--primary-pink);
+    border-radius: .50% 20% / 10% .40%;
 }
 
-.checkbox-container input:checked~ .checkmark{
-    background-color: var(--primary-blue);
-    border: 1px solid var(--primary-blue);
-}
-
-.checkmark{
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: white;
-    border: 1px solid #c4c4c4;
-    border-radius: 4px;
-    top: -2px;
-    left: 0;
-}
-
-.checkmark:after{
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-.checkbox-container input:checked~ .checkmark:after{
-    display: block;
-}
-
-.checkbox-container .checkmark:after{
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    width: 6px;
-    height: 12px;
-    left: 6px;
-    top: 2px;
-    transform: rotate(45deg);
-}
 
 .signup-btn{
     display: block;
-    width: 8rem;
+    width: 10%;
     padding: 1rem;
     margin: auto;
     margin-top: 2rem;
@@ -168,59 +106,7 @@ label.checkbox-container{
 
 
 
-@media screen and (min-width:900px) {
-    .left, .right{
-        display: flex;
-        width: 100%;
-        height: auto;
-    }
-    
-}
-
-/* ############################################ */
-/* making the radio buttons invinsible */
-/* .form-check .form-check-input { */
-    /* display: none; */
-/* } */
-
-/* button design for the options */
-.btn-ans {
-    width: 3rem;
-    padding: 1rem;
-    padding-right: 1.5rem;
-    background: var(--primary-pink);
-    color: white;
-    font-weight: 500;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    text-align: center;
-    letter-spacing: 0.5px;
-    transition: 0.3s;
-}
-
-.btn-ans:hover {
-    background: black;
-    color: white;
-    font-weight: 700;
-}
-
-.btn-ans:hover {
-    background: black;
-    color: white;
-    font-weight: 700;
-}
-
-
-.btn-ans:focus {
-    background: black;
-    color: white;
-    font-weight: 700;
-}
-
-
-button,
+/* button,
 [role="button"] {
     width: 3rem;
     padding: 1rem;
@@ -243,4 +129,55 @@ button:focus,
     background: rgba(0, 128, 0, 0.589);
     color: white;
     /* font-weight: 700; */
-}
+
+
+
+.switch-field {
+    display: flex;
+    margin-bottom: 36px;
+    overflow: hidden;
+  }
+  
+  .switch-field input {
+    position: absolute !important;
+    clip: rect(0, 0, 0, 0);
+    height: 1rem;
+    width: 3rem;
+    border: none;
+    overflow: hidden;
+  }
+  
+  .switch-field label {
+    background-color: white ;
+    color: black;
+    font-size: 1rem;
+    line-height: 1;
+    text-align: center;
+    padding: 1rem 1.8rem;
+    margin-right: -1px;
+    border: none;
+    /* box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1); */
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .switch-field label:hover {
+    cursor: pointer;
+    background-color: var(--primary-pink);
+    color: white;
+  }
+  
+  .switch-field input:checked + label {
+    background-color: var(--primary-pink);
+    color: white;
+    box-shadow: none;
+  }
+  
+  .switch-field label:first-of-type {
+    border-radius: 4px 0 0 4px;
+  }
+  
+  .switch-field label:last-of-type {
+    border-radius: 2rem;
+  }
+  
+  
