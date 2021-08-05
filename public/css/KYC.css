@@ -5,8 +5,7 @@
 * ==========================================
 *
 */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root{
     font-size: 100%;
@@ -96,7 +95,7 @@ a:hover{
     content: 'Uploaded image result';
     margin: 0%;
     text-align: center;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.712);
     font-weight: bold;
     text-transform: uppercase;
     position: absolute;
@@ -105,11 +104,19 @@ a:hover{
     transform: translate(-50%, -50%);
     font-size: 0.8rem;
     z-index: 1;
+    
 }
 
 .image-area img {
     z-index: 2;
     position: relative;
+}
+
+.font-italic.text-center{
+    color: rgba(0, 0, 0, 0.712);
+    font-family: 'Montserrat' ,sans-serif;
+    font-weight: 500;
+    font-size: 1.5em;
 }
 
 
@@ -127,10 +134,9 @@ body {
     font-family: 'Montserrat',sans-serif;
     /* background-color: #757f9a; */
     /* background-image: linear-gradient(147deg, #757f9a 0%, #d7dde8 100%); */
-    background-image: url(/img/wavelogin.png);
+    background-image: url(/img/waveKYC.png);
     background-size: cover;
-    background-repeat: no-repeat;
-    
+    background-repeat: no-repeat;   
 }
 
 .btn-pink {
@@ -170,4 +176,9 @@ body {
 .signup-btn:hover{
     background: #3a7ca5;
     cursor: pointer;
+}
+
+.input-group.mb-3.px-2.py-2.bg-white.shadow-sm{
+    border-radius: 1rem;
+    box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.47);
 }
