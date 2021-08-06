@@ -85,7 +85,7 @@ const validator = function (req, res, next) {
                                     try {
                                         // console.log(result);
                                         if (result.length>0) {
-                                            if(typeof req.file !== 'undefined')
+                                            if(FILE === 'avatar.png')
                                             {
                                                 fs.unlink('./profile/' + result[0].profile_picture, (err) => { 
                                                     if (err) throw err;
@@ -93,7 +93,7 @@ const validator = function (req, res, next) {
                                             }
                                             // console.log("Previous files are deleted.");
 
-                                            db.updateProfilePic(FILE, id) // NID will  be photo
+                                            db.updateProfilePic(FILE, id)
                                                 .then(result => {
                                                     if (result.affectedRows === 1) {
                                                         //res.redirect('/profile-update'); // Dashboard
