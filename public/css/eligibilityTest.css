@@ -48,18 +48,15 @@ a:hover{
     text-decoration: underline;
 }
 
-.brand-name {
-    font-weight: 900;
-    display: inline;
+main {
+    width: 80%;
+    margin: auto;
 }
 
-@media screen and (max-width:900px) {
-    .brand-name {
-        font-weight: 800;
-        display: block;
-    }   
-    
+.row  {
+    margin-bottom: .5rem;
 }
+
 .copy{
     margin: auto;
     padding-top: 2rem;
@@ -70,14 +67,14 @@ a:hover{
 }
 
 .form-body {
-    margin-left: 15rem;
+    width: 80%;
+    margin: auto;
 
  /* css for the form body */
 }
 
 .section-legend {
     /* text-align: center; */
-    margin-left: -5rem;
     padding-left: 2rem;
     padding-bottom: 1.7rem;
     border-left: 6px solid var(--primary-pink);
@@ -108,34 +105,7 @@ a:hover{
     cursor: pointer;
 }
 
-
-
-/* button,
-[role="button"] {
-    width: 3rem;
-    padding: 1rem;
-    padding-right: 1.5rem;
-    background: var(--primary-pink);
-    color: white;
-    font-weight: 500;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    text-align: center;
-    letter-spacing: 0.5px;
-    transition: 0.3s;
-}
-
-button:active,
-button:focus,
-[role="button"][aria-pressed="true"] {
-    background: rgba(0, 128, 0, 0.589);
-    color: white;
-    /* font-weight: 700; */
-
-
-
+/* This part is for the radio-buttons as buttons effect  */
 .switch-field {
     display: flex;
     margin-bottom: 36px;

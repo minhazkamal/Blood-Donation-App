@@ -11,11 +11,11 @@
   <title>Eligibility</title>
   <!-- ALL CSS RESET -->
   <link rel="stylesheet" type="text/css" href="/css/cssReset.css">
+  <!-- BOOT STRAP v4.3.1 -->
   <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
   <!-- fontawesome 5 webkit from abdullah -->
+  <!-- <link rel="stylesheet" type="text/css" href="assets/css/style.css">  -->
   <script src="https://kit.fontawesome.com/af332973a8.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="/css/eligibilityTest.css">
@@ -27,164 +27,178 @@
 </head>
 
 <body>
-  <section class="copy my-10">
+  <header class="copy">
     <h1 class="font-weight-light">
-      <div class="brand-name"> Am I Eligible </div> for donating?
+      Am I Eligible for donating ?
     </h1>
-    <p class="font-weight-lighter">The answer is important for both you and the recipient. Let's have a quic check
+    <p class="lead font-weight-lighter">The answer is important for both you and the recipient. Let's have a quick check
+      !
     </p>
-  </section>
-  </div>
+  </header>
 
 
-  <form action="#" class="form-body">
-    <section class="section-legend">
-      <p class="fw-bold fs-4 my-1.5">Let's look into your <span class="fw-bold"
-          style="color: #b9375e;">Comorbidities</span></p>
-    </section>
+  <main>
 
-    <div class="row">
+    <form action="#" class="form-body">
 
-      <fieldset class="col-sm-12 col-md-6 mb-3 fs-5">
-        <legend class="fw-normal col-form-label">Do you have High Blood Pressure?</legend>
-        <div class="switch-field col-sm-10">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="HBP" id="HBP-Y" value="yes">
-            <label class="form-check-label" for="HBP-Y">Yes</label>
-            <!-- <span role="button" tabindex="0" aria-pressed="false" onclick="handleBtnClickYes(event)">
-              Yes
-            </span> -->
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="HBP" id="HBP-N" value="no">
-            <label class="form-check-label" for="HBP-N">No</label>
+      <section class="section-legend">
+        <p>Let's look into your <span class="fw-bold" style="color: #b9375e;">Comorbidities</span></p>
+      </section>
+
+      <div class="row" style="background-color: brown;">
+
+        <fieldset class="col-sm-12 col-md-6" style="border: 2px solid blue;">
+          <p class="lead">Do you have High Blood Pressure?</p>
+          <div class="switch-field col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="HBP" id="HBP-Y" value="yes">
+              <label class="form-check-label" for="HBP-Y">Yes</label>
+              <!-- <span role="button" tabindex="0" aria-pressed="false" onclick="handleBtnClickYes(event)">
+                Yes
+              </span> -->
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="HBP" id="HBP-N" value="no">
+              <label class="form-check-label" for="HBP-N">No</label>
+            </div>
+        </fieldset>
+
+        <fieldset class="col-sm-12 col-md-6" style="border: 2px solid blue;">
+          <p class="lead">Do you have Heart Disease?</p>
+          <div class="switch-field col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="HD" id="HD-Y" value="yes">
+              <label class="form-check-label" for="HD-Y">Yes</label>
+              <!-- <span role="button" tabindex="0" aria-pressed="false" onclick="handleBtnClickYes(event)">
+                Yes
+              </span> -->
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="HD" id="HD-N" value="no">
+              <label class="form-check-label" for="HD-N">No</label>
+            </div>
+        </fieldset>
+
+      </div>
+
+      <div class="row" style="background-color: gold;">
+
+        <fieldset class="col-sm-12 col-md-6" style="border: 2px solid blue;">
+          <p class="lead">Are you a Kidney Patient?</p>
+          <div class="switch-field col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="kidney" id="kidney-Y" value="yes">
+              <label class="form-check-label" for="kidney-Y">Yes</label>
+              <!-- <span role="button" tabindex="0" aria-pressed="false" onclick="handleBtnClickYes(event)">
+                Yes
+              </span> -->
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="kidney" id="kidney-N" value="no">
+              <label class="form-check-label" for="kidney-N">No</label>
+            </div>
+        </fieldset>
+
+        <fieldset class="col-sm-12 col-md-6" style="border: 2px solid blue;">
+          <p class="lead">Do you have any cancer history?</p>
+          <div class="switch-field col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="cancer" id="cancer-Y" value="yes">
+              <label class="form-check-label" for="cancer-Y">Yes</label>
+              <!-- <span role="button" tabindex="0" aria-pressed="false" onclick="handleBtnClickYes(event)">
+                Yes
+              </span> -->
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="cancer" id="cancer-N" value="no">
+              <label class="form-check-label" for="cancer-N">No</label>
+            </div>
+        </fieldset>
+
+      </div>
+
+      <div class="row" style="background-color:green;">
+
+        <fieldset class="col-sm-12 col-md-6" style="border: 2px solid blue;">
+          <p class="lead">Are you Diabetic?</p>
+          <div class="switch-field col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="diabetic" id="diabetic-Y" value="yes">
+              <label class="form-check-label" for="diabetic-Y">Yes</label>
+              <!-- <span role="button" tabindex="0" aria-pressed="false" onclick="handleBtnClickYes(event)">
+                Yes
+              </span> -->
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="diabetic" id="diabetic-N" value="no">
+              <label class="form-check-label" for="diabetic-N">No</label>
+            </div>
+        </fieldset>
+
+
+
+        <fieldset class="col-sm-12 col-md-6" style="border: 2px solid blue;">
+          <p class="lead">Are you a Anemic?</p>
+          <div class="switch-field col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="Anemia" id="Anemia-Y" value="yes">
+              <label class="form-check-label" for="Anemia-Y">Yes</label>
+              <!-- <span role="button" tabindex="0" aria-pressed="false" onclick="handleBtnClickYes(event)">
+                Yes
+              </span> -->
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="Anemia" id="Anemia-N" value="no">
+              <label class="form-check-label" for="Anemia-N">No</label>
+            </div>
+        </fieldset>
+
+      </div>
+
+      <section class="section-legend">
+        <p class="fw-bold fs-4 my-1.5">A few info about <span class="fw-bold" style="color: #b9375e;">lifestyle</span>
+        </p>
+      </section>
+
+      <fieldset class="row" style="background-color: blueviolet;">
+        <div class="col">
+          <p class="lead">Select the applicable ones for you</p>
+          <div class="switch-field col-sm-12">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="lifestyle1" value="drink-Y">
+              <label class="form-check-label" for="lifestyle1">Drinking</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="lifestyle2" value="smoke-Y">
+              <label class="form-check-label" for="lifestyle2">Smoking</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="lifestyle3" value="depression-Y">
+              <label class="form-check-label" for="lifestyle3">Depression</label>
+            </div>
           </div>
       </fieldset>
 
-      <fieldset class="col-sm-12 col-md-6 mb-3  fs-5">
-        <legend class="fw-normal col-form-label">Do you have Heart Disease?</legend>
-        <div class="switch-field col-sm-10">
+      <fieldset class="row mb-3 px-10">
+        <legend class="fw-normal col-form-label fs-5">When was your last Blood Donation date??
+        </legend>
+        <div class="switch-field col-sm-12">
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="HD" id="HD-Y" value="yes">
-            <label class="form-check-label" for="HD-Y">Yes</label>
-            <!-- <span role="button" tabindex="0" aria-pressed="false" onclick="handleBtnClickYes(event)">
-              Yes
-            </span> -->
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="HD" id="HD-N" value="no">
-            <label class="form-check-label" for="HD-N">No</label>
+            <input class="form-check-input" type="checkbox" id="donation-date" value="NA">
+            <label class="form-check-label font-italic" for="donation-date">(Not Applicable)</label>
           </div>
       </fieldset>
 
-    </div>
+      <button class="signup-btn" type="submit">Submit</button>
 
-    <div class="row">
-
-      <fieldset class="col-sm-12 col-md-6 mb-3  fs-5">
-        <legend class="fw-normal col-form-label">Are you a Kidney Patient?</legend>
-        <div class="switch-field col-sm-10">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="kidney" id="kidney-Y" value="yes">
-            <label class="form-check-label" for="kidney-Y">Yes</label>
-            <!-- <span role="button" tabindex="0" aria-pressed="false" onclick="handleBtnClickYes(event)">
-              Yes
-            </span> -->
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="kidney" id="kidney-N" value="no">
-            <label class="form-check-label" for="kidney-N">No</label>
-          </div>
-      </fieldset>
-
-      <fieldset class="col-sm-12 col-md-6 mb-3  fs-5">
-        <legend class="fw-normal col-form-label">Do you have any cancer history?</legend>
-        <div class="switch-field col-sm-10">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="cancer" id="cancer-Y" value="yes">
-            <label class="form-check-label" for="cancer-Y">Yes</label>
-            <!-- <span role="button" tabindex="0" aria-pressed="false" onclick="handleBtnClickYes(event)">
-              Yes
-            </span> -->
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="cancer" id="cancer-N" value="no">
-            <label class="form-check-label" for="cancer-N">No</label>
-          </div>
-      </fieldset>
-
-    </div>
-
-    <div class="row">
-
-      <fieldset class="col-sm-12 col-md-6 mb-3  fs-5">
-        <legend class="fw-normal col-form-label">Are you Diabetic?</legend>
-        <div class="switch-field col-sm-10">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="diabetic" id="diabetic-Y" value="yes">
-            <label class="form-check-label" for="diabetic-Y">Yes</label>
-            <!-- <span role="button" tabindex="0" aria-pressed="false" onclick="handleBtnClickYes(event)">
-              Yes
-            </span> -->
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="diabetic" id="diabetic-N" value="no">
-            <label class="form-check-label" for="diabetic-N">No</label>
-          </div>
-      </fieldset>
+    </form>
+  </main>
 
 
 
-      <fieldset class="col-sm-12 col-md-6 mb-3 fs-5">
-        <legend class="fw-normal col-form-label">Are you a Anemic?</legend>
-        <div class="switch-field col-sm-10">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="Anemia" id="Anemia-Y" value="yes">
-            <label class="form-check-label" for="Anemia-Y">Yes</label>
-            <!-- <span role="button" tabindex="0" aria-pressed="false" onclick="handleBtnClickYes(event)">
-              Yes
-            </span> -->
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="Anemia" id="Anemia-N" value="no">
-            <label class="form-check-label" for="Anemia-N">No</label>
-          </div>
-      </fieldset>
 
-    </div>
 
-    <section class="section-legend">
-      <p class="fw-bold fs-4 my-1.5">A few info about <span class="fw-bold" style="color: #b9375e;">lifestyle</span></p>
-    </section>
-    <fieldset class="row mb-3 px-10">
-      <legend class="fw-normal col-form-label lead fs-5">Which of the follwings are applicable for you currently?
-      </legend>
-      <div class="switch-field col-sm-12">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="lifestyle1" value="drink-Y">
-          <label class="form-check-label" for="lifestyle1">Drinking</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="lifestyle2" value="smoke-Y">
-          <label class="form-check-label" for="lifestyle2">Smoking</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="lifestyle3" value="depression-Y">
-          <label class="form-check-label" for="lifestyle3">Depression</label>
-        </div>
-    </fieldset>
 
-    <fieldset class="row mb-3 px-10">
-      <legend class="fw-normal col-form-label fs-5">When was your last Blood Donation date??
-      </legend>
-      <div class="switch-field col-sm-12">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="donation-date" value="NA">
-          <label class="form-check-label font-italic" for="donation-date">(Not Applicable)</label>
-        </div>
-    </fieldset>
-
-    <button class="signup-btn" type="submit">Submit</button>
 
   <script src="assets/js/jquery-3.2.1.min.js"></script>
   <script src="assets/js/popper.min.js"></script>
@@ -195,26 +209,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
     crossorigin="anonymous"></script>
-
-
-
-
-  <!-- @ Minhaz ei script niye confusion hocche, ja lagbe na delte kore dish -->
-  <!-- 
-  <script src="assets/js/jquery-3.2.1.min.js"></script>
-	<script src="assets/js/popper.min.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
-  <script src="assets/js/app.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-
-  
-  
-  
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>    -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
-
 
 </body>
 
