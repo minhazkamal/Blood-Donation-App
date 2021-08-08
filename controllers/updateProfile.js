@@ -141,18 +141,19 @@ const validator = function (req, res, next) {
 }
 
 const validateDOB = (value, {req}) => {
-    let day = req.body.dob_day;
-    let month = req.body.dob_month;
-    let year = req.body.dob_year;
+    // let day = req.body.dob_day;
+    // let month = req.body.dob_month;
+    // let year = req.body.dob_year;
+    const [year, month, day] = value.split('-');
 
     // console.log(year, month, day);
-    let dob = new Date(year, month-1, day);
+    // let dob = new Date(year, month-1, day);
     // console.log(dob);
     // console.log(dob.getDate());
     // console.log(dob.getMonth());
     // console.log(new Date());
-    if(dob.getFullYear() == year && dob.getMonth() == month-1 && dob.getDate() == day)
-    {
+    // if(dob.getFullYear() == year && dob.getMonth() == month-1 && dob.getDate() == day)
+    // {
         // console.log(dob);
         var today = new Date();
         // var birthDate = new Date(dateString);
@@ -167,11 +168,11 @@ const validateDOB = (value, {req}) => {
             throw new Error('Your age must be greater than 18');
         }
         
-    }
-    else
-    {
-        throw new Error('Date of Birth is not valid');
-    }
+    // }
+    // else
+    // {
+    //     throw new Error('Date of Birth is not valid');
+    // }
     return true;
 }
 
@@ -215,7 +216,7 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', validator, [
-    check('dob_year').custom(validateDOB),
+    check('dob').custom(validateDOB),
     check('blood_group', 'Blood Group field is empty').notEmpty(),
     check('gender', 'Gender field is empty').notEmpty(),
     check('division', 'Division field is empty').notEmpty(),
@@ -232,7 +233,8 @@ function (req, res) {
     }
     else
     {
-        let temp_dob = new Date(2000, 11, 30);
+        // console.log(req.body);
+        let temp_dob = new Date(req.body.dob);
         // console.log(temp_dob);
         temp_dob.setTime( temp_dob.getTime() - temp_dob.getTimezoneOffset()*60*1000 );
         // console.log(temp_dob);
@@ -257,7 +259,10 @@ function (req, res) {
                     street: req.body.street,
                     division: req.body.division,
                     district: req.body.district,
-                    upazilla: req.body.upazilla
+                    upazilla: req.body.upazilla,
+                    zipcode: req.body.zipcode,
+                    lat: req.body.lat,
+                    lon: req.body.lon
                 }
 
                 db.setUserProfile(profile)

@@ -286,7 +286,7 @@ module.exports.setUserProfile = (profile) => {
 
 module.exports.setUserAddress = (address) => {
     return new Promise((resolve, reject) => {
-        db.query("INSERT INTO user_address VALUES (?, ?, ?, ?, ?, ?)", [address.id, address.house, address.street, address.division, address.district, address.upazilla], (err, res) => {
+        db.query("INSERT INTO user_address VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", [address.id, address.house, address.street, address.division, address.district, address.upazilla, address.zipcode, address.lat, address.lon], (err, res) => {
             err ? reject(err) : resolve(res)
         })
     })
