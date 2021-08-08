@@ -89,7 +89,13 @@ app.use('/address', address);
 app.get('/search-donor', function(req,res){
     res.render('searchDonor.ejs');
 });
-//localhost:3940/
+
+//localhost:3940//search-org
 app.get('/search-org', function(req,res){
     res.render('searchOrg.ejs');
+});
+
+//localhost:3940//search-org
+app.get('/home', function(req,res){
+    res.render('home.ejs');
 });
