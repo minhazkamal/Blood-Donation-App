@@ -39,7 +39,7 @@
 					<section>
 						<h2>Edit your <div class="brandname" style="font-weight: 600;"> G L E A M </div> Profile
 						</h2>
-						
+
 					</section>
 
 
@@ -91,17 +91,17 @@
 											<span aria-hidden="true">×</span>
 										</button>
 								</div>
-							<% }) %>
-						<% } %>
-						<!-- <div class="about">
+								<% }) %>
+									<% } %>
+										<!-- <div class="about">
 								<h5>About</h5> -->
-						<!-- <div class="form-group">
+										<!-- <div class="form-group">
 									<input id="bio" name="bio" class="bio" placeholder="Write something about yourself."
 										type="text" required>
 								</div> -->
 
-						<!-- <div class="form-group"> -->
-						<!-- <label for="exampleFormControlTextarea1">Example textarea</label>
+										<!-- <div class="form-group"> -->
+										<!-- <label for="exampleFormControlTextarea1">Example textarea</label>
 									<textarea class="form-control" id="exampleFormControlTextarea1" rows="10"
 										placeholder="Write something about yourself."></textarea>
 								</div>
@@ -251,10 +251,10 @@
 						</div>
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="input-container lname">
-								<input id="house" name="house" placeholder="House" type="text">
+								<input id="house" name="house" placeholder="House (Optional)" type="text">
 							</div>
 							<div class="input-container lname">
-								<input id="street" name="street" placeholder="Street" type="text">
+								<input id="street" name="street" placeholder="Street (Optional)" type="text">
 							</div>
 
 							<!-- <div class="form-group">
@@ -266,6 +266,11 @@
 						</div>
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="row">
+								<div class="col-md-12 mb-4">
+									<div class="input-container lname"  >
+										<input id="street" name="street" style="margin-bottom: 0;" placeholder="Zip Code (Optional)" type="text">
+									</div>
+								</div>
 								<div class="col-md-4 mb-4">
 									<select name="division" class="form-control" id="basic_division" tabindex="-1" "
 											aria-hidden=" true" required>
@@ -289,11 +294,11 @@
 								<div class="col-md-4 mb-4">
 									<select name="upazilla" class="form-control" id="basic_upazilla" tabindex="-1" "
 											aria-hidden=" true" required>
-										<!-- Eta thik kore nio -->
 										<option disabled selected>Upazilla</option>
 
 									</select>
 								</div>
+								
 							</div>
 
 							<!-- <div class="form-group">
@@ -322,18 +327,18 @@
 	<script>
 		$(document).ready(function () {
 			if (navigator.geolocation) {
-			    navigator.geolocation.getCurrentPosition(function(position){
-			        console.log(position);
+				navigator.geolocation.getCurrentPosition(function (position) {
+					console.log(position);
 					$("#latitude").val(position.coords.latitude);
 					$("#longitude").val(position.coords.longitude);
 
-			        //   $.get( "http://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false", function(data) {
-			        //     console.log(data);
-			        //   })
-			        //   var img = new Image();
-			        //   img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + position.coords.latitude + "," + position.coords.longitude + "&zoom=13&size=800x400&sensor=false";
-			        //   $('#output').html(img);
-			    });
+					//   $.get( "http://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false", function(data) {
+					//     console.log(data);
+					//   })
+					//   var img = new Image();
+					//   img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + position.coords.latitude + "," + position.coords.longitude + "&zoom=13&size=800x400&sensor=false";
+					//   $('#output').html(img);
+				});
 			}
 			for (var i = 1; i <= 31; i++) {
 				$('#basic_dob_day').append("<option value = '" + i + "' >" + i + " </option>");
