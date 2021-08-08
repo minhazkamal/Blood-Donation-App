@@ -86,8 +86,31 @@ CREATE TABLE `nid` (
 
 LOCK TABLES `nid` WRITE;
 /*!40000 ALTER TABLE `nid` DISABLE KEYS */;
-INSERT INTO `nid` VALUES (1,'e96adcd4648d96d294592f78c3f6f3311b922d752d2d2241fc599b457a1182d5ca999156b0b166a6f00a94571eeca418b528e3d5afe3fb04f315150fc753414b4facdcb28fcd3c6532ff66d691a6fc1cf3ef6849e9d54e9d5b75d592ce0da09384.png','9bc9a6de15fd65e04b2a327a878b7b9ab8f189f1fdc555b26eab6a11327f0cf76035eb32f7c7d259d167c98469dad3758759fbb92216045bdcf80e1e8227a587b5ab2c7b9ecc5ad7b120f3767b7f930e4a744b05b1077e499ec9c5e7e3d3c35bd0.png');
 /*!40000 ALTER TABLE `nid` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `profile_picture`
+--
+
+DROP TABLE IF EXISTS `profile_picture`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `profile_picture` (
+  `id` int NOT NULL,
+  `profile_picture` varchar(250) NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `profile_pic_id` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `profile_picture`
+--
+
+LOCK TABLES `profile_picture` WRITE;
+/*!40000 ALTER TABLE `profile_picture` DISABLE KEYS */;
+/*!40000 ALTER TABLE `profile_picture` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -116,6 +139,61 @@ INSERT INTO `upazillas` VALUES (1,34,'Amtali'),(2,34,'Bamna '),(3,34,'Barguna Sa
 UNLOCK TABLES;
 
 --
+-- Table structure for table `user_address`
+--
+
+DROP TABLE IF EXISTS `user_address`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_address` (
+  `id` int NOT NULL,
+  `house` varchar(250) DEFAULT NULL,
+  `street` varchar(250) DEFAULT NULL,
+  `division` int NOT NULL,
+  `district` int NOT NULL,
+  `upazilla` int NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `user_address_id` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_address`
+--
+
+LOCK TABLES `user_address` WRITE;
+/*!40000 ALTER TABLE `user_address` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_address` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_profile`
+--
+
+DROP TABLE IF EXISTS `user_profile`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_profile` (
+  `id` int NOT NULL,
+  `contact` varchar(11) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `BG` enum('A+','A-','B+','B-','O+','O-','AB+','AB-') DEFAULT NULL,
+  `gender` enum('Male','Female','Others') DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `user_profile_id` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_profile`
+--
+
+LOCK TABLES `user_profile` WRITE;
+/*!40000 ALTER TABLE `user_profile` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_profile` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -131,6 +209,7 @@ CREATE TABLE `users` (
   `email_verified` enum('yes','no') NOT NULL DEFAULT 'no',
   `profile_build` enum('yes','no') NOT NULL DEFAULT 'no',
   `nid_verified` enum('yes','no') NOT NULL DEFAULT 'no',
+  `eligibility_test` enum('yes','no') NOT NULL DEFAULT 'no',
   `joined` date NOT NULL,
   `provider` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
@@ -144,7 +223,6 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Minhaz','Kamal','minhaz.kamal9900@gmail.com',NULL,'yes','no','no','2021-07-30','google'),(2,'MINHAZ','KAMAL','minhazkamal@iut-dhaka.edu','$2a$10$d25V0RIEsgP0ZgaMSXdojOkiDxi0tmQUzpXzZSyaRNAcgqaa8y3Bu','yes','no','no','2021-07-31','self'),(4,'Notredamian','Minhaz','ndcminhaz@gmail.com',NULL,'yes','no','no','2021-08-04','google');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -157,4 +235,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-04 11:30:04
+-- Dump completed on 2021-08-06  0:28:55
