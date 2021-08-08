@@ -29,7 +29,7 @@ body {
     border-radius: 100px;
     /* border-style: solid; */
 }
-input[type="text"],input[type="email"],input[type="tel"]{
+input[type="text"],input[type="email"],input[type="tel"],input[type="date"]{
     /* margin: 0 0 0.5rem 0; */
 
     display: block;

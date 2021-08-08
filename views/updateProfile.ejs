@@ -142,14 +142,20 @@
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<h6 class="mb-2">Date of Birth</h6>
 							<div class="row">
-								<div class="col-md-4 mb-4">
+								<div class="col-md-6 mb-4" style="margin-bottom: 0.25 !important; ">
+									<div class="input-container lname" >
+										<input id="DOB" type="date" style="margin-bottom: 0;">
+									</div>
+								</div>
+								
+								<!-- <div class="col-md-4 mb-4">
 									<select name="dob_day" class="form-control" id="basic_dob_day" tabindex="-1" "
 											aria-hidden=" true" required>
 										<option disabled selected>Day</option>
 
 									</select>
-								</div>
-								<div class="col-md-4 mb-4"><select name="dob_month" class="form-control"
+								</div> -->
+								<!-- <div class="col-md-4 mb-4"><select name="dob_month" class="form-control"
 										id="basic_dob_month" tabindex="-1" aria-hidden="true" required>
 										<option disabled selected>Month</option>
 										<option value="01">January</option>
@@ -164,17 +170,19 @@
 										<option value="10">October</option>
 										<option value="11">November</option>
 										<option value="12">December</option>
-									</select></div>
-								<div class="col-md-4 mb-4"><select name="dob_year" class="form-control"
+									</select>
+								</div> -->
+								<!-- <div class="col-md-4 mb-4"><select name="dob_year" class="form-control"
 										id="basic_dob_year" tabindex="-1" aria-hidden="true" required>
 										<option disabled selected>Year</option>
-									</select></div>
+									</select>
+								</div> -->
 							</div>
 							<h6 class="mb-2">Blood Group <div style="display: inline;" class="note">(You can select
 									it only once.)</div>
 							</h6>
 							<div class="row">
-								<div class="col-md-4 mb-4">
+								<div class="col-md-6 mb-4">
 									<% if (user.profile_build==='yes' ) { %>
 										<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
 											aria-hidden=" true" disabled>
@@ -201,7 +209,7 @@
 							</div>
 							<h6 class="mb-2">Gender</h6>
 							<div class="row">
-								<div class="col-md-4 mb-4">
+								<div class="col-md-6 mb-4">
 									<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
 											aria-hidden=" true" required>
 										<option disabled selected>Gender</option>
