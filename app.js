@@ -84,3 +84,18 @@ app.use('/address', address);
 //     let {id} = req.params;
 //     res.render('email_activate.ejs', {id});
 // });
+
+//localhost:3940/search-donor
+app.get('/search-donor', function(req,res){
+    res.render('searchDonor.ejs');
+});
+
+//localhost:3940//search-org
+app.get('/search-org', function(req,res){
+    res.render('searchOrg.ejs');
+});
+
+//localhost:3940//search-org
+app.get('/home', function(req,res){
+    res.render('home.ejs');
+});
