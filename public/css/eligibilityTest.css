@@ -247,7 +247,6 @@ hr{
     border-width: 1px;
     background: rgba(0, 0, 0, 0.404);
     margin-bottom: 2rem;
-    width: 100%;
 }
 
 .hr1{
@@ -305,7 +304,7 @@ hr{
 
 
 h3 {
-	font-size: 20px;
+	font-size: 22px;
 	margin-bottom: 8px;
     font-family: 'Montserrat',sans-serif;
     font-weight: 400;
@@ -322,7 +321,6 @@ h3 {
     display:flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-left: 10px;
 }
 
 .form-left{
