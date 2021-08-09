@@ -82,28 +82,7 @@ main {
 }
 
 
-.signup-btn{
-    display: block;
-    width: 10%;
-    padding: 1rem;
-    margin: auto;
-    margin-top: 2rem;
-    background: var(--primary-blue);
-    color: white;
-    font-weight: 500;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: 0.3s;
-    font-size: 0.875rem;
-}
-
-.signup-btn:hover{
-    background: #3a7ca5;
-    cursor: pointer;
-} */
+*/
 
 /* This part is for the radio-buttons as buttons effect  */
 /* .switch-field {
@@ -244,7 +223,7 @@ p{
 }
 
 hr{
-    border-width: 1px;
+    border-width: 0.5px;
     background: rgba(0, 0, 0, 0.404);
     margin-bottom: 2rem;
 }
@@ -321,6 +300,34 @@ h3 {
     display:flex;
     justify-content: center;
     flex-wrap: wrap;
+    margin-left: 80px;
+}
+
+.signup-btn{
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    margin: auto;
+    margin-top: 2rem;
+    background: var(--primary-blue);
+    color: white;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: 0.3s;
+    font-size: 0.875rem;
+    font-family: 'Montserrat',sans-serif;
+}
+
+.signup-btn:hover{
+    background: #3a7ca5;
+    cursor: pointer;
+} 
+.btn{
+    width: 50%;
 }
 
 .form-left{
@@ -334,6 +341,9 @@ h3 {
 }
 
 @media(max-width:800px){
+    .row{
+        margin-left: 20px ;
+    }
     .form-left{
         flex: 100%;
         max-width: 100%;
@@ -351,6 +361,9 @@ h3 {
 }
 
 @media(max-width:800px){
+    .row{
+        margin-left: 20px ;
+    }
     .form-right{
         flex: 100%;
         max-width: 100%;
