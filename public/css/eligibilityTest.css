@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
-:root{
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* :root{
     font-size: 100%;
     font-size: 16px;
     line-height: 1.5;
@@ -60,22 +60,22 @@ main {
 .copy{
     margin: auto;
     padding-top: 2rem;
-    padding-bottom: 4rem;
+    padding-bottom: 4rem; */
     /* border-left: 10px solid var(--primary-blue);
     border-radius: .50% 20% / 10% .40%; */
-    text-align: center;
+    /* text-align: center;
 }
 
 .form-body {
     width: 80%;
-    margin: auto;
+    margin: auto; */
 
  /* css for the form body */
-}
+/* }
 
-.section-legend {
+.section-legend { */
     /* text-align: center; */
-    padding-left: 2rem;
+    /* padding-left: 2rem;
     padding-bottom: 1.7rem;
     border-left: 6px solid var(--primary-pink);
     border-radius: .50% 20% / 10% .40%;
@@ -103,10 +103,10 @@ main {
 .signup-btn:hover{
     background: #3a7ca5;
     cursor: pointer;
-}
+} */
 
 /* This part is for the radio-buttons as buttons effect  */
-.switch-field {
+/* .switch-field {
     display: flex;
     margin-bottom: 36px;
     overflow: hidden;
@@ -129,9 +129,9 @@ main {
     text-align: center;
     padding: 1rem 1.8rem;
     margin-right: -1px;
-    border: none;
+    border: none; */
     /* box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1); */
-    transition: all 0.2s ease-in-out;
+    /* transition: all 0.2s ease-in-out;
   }
   
   .switch-field label:hover {
@@ -152,6 +152,87 @@ main {
   
   .switch-field label:last-of-type {
     border-radius: 2rem;
-  }
+  } */
   
-  
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat',sans-serif;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    width: 100%;
+    height: 100%;
+}
+
+.container{
+    position: relative;
+    width: 1100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 30px;
+}
+
+.container .card{
+    position: relative;
+    max-width: 300px;
+    height: 215px;
+    background: #fff;
+    margin: 30px 10px;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s ease-in-out;
+    background: rgb(100,223,223);
+    background: linear-gradient(0deg, rgba(100,223,223,1) 0%, rgba(244,172,183,1) 0%);
+}
+
+.container .card:hover{
+    height: 420px;
+
+}
+
+.container .card .imgBx{
+    position: relative;
+    width: 260px;
+    height: 260px;
+    top: -60px;
+    left: 20px;
+    z-index: 1;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.container .card .imgBx img{
+    max-width: 100%;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.container .card .content{
+    position: relative;
+    margin-top: -140px;
+    padding: 10px 15px;
+    text-align: center;
+    color: #111;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+
+}
+
+.container .card:hover .content{
+    visibility: visible;
+    opacity: 1;
+    margin-top: -40px;
+    transition-delay: 0.3s;
+}
