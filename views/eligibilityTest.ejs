@@ -233,7 +233,7 @@
     </div>
 
     <div class="card">
-      <h1>Cancer</h1>
+      <h1>Donation Intervals</h1>
       <div class="content">
         <h4>Card Three</h4>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi vitae facilis vel laborum excepturi
@@ -321,15 +321,16 @@
           temporibus maiores.</p>
       </div>
     </div>
-    
+
   </div>
 
   <script>
-    const card = document.querySelector(".card");
+    const card = document.querySelectorAll(".card");
 
-    card.addEventListener("click", function (e) {
-      card.classList.toggle('is-clicked');
-    });
+    function clickCard() {
+      this.classList.toggle('is-clicked');
+    }
+    card.forEach((card) => card.addEventListener("click", clickCard));
 
   </script>
 
