@@ -174,7 +174,7 @@ body{
 
 .container{
     position: relative;
-    width: 1100px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -185,9 +185,9 @@ body{
 .card{
     position: relative;
     max-width: 300px;
-    height: 150px;
+    height: 180px;
     background: #fff;
-    margin: 30px 10px;
+    margin: 30px 20px;
     padding: 20px 15px;
     display: flex;
     flex-direction: column;
@@ -195,9 +195,10 @@ body{
     background: rgb(100,223,223);
     background: linear-gradient(0deg, rgba(100,223,223,1) 0%, rgba(244,172,183,1) 0%);
     font-family: 'Montserrat',sans-serif;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     -webkit-box-shadow: 1px 2px 11px -3px #000000; 
     box-shadow: 1px 2px 11px -3px #000000;
+
 }
 
 .card:hover{
@@ -226,7 +227,7 @@ body{
     transition-delay: 0.5s;
 }
 
-h1{
+h2{
     text-align: center;
     font-family: 'Montserrat',sans-serif;
     font-weight: 300;
@@ -243,21 +244,16 @@ p{
 }
 
 hr{
-    color: black;
+    border-width: 1px;
+    background: rgba(0, 0, 0, 0.404);
+    margin-bottom: 2rem;
 }
 
-form{
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
+.hr1{
+    border-width: 0.5px;
+    background: rgba(0, 0, 0, 0.404);
+    margin-bottom: 2rem;
 }
-
-
-
-
 
 .switch-field {
     display: flex;
@@ -305,14 +301,6 @@ form{
     font-weight: 400;
     transition: 0.3s ease-in-out;
   }
-  
-  /* .switch-field label:first-of-type {
-    border-radius: 2rem;
-  }
-  
-  .switch-field label:last-of-type {
-    border-radius: 2rem;
-  } */
 
 
 h3 {
@@ -320,4 +308,51 @@ h3 {
 	margin-bottom: 8px;
     font-family: 'Montserrat',sans-serif;
     font-weight: 400;
+}
+
+
+.container-form{
+    margin: 20px;
+    width: 100%;
+}
+
+.row{
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.form-left{
+    position: relative;
+    flex: 1;
+    max-width: 50%;
+    height: 150px;
+    margin: 10px;
+    border-radius: 5px;
+    
+}
+
+@media(max-width:800px){
+    .form-left{
+        flex: 100%;
+        max-width: 100%;
+    }
+}
+
+.form-right{
+    position: relative;
+    flex: 1;
+    max-width: 50%;
+    height: 150px;
+    margin: 10px;
+    border-radius: 5px;
+
+}
+
+@media(max-width:800px){
+    .form-right{
+        flex: 100%;
+        max-width: 100%;
+    }
 }

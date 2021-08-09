@@ -20,16 +20,6 @@
 	<div class="container">
 		<form method="Post" enctype="multipart/form-data">
 			<div class="row gutters" style="padding-bottom: 5rem;">
-
-
-				<!-- <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-				<div class="card h-100">
-					<div class="card-body">
-						
-					</div>
-				</div>
-			</div> -->
-
 				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
 					<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blobUpdateProf">
 						<path fill="#E1E1E1"
@@ -42,44 +32,22 @@
 
 					</section>
 
-
+					<!-- Profile Picture Upload -->
 					<div class="account-settings">
 						<div class="user-profile">
 							<div class="user-avatar">
 
 								<img id="imageResult" src="img/avatar.png" alt="">
 							</div>
-							<!-- <input id="username" name="username" placeholder="Username" type="text" required>
-								<h6 class="note">*This is a one-time username</h6> -->
 
 							<section class="section-preview">
 
 								<div class="input-group mb-3">
-									<!-- <div class="input-group-prepend"> -->
-									<!-- <span class="input-group-text" id="inputGroupFileAddon01">Upload</span> -->
-									<!-- </div> -->
-									<!-- <div class="custom-file">
-											<input type="file" class="custom-file-input" id="customFile">
-											<label class="custom-file-label" for="customFile">Choose file</label>
-										  </div> -->
 
-									<!-- <input type="text" class="form-control" id="upload" disabled
-											placeholder="Choose File" aria-label="Choose File"
-											aria-describedby="basic-addon1"> -->
 									<input class="form-control" name="avatar" type="file" id="upload"
 										onchange="readURL(this);" accept="image/png, image/jpeg, image/jpg">
-									<!-- <div class="input-group-append">
-											<button type="button"
-												class="browse input-group-text btn btn-outline-secondary"
-												id="basic-addon2" style="font-weight: 500; "> Browse</button>
-										</div> -->
-
 								</div>
-
 							</section>
-
-							<!-- <button type="button" class="btn btn-lg btn-outline-dark"
-							style="margin-top: 1rem;">Upload</button> -->
 
 						</div>
 						<!-- Alert Message -->
@@ -93,23 +61,10 @@
 								</div>
 								<% }) %>
 									<% } %>
-										<!-- <div class="about">
-								<h5>About</h5> -->
-										<!-- <div class="form-group">
-									<input id="bio" name="bio" class="bio" placeholder="Write something about yourself."
-										type="text" required>
-								</div> -->
-
-										<!-- <div class="form-group"> -->
-										<!-- <label for="exampleFormControlTextarea1">Example textarea</label>
-									<textarea class="form-control" id="exampleFormControlTextarea1" rows="10"
-										placeholder="Write something about yourself."></textarea>
-								</div>
-
-							</div> -->
-
 					</div>
+
 					<hr>
+
 					<div class="row gutters">
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<h6 class="mb-2">Personal Details</h6>
@@ -131,12 +86,6 @@
 									type="email" readonly>
 							</div>
 
-
-
-							<!-- <div class="form-group">
-									<input type="text" class="form-control" id="profession" placeholder="Profession">
-								</div> -->
-
 						</div>
 
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -148,35 +97,6 @@
 									</div>
 								</div>
 
-								<!-- <div class="col-md-4 mb-4">
-									<select name="dob_day" class="form-control" id="basic_dob_day" tabindex="-1" "
-											aria-hidden=" true" required>
-										<option disabled selected>Day</option>
-
-									</select>
-								</div> -->
-								<!-- <div class="col-md-4 mb-4"><select name="dob_month" class="form-control"
-										id="basic_dob_month" tabindex="-1" aria-hidden="true" required>
-										<option disabled selected>Month</option>
-										<option value="01">January</option>
-										<option value="02">February</option>
-										<option value="03">March</option>
-										<option value="04">April</option>
-										<option value="05">May</option>
-										<option value="06">June</option>
-										<option value="07">July</option>
-										<option value="08">August</option>
-										<option value="09">September</option>
-										<option value="10">October</option>
-										<option value="11">November</option>
-										<option value="12">December</option>
-									</select>
-								</div> -->
-								<!-- <div class="col-md-4 mb-4"><select name="dob_year" class="form-control"
-										id="basic_dob_year" tabindex="-1" aria-hidden="true" required>
-										<option disabled selected>Year</option>
-									</select>
-								</div> -->
 							</div>
 							<h6 class="mb-2">Blood Group <div style="display: inline;" class="note">(You can select
 									it only once.)</div>
@@ -221,34 +141,6 @@
 
 							</div>
 
-
-							<!-- <div class="dropdown">
-									<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
-										style="border: 1px solid;opacity:0.8; font-weight: 500;" data-toggle="dropdown"
-										aria-haspopup="true" aria-expanded="false">
-										Blood Group
-									</button>
-									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-										<a class="dropdown-item" href="#">Action</a>
-										<a class="dropdown-item" href="#">Another action</a>
-										<a class="dropdown-item" href="#">Something else here</a>
-									</div>
-								</div> -->
-							<!-- <div style="margin-top: 1.75rem;">
-									<div class="dropdown">
-										<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
-											style="border: 1px solid;opacity:0.8; font-weight: 500;"
-											data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											Gender
-										</button>
-										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-											<a class="dropdown-item" href="#">Action</a>
-											<a class="dropdown-item" href="#">Another action</a>
-											<a class="dropdown-item" href="#">Something else here</a>
-										</div>
-									</div>
-								</div> -->
-
 						</div>
 
 					</div>
@@ -265,10 +157,6 @@
 								<input id="street" name="street" placeholder="Street (Optional)" type="text">
 							</div>
 
-							<!-- <div class="form-group">
-									<textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
-										placeholder="Additional Details(if any)"></textarea>
-								</div> -->
 
 
 						</div>
@@ -310,9 +198,6 @@
 
 							</div>
 
-							<!-- <div class="form-group">
-									<input type="text" class="form-control" id="Division" placeholder="Division">
-								</div> -->
 
 						</div>
 					</div>
