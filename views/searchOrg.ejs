@@ -488,9 +488,10 @@
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v10',
-            center: [-77.034084, 38.909671],
+            // latitude, longitude
+            center: [90.3737413, 23.7911877],
             zoom: 13,
-            scrollZoom: false
+            scrollZoom: true
         });
         /* Assign a unique ID to each store */
         stores.features.forEach(function (store, i) {
