@@ -159,6 +159,8 @@ main {
     margin: 0;
     padding: 0;
     font-family: 'Montserrat',sans-serif;
+    --primary-blue: #2f6690;
+    --primary-pink: #b9375e;
 }
 
 body{
@@ -236,6 +238,86 @@ h4{
 }
 
 p{
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 400;
+}
+
+hr{
+    color: black;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+
+.switch-field {
+    display: flex;
+    margin-bottom: 36px;
+    overflow: hidden;
+  }
+  
+  .switch-field input {
+    position: absolute !important;
+    clip: rect(0, 0, 0, 0);
+    height: 1rem;
+    width: 3rem;
+    border: none;
+    overflow: hidden;
+  }
+  
+  .switch-field label {
+    background-color: var(--primary-pink) ;
+    color: white;
+    line-height: 1;
+    text-align: center;
+    padding: 0.8rem 2rem;
+    margin-right: -1px;
+    border: none;
+    margin-right:50px ;
+    border-radius: 15px;
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 400;
+    font-size: large;
+
+  }
+  
+  .switch-field label:hover {
+    cursor: pointer;
+    background-color: var(--primary-pink);
+    color: white;
+    transition: 0.2s ease-in-out;
+  }
+  
+  .switch-field input:checked + label {
+    background-color: rgba(11, 175, 11, 0.89);
+    color: white;
+    box-shadow: none;
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 400;
+    transition: 0.3s ease-in-out;
+  }
+  
+  /* .switch-field label:first-of-type {
+    border-radius: 2rem;
+  }
+  
+  .switch-field label:last-of-type {
+    border-radius: 2rem;
+  } */
+
+
+h3 {
+	font-size: 22px;
+	margin-bottom: 8px;
     font-family: 'Montserrat',sans-serif;
     font-weight: 400;
 }
