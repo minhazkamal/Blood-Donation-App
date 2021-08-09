@@ -195,6 +195,10 @@ body{
 }
 
 .container .card:hover{
+    cursor: pointer;
+}
+
+.container .card.is-clicked{
     height: 420px;
 
 }
@@ -230,9 +234,9 @@ body{
 
 }
 
-.container .card:hover .content{
+.container .card.is-clicked .content{
     visibility: visible;
     opacity: 1;
-    margin-top: -40px;
+    margin-top: 20px;
     transition-delay: 0.3s;
 }
