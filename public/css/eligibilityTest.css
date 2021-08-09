@@ -180,63 +180,62 @@ body{
     padding: 30px;
 }
 
-.container .card{
+.card{
     position: relative;
     max-width: 300px;
-    height: 215px;
+    height: 150px;
     background: #fff;
     margin: 30px 10px;
     padding: 20px 15px;
     display: flex;
     flex-direction: column;
-    transition: 0.3s ease-in-out;
+    transition: 0.5s ease-in-out;
     background: rgb(100,223,223);
     background: linear-gradient(0deg, rgba(100,223,223,1) 0%, rgba(244,172,183,1) 0%);
+    font-family: 'Montserrat',sans-serif;
+    border-radius: 10px;
+    -webkit-box-shadow: 1px 2px 11px -3px #000000; 
+    box-shadow: 1px 2px 11px -3px #000000;
 }
 
-.container .card:hover{
+.card:hover{
     cursor: pointer;
 }
-
-.container .card.is-clicked{
+.card.is-clicked{
     height: 420px;
 
 }
 
-.container .card .imgBx{
-    position: relative;
-    width: 260px;
-    height: 260px;
-    top: -60px;
-    left: 20px;
-    z-index: 1;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-}
-
-.container .card .imgBx img{
-    max-width: 100%;
-    border-radius: 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
-
-.container .card .content{
+.content{
     position: relative;
     margin-top: -140px;
     padding: 10px 15px;
     text-align: center;
-    color: #111;
+    color: #22223b;
     visibility: hidden;
     opacity: 0;
-    transition: 0.3s ease-in-out;
+    transition: 0.5s ease-in-out;
 
 }
-
-.container .card.is-clicked .content{
+.card.is-clicked .content{
     visibility: visible;
     opacity: 1;
     margin-top: 20px;
-    transition-delay: 0.3s;
+    transition-delay: 0.5s;
+}
+
+h1{
+    text-align: center;
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 300;
+}
+
+h4{
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 400;
+}
+
+p{
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 400;
 }
