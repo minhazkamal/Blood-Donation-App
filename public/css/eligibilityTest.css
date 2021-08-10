@@ -234,6 +234,14 @@ hr{
     margin-bottom: 2rem;
 }
 
+.vl{
+    border-left: 0.25px solid rgba(0, 0, 0, 0.685);
+  height: 650px;
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  top: 28%;
+}
 .switch-field {
     display: flex;
     margin-bottom: 36px;
@@ -348,6 +356,9 @@ h3 {
         flex: 100%;
         max-width: 100%;
     }
+    .vl{
+        visibility: hidden;
+    }
 }
 
 .form-right{
@@ -367,5 +378,9 @@ h3 {
     .form-right{
         flex: 100%;
         max-width: 100%;
+    }
+
+    .vl{
+        visibility: hidden;
     }
 }
