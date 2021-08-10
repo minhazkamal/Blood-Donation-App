@@ -210,43 +210,51 @@
       integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
       crossorigin="anonymous"></script>
   </main> -->
+  <div class="heading">
+    <!-- <h1>Click to learn more.</h1> -->
+  </div>
 
   <div class="container">
-    <div class="card">
-      <h2>Comorbidities</h2>
-      <hr class="hr1">
-      <div class="content">
-        <h4>Card One</h4>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi vitae facilis vel laborum excepturi
-          perferendis dolorem optio nulla sed ea veritatis, at quaerat odio accusamus dolorum! Delectus vero
-          temporibus maiores.</p>
+
+    <div class="container-card">
+      <div class="card">
+        <h2>Comorbidities</h2>
+        <hr class="hr1">
+        <div class="content">
+          <h4>Card One</h4>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi vitae facilis vel laborum excepturi
+            perferendis dolorem optio nulla sed ea veritatis, at quaerat odio accusamus dolorum! Delectus vero
+            temporibus maiores.</p>
+        </div>
+      </div>
+  
+      <div class="card">
+        <h2>Lifestyle</h2>
+        <hr class="hr1">
+        <div class="content">
+          <h4>Card Two</h4>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi vitae facilis vel laborum excepturi
+            perferendis dolorem optio nulla sed ea veritatis, at quaerat odio accusamus dolorum! Delectus vero
+            temporibus maiores.</p>
+        </div>
+      </div>
+  
+      <div class="card">
+        <h2>Donation Intervals</h2>
+        <hr class="hr1">
+        <div class="content">
+          <h4>Card Three</h4>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi vitae facilis vel laborum excepturi
+            perferendis dolorem optio nulla sed ea veritatis, at quaerat odio accusamus dolorum! Delectus vero
+            temporibus maiores.</p>
+        </div>
       </div>
     </div>
 
-    <div class="card">
-      <h2>Lifestyle</h2>
-      <hr class="hr1">
-      <div class="content">
-        <h4>Card Two</h4>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi vitae facilis vel laborum excepturi
-          perferendis dolorem optio nulla sed ea veritatis, at quaerat odio accusamus dolorum! Delectus vero
-          temporibus maiores.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>Donation Types</h2>
-      <hr class="hr1">
-      <div class="content">
-        <h4>Card Three</h4>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi vitae facilis vel laborum excepturi
-          perferendis dolorem optio nulla sed ea veritatis, at quaerat odio accusamus dolorum! Delectus vero
-          temporibus maiores.</p>
-      </div>
-    </div>
 
     <div class="container-form">
       <hr>
+      <h1>Let us know about your Comorbidities.</h1>
       <div class="row">
         <div class="form-left">
           <form class="form">
@@ -377,6 +385,8 @@
         </div>
       </div>
 
+
+
       <!-- <hr> -->
       <!-- <div class="row">
         <div class="form-left">
@@ -396,12 +406,85 @@
       </div> -->
 
 
-      <!-- <hr class="hr2"> -->
-
-      <div class="vl"></div>
+      <hr>
 
 
+      <h1>A little about your lifestyle.</h1>
 
+      <div class="row-lifestyle">
+        <div class="form-left">
+          <form class="form">
+
+            <h3>How often do you smoke?</h3>
+            <!-- <div class="switch-field"> -->
+            <!-- <label for="customRange2">Example range</label> -->
+              <input type="range" class="custom-range" min="0" max="2" id="customRange2">
+            <div class="range">
+              <label for="">Never</label>
+              <label for="">Frequently</label>
+              <label for="">Extreme</label>
+            </div>
+
+            
+
+            <!-- </div> -->
+
+          </form>
+        </div>
+
+        <div class="form-right">
+          <form class="form">
+
+            <h3>How often do you drink?</h3>
+            <input type="range" class="custom-range" min="0" max="2" id="customRange2">
+            <div class="range">
+              <label for="">Never</label>
+              <label for="">Frequently</label>
+              <label for="">Extreme</label>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <div class="row-lifestyle">
+        <div class="form-left">
+          <form class="form">
+
+            <h3>Are you in depression?</h3>
+            <input type="range" class="custom-range" min="0" max="2" id="customRange2">
+            <div class="range">
+              <label for="">No</label>
+              <label for="">Medium</label>
+              <label for="">Severe</label>
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+      <hr>
+
+      <div class="row-depression">
+        <div class="form-left">
+          <form class="form">
+
+            <h3>When did you last donate?</h3>
+            <div class="input-container cta">
+              <label class="checkbox-container">
+                  <input type="checkbox" name="remember" value="false">
+                  <span class="checkmark mt-1"></span>
+                  (Not Applicable)
+              </label>
+              <div class="input-container lname">
+                <input id="DOB" name="dob" type="date" style="margin-bottom: 0;">
+              </div>
+          </div>
+
+          </form>
+        </div>
+
+      </div>
 
     </div>
     <div class="btn">

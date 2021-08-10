@@ -149,7 +149,11 @@ body{
     background: white;
     width: 100%;
     height: 100%;
+    background: url(/img/waveEligibility.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
 
 .container{
     position: relative;
@@ -159,6 +163,14 @@ body{
     align-items: center;
     flex-wrap: wrap;
     padding: 30px;
+}
+
+.container-card{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .card{
@@ -210,6 +222,7 @@ h2{
     text-align: center;
     font-family: 'Montserrat',sans-serif;
     font-weight: 300;
+    font-size: 1.8rem;
 }
 
 h4{
@@ -234,14 +247,7 @@ hr{
     margin-bottom: 2rem;
 }
 
-.vl{
-    border-left: 0.25px solid rgba(0, 0, 0, 0.685);
-  height: 650px;
-  position: absolute;
-  left: 50%;
-  margin-left: -3px;
-  top: 28%;
-}
+
 .switch-field {
     display: flex;
     margin-bottom: 36px;
@@ -311,6 +317,21 @@ h3 {
     margin-left: 80px;
 }
 
+.row-lifestyle{
+    width: 100%;
+    display:flex;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+
+.row-depression{
+    width: 100%;
+    display:flex;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+
+
 .signup-btn{
     display: block;
     width: 100%;
@@ -356,9 +377,6 @@ h3 {
         flex: 100%;
         max-width: 100%;
     }
-    .vl{
-        visibility: hidden;
-    }
 }
 
 .form-right{
@@ -379,8 +397,92 @@ h3 {
         flex: 100%;
         max-width: 100%;
     }
-
-    .vl{
-        visibility: hidden;
+    .range{
+        width: 100%;
+    }
+    .custom-range{
+        width: 100%;
+    }
+    .row-lifestyle{
+        margin-left: 20px;
     }
 }
+
+.range{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.custom-range{
+    width: 80%;
+}
+
+.checkbox-container input{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkbox-container{
+    display: block;
+    position: relative;
+    padding-left: 2rem;
+    cursor: pointer;
+    user-select: none;
+    margin: 0 0 1.25rem 0;
+}
+
+.checkbox-container input:checked~ .checkmark{
+    background-color: var(--primary-pink);
+    border: 1px solid var(--primary-pink);
+}
+
+.checkmark{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 1px solid #c4c4c4;
+    border-radius: 4px;
+    left: 0;
+}
+
+.checkmark:after{
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked~ .checkmark:after{
+    display: block;
+}
+
+.checkbox-container .checkmark:after{
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    width: 6px;
+    height: 12px;
+    left: 6px;
+    top: 1px;
+    transform: rotate(45deg);
+}
+
+input[type="date"]{
+    /* margin: 0 0 0.5rem 0; */
+
+    display: block;
+    width: 70%;
+    box-sizing: border-box;
+    background-color: #f8f9fa15;
+    border-radius: 8px;
+    border: 1px solid #1a1919;
+    padding: 1em;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+
