@@ -6,12 +6,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="img/Logo-01.png">
-	<title>Update Profile - G L E A M</title>
+	<title>New Request - G L E A M</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="css/updateProfile.css">
+	<link rel="stylesheet" type="text/css" href="css/demoUpdateProfile.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 </head>
 
@@ -27,7 +27,8 @@
 							transform="translate(100 100)" />
 					</svg>
 					<section>
-						<h2>Edit your <div class="brandname" style="font-weight: 600;"> G L E A M </div> Profile
+						<h2>Post a New Request in <div class="brandname" style="font-weight: 600;"> G L E A M </div>
+							Community.
 						</h2>
 
 					</section>
@@ -50,6 +51,7 @@
 							</section>
 
 						</div>
+
 						<!-- Alert Message -->
 						<% if(typeof alert !='undefined' ) { %>
 							<% alert.forEach(function(error) { %>
@@ -67,29 +69,29 @@
 
 					<div class="row gutters">
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<h6 class="mb-2">Personal Details</h6>
+							<h6 class="mb-2">Donation Details</h6>
 							<div class="input-container fname">
-								<input id="fname" name="fname" placeholder="First Name" value=""
-									type="text" required>
+								<input id="fname" name="fname" placeholder="Patient's Name" value="" type="text"
+									required>
 							</div>
 							<div class="input-container lname">
-								<input id="lname" name="lname" placeholder="Last Name" value=""
+								<input id="lname" name="lname" placeholder="Emergency Contact Person" value=""
 									type="text">
 							</div>
 							<div class="input-container lname">
-								<input id="contact" name="contact" placeholder="Contact Number (+88)"
+								<input id="contact" name="contact" placeholder="Emergency Contact Number (+88)"
 									title="Please give a valid phone number (018xxxxxxxx)"
 									pattern="[0]{1}[1]{1}[3-9]{1}[0-9]{8}" type="tel" required>
 							</div>
 							<div class="input-container lname">
-								<input id="email" name="email" placeholder="Email Address" value=""
-									type="email" readonly>
+								<input id="email" name="email" placeholder="Complications (if any)" value=""
+									type="text">
 							</div>
 
 						</div>
 
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<h6 class="mb-2">Date of Birth</h6>
+							<h6 class="mb-2">Approx. Date of Donation</h6>
 							<div class="row">
 								<div class="col-md-6 mb-4" style="margin-bottom: 0.25 !important; ">
 									<div class="input-container lname">
@@ -98,9 +100,20 @@
 								</div>
 
 							</div>
-							<h6 class="mb-2">Blood Group <div style="display: inline;" class="note">(You can select
-									it only once.)</div>
+							<h6 class="mb-2">Blood Group
 							</h6>
+							<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
+											aria-hidden=" true" required>
+								<option disabled selected>Blood Group</option>
+								<option value="A+">A+</option>
+								<option value="A-">A-</option>
+								<option value="B+">B+</option>
+								<option value="B-">B-</option>
+								<option value="O+">O+</option>
+								<option value="O-">O-</option>
+								<option value="AB+">AB+</option>
+								<option value="AB-">AB-</option>
+							</select>
 							<div class="row">
 								<div class="col-md-6 mb-4">
 									<!-- 
@@ -121,24 +134,20 @@
 												<option value="AB+">AB+</option>
 												<option value="AB-">AB-</option>
 											</select>
-										-->		
+										-->
 								</div>
 
 							</div>
-							<h6 class="mb-2">Gender</h6>
+							<h6 class="mb-2">Quantity <span class="font-italic font-weight-normal">(bag/s)</span></h6>
 							<div class="row">
 								<div class="col-md-6 mb-4">
-									<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
-											aria-hidden=" true" required>
-										<option disabled selected>Gender</option>
-										<option value="Male">Male</option>
-										<option value="Female">Female</option>
-										<option value="Others">Others</option>
-									</select>
+									<div class="input-container lname">
+										<input id="contact" name="contact" placeholder="Example: 3"
+											title="Please give a valid phone number (018xxxxxxxx)"
+											pattern="[0]{1}[1]{1}[3-9]{1}[0-9]{8}" type="tel" required>
+									</div>
 								</div>
-
 							</div>
-
 						</div>
 
 					</div>
@@ -170,7 +179,7 @@
 									<select name="division" class="form-control" id="basic_division" tabindex="-1" "
 											aria-hidden=" true" required>
 										<option disabled selected>Division</option>
-										
+
 									</select>
 								</div>
 
@@ -202,8 +211,7 @@
 					<div class="row gutters">
 						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 							<div class="text-right">
-								<button type="submit" class="btn2" style>Save
-									Changes</button>
+								<button type="submit" class="btn2" style>Submitt</button>
 							</div>
 						</div>
 					</div>
@@ -220,7 +228,7 @@
 					$("#latitude").val(position.coords.latitude);
 					$("#longitude").val(position.coords.longitude);
 
-					
+
 				});
 			}
 		});
