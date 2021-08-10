@@ -96,9 +96,14 @@ app.get('/search-org', function(req,res){
     res.render('searchOrg.ejs');
 });
 
-//localhost:3940//search-org
+//localhost:3940/home
 app.get('/home', function(req,res){
     res.render('home.ejs');
+});
+
+//localhost:3940/new-request
+app.get('/new-request', function(req,res){
+    res.render('newRequest.ejs');
 });
 
 app.get('/mapbox', function(req, res){
