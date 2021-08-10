@@ -284,6 +284,14 @@ module.exports.setUserProfile = (profile) => {
     })
 }
 
+module.exports.getProfile = (id) => {
+    return new Promise((resolve, reject) => {
+        db.query("SELECT * FROM user_profile WHERE id=?", [id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
 module.exports.setUserAddress = (address) => {
     return new Promise((resolve, reject) => {
         db.query("INSERT INTO user_address VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", [address.id, address.house, address.street, address.division, address.district, address.upazilla, address.zipcode, address.lat, address.lon], (err, res) => {
@@ -292,3 +300,26 @@ module.exports.setUserAddress = (address) => {
     })
 }
 
+module.exports.getDivId = (name) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * from divisions WHERE name like '%${name}%'`, (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.getDistId = (name, id) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * from districts WHERE name like '%${name}%' AND division_id=${id}`, (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.getUpazillaId = (name, id) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * from upazillas WHERE name like '%${name}%' AND district_id=${id}`, (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}

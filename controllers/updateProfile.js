@@ -202,7 +202,7 @@ router.get('/', function (req, res) {
                             else {
                                 db.getProfile(result[0].id)
                                     .then(result => {
-                                        user.bg = result[0].blood_group;
+                                        user.bg = result[0].BG;
                                         res.render('updateProfile.ejs', { user, divisions: div_result });
                                     })
                             }

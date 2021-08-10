@@ -225,65 +225,88 @@
 					console.log(position);
 					$("#latitude").val(position.coords.latitude);
 					$("#longitude").val(position.coords.longitude);
+					$.ajax({
+						type: 'GET',
+						data: { latitude: position.coords.latitude, longitude: position.coords.longitude},
+						url: '/map-box/reverse',
+						success: function (data) {
+							console.log(data);
+							$("#basic_division").val(data.division);
+							district();
+						}
+					});
+					$.ajax({
+						type: 'GET',
+						data: { latitude: position.coords.latitude, longitude: position.coords.longitude},
+						url: '/map-box/reverse',
+						success: function (data) {
+							// console.log(data);
+							if(data.district !== null) {
+								$('#basic_district').val(data.district);
+								upazilla();
+							}
+						}
+					});
+					$.ajax({
+						type: 'GET',
+						data: { latitude: position.coords.latitude, longitude: position.coords.longitude},
+						url: '/map-box/reverse',
+						success: function (data) {
+							// console.log(data);
+							if(data.upazilla !== null) $('#basic_upazilla').val(data.upazilla);
+						}
+					});
 
-					//   $.get( "http://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false", function(data) {
-					//     console.log(data);
-					//   })
-					//   var img = new Image();
-					//   img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + position.coords.latitude + "," + position.coords.longitude + "&zoom=13&size=800x400&sensor=false";
-					//   $('#output').html(img);
+						
 				});
-			}
-			for (var i = 1; i <= 31; i++) {
-				$('#basic_dob_day').append("<option value = '" + i + "' >" + i + " </option>");
-			}
-			for (var i = (new Date().getFullYear()) - 18; i >= 1900; i--) {
-				$('#basic_dob_year').append("<option value = '" + i + "' >" + i + " </option>");
 			}
 		});
 
-		$(function () {
-			$('#basic_division').on("change", function () {
+		function district(){
+			var div_id = $('#basic_division').val();
+				// console.log(div_id);
 
-				var div_id = $('#basic_division').val();
-				//console.log(div_id);
-
-				$.ajax({
-					type: 'GET',
-					data: { division_id: div_id },
-					url: '/address/districts',
-					success: function (data) {
-						//console.log(data);
-						$('#basic_district').empty();
-						$('#basic_district').append("<option disabled selected>District</option>");
-						$.each(data, function (index, district) {
-							$('#basic_district').append("<option value = '" + district.id + "' >" + district.name + " </option>");
-						});
-					}
-				});
+			$.ajax({
+				type: 'GET',
+				data: { division_id: div_id },
+				url: '/address/districts',
+				success: function (data) {
+					//console.log(data);
+					$('#basic_district').empty();
+					$('#basic_district').append("<option disabled selected>District</option>");
+					$.each(data, function (index, district) {
+						$('#basic_district').append("<option value = '" + district.id + "' >" + district.name + " </option>");
+					});
+				}
 			});
+		}
+
+		function upazilla() {
+			var dist_id = $('#basic_district').val();
+				//console.log(dist_id);
+
+			$.ajax({
+				type: 'GET',
+				data: { district_id: dist_id },
+				url: '/address/upazillas',
+				success: function (data) {
+					// console.log(data);
+					$('#basic_upazilla').empty();
+					$('#basic_upazilla').append("<option disabled selected>Upazilla</option>");
+					$.each(data, function (index, upazilla) {
+						$('#basic_upazilla').append("<option value = '" + upazilla.id + "' >" + upazilla.name + " </option>");
+					});
+				}
+			});
+		}
+
+
+		$(function () {
+			$('#basic_division').on("change", district );
 		});
 
 		$(function () {
-			$('#basic_district').on("change", function () {
-
-				var dist_id = $('#basic_district').val();
-				// console.log(dist_id);
-
-				$.ajax({
-					type: 'GET',
-					data: { district_id: dist_id },
-					url: '/address/upazillas',
-					success: function (data) {
-						// console.log(data);
-						$('#basic_upazilla').empty();
-						$('#basic_upazilla').append("<option disabled selected>Upazilla</option>");
-						$.each(data, function (index, upazilla) {
-							$('#basic_upazilla').append("<option value = '" + upazilla.id + "' >" + upazilla.name + " </option>");
-						});
-					}
-				});
-			});
+			$('#basic_district').on("change", upazilla );
 		});
 
 		function readURL(input) {

@@ -36,6 +36,7 @@ var eligibilityTest = require('./controllers/eligibilityTest');
 var resetPassword = require('./controllers/resetPassword');
 var KYC = require('./controllers/KYC');
 var address = require('./controllers/address');
+var mapquery = require('./controllers/mapquery');
 
 
 // view engine
@@ -81,6 +82,7 @@ app.use('/login-facebook', login_facebook);
 app.use('/reset-password', resetPassword);
 app.use('/KYC', KYC);
 app.use('/address', address);
+app.use('/map-box', mapquery);
 // app.get('/activate/:id', function(req,res){
 //     let {id} = req.params;
 //     res.render('email_activate.ejs', {id});

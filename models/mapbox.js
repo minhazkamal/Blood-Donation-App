@@ -34,10 +34,15 @@ module.exports.reverseGeocoder = async function(latitude, longitude) {
         let response = await geocodingClient
         .reverseGeocode({
             query: [Number(longitude), Number(latitude)],
+            types: ['locality', 'district', 'region']
           })
         .send()
         
-        console.log(response.body);
+        return new Promise((resolve, reject) => {
+          if(!response) reject(response);
+          else resolve(response.body);
+        })
+
     } catch(err) {
         console.log(err);
     }
