@@ -20,6 +20,7 @@ var hl = require('handy-log');
 var app = express();
 var passport = require('passport');
 var cookieSession = require('cookie-session')
+var box = require('./models/mapbox');
 
 // file modules
 var landing = require ('./controllers/landing');
@@ -98,4 +99,10 @@ app.get('/search-org', function(req,res){
 //localhost:3940//search-org
 app.get('/home', function(req,res){
     res.render('home.ejs');
+});
+
+app.get('/mapbox', function(req, res){
+    // console.log(req.query);
+    box.reverseGeocoder(req.query.latitude, req.query.longitude);
+    // box.forwardGeocoder('Shewrapara, Mirpur, Dhaka');
 });

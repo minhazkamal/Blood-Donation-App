@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/minhazkamal/Blood-Donation-App#readme",
   "dependencies": {
+    "@mapbox/mapbox-sdk": "^0.13.0",
     "animate-components": "^1.4.8",
     "async": "^3.2.0",
     "axios": "^0.21.1",
