@@ -184,6 +184,8 @@ h6{
     transition: 0.3s;
     font-size: 0.875rem;
     margin-right: 1rem;
+    width: 25%;
+    display: inline;
 }
 
 .btn1:hover{
@@ -204,8 +206,8 @@ h6{
     letter-spacing: 0.5px;
     transition: 0.3s;
     font-size: 0.875rem;
-    display: block;
-    width: 100%;
+    display: inline;
+    width: 25%;
 }
 
 .btn2:hover{
@@ -453,4 +455,8 @@ textarea:focus {
     outline: none !important;
     border-color: var(--primary-pink);
     box-shadow: 0 0 10px var(--primary-pink);
+}
+
+.address-details {
+    min-height: 7rem;
 }
