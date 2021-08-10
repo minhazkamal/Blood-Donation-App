@@ -199,6 +199,15 @@
             border-bottom-color: #91c949;
         }
 
+        .marker {
+            background-image: url('/img/map-icon.png');
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
         /* CSS for interactivity stops here */
     </style>
 </head>
@@ -250,18 +259,18 @@
                     "geometry": {
                         "type": "Point",
                         "coordinates": [
-                            -77.034084142948,
-                            38.909671288923
+                            90.396524,
+                            23.725869
                         ]
                     },
                     "properties": {
                         "phoneFormatted": "(202) 234-7336",
                         "phone": "2022347336",
-                        "address": "1471 P St NW",
-                        "city": "Washington DC",
-                        "country": "United States",
+                        "address": "Dhaka Medical College",
+                        "city": "Dhaka",
+                        "country": "Bangladesh",
                         "crossStreet": "at 15th St NW",
-                        "postalCode": "20005",
+                        "postalCode": "1216",
                         "state": "D.C."
                     }
                 },
@@ -592,30 +601,76 @@
             /** Check if there is already a popup on the map and if so, remove it */
             if (popUps[0]) popUps[0].remove();
 
-            var popup = new mapboxgl.Popup({ closeOnClick: false })
+            // create a HTML element for each feature
+            var el = document.createElement('div');
+            el.className = 'marker';
+
+            new mapboxgl.Marker(el)
                 .setLngLat(currentFeature.geometry.coordinates)
-                .setHTML('<h3> G L E A M</h3>' +
-                    '<h4>' + currentFeature.properties.address + '</h4>')
+                .setPopup(new mapboxgl.Popup({ closeOnClick: false }) // add popups
+                    .setHTML('<h3>' + currentFeature.properties.address + '</h3><h4>' + currentFeature.properties.city + '</h4>'))
                 .addTo(map);
+
+            // var popup = new mapboxgl.Popup({ closeOnClick: false })
+            //     .setLngLat(currentFeature.geometry.coordinates)
+            //     .setHTML('<h3>'+currentFeature.properties.address+'</h3>' +
+            //         '<h4>' + currentFeature.properties.city + '</h4>')
+            //     .addTo(map);
         }
         ///////////////////////////////////////
 
+        map.on('load', () => {
+            // Load an image from an external URL.
+            map.loadImage(
+                '/img/map-icon.png',
+                (error, image) => {
+                    if (error) throw error;
+
+                    // Add the image to the map style.
+                    map.addImage('map-icon', image);
 
 
-        map.on('load', function (e) {
-            /* Add the data to your map as a layer */
-            map.addLayer({
-                "id": "locations",
-                "type": "circle",
-                /* Add a GeoJSON source containing place coordinates and information. */
-                "source": {
-                    "type": "geojson",
-                    "data": stores
+                    // Add a layer to use the image to represent the data.
+                    map.addLayer({
+                        "id": "locations",
+                        "type": "symbol",
+                        /* Add a GeoJSON source containing place coordinates and information. */
+                        "source": {
+                            "type": "geojson",
+                            "data": stores
+                        },
+                        "layout": {
+                            "icon-image": 'map-icon',
+                            "icon-size": 0.10,
+                        }
+                    });
+
+                    buildLocationList(stores);
                 }
-            });
-
-            buildLocationList(stores);
+            );
         });
+
+        // map.on('load', function (e) {
+
+        //     /* Add the data to your map as a layer */
+        // map.addLayer({
+        //     "id": "locations",
+        //     "type": "symbol",
+        //     /* Add a GeoJSON source containing place coordinates and information. */
+        //     "source": {
+        //         "type": "geojson",
+        //         "data": stores
+        //     },
+        //     "layout": {
+        //         "icon-image": '/img/map-icon.png',
+        //         "icon-size": 0.25,
+        //         "icon-allow-overlap": true,
+        //         "text-allow-overlap": true
+        //     }
+        // });
+
+        //     buildLocationList(stores);
+        // });
     </script>
 
 

@@ -9,11 +9,12 @@ module.exports.forwardGeocoder = async function(location) {
 		let response = await geocodingClient
 		  .forwardGeocode({
 		    query: location,
-		    limit: 1
+        countries: ['bd'],
+        types: ['locality', 'district', 'region']
 		  })
 		  .send();
 
-		console.log(response.body.features[0].geometry.coordinates);
+		console.log(response.body);
 	} catch(err) {
 		console.log(err.message);
 	}

@@ -178,7 +178,7 @@ const validateDOB = (value, {req}) => {
 
 
 router.get('/', function (req, res) {
-    // req.session.email = 'minhaz.kamal9900@gmail.com';
+    req.session.email = 'minhaz.kamal9900@gmail.com';
     if (req.session.email) {
         db.getDivisions()
             .then(result => {
