@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" type="image/x-icon" href="img/Logo-01.png">
+	<title>Update Profile - G L E A M</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/updateProfile.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+	<div class="container">
+		<form method="Post" enctype="multipart/form-data">
+			<div class="row gutters" style="padding-bottom: 5rem;">
+				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+					<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blobUpdateProf">
+						<path fill="#E1E1E1"
+							d="M59.7,-32.4C71.3,-14.4,70.4,12.8,58.3,34.2C46.3,55.6,23.2,71.1,1,70.6C-21.2,70,-42.4,53.4,-54.4,32C-66.3,10.7,-68.9,-15.3,-58.3,-32.7C-47.7,-50.2,-23.9,-59,0.1,-59.1C24.1,-59.2,48.1,-50.4,59.7,-32.4Z"
+							transform="translate(100 100)" />
+					</svg>
+					<section>
+						<h2>Edit your <div class="brandname" style="font-weight: 600;"> G L E A M </div> Profile
+						</h2>
+
+					</section>
+
+					<!-- Profile Picture Upload -->
+					<div class="account-settings">
+						<div class="user-profile">
+							<div class="user-avatar">
+
+								<img id="imageResult" src="img/avatar.png" alt="">
+							</div>
+
+							<section class="section-preview">
+
+								<div class="input-group mb-3">
+
+									<input class="form-control" name="avatar" type="file" id="upload"
+										onchange="readURL(this);" accept="image/png, image/jpeg, image/jpg">
+								</div>
+							</section>
+
+						</div>
+						<!-- Alert Message -->
+						<% if(typeof alert !='undefined' ) { %>
+							<% alert.forEach(function(error) { %>
+								<div class="alert alert-warning alert-dismissible fade show" role="alert">
+									<%= error.msg %>
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">×</span>
+										</button>
+								</div>
+								<% }) %>
+									<% } %>
+					</div>
+
+					<hr>
+
+					<div class="row gutters">
+						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+							<h6 class="mb-2">Personal Details</h6>
+							<div class="input-container fname">
+								<input id="fname" name="fname" placeholder="First Name" value=""
+									type="text" required>
+							</div>
+							<div class="input-container lname">
+								<input id="lname" name="lname" placeholder="Last Name" value=""
+									type="text">
+							</div>
+							<div class="input-container lname">
+								<input id="contact" name="contact" placeholder="Contact Number (+88)"
+									title="Please give a valid phone number (018xxxxxxxx)"
+									pattern="[0]{1}[1]{1}[3-9]{1}[0-9]{8}" type="tel" required>
+							</div>
+							<div class="input-container lname">
+								<input id="email" name="email" placeholder="Email Address" value=""
+									type="email" readonly>
+							</div>
+
+						</div>
+
+						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+							<h6 class="mb-2">Date of Birth</h6>
+							<div class="row">
+								<div class="col-md-6 mb-4" style="margin-bottom: 0.25 !important; ">
+									<div class="input-container lname">
+										<input id="DOB" name="dob" type="date" style="margin-bottom: 0;">
+									</div>
+								</div>
+
+							</div>
+							<h6 class="mb-2">Blood Group <div style="display: inline;" class="note">(You can select
+									it only once.)</div>
+							</h6>
+							<div class="row">
+								<div class="col-md-6 mb-4">
+									<!-- 
+										<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
+											aria-hidden=" true" disabled>
+											<option value="" selected>
+											</option>
+										</select>
+											<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
+											aria-hidden=" true" required>
+												<option disabled selected>Blood Group</option>
+												<option value="A+">A+</option>
+												<option value="A-">A-</option>
+												<option value="B+">B+</option>
+												<option value="B-">B-</option>
+												<option value="O+">O+</option>
+												<option value="O-">O-</option>
+												<option value="AB+">AB+</option>
+												<option value="AB-">AB-</option>
+											</select>
+										-->		
+								</div>
+
+							</div>
+							<h6 class="mb-2">Gender</h6>
+							<div class="row">
+								<div class="col-md-6 mb-4">
+									<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
+											aria-hidden=" true" required>
+										<option disabled selected>Gender</option>
+										<option value="Male">Male</option>
+										<option value="Female">Female</option>
+										<option value="Others">Others</option>
+									</select>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+					<hr class="hr1" style="margin-top: 0; margin-bottom: 1rem;">
+					<div class="row gutters">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<h6 class="mt-3 mb-2 ">Address Details</h6>
+						</div>
+						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+							<div class="input-container lname">
+								<input id="house" name="house" placeholder="House (Optional)" type="text">
+							</div>
+							<div class="input-container lname">
+								<input id="street" name="street" placeholder="Street (Optional)" type="text">
+							</div>
+
+
+
+						</div>
+						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+							<div class="row">
+								<div class="col-md-12 mb-4">
+									<div class="input-container lname">
+										<input id="street" name="zipcode" style="margin-bottom: 0;"
+											placeholder="Zip Code (Optional)" type="text">
+									</div>
+								</div>
+								<div class="col-md-4 mb-4">
+									<select name="division" class="form-control" id="basic_division" tabindex="-1" "
+											aria-hidden=" true" required>
+										<option disabled selected>Division</option>
+										
+									</select>
+								</div>
+
+								<div class="col-md-4 mb-4">
+									<select name="district" class="form-control" id="basic_district" tabindex="-1" "
+											aria-hidden=" true" required>
+										<option disabled selected>District</option>
+
+									</select>
+								</div>
+
+								<div class="col-md-4 mb-4">
+									<select name="upazilla" class="form-control" id="basic_upazilla" tabindex="-1" "
+											aria-hidden=" true" required>
+										<option disabled selected>Upazilla</option>
+
+									</select>
+								</div>
+
+							</div>
+
+
+						</div>
+					</div>
+					<div id="output" style="display: none;">
+						<input id="latitude" name="lat" placeholder="House" type="text" value="">
+						<input id="longitude" name="lon" placeholder="House" type="text" value="">
+					</div>
+					<div class="row gutters">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="text-right">
+								<button type="submit" class="btn2" style>Save
+									Changes</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<script>
+		$(document).ready(function () {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function (position) {
+					console.log(position);
+					$("#latitude").val(position.coords.latitude);
+					$("#longitude").val(position.coords.longitude);
+
+					
+				});
+			}
+		});
+
+		$(function () {
+			$('#basic_division').on("change", function () {
+
+				var div_id = $('#basic_division').val();
+				//console.log(div_id);
+
+				$.ajax({
+					type: 'GET',
+					data: { division_id: div_id },
+					url: '/address/districts',
+					success: function (data) {
+						//console.log(data);
+						$('#basic_district').empty();
+						$('#basic_district').append("<option disabled selected>District</option>");
+						$.each(data, function (index, district) {
+							$('#basic_district').append("<option value = '" + district.id + "' >" + district.name + " </option>");
+						});
+					}
+				});
+			});
+		});
+
+		$(function () {
+			$('#basic_district').on("change", function () {
+
+				var dist_id = $('#basic_district').val();
+				// console.log(dist_id);
+
+				$.ajax({
+					type: 'GET',
+					data: { district_id: dist_id },
+					url: '/address/upazillas',
+					success: function (data) {
+						// console.log(data);
+						$('#basic_upazilla').empty();
+						$('#basic_upazilla').append("<option disabled selected>Upazilla</option>");
+						$.each(data, function (index, upazilla) {
+							$('#basic_upazilla').append("<option value = '" + upazilla.id + "' >" + upazilla.name + " </option>");
+						});
+					}
+				});
+			});
+		});
+
+		function readURL(input) {
+			console.log(input);
+			if (input.files && input.files[0]) {
+				console.log(input.files);
+				var reader = new FileReader();
+
+				reader.onload = function (e) {
+					$('#imageResult')
+						.attr('src', e.target.result);
+				};
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>
+	<script src="assets/js/jquery-3.2.1.min.js"></script>
+	<script src="assets/js/popper.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+		crossorigin="anonymous"></script>
+
+</body>
+
+</html>
