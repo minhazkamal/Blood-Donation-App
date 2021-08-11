@@ -443,6 +443,7 @@ h3 {
 
 .custom-range::-moz-range-progress{
     background-color: var(--primary-pink);
+    border-radius: 10px;
 }
 .checkbox-container input{
     position: absolute;

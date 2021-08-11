@@ -21,11 +21,11 @@
 		<form method="Post" enctype="multipart/form-data">
 			<div class="row gutters" style="padding-bottom: 5rem;">
 				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
-					<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blobUpdateProf">
+					<!-- <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blobUpdateProf">
 						<path fill="#E1E1E1"
 							d="M59.7,-32.4C71.3,-14.4,70.4,12.8,58.3,34.2C46.3,55.6,23.2,71.1,1,70.6C-21.2,70,-42.4,53.4,-54.4,32C-66.3,10.7,-68.9,-15.3,-58.3,-32.7C-47.7,-50.2,-23.9,-59,0.1,-59.1C24.1,-59.2,48.1,-50.4,59.7,-32.4Z"
 							transform="translate(100 100)" />
-					</svg>
+					</svg> -->
 					<section>
 						<h2>Post a New Request in <div class="brandname" style="font-weight: 600;"> G L E A M </div>
 							Community.
@@ -36,19 +36,19 @@
 					<!-- Profile Picture Upload -->
 					<div class="account-settings">
 						<div class="user-profile">
-							<div class="user-avatar">
+							<!-- <div class="user-avatar">
 
 								<img id="imageResult" src="img/avatar.png" alt="">
-							</div>
+							</div> -->
 
-							<section class="section-preview">
+							<!-- <section class="section-preview">
 
 								<div class="input-group mb-3">
 
 									<input class="form-control" name="avatar" type="file" id="upload"
 										onchange="readURL(this);" accept="image/png, image/jpeg, image/jpg">
 								</div>
-							</section>
+							</section> -->
 
 						</div>
 
@@ -63,6 +63,7 @@
 								</div>
 								<% }) %>
 									<% } %>
+
 					</div>
 
 					<hr>
@@ -91,9 +92,9 @@
 						</div>
 
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<h6 class="mb-2">Approx. Date of Donation</h6>
+							<h6 class="mb-2">Approximate Date of Donation</h6>
 							<div class="row">
-								<div class="col-md-6 mb-4" style="margin-bottom: 0.25 !important; ">
+								<div class="col-md-12 mb-4" style="margin-bottom: 0.25 !important; ">
 									<div class="input-container lname">
 										<input id="DOB" name="dob" type="date" style="margin-bottom: 0;">
 									</div>
@@ -166,8 +167,8 @@
 							<div class="row">
 								<div class="col-md-12 mb-4">
 									<div class="input-container lname">
-										<input id="street" name="zipcode" style="margin-bottom: 0;"
-											placeholder="Name" type="text">
+										<input id="street" name="zipcode" style="margin-bottom: 0;" placeholder="Name"
+											type="text">
 									</div>
 								</div>
 								<div class="col-md-4 mb-4">
@@ -202,7 +203,9 @@
 						</div>
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="input-container lname">
-								<input class="address-details" name="house" placeholder="Address details" type="text" rows="3" required>
+								<!-- <input name="house" placeholder="Address details" type="textarea"
+									rows="3" required> -->
+								<textarea name="addressDetails" id="" cols="1" rows="1"></textarea>
 							</div>
 						</div>
 					</div>

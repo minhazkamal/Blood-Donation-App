@@ -278,11 +278,17 @@ label.checkbox-container{
 }
 
 .blobSignup{
-    width: 700px;;
-    height: 500px;
-    top: 100px;
+    width: 400px;;
+    height: 400px;
+    top: 200px;
     position: absolute;
     z-index: -1;
+    right: -8px;
+
+}
+path{
+    width: 500px;
+    height: 500px;
 }
 
 @media screen and (min-width:900px) {
