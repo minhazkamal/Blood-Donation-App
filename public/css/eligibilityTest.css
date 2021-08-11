@@ -431,15 +431,20 @@ h3 {
 
 .custom-range::-webkit-slider-thumb {
     background: var(--primary-pink);
-  }
+}
   
-  .custom-range::-moz-range-thumb {
+.custom-range::-moz-range-thumb {
     background: var(--primary-pink);
-  }
+}
   
-  .custom-range::-ms-thumb {
+.custom-range::-ms-thumb {
     background: var(--primary-pink);
-  }
+}
+
+.custom-range::-moz-range-progress{
+    background-color: var(--primary-pink);
+    border-radius: 10px;
+}
 .checkbox-container input{
     position: absolute;
     opacity: 0;
@@ -542,8 +547,5 @@ input[type="date"]{
     }
 }
 
-.navbar .navbar-expand-lg .navbar-light .bg-light{
-    width:100vw;
-    margin: 0;
-    padding: 0;
-}
+
+
