@@ -300,6 +300,14 @@ module.exports.setUserAddress = (address) => {
     })
 }
 
+module.exports.getUserAddress = (email) => {
+    return new Promise((resolve, reject) => {
+        db.query("SELECT * FROM user_address WHERE id = (SELECT id FROM users WHERE email = ?)", [email], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
 module.exports.getDivId = (name) => {
     return new Promise((resolve, reject) => {
         db.query(`SELECT * from divisions WHERE name like '%${name}%'`, (err, res) => {
@@ -367,4 +375,12 @@ module.exports.setOrgInput = (org, callback) => {
         })
     })
     
+}
+
+module.exports.getOrgInfo = () => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * from organizations`, (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
 }

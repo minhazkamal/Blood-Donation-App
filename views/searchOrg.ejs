@@ -19,6 +19,7 @@
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
     <!-- for mapbox -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.4.0/mapbox-gl.js'></script>
@@ -208,6 +209,15 @@
             cursor: pointer;
         }
 
+        .marker_self {
+            background-image: url('/img/self-map-icon.png');
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
         /* CSS for interactivity stops here */
     </style>
 </head>
@@ -242,6 +252,56 @@
         crossorigin="anonymous"></script> -->
 
     <script>
+        var self_marker;
+        $(document).ready(function () {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    console.log(position);
+                    const center = [position.coords.longitude, position.coords.latitude];
+
+                    map.setCenter(center);
+
+                    var self = document.createElement('div');
+                    self.className = 'marker_self';
+
+                    self_marker = new mapboxgl.Marker(self)
+                        .setLngLat(center)
+                        .setPopup(new mapboxgl.Popup({ closeOnClick: true }) // add popups
+                            .setHTML('<h3>' + "Your Location" + '</h3>'))
+                        .addTo(map);
+
+                    buildLocationList(stores);
+
+                }, function (error) {
+                    if (error.code == error.PERMISSION_DENIED) {
+                        console.log("Hello");
+                        $.ajax({
+                            type: 'GET',
+                            data: {},
+                            url: '/show-org/owner-details',
+                            success: function (data) {
+                                // console.log(data);
+
+                                const center = [data.lat, data.lon];
+
+                                map.setCenter(center);
+
+                                var self = document.createElement('div');
+                                self.className = 'marker_self';
+
+                                self_marker = new mapboxgl.Marker(self)
+                                    .setLngLat(center)
+                                    .setPopup(new mapboxgl.Popup({ closeOnClick: true }) // add popups
+                                        .setHTML('<h3>' + "Your Location" + '</h3>'))
+                                    .addTo(map);
+
+                                buildLocationList(stores);
+                            }
+                        });
+                    }
+                });
+            }
+        });
         /* This will let you use the .remove() function later on */
         if (!('remove' in Element.prototype)) {
             Element.prototype.remove = function () {
@@ -251,246 +311,66 @@
             };
         }
 
-        var stores = {
-            "type": "FeatureCollection",
-            "features": [
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            90.396524,
-                            23.725869
-                        ]
-                    },
-                    "properties": {
-                        "phoneFormatted": "(202) 234-7336",
-                        "phone": "2022347336",
-                        "address": "Dhaka Medical College",
-                        "city": "Dhaka",
-                        "country": "Bangladesh",
-                        "crossStreet": "at 15th St NW",
-                        "postalCode": "1216",
-                        "state": "D.C."
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            -77.049766,
-                            38.900772
-                        ]
-                    },
-                    "properties": {
-                        "phoneFormatted": "(202) 507-8357",
-                        "phone": "2025078357",
-                        "address": "2221 I St NW",
-                        "city": "Washington DC",
-                        "country": "United States",
-                        "crossStreet": "at 22nd St NW",
-                        "postalCode": "20037",
-                        "state": "D.C."
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            -77.043929,
-                            38.910525
-                        ]
-                    },
-                    "properties": {
-                        "phoneFormatted": "(202) 387-9338",
-                        "phone": "2023879338",
-                        "address": "1512 Connecticut Ave NW",
-                        "city": "Washington DC",
-                        "country": "United States",
-                        "crossStreet": "at Dupont Circle",
-                        "postalCode": "20036",
-                        "state": "D.C."
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            -77.0672,
-                            38.90516896
-                        ]
-                    },
-                    "properties": {
-                        "phoneFormatted": "(202) 337-9338",
-                        "phone": "2023379338",
-                        "address": "3333 M St NW",
-                        "city": "Washington DC",
-                        "country": "United States",
-                        "crossStreet": "at 34th St NW",
-                        "postalCode": "20007",
-                        "state": "D.C."
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            -77.002583742142,
-                            38.887041080933
-                        ]
-                    },
-                    "properties": {
-                        "phoneFormatted": "(202) 547-9338",
-                        "phone": "2025479338",
-                        "address": "221 Pennsylvania Ave SE",
-                        "city": "Washington DC",
-                        "country": "United States",
-                        "crossStreet": "btwn 2nd & 3rd Sts. SE",
-                        "postalCode": "20003",
-                        "state": "D.C."
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            -76.933492720127,
-                            38.99225245786
-                        ]
-                    },
-                    "properties": {
-                        "address": "8204 Baltimore Ave",
-                        "city": "College Park",
-                        "country": "United States",
-                        "postalCode": "20740",
-                        "state": "MD"
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            -77.097083330154,
-                            38.980979
-                        ]
-                    },
-                    "properties": {
-                        "phoneFormatted": "(301) 654-7336",
-                        "phone": "3016547336",
-                        "address": "4831 Bethesda Ave",
-                        "cc": "US",
-                        "city": "Bethesda",
-                        "country": "United States",
-                        "postalCode": "20814",
-                        "state": "MD"
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            -77.359425054188,
-                            38.958058116661
-                        ]
-                    },
-                    "properties": {
-                        "phoneFormatted": "(571) 203-0082",
-                        "phone": "5712030082",
-                        "address": "11935 Democracy Dr",
-                        "city": "Reston",
-                        "country": "United States",
-                        "crossStreet": "btw Explorer & Library",
-                        "postalCode": "20190",
-                        "state": "VA"
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            -77.10853099823,
-                            38.880100922392
-                        ]
-                    },
-                    "properties": {
-                        "phoneFormatted": "(703) 522-2016",
-                        "phone": "7035222016",
-                        "address": "4075 Wilson Blvd",
-                        "city": "Arlington",
-                        "country": "United States",
-                        "crossStreet": "at N Randolph St.",
-                        "postalCode": "22203",
-                        "state": "VA"
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            -75.28784,
-                            40.008008
-                        ]
-                    },
-                    "properties": {
-                        "phoneFormatted": "(610) 642-9400",
-                        "phone": "6106429400",
-                        "address": "68 Coulter Ave",
-                        "city": "Ardmore",
-                        "country": "United States",
-                        "postalCode": "19003",
-                        "state": "PA"
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            -75.20121216774,
-                            39.954030175164
-                        ]
-                    },
-                    "properties": {
-                        "phoneFormatted": "(215) 386-1365",
-                        "phone": "2153861365",
-                        "address": "3925 Walnut St",
-                        "city": "Philadelphia",
-                        "country": "United States",
-                        "postalCode": "19104",
-                        "state": "PA"
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            -77.043959498405,
-                            38.903883387232
-                        ]
-                    },
-                    "properties": {
-                        "phoneFormatted": "(202) 331-3355",
-                        "phone": "2023313355",
-                        "address": "1901 L St. NW",
-                        "city": "Washington DC",
-                        "country": "United States",
-                        "crossStreet": "at 19th St",
-                        "postalCode": "20036",
-                        "state": "D.C."
-                    }
+        function distance(lat2, lon2) {
+            const lngLat = self_marker.getLngLat();
+            var lat1 = lngLat.lng;
+            var lon1 = lngLat.lat;
+            // console.log(lat1, lon1);
+            // console.log(lat2, lon2);
+            var minimum;
+            $.ajax({
+                type: 'GET',
+                data: {},
+                async: false,
+                url: `https://api.mapbox.com/directions-matrix/v1/mapbox/driving/${lat1},${lon1};${lat2},${lon2}?annotations=distance&access_token=${mapboxgl.accessToken}`,
+                success: function (data) {
+                    // console.log(data.distances[0][1]);
+                    minimum = data.distances[0][1] / 1000;
                 }
-            ]
-        };
+            });
+            return minimum;
+            // var p = 0.017453292519943295;    // Math.PI / 180
+            // var c = Math.cos;
+            // var a = 0.5 - c((lat2 - lat1) * p) / 2 +
+            //     c(lat1 * p) * c(lat2 * p) *
+            //     (1 - c((lon2 - lon1) * p)) / 2;
+
+            // return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+        }
+
+        var stores;
+
+        $.ajax({
+            type: 'GET',
+            data: {},
+            async: false,
+            url: '/show-org/details',
+            success: function (data) {
+                // console.log(data);
+                stores = data;
+            }
+        });
+
+        // console.log("After ajax");
+
+        // var stores = {
+        //     "type": "FeatureCollection",
+        //     "features": [
+        //         {
+        //             "type": "Feature",
+        //             "geometry": {
+        //                 "type": "Point",
+        //                 "coordinates": [
+        //                     90.396524,
+        //                     23.725869
+        //                 ]
+        //             },
+        //             "properties": {
+        //                 "contact": "01867057600",
+        //                 "address": "Shewrapara",
+        //                 "title": "Minhaz Kamal"
+        //             }
+        //         }]
 
         mapboxgl.accessToken = 'pk.eyJ1IjoiaW50cmljYXRlLXBvdGF0byIsImEiOiJja3M0M2VzY3AyMmhmMnBvOTB4bnVuaHVtIn0.eqxegwotqUt-4XoroDJl2g';
 
@@ -498,14 +378,37 @@
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v10',
             // latitude, longitude
-            center: [90.3737413, 23.7911877],
+            center: [90.41233760851503, 23.73125557117023],
+            // center: [90.3737413, 23.7911877],
             zoom: 13,
             scrollZoom: true
         });
+
+        function addIDandDistanceandSort() {
+            stores.features.forEach(function (store) {
+                store.properties.distance = distance(store.geometry.coordinates[0], store.geometry.coordinates[1]).toFixed(2);
+            });
+
+            stores.features.sort(function (a, b) {
+                return parseFloat(a.properties.distance) - parseFloat(b.properties.distance);
+            });
+
+            stores.features.forEach(function (store, i) {
+                store.properties.id = i;
+            });
+        }
+
+        // console.log(stores.features.length);
+        /* Adding Distance from initial Position to each store */
+        // stores.features.forEach(function (store) {
+        //     store.properties.distance = distance(store.geometry.coordinates[0], store.geometry.coordinates[0]);
+        // });
+
+
         /* Assign a unique ID to each store */
-        stores.features.forEach(function (store, i) {
-            store.properties.id = i;
-        });
+        // stores.features.forEach(function (store, i) {
+        //     store.properties.id = i;
+        // });
 
         // this code to handle when a location circle on the map is clicked
         map.on('click', function (e) {
@@ -536,6 +439,8 @@
 
         /* Building The list of Locations */
         function buildLocationList(data) {
+            // console.log("Hello");
+            addIDandDistanceandSort();
             data.features.forEach(function (store, i) {
                 /**
                  * Create a shortcut for `store.properties`,
@@ -556,18 +461,18 @@
                 link.href = '#';
                 link.className = 'title';
                 link.id = "link-" + prop.id;
-                link.innerHTML = prop.address;
+                link.innerHTML = prop.title;
 
                 /* Add details to the individual listing. */
                 var details = listing.appendChild(document.createElement('div'));
-                details.innerHTML = prop.city;
-                if (prop.phone) {
-                    details.innerHTML += ' · ' + prop.phoneFormatted;
+                details.innerHTML = prop.address;
+                if (prop.contact) {
+                    details.innerHTML += '<br>Contact: ' + prop.contact;
                 }
                 if (prop.distance) {
-                    var roundedDistance = Math.round(prop.distance * 100) / 100;
+                    // var roundedDistance = Math.round(prop.distance * 100) / 100;
                     details.innerHTML +=
-                        '<p><strong>' + roundedDistance + ' miles away</strong></p>';
+                        '<p><strong>' + prop.distance + ' kms away</strong></p>';
                 }
 
                 // this code to handle when a user clicks a link in the sidebar:
@@ -607,8 +512,8 @@
 
             new mapboxgl.Marker(el)
                 .setLngLat(currentFeature.geometry.coordinates)
-                .setPopup(new mapboxgl.Popup({ closeOnClick: false }) // add popups
-                    .setHTML('<h3>' + currentFeature.properties.address + '</h3><h4>' + currentFeature.properties.city + '</h4>'))
+                // .setPopup(new mapboxgl.Popup({ closeOnClick: true }) // add popups
+                //     .setHTML('<h3>' + currentFeature.properties.title + '</h3><h4>' + currentFeature.properties.address + '</h4>'))
                 .addTo(map);
 
             // var popup = new mapboxgl.Popup({ closeOnClick: false })
@@ -645,10 +550,42 @@
                         }
                     });
 
-                    buildLocationList(stores);
+                    // buildLocationList(stores);
                 }
             );
         });
+
+        const popup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false
+        });
+
+        map.on('mouseenter', 'locations', (e) => {
+            // Change the cursor style as a UI indicator.
+            map.getCanvas().style.cursor = 'pointer';
+
+            // Copy coordinates array.
+            const coordinates = e.features[0].geometry.coordinates.slice();
+            const description = e.features[0].properties.description;
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            // Populate the popup and set its coordinates
+            // based on the feature found.
+            popup.setLngLat(coordinates).setHTML('<h3>' + e.features[0].properties.title + '</h3><h4>' + e.features[0].properties.address + '</h4>').addTo(map);
+        });
+
+        map.on('mouseleave', 'locations', () => {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
+
+        // buildLocationList(stores);
 
         // map.on('load', function (e) {
 
@@ -672,7 +609,16 @@
         //     buildLocationList(stores);
         // });
     </script>
-
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
 
 
 </body>

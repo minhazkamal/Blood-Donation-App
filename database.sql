@@ -105,7 +105,7 @@ CREATE TABLE `organizations` (
   `lon` double DEFAULT NULL,
   `lat` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,6 +114,7 @@ CREATE TABLE `organizations` (
 
 LOCK TABLES `organizations` WRITE;
 /*!40000 ALTER TABLE `organizations` DISABLE KEYS */;
+INSERT INTO `organizations` VALUES (1,'Dhaka Medical College Hospital','Secretariat Road, Shahbag, Dhaka, Dhaka','02-55165088',23.725869,90.396524),(2,'Sir Salimullah Medical College Hospitals','Mitford road, Chackbazar, Dhaka, Dhaka','01703636314',23.711423,90.401239),(3,'Square Hospitals','Bir Uttam Qazi Nuruzzaman Road, Tejgaon, Dhaka, Dhaka','02-8144400',23.752927,90.381731),(4,'Evercare Hospital Dhaka','Hospital Road, Vatara, Dhaka, Dhaka','10678',23.810054,90.43254),(5,'Mymensingh Medical College','Dhaka-Mymensingh Road, Mymensingh Sadar, Mymensingh, Mymensingh','01713332468',24.743187,90.409051),(6,'Chittagong Medical College','KBF Kader Road, Kotwali, Chittagong, Chittagong','031-630335',22.359414,91.830903),(7,'Evercare Hospital Chitagong','Kuwaish Road, Chandgaon, Chittagong, Chittagong','10678',22.401834,91.849365),(8,'Chittagong General Hospital','Anderkilla Road, Kotwali, Chittagong, Chittagong','01711468326',22.340604,91.837763),(9,'BIRDEM General Hospital','Kazi Nazrul Islam Ave, Shahbag, Dhaka, Dhaka','02-41060501',23.738799,90.396402),(10,'BSMMU Hospitals','Kazi Nazrul Islam Avenue, Shahbag, Dhaka, Dhaka','01866637482',23.739668,90.394563),(11,'United Hospital Ltd.','Hospital Road, Gulshan, Dhaka, Dhaka','',23.804578,90.415648),(12,'Parkview Hospital Ltd','Pachlaish Road, Panchlaish, Chittagong, Chittagong','01976022333',22.363095,91.835649),(13,'National Hospital Pvt Ltd','Mehedibag Road, Kotwali, Chittagong, Chittagong','031623753',22.35486,91.82491),(14,'Max Hospitals Ltd','Hussain Park Street, Kotwali, Chittagong, Chittagong','01713998199',22.355308,91.825237),(15,'Imperial Hospitals Ltd','Zakir Hussain Road, Kulshi, Chittagong, Chittagong','0961224724',22.359176,91.795598),(16,'Shaheed Tajuddin Ahmed Medical College Hospital ','Hospital Road, Gazipur Sadar-Joydebpur, Gazipur, Dhaka','',23.9992261,90.424614);
 /*!40000 ALTER TABLE `organizations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,4 +271,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-11 17:14:40
+-- Dump completed on 2021-08-12  3:06:05
