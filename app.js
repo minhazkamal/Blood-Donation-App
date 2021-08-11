@@ -21,6 +21,7 @@ var app = express();
 var passport = require('passport');
 var cookieSession = require('cookie-session')
 var box = require('./models/mapbox');
+var db = require('./models/db_controller');
 
 // file modules
 var landing = require ('./controllers/landing');
@@ -118,5 +119,18 @@ app.get('/mapbox', function(req, res){
 
 //localhost:3940/org-input
 app.get('/org-input', function(req,res){
-    res.render('orgInput.ejs');
+    db.getDivisions()
+            .then(result => {
+                if (result.length > 0) {
+                    let div_result = result;
+                    res.render('orgInput.ejs', {divisions: div_result});
+                }
+            })
+});
+
+app.post('/org-input', function(req,res){
+    // console.log(req.body);
+    db.setOrgInput(req.body, function(insert_id){
+        res.send("Hospital with ID: "+insert_id+" insertion successfull");
+    })
 });

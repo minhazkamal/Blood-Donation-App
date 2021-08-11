@@ -308,9 +308,25 @@ module.exports.getDivId = (name) => {
     })
 }
 
+module.exports.getDivName = (id) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * from divisions WHERE id=${id}`, (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
 module.exports.getDistId = (name, id) => {
     return new Promise((resolve, reject) => {
         db.query(`SELECT * from districts WHERE name like '%${name}%' AND division_id=${id}`, (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.getDistName = (id) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * from districts WHERE id=${id}`, (err, res) => {
             err ? reject(err) : resolve(res)
         })
     })
@@ -322,4 +338,33 @@ module.exports.getUpazillaId = (name, id) => {
             err ? reject(err) : resolve(res)
         })
     })
+}
+
+module.exports.getUpazillaName = (id) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * from upazillas WHERE id=${id}`, (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.setOrgInput = (org, callback) => {
+    let details = org.street;
+    db.query(`SELECT * from upazillas WHERE id=${org.upazilla}`, (err, res) => {
+        details += ", "+res[0].name;
+        // console.log(details);
+        db.query(`SELECT * from districts WHERE id=${org.district}`, (err, res) => {
+            details += ", "+res[0].name;
+            // console.log(details);
+            db.query(`SELECT * from divisions WHERE id=${org.division}`, (err, res) => {
+                details += ", "+res[0].name;
+                // console.log(details);
+                    db.query("INSERT INTO `organizations`(`name`,`details`,`contact`,`lon`,`lat`) VALUES (?, ?, ?, ?, ?)", [org.name, details, org.mobile, org.longitude, org.latitude], (err, res) => {
+                        if(err) throw err;
+                        callback(res.insertId);
+                    })
+            })
+        })
+    })
+    
 }

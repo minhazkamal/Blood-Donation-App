@@ -86,7 +86,35 @@ CREATE TABLE `nid` (
 
 LOCK TABLES `nid` WRITE;
 /*!40000 ALTER TABLE `nid` DISABLE KEYS */;
+INSERT INTO `nid` VALUES (6,'f837a6f4369555646c943f616b7cecd097dc43e6e334c78c50ee5264532aa0b94445c847663ce8f88a10ffc0a7e13b8138d5eac7f6b17f5e8ccc4f875fe75cb960dcf479a2104583a1146d9eb2f6a8374e6ad18c089de9c4167ca7d4e8e17b1ff8.png','75924dc90a046c4fc7af1afab6e7f67213d48d50c1307bf45ddecdb483662fe2833592e30ce9161258a09360344ca4b6002361c2d0d325847dc8603982af3731cba10c6a391a115da4518ea0fd5c390ba364a158adfb5b1a14f8ea0f6abbcd7e39.png');
 /*!40000 ALTER TABLE `nid` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `organizations`
+--
+
+DROP TABLE IF EXISTS `organizations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `organizations` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) DEFAULT NULL,
+  `details` varchar(1500) DEFAULT NULL,
+  `contact` varchar(11) DEFAULT NULL,
+  `lon` double DEFAULT NULL,
+  `lat` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `organizations`
+--
+
+LOCK TABLES `organizations` WRITE;
+/*!40000 ALTER TABLE `organizations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `organizations` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -110,6 +138,7 @@ CREATE TABLE `profile_picture` (
 
 LOCK TABLES `profile_picture` WRITE;
 /*!40000 ALTER TABLE `profile_picture` DISABLE KEYS */;
+INSERT INTO `profile_picture` VALUES (6,'7a6da0e3925bd770c60d7fb1b50d608cfc7a9a1cdbb8172d422e721b4fbf1209387eacff16815041f0a3e7d1edda005716fb943120b0b67a517af2545d9e7240f662fd1b720ca544609d90d4dacc443bfe68b621f3fcc9f6d0792f048490e3dd80.JPG');
 /*!40000 ALTER TABLE `profile_picture` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,6 +181,9 @@ CREATE TABLE `user_address` (
   `division` int NOT NULL,
   `district` int NOT NULL,
   `upazilla` int NOT NULL,
+  `zipcode` int DEFAULT NULL,
+  `lon` double DEFAULT NULL,
+  `lat` double DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `user_address_id` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -163,6 +195,7 @@ CREATE TABLE `user_address` (
 
 LOCK TABLES `user_address` WRITE;
 /*!40000 ALTER TABLE `user_address` DISABLE KEYS */;
+INSERT INTO `user_address` VALUES (6,'7C','311, West Shewrapara, Mirpur',3,1,519,1216,23.7910932,90.3736199);
 /*!40000 ALTER TABLE `user_address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,6 +223,7 @@ CREATE TABLE `user_profile` (
 
 LOCK TABLES `user_profile` WRITE;
 /*!40000 ALTER TABLE `user_profile` DISABLE KEYS */;
+INSERT INTO `user_profile` VALUES (6,'01867057600','2000-11-30','O+','Male');
 /*!40000 ALTER TABLE `user_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,7 +248,7 @@ CREATE TABLE `users` (
   `provider` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -223,6 +257,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (6,'Minhaz','Kamal','minhaz.kamal9900@gmail.com',NULL,'yes','yes','yes','no','2021-08-09','google');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -235,4 +270,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-06  0:28:55
+-- Dump completed on 2021-08-11 17:14:40
