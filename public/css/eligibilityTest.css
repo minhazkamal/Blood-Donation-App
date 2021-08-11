@@ -166,6 +166,7 @@ body{
     align-items: center;
     flex-wrap: wrap;
     padding: 30px;
+    margin-top: 50px;
 }
 
 .container-card{
@@ -742,7 +743,7 @@ header{
       padding: 90px 50px;
       visibility: hidden;
       overflow-y: auto;
-      transition: 0.5s;
+      transition: 0.7s;
       transition-property: right, visibility;
     }
   
@@ -815,7 +816,7 @@ header{
   
     .close-btn{
       position: absolute;
-      background: url(close.png)no-repeat;
+      background: url(/img/close.png)no-repeat;
       width: 40px;
       height: 40px;
       background-size: 25px;
@@ -827,7 +828,7 @@ header{
     }
   
     .menu-btn{
-      background: url(menu.png)no-repeat;
+      background: url(/img/menu.png)no-repeat;
       width: 40px;
       height: 40px;
       background-size: 30px;
