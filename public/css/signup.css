@@ -283,7 +283,7 @@ label.checkbox-container{
     top: 200px;
     position: absolute;
     z-index: -1;
-    right: -8px;
+    right: 2px;
 
 }
 path{
