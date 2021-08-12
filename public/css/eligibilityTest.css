@@ -558,15 +558,15 @@ header {
   align-items: center;
   /* background: #23252B; */
   background: rgb(1, 42, 74);
-  background: linear-gradient(82deg, rgba(1, 42, 74, 1) 25%, rgba(42, 111, 151, 1) 73%);
+  background: linear-gradient(82deg, rgba(1, 42, 74, 1) 20%, rgba(42, 111, 151, 1) 80%);
   box-shadow: 0 5px 25px rgb(0 0 0 / 20%);
   padding: 0 150px;
-  transition: 0.6s;
+  transition: 1.5s;
+  transition-timing-function: ease-in;
 }
 
 .scrolled {
-  background: rgb(42, 111, 151);
-  background: linear-gradient(82deg, rgba(42, 111, 151, 1) 25%, rgba(1, 42, 74, 1) 73%);
+  background: rgb(1, 42, 74);
 }
 
 header .logo {
