@@ -172,7 +172,8 @@ body {
   align-items: center;
   flex-wrap: wrap;
   padding: 30px;
-  margin-top: 50px;
+  margin-top: 60px;
+  margin-bottom: 50px;
 }
 
 .container-card {
@@ -922,7 +923,7 @@ footer p {
   color: #999;
 }
 
-hr{
+.footer-hr{
   background-color: rgba(42, 111, 151, 1);
   border-width: 4px;
   border-radius: 10px;
