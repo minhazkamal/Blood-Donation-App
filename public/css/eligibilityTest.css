@@ -561,12 +561,14 @@ header {
   background: linear-gradient(82deg, rgba(1, 42, 74, 1) 20%, rgba(42, 111, 151, 1) 80%);
   box-shadow: 0 5px 25px rgb(0 0 0 / 20%);
   padding: 0 150px;
-  transition: 1.5s;
-  transition-timing-function: ease-in;
+  transition: 2s;
+  transition-timing-function: linear;
 }
 
 .scrolled {
   background: rgb(1, 42, 74);
+  /* background: linear-gradient(82deg, rgba(1, 42, 74, 1) 20%, rgba(42, 111, 151, 1) 80%); */
+
 }
 
 header .logo {
