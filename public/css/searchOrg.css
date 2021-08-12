@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+:root{
+    /* font-size: 100%;
+    font-size: 16px;
+    line-height: 1.5; */
+    --primary-pink: #b9375e;
+    --primary-blue: #2f6690;
+}
+
+.sidebar {
+    font-family: 'Montserrat',sans-serif;
+    background-image: url(/img/wavelogin.png);
+    background-size: cover;
+}
+
+form input[type="text"]{
+    display: inline;
+    width: 75%;
+    height: 2.8rem;
+    box-sizing: border-box;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #c4c4c4;
+    /* padding: 1em; */
+    margin-bottom: 1.25rem;
+    font-size: 0.875rem;
+}
+
+
+.signup-btn{
+    display: inline;
+    width: 20%;
+    background: var(--primary-pink);
+    color: white;
+    font-weight: 500;
+    border: none;
+    /* padding: 1rem ; */
+    border-radius: 8px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: 0.3s;
+    font-size: 0.875rem;
+    margin-left: .6rem;
+    margin-right: 0rem;
+}
+
+.signup-btn:hover{
+    background: #3a7ca5;
+    cursor: pointer;
+}
+
+
+
+
+
