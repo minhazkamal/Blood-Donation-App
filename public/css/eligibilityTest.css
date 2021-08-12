@@ -1,144 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-/* :root{
-    font-size: 100%;
-    font-size: 16px;
-    line-height: 1.5;
-    --primary-blue: #2f6690;
-    --primary-pink: #b9375e;
-}
-
-html{
-    height: 100%;
-}
-
-body{
-    padding: 0;
-    margin: 0;
-    font-family: 'Montserrat',sans-serif;
-    font-weight: 500;
-    background-image: url(/img/wavelogin.png);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    background-repeat: no-repeat;
-}
-
-h1{
-    font-size: 2.25rem;
-    font-weight: 700;
-}
-
-h2{
-    margin-top: 1rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-a{
-    text-decoration: none;
-    color: var(--primary-blue);
-}
-
-a:hover{
-    text-decoration: underline;
-}
-
-main {
-    width: 80%;
-    margin: auto;
-}
-
-.row  {
-    margin-bottom: .5rem;
-}
-
-.copy{
-    margin: auto;
-    padding-top: 2rem;
-    padding-bottom: 4rem; */
-
-/* border-left: 10px solid var(--primary-blue);
-    border-radius: .50% 20% / 10% .40%; */
-
-/* text-align: center;
-}
-
-.form-body {
-    width: 80%;
-    margin: auto; */
-
-/* css for the form body */
-
-/* }
-
-.section-legend { */
-
-/* text-align: center; */
-
-/* padding-left: 2rem;
-    padding-bottom: 1.7rem;
-    border-left: 6px solid var(--primary-pink);
-    border-radius: .50% 20% / 10% .40%;
-}
-
-
-*/
-
-/* This part is for the radio-buttons as buttons effect  */
-
-/* .switch-field {
-    display: flex;
-    margin-bottom: 36px;
-    overflow: hidden;
-  }
-  
-  .switch-field input {
-    position: absolute !important;
-    clip: rect(0, 0, 0, 0);
-    height: 1rem;
-    width: 3rem;
-    border: none;
-    overflow: hidden;
-  }
-  
-  .switch-field label {
-    background-color: white ;
-    color: black;
-    font-size: 1rem;
-    line-height: 1;
-    text-align: center;
-    padding: 1rem 1.8rem;
-    margin-right: -1px;
-    border: none; */
-
-/* box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1); */
-
-/* transition: all 0.2s ease-in-out;
-  }
-  
-  .switch-field label:hover {
-    cursor: pointer;
-    background-color: var(--primary-pink);
-    color: white;
-  }
-  
-  .switch-field input:checked + label {
-    background-color: var(--primary-pink);
-    color: white;
-    box-shadow: none;
-  }
-  
-  .switch-field label:first-of-type {
-    border-radius: 4px 0 0 4px;
-  }
-  
-  .switch-field label:last-of-type {
-    border-radius: 2rem;
-  } */
 
 * {
   margin: 0;
@@ -818,6 +678,8 @@ header.sticky .menu-item .sub-menu {
 
 /* /////////////////////////////////////////////////// */
 
+/* ///////////FOOTERCSS///////////// */
+
 footer {
   position: relative;
   width: 100%;
@@ -946,3 +808,4 @@ footer p {
     width: 100%;
   }
 }
+/* /////////////////////////////////////////////////// */
