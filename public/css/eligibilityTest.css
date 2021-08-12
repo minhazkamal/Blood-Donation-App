@@ -940,4 +940,8 @@ hr{
   footer .footer-container .sec .aboutus, .quicklinks {
     width: 100%;
   }
+
+  footer .footer-container .sec.aboutus{
+    width: 100%;
+  }
 }
