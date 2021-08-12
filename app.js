@@ -136,3 +136,9 @@ app.post('/org-input', function(req,res){
         res.send("Hospital with ID: "+insert_id+" insertion successfull");
     })
 });
+
+//localhost:3940/dashboard
+app.get('/dashboard', function(req,res){
+    res.render('dashboard.ejs');
+});
+
