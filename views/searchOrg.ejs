@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="/img/Logo-01.png">
-    <title>Search Organizationg</title>
+    <title>Search Organization</title>
     <!-- ALL CSS RESET -->
     <link rel="stylesheet" type="text/css" href="/css/cssReset.css">
     <!-- BOOT STRAP v4.3.1 -->
@@ -218,6 +218,26 @@
             cursor: pointer;
         }
 
+        #searchBar {
+            width: 100%;
+            height: 32px;
+            border-radius: 3px;
+            border: 1px solid #eaeaea;
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+
+        #searchWrapper {
+            position: relative;
+        }
+
+        #searchWrapper::after {
+            content: '🔍';
+            position: absolute;
+            top: 7px;
+            right: 15px;
+        }
+
         /* CSS for interactivity stops here */
     </style>
 </head>
@@ -226,17 +246,16 @@
     <div class='sidebar'>
         <div class='heading'>
             <h1>Search Organizations</h1>
-            <form action="#">
+            <!-- <form action="#">
                 <div class="input-container email">
-                    <!-- <label for="email">Email</label> -->
                     <input id="email" name="email" placeholder="Organization Name" type="text">
-                    <!-- <button class="signup-btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
-                        Search</button> -->
                 </div>
-                <!-- <button class="login-btn" type="submit">Log In</button> -->
-                <!-- <button class="signup-btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
-                    Search</button> -->
-            </form>
+            </form> -->
+
+        </div>
+        <div id="searchWrapper">
+            <input type="text" name="searchBar" id="searchBar" placeholder="Start typing for search" />
+            <div id="resultFound"></div>
         </div>
         <div id='listings' class='listings'></div>
     </div>
@@ -281,6 +300,7 @@
                             .setHTML('<h3>' + "Your Location" + '</h3>'))
                         .addTo(map);
 
+                    addIDandDistanceandSort();
                     buildLocationList(stores);
 
                 }, function (error) {
@@ -306,6 +326,7 @@
                                         .setHTML('<h3>' + "Your Location" + '</h3>'))
                                     .addTo(map);
 
+                                addIDandDistanceandSort();
                                 buildLocationList(stores);
                             }
                         });
@@ -448,60 +469,80 @@
             }
         });
 
+        const listingsE1 = document.getElementById('listings');
+        const resultE1 = document.getElementById('resultFound');
+        resultE1.style.background = 'linear-gradient(to bottom, #00ffff 0%, #0066ff 100%)';
         /* Building The list of Locations */
         function buildLocationList(data) {
             // console.log("Hello");
-            addIDandDistanceandSort();
-            data.features.forEach(function (store, i) {
-                /**
-                 * Create a shortcut for `store.properties`,
-                 * which will be used several times below.
-                **/
-                var prop = store.properties;
+            // addIDandDistanceandSort(data);
+            // console.log(data);
+            const result_number = document.createElement('p');
+            result_number.style.textAlign = 'center';
+            result_number.style.fontWeight = 'bold';
+            // Clear any existing listings
+            listingsE1.innerHTML = '';
+            resultE1.innerHTML = '';
+            // console.log(data.features.length);
+            if (data.features.length) {
+                result_number.textContent = data.features.length + ' results found';
+                resultE1.appendChild(result_number);
 
-                /* Add a new listing section to the sidebar. */
-                var listings = document.getElementById('listings');
-                var listing = listings.appendChild(document.createElement('div'));
-                /* Assign a unique `id` to the listing. */
-                listing.id = "listing-" + data.features[i].properties.id;
-                /* Assign the `item` class to each listing for styling. */
-                listing.className = 'item';
+                data.features.forEach(function (store, i) {
+                    /**
+                     * Create a shortcut for `store.properties`,
+                     * which will be used several times below.
+                    **/
+                    var prop = store.properties;
 
-                /* Add the link to the individual listing created above. */
-                var link = listing.appendChild(document.createElement('a'));
-                link.href = '#';
-                link.className = 'title';
-                link.id = "link-" + prop.id;
-                link.innerHTML = prop.title;
+                    /* Add a new listing section to the sidebar. */
+                    var listings = document.getElementById('listings');
+                    var listing = listings.appendChild(document.createElement('div'));
+                    /* Assign a unique `id` to the listing. */
+                    listing.id = "listing-" + data.features[i].properties.id;
+                    /* Assign the `item` class to each listing for styling. */
+                    listing.className = 'item';
 
-                /* Add details to the individual listing. */
-                var details = listing.appendChild(document.createElement('div'));
-                details.innerHTML = prop.address;
-                if (prop.contact) {
-                    details.innerHTML += '<br>Contact: ' + prop.contact;
-                }
-                if (prop.distance) {
-                    // var roundedDistance = Math.round(prop.distance * 100) / 100;
-                    details.innerHTML +=
-                        '<p><strong>' + prop.distance + ' kms away</strong></p>';
-                }
+                    /* Add the link to the individual listing created above. */
+                    var link = listing.appendChild(document.createElement('a'));
+                    link.href = '#';
+                    link.className = 'title';
+                    link.id = "link-" + prop.id;
+                    link.innerHTML = prop.title;
 
-                // this code to handle when a user clicks a link in the sidebar:
-                link.addEventListener('click', function (e) {
-                    for (var i = 0; i < data.features.length; i++) {
-                        if (this.id === "link-" + data.features[i].properties.id) {
-                            var clickedListing = data.features[i];
-                            flyToStore(clickedListing);
-                            createPopUp(clickedListing);
+                    /* Add details to the individual listing. */
+                    var details = listing.appendChild(document.createElement('div'));
+                    details.innerHTML = prop.address;
+                    if (prop.contact) {
+                        details.innerHTML += '<br>Contact: ' + prop.contact;
+                    }
+                    if (prop.distance) {
+                        // var roundedDistance = Math.round(prop.distance * 100) / 100;
+                        details.innerHTML +=
+                            '<p><strong>' + prop.distance + ' kms away</strong></p>';
+                    }
+
+                    // this code to handle when a user clicks a link in the sidebar:
+                    link.addEventListener('click', function (e) {
+                        for (var i = 0; i < data.features.length; i++) {
+                            if (this.id === "link-" + data.features[i].properties.id) {
+                                var clickedListing = data.features[i];
+                                flyToStore(clickedListing);
+                                createPopUp(clickedListing);
+                            }
                         }
-                    }
-                    var activeItem = document.getElementsByClassName('active');
-                    if (activeItem[0]) {
-                        activeItem[0].classList.remove('active');
-                    }
-                    this.parentNode.classList.add('active');
+                        var activeItem = document.getElementsByClassName('active');
+                        if (activeItem[0]) {
+                            activeItem[0].classList.remove('active');
+                        }
+                        this.parentNode.classList.add('active');
+                    });
                 });
-            });
+            }
+            else if (data.features.length === 0 && searchBar.value !== '') {
+                result_number.textContent = 'No results found';
+                resultE1.appendChild(result_number);
+            }
         }
 
         // Functions For Interactivity
@@ -594,6 +635,28 @@
         map.on('mouseleave', 'locations', () => {
             map.getCanvas().style.cursor = '';
             popup.remove();
+        });
+
+        const searchBar = document.getElementById('searchBar');
+
+        searchBar.addEventListener('keyup', (e) => {
+            const searchString = e.target.value.toLowerCase();
+
+            const filteredStores = {
+                type: 'FeatureCollection',
+                features: []
+            }
+
+            filteredStores.features = stores.features.filter((store) => {
+                return (
+                    store.properties.title.toLowerCase().includes(searchString) ||
+                    store.properties.address.toLowerCase().includes(searchString)
+                );
+            });
+            // console.log(stores);
+            // console.log(filteredStores);
+
+            buildLocationList(filteredStores);
         });
 
         // buildLocationList(stores);
