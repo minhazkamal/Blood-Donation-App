@@ -50,7 +50,7 @@ router.get('/details', function(req,res){
 });
 
 router.get('/owner-details', function(req, res){
-    req.session.email = 'minhaz.kamal9900@gmail.com';
+    // req.session.email = 'minhaz.kamal9900@gmail.com';
     if (req.session.email) {
         db.getUserAddress(req.session.email)
         .then(result => {
