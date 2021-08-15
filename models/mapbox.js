@@ -10,11 +10,15 @@ module.exports.forwardGeocoder = async function(location) {
 		  .forwardGeocode({
 		    query: location,
         countries: ['bd'],
-        types: ['locality', 'district', 'region']
+        types: ['locality'],
 		  })
 		  .send();
-
-		console.log(response.body);
+    // return new Promise((resolve, reject) => {
+    //         err ? reject(err) : resolve(res)
+    // })
+		// console.log(response.body);
+    return response.body.features[0];
+    
 	} catch(err) {
 		console.log(err.message);
 	}

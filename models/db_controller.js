@@ -292,6 +292,14 @@ module.exports.getProfile = (id) => {
     })
 }
 
+module.exports.updateUserProfile = (profile) => {
+    return new Promise((resolve, reject) => {
+        db.query("UPDATE user_profile SET contact=?, dob=?, BG=?, gender=? WHERE id=?", [profile.contact, profile.dob, profile.bg, profile.gender, profile.id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
 module.exports.setUserAddress = (address) => {
     return new Promise((resolve, reject) => {
         db.query("INSERT INTO user_address VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", [address.id, address.house, address.street, address.division, address.district, address.upazilla, address.zipcode, address.lat, address.lon], (err, res) => {
@@ -307,6 +315,15 @@ module.exports.getUserAddress = (email) => {
         })
     })
 }
+
+module.exports.updateUserAddress = (address) => {
+    return new Promise((resolve, reject) => {
+        db.query("UPDATE user_address SET house=?, street=?, division=?, district=?, upazilla=?, zipcode=?, lon=?, lat=? WHERE id=?", [address.house, address.street, address.division, address.district, address.upazilla, address.zipcode, address.lat, address.lon, address.id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
 
 module.exports.getDivId = (name) => {
     return new Promise((resolve, reject) => {

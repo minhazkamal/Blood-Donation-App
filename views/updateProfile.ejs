@@ -39,6 +39,19 @@
 
 								<img id="imageResult" src="img/avatar.png" alt="">
 							</div>
+							<div style="display: none;" id="profile">
+								<input id="profile_build" type="text" value="<%= user.profile_build %>">
+								<input id="user_bg" type="text" value="<%= user.bg %>">
+								<input id="user_dob" type="date" value="<%= user.dob %>">
+								<input id="user_gender" type="text" value="<%= user.gender %>">
+								<input id="user_contact" type="text" value="<%= user.contact %>">
+								<input id="user_division" type="text" value="<%= user.division %>">
+								<input id="user_district" type="text" value="<%= user.district %>">
+								<input id="user_upazilla" type="text" value="<%= user.upazilla %>">
+								<input id="user_zipcode" type="text" value="<%= user.zipcode %>">
+								<input id="user_house" type="text" value="<%= user.house %>">
+								<input id="user_street" type="text" value="<%= user.street %>">
+							</div>
 
 							<section class="section-preview">
 
@@ -103,27 +116,18 @@
 							</h6>
 							<div class="row">
 								<div class="col-md-6 mb-4">
-									<% if (user.profile_build==='yes' ) { %>
-										<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
-											aria-hidden=" true" disabled>
-											<option value="<%= user.bg %>" selected>
-												<%= user.bg %>
-											</option>
-										</select>
-										<%} else{ %>
-											<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
+									<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
 											aria-hidden=" true" required>
-												<option disabled selected>Blood Group</option>
-												<option value="A+">A+</option>
-												<option value="A-">A-</option>
-												<option value="B+">B+</option>
-												<option value="B-">B-</option>
-												<option value="O+">O+</option>
-												<option value="O-">O-</option>
-												<option value="AB+">AB+</option>
-												<option value="AB-">AB-</option>
-											</select>
-											<% } %>
+										<option disabled selected>Blood Group</option>
+										<option value="A+">A+</option>
+										<option value="A-">A-</option>
+										<option value="B+">B+</option>
+										<option value="B-">B-</option>
+										<option value="O+">O+</option>
+										<option value="O-">O-</option>
+										<option value="AB+">AB+</option>
+										<option value="AB-">AB-</option>
+									</select>
 								</div>
 
 							</div>
@@ -164,7 +168,7 @@
 							<div class="row">
 								<div class="col-md-12 mb-4">
 									<div class="input-container lname">
-										<input id="street" name="zipcode" style="margin-bottom: 0;"
+										<input id="zipcode" name="zipcode" style="margin-bottom: 0;"
 											placeholder="Zip Code (Optional)" type="text">
 									</div>
 								</div>
@@ -225,51 +229,69 @@
 					console.log(position);
 					$("#latitude").val(position.coords.latitude);
 					$("#longitude").val(position.coords.longitude);
-					$.ajax({
-						type: 'GET',
-						data: { latitude: position.coords.latitude, longitude: position.coords.longitude},
-						url: '/map-box/reverse',
-						success: function (data) {
-							console.log(data);
-							$("#basic_division").val(data.division);
-							district();
-						}
-					});
-					$.ajax({
-						type: 'GET',
-						data: { latitude: position.coords.latitude, longitude: position.coords.longitude},
-						url: '/map-box/reverse',
-						success: function (data) {
-							// console.log(data);
-							if(data.district !== null) {
-								$('#basic_district').val(data.district);
-								upazilla();
+					if ($("#profile_build").val() === 'no') {
+						$.ajax({
+							type: 'GET',
+							data: { latitude: position.coords.latitude, longitude: position.coords.longitude },
+							url: '/map-box/reverse',
+							success: function (data) {
+								console.log(data);
+								$("#basic_division").val(data.division);
+								district();
 							}
-						}
-					});
-					$.ajax({
-						type: 'GET',
-						data: { latitude: position.coords.latitude, longitude: position.coords.longitude},
-						url: '/map-box/reverse',
-						success: function (data) {
-							// console.log(data);
-							if(data.upazilla !== null) $('#basic_upazilla').val(data.upazilla);
-						}
-					});
-
-						
+						});
+						$.ajax({
+							type: 'GET',
+							data: { latitude: position.coords.latitude, longitude: position.coords.longitude },
+							url: '/map-box/reverse',
+							success: function (data) {
+								// console.log(data);
+								if (data.district !== null) {
+									$('#basic_district').val(data.district);
+									upazilla();
+								}
+							}
+						});
+						$.ajax({
+							type: 'GET',
+							data: { latitude: position.coords.latitude, longitude: position.coords.longitude },
+							url: '/map-box/reverse',
+							success: function (data) {
+								// console.log(data);
+								if (data.upazilla !== null) $('#basic_upazilla').val(data.upazilla);
+							}
+						});
+					}
 				});
+			}
+			if ($("#profile_build").val() === 'yes') {
+				$("#basic_bg").val($("#user_bg").val());
+				$("#DOB").val($("#user_dob").val());
+				$("#house").val($("#user_house").val());
+				$("#contact").val($("#user_contact").val());
+				$("#basic_gender").val($("#user_gender").val());
+				$("#basic_bg").val($("#user_bg").val());
+				$("#street").val($("#user_street").val());
+				$("#zipcode").val($("#user_zipcode").val());
+				$("#basic_division").val($("#user_division").val());
+				district();
+				$("#basic_district").val($("#user_district").val());
+				// console.log($("#user_district").val());
+				upazilla();
+				$("#basic_upazilla").val($("#user_upazilla").val());
+				// console.log($("#zipcode").val());
 			}
 		});
 
-		function district(){
+		function district() {
 			var div_id = $('#basic_division').val();
-				// console.log(div_id);
+			// console.log(div_id);
 
 			$.ajax({
 				type: 'GET',
 				data: { division_id: div_id },
 				url: '/address/districts',
+				async: false,
 				success: function (data) {
 					//console.log(data);
 					$('#basic_district').empty();
@@ -283,12 +305,13 @@
 
 		function upazilla() {
 			var dist_id = $('#basic_district').val();
-				//console.log(dist_id);
+			//console.log(dist_id);
 
 			$.ajax({
 				type: 'GET',
 				data: { district_id: dist_id },
 				url: '/address/upazillas',
+				async: false,
 				success: function (data) {
 					// console.log(data);
 					$('#basic_upazilla').empty();
@@ -302,11 +325,11 @@
 
 
 		$(function () {
-			$('#basic_division').on("change", district );
+			$('#basic_division').on("change", district);
 		});
 
 		$(function () {
-			$('#basic_district').on("change", upazilla );
+			$('#basic_district').on("change", upazilla);
 		});
 
 		function readURL(input) {
@@ -322,6 +345,7 @@
 				reader.readAsDataURL(input.files[0]);
 			}
 		}
+
 	</script>
 	<script src="assets/js/jquery-3.2.1.min.js"></script>
 	<script src="assets/js/popper.min.js"></script>

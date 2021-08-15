@@ -12,7 +12,7 @@ router.use(bodyParser.urlencoded({extended : true}));
 router.use(bodyParser.json());
 
 router.get('/forward', function(req,res){
-    // box.forwardGeocoder('311, West Shewrapara, Mirpur, Dhaka, Dhaka')
+    box.forwardGeocoder('311, West Shewrapara, Mirpur, Dhaka, Dhaka')
 });
 
 router.get('/reverse', function(req,res){

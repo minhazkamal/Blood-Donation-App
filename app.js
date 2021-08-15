@@ -113,9 +113,8 @@ app.get('/new-request', function(req,res){
 
 app.get('/mapbox', function(req, res){
     // console.log(req.query);
-    box.reverseGeocoder(req.query.latitude, req.query.longitude);
+    // box.reverseGeocoder(req.query.latitude, req.query.longitude);
     // box.reverseGeocoder(23.21271883828553, 89.79110255783338);
-    // box.forwardGeocoder('Shewrapara, Mirpur, Dhaka');
 });
 
 

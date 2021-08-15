@@ -11,6 +11,7 @@ var fs = require('fs');
 var path = require('path');
 var multer = require('multer');
 const { body, check, validationResult } = require('express-validator');
+var mapbox = require('../models/mapbox');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
@@ -73,7 +74,7 @@ const validator = function (req, res, next) {
             }
             else {
                 let FILE;
-                if(typeof req.file === 'undefined') FILE = 'avatar.png';
+                if (typeof req.file === 'undefined') FILE = 'avatar.png';
                 else FILE = req.file.filename;
                 db.getuserid(req.session.email)
                     .then(result => {
@@ -84,10 +85,9 @@ const validator = function (req, res, next) {
                                     // console.log(req.files.front_side[0].filename);
                                     try {
                                         // console.log(result);
-                                        if (result.length>0) {
-                                            if(FILE === 'avatar.png')
-                                            {
-                                                fs.unlink('./profile/' + result[0].profile_picture, (err) => { 
+                                        if (result.length > 0) {
+                                            if (FILE === 'avatar.png' && result[0].profile_picture !== 'avatar.png') {
+                                                fs.unlink('./profile/' + result[0].profile_picture, (err) => {
                                                     if (err) throw err;
                                                 });
                                             }
@@ -104,21 +104,20 @@ const validator = function (req, res, next) {
                                                     }
                                                 })
                                         }
-                                        else 
-                                        {
+                                        else {
                                             // console.log(req.file);
                                             // console.log(req.files);
                                             db.setProfilePic(FILE, id)
-                                            .then(result => {
-                                                // console.log(result.affectedRows);
-                                                if (result.affectedRows === 1) {
-                                                    //res.send('Dashboard'); // Dashboard
-                                                    next();
-                                                }
-                                                else {
-                                                    res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
-                                                }
-                                            })
+                                                .then(result => {
+                                                    // console.log(result.affectedRows);
+                                                    if (result.affectedRows === 1) {
+                                                        //res.send('Dashboard'); // Dashboard
+                                                        next();
+                                                    }
+                                                    else {
+                                                        res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
+                                                    }
+                                                })
                                         }
                                     }
                                     catch (error) {
@@ -133,14 +132,14 @@ const validator = function (req, res, next) {
                 // console.log(req.session.email);
                 // res.redirect('/profile-update');
             }
-        })    
+        })
     } catch (err) {
         console.error(err.message);
         res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
     }
 }
 
-const validateDOB = (value, {req}) => {
+const validateDOB = (value, { req }) => {
     // let day = req.body.dob_day;
     // let month = req.body.dob_month;
     // let year = req.body.dob_year;
@@ -154,20 +153,18 @@ const validateDOB = (value, {req}) => {
     // console.log(new Date());
     // if(dob.getFullYear() == year && dob.getMonth() == month-1 && dob.getDate() == day)
     // {
-        // console.log(dob);
-        var today = new Date();
-        // var birthDate = new Date(dateString);
-        var age = today.getFullYear() - year;
-        var m = today.getMonth() - month;
-        if (m < 0 || (m === 0 && today.getDate() < day)) 
-        {
-            age--;
-        }
-        if(age<18)
-        {
-            throw new Error('Your age must be greater than 18');
-        }
-        
+    // console.log(dob);
+    var today = new Date();
+    // var birthDate = new Date(dateString);
+    var age = today.getFullYear() - year;
+    var m = today.getMonth() - month;
+    if (m < 0 || (m === 0 && today.getDate() < day)) {
+        age--;
+    }
+    if (age < 18) {
+        throw new Error('Your age must be greater than 18');
+    }
+
     // }
     // else
     // {
@@ -191,7 +188,16 @@ router.get('/', function (req, res) {
                                 l_name: result[0].last_name,
                                 email: result[0].email,
                                 profile_build: result[0].profile_build,
-                                bg: ''
+                                bg: '',
+                                dob: '',
+                                gender: '',
+                                contact: '',
+                                division: '',
+                                district: '',
+                                upazilla: '',
+                                zipcode: '',
+                                house: '',
+                                street: ''
                             }
                             req.session.temp_user = user;
                             req.session.div_results = div_result;
@@ -202,8 +208,29 @@ router.get('/', function (req, res) {
                             else {
                                 db.getProfile(result[0].id)
                                     .then(result => {
+                                        user.contact = result[0].contact;
+                                        result[0].dob.setTime(result[0].dob.getTime() - result[0].dob.getTimezoneOffset() * 60 * 1000);
+                                        user.dob = result[0].dob.toISOString();
+                                        user.dob = (user.dob.substring(0, 10));
+                                        user.gender = result[0].gender;
                                         user.bg = result[0].BG;
-                                        res.render('updateProfile.ejs', { user, divisions: div_result });
+                                        db.getuserid(req.session.email)
+                                            .then(result => {
+                                                user.f_name = result[0].first_name;
+                                                user.l_name = result[0].last_name;
+                                                db.getUserAddress(req.session.email)
+                                                    .then(result => {
+                                                        user.house = result[0].house;
+                                                        user.street = result[0].street;
+                                                        user.division = result[0].division;
+                                                        user.district = result[0].district;
+                                                        user.upazilla = result[0].upazilla;
+                                                        user.zipcode = result[0].zipcode;
+                                                        // console.log(user);
+                                                        req.session.temp_user = user;
+                                                        res.render('updateProfile.ejs', { user, divisions: div_result });
+                                                    })
+                                            })
                                     })
                             }
                         })
@@ -215,6 +242,11 @@ router.get('/', function (req, res) {
     }
 });
 
+function LatLon(address) {
+
+
+}
+
 router.post('/', validator, [
     check('dob').custom(validateDOB),
     check('blood_group', 'Blood Group field is empty').notEmpty(),
@@ -223,83 +255,140 @@ router.post('/', validator, [
     check('district', 'District field is empty').notEmpty(),
     check('upazilla', 'Upazilla field is empty').notEmpty(),
 ],
-function (req, res) {
-    let errors = validationResult(req)
+    function (req, res) {
+        let errors = validationResult(req)
 
-    if (!errors.isEmpty()) {
-        //console.log(errors);
-        const alert = errors.array();
-        res.render('updateProfile', {alert, user: req.session.temp_user, divisions: req.session.div_results});
-    }
-    else
-    {
-        // console.log(req.body);
-        let temp_dob = new Date(req.body.dob);
-        // console.log(temp_dob);
-        temp_dob.setTime( temp_dob.getTime() - temp_dob.getTimezoneOffset()*60*1000 );
-        // console.log(temp_dob);
-        
+        if (!errors.isEmpty()) {
+            //console.log(errors);
+            const alert = errors.array();
+            res.render('updateProfile', { alert, user: req.session.temp_user, divisions: req.session.div_results });
+        }
+        else {
+            // console.log(req.body);
+            let temp_dob = new Date(req.body.dob);
+            // console.log(temp_dob);
+            temp_dob.setTime(temp_dob.getTime() - temp_dob.getTimezoneOffset() * 60 * 1000);
+            // console.log(temp_dob);
 
-        db.getuserid(req.session.email)
-        .then(result => {
-            if(result.length>0)
-            {
-                req.session.user_id = result[0].id;
-                let profile = {
-                    id: req.session.user_id,
-                    contact: req.body.contact,
-                    dob: temp_dob,
-                    bg: req.body.blood_group,
-                    gender: req.body.gender
-                }
-        
-                let address = {
-                    id: req.session.user_id,
-                    house: req.body.house,
-                    street: req.body.street,
-                    division: req.body.division,
-                    district: req.body.district,
-                    upazilla: req.body.upazilla,
-                    zipcode: req.body.zipcode,
-                    lat: req.body.lat,
-                    lon: req.body.lon
-                }
 
-                db.setUserProfile(profile)
+            db.getuserid(req.session.email)
                 .then(result => {
-                    // console.log(result);
-                    db.setUserAddress(address)
-                    .then(result => {
-                        // console.log(result);
-                        db.updateUsers(req.session.user_id, req.body.fname, req.body.lname, 'yes', 'yes')
-                        .then(result => {
+                    if (result.length > 0) {
+                        req.session.user_id = result[0].id;
+                        var profile_build = result[0].profile_build;
+                        let profile = {
+                            id: req.session.user_id,
+                            contact: req.body.contact,
+                            dob: temp_dob,
+                            bg: req.body.blood_group,
+                            gender: req.body.gender
+                        }
 
-                            res.send("<h1>Eligibility Test</h1><br><span>Under Progress....</span>");
-                            // console.log('insertion successfull');
-                        })
-                    })
+                        var address = {
+                            id: req.session.user_id,
+                            house: req.body.house,
+                            street: req.body.street,
+                            division: req.body.division,
+                            district: req.body.district,
+                            upazilla: req.body.upazilla,
+                            zipcode: req.body.zipcode,
+                            lat: req.body.lat,
+                            lon: req.body.lon
+                        }
+
+                        let query_address = {
+                            house: address.house,
+                            street: address.street,
+                            division: '',
+                            district: '',
+                            upazilla: ''
+                        }
+
+                        db.getDivName(address.division)
+                            .then(result => {
+                                query_address.division = result[0].name;
+                                db.getDistName(address.district)
+                                    .then(result => {
+                                        query_address.district = result[0].name;
+                                        db.getUpazillaName(address.upazilla)
+                                            .then(result => {
+                                                query_address.upazilla = result[0].name;
+                                                mapbox.forwardGeocoder(query_address.house + ', ' + query_address.street + ', ' + query_address.upazilla + ', ' + query_address.district + ', ' + query_address.division)
+                                                    .then(result => {
+                                                        // console.log(result.geometry.coordinates);
+                                                        // req.body.lat = result.geometry.coordinates[1];
+                                                        // req.body.lon = result.geometry.coordinates[0];
+                                                        if(req.body.lat === '' || req.body.lon === '')
+                                                        {
+                                                            console.log('Hello');
+                                                            address.lat = result.geometry.coordinates[1];
+                                                            address.lon = result.geometry.coordinates[0];
+                                                        }
+
+                                                        if (profile_build === 'no') {
+                                                            db.setUserProfile(profile)
+                                                                .then(result => {
+                                                                    // console.log(result);
+                                                                    db.setUserAddress(address)
+                                                                        .then(result => {
+                                                                            // console.log(result);
+                                                                            db.updateUsers(req.session.user_id, req.body.fname, req.body.lname, 'yes', 'yes')
+                                                                                .then(result => {
+                                
+                                                                                    res.send("<h1>Dashboard</h1><br><span>Under Progress....</span>");
+                                                                                    // console.log('insertion successfull');
+                                                                                })
+                                                                        })
+                                                                })
+                                                                .catch(me => {
+                                                                    console.log(me);
+                                                                    hl.error(me);
+                                
+                                                                    res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
+                                                                })
+                                                        }
+                                                        else{
+                                                            db.updateUserProfile(profile)
+                                                                .then(result => {
+                                                                    // console.log(result);
+                                                                    db.updateUserAddress(address)
+                                                                        .then(result => {
+                                                                            // console.log(result);
+                                                                            db.updateUsers(req.session.user_id, req.body.fname, req.body.lname, 'yes', 'yes')
+                                                                                .then(result => {
+                                
+                                                                                    res.send("<h1>Dashboard</h1><br><span>Under Progress....</span>");
+                                                                                    // console.log('insertion successfull');
+                                                                                })
+                                                                        })
+                                                                })
+                                                                .catch(me => {
+                                                                    console.log(me);
+                                                                    hl.error(me);
+                                
+                                                                    res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
+                                                                })
+                                                        }
+
+                                                    })
+                                            })
+                                    })
+                            })
+                    }
                 })
                 .catch(me => {
                     console.log(me);
                     hl.error(me);
-                    
+
                     res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
                 })
-            }
-        })
-        .catch(me => {
-            console.log(me);
-            hl.error(me);
-            
-            res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
-        })
 
-    }
-    
-    // console.log("Hello");
-    // console.log(req.body.latitude);
-    delete req.session.temp_user;
-    delete req.session.div_results;
-});
+        }
+
+        // console.log("Hello");
+        // console.log(req.body.latitude);
+        delete req.session.temp_user;
+        delete req.session.div_results;
+    });
 
 module.exports = router;
