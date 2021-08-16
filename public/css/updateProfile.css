@@ -13,6 +13,19 @@ body {
     background: url(/img/waveUpdateProfile.png);
 
 }
+
+.container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 30px;
+    margin-top: 60px;
+    margin-bottom: 50px;
+}
+
 .account-settings .user-profile {
     margin: 0 0 1rem 0;
     padding-bottom: 1rem;
@@ -307,7 +320,7 @@ hr{
     z-index: -1;
     width: 15rem;
     height: 17rem;
-    left: 28rem;
+    left: 27.25rem;
 }
 
 @media screen and (max-width:1200px) {
@@ -326,7 +339,7 @@ hr{
         z-index: -1;
         width: 15rem;
         height: 17rem;
-        left: 15rem;
+        left: 14rem;
     }
 }
 
@@ -336,7 +349,7 @@ hr{
         z-index: -1;
         width: 15rem;
         height: 16rem;
-        left: 9.5rem;
+        left: 8.25rem;
     }
 }
 
@@ -346,7 +359,7 @@ hr{
         z-index: -1;
         width: 15rem;
         height: 16rem;
-        left: 9.5rem;
+        left: 6.75rem;
     }
 }
 
@@ -356,7 +369,7 @@ hr{
         z-index: -1;
         width: 15rem;
         height: 16rem;
-        left: 6rem;
+        left: 5.25rem;
     }
 }
 
@@ -366,7 +379,7 @@ hr{
         z-index: -1;
         width: 15rem;
         height: 16rem;
-        left: 5rem;
+        left: 4.25rem;
     }
 }
 
@@ -386,7 +399,7 @@ hr{
         z-index: -1;
         width: 15rem;
         height: 16rem;
-        left: 1rem;
+        left: 3.25rem;
     }
     body{
         background: cover;

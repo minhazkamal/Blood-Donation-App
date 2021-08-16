@@ -16,7 +16,7 @@
 </head>
 
 <body>
-
+	<%- include ("./partials/navbar.ejs") %>
 	<div class="container">
 		<form method="Post" enctype="multipart/form-data">
 			<div class="row gutters" style="padding-bottom: 5rem;">
@@ -221,6 +221,8 @@
 			</div>
 		</form>
 	</div>
+
+	<%- include ("./partials/footer.ejs") %>
 
 	<script>
 		$(document).ready(function () {
