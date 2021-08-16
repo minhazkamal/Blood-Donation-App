@@ -401,3 +401,35 @@ module.exports.getOrgInfo = () => {
         })
     })
 }
+
+module.exports.getUserAllInfo = (email) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * from users NATURAL JOIN user_address NATURAL JOIN user_profile WHERE users.email != ?`, [email], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.getAllDiv = () => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * from divisions`, (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.getAllDist = () => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * from districts`, (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.getAllUpazilla = () => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * from upazillas`, (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}

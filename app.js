@@ -39,6 +39,7 @@ var KYC = require('./controllers/KYC');
 var address = require('./controllers/address');
 var mapquery = require('./controllers/mapquery');
 var org = require('./controllers/showOrg');
+var donor = require('./controllers/showDonor');
 
 
 // view engine
@@ -86,6 +87,7 @@ app.use('/KYC', KYC);
 app.use('/address', address);
 app.use('/map-box', mapquery);
 app.use('/show-org', org);
+app.use('/show-donor', donor);
 // app.get('/activate/:id', function(req,res){
 //     let {id} = req.params;
 //     res.render('email_activate.ejs', {id});
