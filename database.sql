@@ -23,8 +23,8 @@ DROP TABLE IF EXISTS `districts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `districts` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `division_id` int unsigned NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `division_id` int NOT NULL,
   `name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb3;
@@ -48,7 +48,7 @@ DROP TABLE IF EXISTS `divisions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `divisions` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
@@ -151,8 +151,8 @@ DROP TABLE IF EXISTS `upazillas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `upazillas` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `district_id` int unsigned NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `district_id` int NOT NULL,
   `name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=595 DEFAULT CHARSET=utf8mb3;
@@ -185,8 +185,12 @@ CREATE TABLE `user_address` (
   `zipcode` int DEFAULT NULL,
   `lon` double DEFAULT NULL,
   `lat` double DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `user_address_id` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `user_address_upazilla_idx` (`upazilla`),
+  KEY `user_address_district_idx` (`district`),
+  KEY `user_address_division_idx` (`division`),
+  CONSTRAINT `user_address_district` FOREIGN KEY (`district`) REFERENCES `districts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `user_address_division` FOREIGN KEY (`division`) REFERENCES `divisions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `user_address_upazilla` FOREIGN KEY (`upazilla`) REFERENCES `upazillas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -196,7 +200,7 @@ CREATE TABLE `user_address` (
 
 LOCK TABLES `user_address` WRITE;
 /*!40000 ALTER TABLE `user_address` DISABLE KEYS */;
-INSERT INTO `user_address` VALUES (6,'7C','311, West Shewrapara, Mirpur',3,1,519,1216,23.7911952,90.3737414),(7,'Chowdhury Vila','Enam Road',2,43,566,4203,22.342895,91.829046),(8,'Khan Villa','Highway Road',2,43,561,4205,22.303201,91.789352),(9,'King Villa','King Road',2,43,567,4100,22.364765,91.803119),(10,'Bokhsi House','Bokhs Road',2,43,564,4002,22.303201,91.789352),(11,'Doctor House','Medical Road',2,43,569,4500,22.375772,91.827392),(12,'brothers villa','College Road',2,43,570,4302,22.2544,91.7948),(13,'Cumilla Vila','Cumilla House',2,43,560,4322,22.393836,91.865371),(14,'Bokhsi Vila','Bokhsi Road',2,43,565,4731,22.303201,91.789352),(15,'Dhanshiri','Apon Road',2,43,568,4800,22.358732,91.775428),(16,'Shadhinota','Mujib Road',3,1,511,2000,23.7931,90.3861),(17,'Chowdhury Vila','Khan Road',3,1,525,1000,23.827398,90.364473),(18,'Apon Nibash','Hospital Road',3,1,544,1200,23.709226,90.40739),(19,'Bokhsi House','Bokhs Road',3,1,508,1500,23.7917,90.4167),(20,'Poushi','School Road',3,1,533,1200,23.736484,90.397323),(21,'Artboard','Choumuhuni Road',3,1,505,1100,23.744806,90.373922);
+INSERT INTO `user_address` VALUES (6,'7C','311, West Shewrapara, Mirpur',3,1,519,1216,23.7911459,90.3736772),(7,'Chowdhury Vila','Enam Road',2,43,566,4203,22.342895,91.829046),(8,'Khan Villa','Highway Road',2,43,561,4205,22.303201,91.789352),(9,'King Villa','King Road',2,43,567,4100,22.364765,91.803119),(10,'Bokhsi House','Bokhs Road',2,43,564,4002,22.303201,91.789352),(11,'Doctor House','Medical Road',2,43,569,4500,22.375772,91.827392),(12,'brothers villa','College Road',2,43,570,4302,22.2544,91.7948),(13,'Cumilla Vila','Cumilla House',2,43,560,4322,22.393836,91.865371),(14,'Bokhsi Vila','Bokhsi Road',2,43,565,4731,22.303201,91.789352),(15,'Dhanshiri','Apon Road',2,43,568,4800,22.358732,91.775428),(16,'Shadhinota','Mujib Road',3,1,511,2000,23.7931,90.3861),(17,'Chowdhury Vila','Khan Road',3,1,525,1000,23.827398,90.364473),(18,'Apon Nibash','Hospital Road',3,1,544,1200,23.709226,90.40739),(19,'Bokhsi House','Bokhs Road',3,1,508,1500,23.7917,90.4167),(20,'Poushi','School Road',3,1,533,1200,23.736484,90.397323),(21,'Artboard','Choumuhuni Road',3,1,505,1100,23.744806,90.373922);
 /*!40000 ALTER TABLE `user_address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -271,4 +275,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-15 23:47:12
+-- Dump completed on 2021-08-21 12:36:34
