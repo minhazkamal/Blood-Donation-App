@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+:root{
+    font-size: 100%;
+    font-size: 16px;
+    line-height: 1.5;
+    --primary-pink: #b9375e;
+    --primary-blue: #2f6690;
+}
+
 body {
     margin: 0;
     padding-top: 40px;
@@ -10,7 +18,7 @@ body {
     background-size: cover;
     font-family: 'Montserrat',sans-serif;
     padding-bottom: 40px;
-    background: url(/img/waveUpdateProfile.png);
+    background: url(/img/waveKYC.png);
 
 }
 .account-settings .user-profile {
@@ -29,7 +37,7 @@ body {
     border-radius: 100px;
     /* border-style: solid; */
 }
-input[type="text"],input[type="email"],input[type="tel"],input[type="date"]{
+input[type="text"],input[type="email"],input[type="tel"],input[type="date"],input[type="textarea"]{
     /* margin: 0 0 0.5rem 0; */
 
     display: block;
@@ -62,6 +70,19 @@ input[type="textarea"]::placeholder{
 input[type="textarea"]{
     /* margin: 0 0 0.5rem 0; */
 
+    display: block;
+    width: 100%;
+    height: 15rem;
+    box-sizing: border-box;
+    background-color: #f8f9fa15;
+    border-radius: 8px;
+    border: 1px solid #1a1919;
+    padding: 1em;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    word-wrap: break-word;
+}
+textarea{
     display: block;
     width: 100%;
     height: 15rem;
@@ -176,6 +197,8 @@ h6{
     transition: 0.3s;
     font-size: 0.875rem;
     margin-right: 1rem;
+    width: 25%;
+    display: inline;
 }
 
 .btn1:hover{
@@ -196,8 +219,8 @@ h6{
     letter-spacing: 0.5px;
     transition: 0.3s;
     font-size: 0.875rem;
-    display: block;
-    width: 100%;
+    display: inline;
+    width: 25%;
 }
 
 .btn2:hover{
@@ -418,4 +441,35 @@ hr{
     body{
         background: cover;
     }
+}
+
+/* form input[type="text"] {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #c4c4c4;
+    padding: 1em;
+    margin-bottom: 1.25rem;
+    font-size: 0.875rem;
+}
+
+form input[type="text"]::selection {
+    border: 2px solid var(--primary-pink);
+} */
+
+input:focus { 
+    outline: none !important;
+    border-color: var(--primary-pink);
+    box-shadow: 0 0 10px var(--primary-pink);
+}
+textarea:focus { 
+    outline: none !important;
+    border-color: var(--primary-pink);
+    box-shadow: 0 0 10px var(--primary-pink);
+}
+
+.address-details {
+    min-height: 7rem;
 }

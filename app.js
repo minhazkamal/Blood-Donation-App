@@ -40,6 +40,7 @@ var address = require('./controllers/address');
 var mapquery = require('./controllers/mapquery');
 var org = require('./controllers/showOrg');
 var donor = require('./controllers/showDonor');
+var newRequest = require('./controllers/newRequest');
 
 
 // view engine
@@ -88,6 +89,12 @@ app.use('/address', address);
 app.use('/map-box', mapquery);
 app.use('/show-org', org);
 app.use('/show-donor', donor);
+app.use('/new-request', newRequest);
+//localhost:3940/new-request
+// app.get('/new-request', function(req,res){
+//     res.render('newRequest.ejs');
+// });
+
 // app.get('/activate/:id', function(req,res){
 //     let {id} = req.params;
 //     res.render('email_activate.ejs', {id});
@@ -106,11 +113,6 @@ app.get('/search-org', function(req,res){
 //localhost:3940/home
 app.get('/home', function(req,res){
     res.render('home.ejs');
-});
-
-//localhost:3940/new-request
-app.get('/new-request', function(req,res){
-    res.render('demoUpdateProfile.ejs');
 });
 
 app.get('/mapbox', function(req, res){

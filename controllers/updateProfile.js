@@ -143,27 +143,31 @@ const validateDOB = (value, { req }) => {
     // let day = req.body.dob_day;
     // let month = req.body.dob_month;
     // let year = req.body.dob_year;
-    const [year, month, day] = value.split('-');
+    // console.log(value);
+    if (value != null) {
+        const [year, month, day] = value.split('-');
 
-    // console.log(year, month, day);
-    // let dob = new Date(year, month-1, day);
-    // console.log(dob);
-    // console.log(dob.getDate());
-    // console.log(dob.getMonth());
-    // console.log(new Date());
-    // if(dob.getFullYear() == year && dob.getMonth() == month-1 && dob.getDate() == day)
-    // {
-    // console.log(dob);
-    var today = new Date();
-    // var birthDate = new Date(dateString);
-    var age = today.getFullYear() - year;
-    var m = today.getMonth() - month;
-    if (m < 0 || (m === 0 && today.getDate() < day)) {
-        age--;
+        // console.log(year, month, day);
+        // let dob = new Date(year, month-1, day);
+        // console.log(dob);
+        // console.log(dob.getDate());
+        // console.log(dob.getMonth());
+        // console.log(new Date());
+        // if(dob.getFullYear() == year && dob.getMonth() == month-1 && dob.getDate() == day)
+        // {
+        // console.log(dob);
+        var today = new Date();
+        // var birthDate = new Date(dateString);
+        var age = today.getFullYear() - year;
+        var m = today.getMonth() - month;
+        if (m < 0 || (m === 0 && today.getDate() < day)) {
+            age--;
+        }
+        if (age < 18) {
+            throw new Error('Your age must be greater than 18');
+        }
     }
-    if (age < 18) {
-        throw new Error('Your age must be greater than 18');
-    }
+    else throw new Error('Date of Birth is empty');
 
     // }
     // else
@@ -175,7 +179,7 @@ const validateDOB = (value, { req }) => {
 
 
 router.get('/', function (req, res) {
-    req.session.email = 'minhaz.kamal9900@gmail.com';
+    // req.session.email = 'minhaz.kamal9900@gmail.com';
     if (req.session.email) {
         db.getDivisions()
             .then(result => {
@@ -248,6 +252,7 @@ function LatLon(address) {
 }
 
 router.post('/', validator, [
+    check('dob', 'Date of Birth is Empty').notEmpty(),
     check('dob').custom(validateDOB),
     check('blood_group', 'Blood Group field is empty').notEmpty(),
     check('gender', 'Gender field is empty').notEmpty(),
@@ -261,6 +266,24 @@ router.post('/', validator, [
         if (!errors.isEmpty()) {
             //console.log(errors);
             const alert = errors.array();
+            let post_user = {
+                f_name: req.body.fname,
+                l_name: req.body.lname,
+                email: req.body.email,
+                profile_build: 'error',
+                bg: req.body.blood_group,
+                dob: req.body.dob,
+                gender: req.body.gender,
+                contact: req.body.contact,
+                division: req.body.division,
+                district: req.body.district,
+                upazilla: req.body.upazilla,
+                zipcode: req.body.zipcode,
+                house: req.body.house,
+                street: req.body.street
+            }
+            req.session.temp_user = post_user;
+            // console.log(req.session.temp_user);
             res.render('updateProfile', { alert, user: req.session.temp_user, divisions: req.session.div_results });
         }
         else {
@@ -318,8 +341,7 @@ router.post('/', validator, [
                                                         // console.log(result.geometry.coordinates);
                                                         // req.body.lat = result.geometry.coordinates[1];
                                                         // req.body.lon = result.geometry.coordinates[0];
-                                                        if(req.body.lat === '' || req.body.lon === '')
-                                                        {
+                                                        if (req.body.lat === '' || req.body.lon === '') {
                                                             console.log('Hello');
                                                             address.lat = result.geometry.coordinates[1];
                                                             address.lon = result.geometry.coordinates[0];
@@ -334,7 +356,7 @@ router.post('/', validator, [
                                                                             // console.log(result);
                                                                             db.updateUsers(req.session.user_id, req.body.fname, req.body.lname, 'yes', 'yes')
                                                                                 .then(result => {
-                                
+
                                                                                     res.send("<h1>Dashboard</h1><br><span>Under Progress....</span>");
                                                                                     // console.log('insertion successfull');
                                                                                 })
@@ -343,11 +365,11 @@ router.post('/', validator, [
                                                                 .catch(me => {
                                                                     console.log(me);
                                                                     hl.error(me);
-                                
+
                                                                     res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
                                                                 })
                                                         }
-                                                        else{
+                                                        else {
                                                             db.updateUserProfile(profile)
                                                                 .then(result => {
                                                                     // console.log(result);
@@ -356,7 +378,7 @@ router.post('/', validator, [
                                                                             // console.log(result);
                                                                             db.updateUsers(req.session.user_id, req.body.fname, req.body.lname, 'yes', 'yes')
                                                                                 .then(result => {
-                                
+
                                                                                     res.send("<h1>Dashboard</h1><br><span>Under Progress....</span>");
                                                                                     // console.log('insertion successfull');
                                                                                 })
@@ -365,7 +387,7 @@ router.post('/', validator, [
                                                                 .catch(me => {
                                                                     console.log(me);
                                                                     hl.error(me);
-                                
+
                                                                     res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
                                                                 })
                                                         }

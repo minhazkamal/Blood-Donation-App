@@ -106,7 +106,7 @@
 							<div class="row">
 								<div class="col-md-6 mb-4" style="margin-bottom: 0.25 !important; ">
 									<div class="input-container lname">
-										<input id="DOB" name="dob" type="date" style="margin-bottom: 0;">
+										<input id="DOB" name="dob" type="date" style="margin-bottom: 0;" value="" required>
 									</div>
 								</div>
 
@@ -118,7 +118,7 @@
 								<div class="col-md-6 mb-4">
 									<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
 											aria-hidden=" true" required>
-										<option disabled selected>Blood Group</option>
+										<option disabled selected value="">Blood Group</option>
 										<option value="A+">A+</option>
 										<option value="A-">A-</option>
 										<option value="B+">B+</option>
@@ -136,7 +136,7 @@
 								<div class="col-md-6 mb-4">
 									<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
 											aria-hidden=" true" required>
-										<option disabled selected>Gender</option>
+										<option disabled selected value="">Gender</option>
 										<option value="Male">Male</option>
 										<option value="Female">Female</option>
 										<option value="Others">Others</option>
@@ -175,7 +175,7 @@
 								<div class="col-md-4 mb-4">
 									<select name="division" class="form-control" id="basic_division" tabindex="-1" "
 											aria-hidden=" true" required>
-										<option disabled selected>Division</option>
+										<option disabled selected value="">Division</option>
 										<% divisions.forEach((division)=> { %>
 											<option value="<%= division.id %>">
 												<%=division.name %>
@@ -187,7 +187,7 @@
 								<div class="col-md-4 mb-4">
 									<select name="district" class="form-control" id="basic_district" tabindex="-1" "
 											aria-hidden=" true" required>
-										<option disabled selected>District</option>
+										<option disabled selected value="">District</option>
 
 									</select>
 								</div>
@@ -195,7 +195,7 @@
 								<div class="col-md-4 mb-4">
 									<select name="upazilla" class="form-control" id="basic_upazilla" tabindex="-1" "
 											aria-hidden=" true" required>
-										<option disabled selected>Upazilla</option>
+										<option disabled selected value="">Upazilla</option>
 
 									</select>
 								</div>
@@ -266,7 +266,8 @@
 					}
 				});
 			}
-			if ($("#profile_build").val() === 'yes') {
+			
+			if ($("#profile_build").val() === 'yes' || $("#profile_build").val() == 'error') {
 				$("#basic_bg").val($("#user_bg").val());
 				$("#DOB").val($("#user_dob").val());
 				$("#house").val($("#user_house").val());
@@ -297,7 +298,7 @@
 				success: function (data) {
 					//console.log(data);
 					$('#basic_district').empty();
-					$('#basic_district').append("<option disabled selected>District</option>");
+					$('#basic_district').append('<option disabled selected value="">District</option>');
 					$.each(data, function (index, district) {
 						$('#basic_district').append("<option value = '" + district.id + "' >" + district.name + " </option>");
 					});
@@ -317,7 +318,7 @@
 				success: function (data) {
 					// console.log(data);
 					$('#basic_upazilla').empty();
-					$('#basic_upazilla').append("<option disabled selected>Upazilla</option>");
+					$('#basic_upazilla').append('<option disabled selected value="">Upazilla</option>');
 					$.each(data, function (index, upazilla) {
 						$('#basic_upazilla').append("<option value = '" + upazilla.id + "' >" + upazilla.name + " </option>");
 					});
