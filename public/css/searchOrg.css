@@ -63,6 +63,9 @@ form input[type="text"] {
     overflow: hidden;
     display: block;
     position: relative;
+    padding: 30px;
+    margin-top: 80px;
+    /* margin-bottom: 50px; */
     padding-bottom: 100px;
     /* height of your footer */
 }
