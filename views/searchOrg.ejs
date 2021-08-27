@@ -32,9 +32,14 @@
             box-sizing: border-box;
         }
 
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+
         body {
             color: #404040;
-            font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+            /* font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif; */
             margin: 0;
             padding: 0;
             -webkit-font-smoothing: antialiased;
@@ -238,39 +243,34 @@
             right: 15px;
         }
 
-        footer {
-            position: fixed;
-        }
-
         /* CSS for interactivity stops here */
     </style>
 </head>
 
 <body>
     <%- include ("./partials/navbar.ejs") %>
-        <div class='sidebar'>
-            <div class='heading'>
-                <h1>Search Organizations</h1>
-                <!-- <form action="#">
+        <div class="main-container">
+            <div class='sidebar'>
+                <div class='heading'>
+                    <h1>Search Organizations</h1>
+                    <!-- <form action="#">
                 <div class="input-container email">
                     <input id="email" name="email" placeholder="Organization Name" type="text">
                 </div>
             </form> -->
 
+                </div>
+                <div id="searchWrapper">
+                    <input type="text" name="searchBar" id="searchBar" placeholder="Start typing for search" />
+                    <div id="resultFound"></div>
+                </div>
+                <div id='listings' class='listings'></div>
             </div>
-            <div id="searchWrapper">
-                <input type="text" name="searchBar" id="searchBar" placeholder="Start typing for search" />
-                <div id="resultFound"></div>
+            <div id="map" class="map">
+                <!-- the map body -->
             </div>
-            <div id='listings' class='listings'></div>
+            
         </div>
-        <div id="map" class="map">
-            <!-- the map body -->
-        </div>
-
-
-
-
 
         <%- include ("./partials/footer.ejs") %>
 

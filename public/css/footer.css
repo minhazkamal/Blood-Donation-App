@@ -1,128 +1,127 @@
 footer {
-    position: relative;
-    width: 100%;
-    height: auto;
-    padding: 50px 100px;
-    background: #111;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding: 50px 100px;
+  background: #111;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+footer .footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+footer .footer-container .sec {
+  margin-right: 30px;
+}
+
+footer .footer-container .sec.aboutus {
+  width: 50%;
+}
+
+footer .footer-container h2 {
+  display: flex;
+  justify-content: flex-start;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+footer p {
+  color: #999;
+}
+
+.sci {
+  margin-top: 20px;
+  display: flex;
+}
+
+.sci li {
+  list-style: none;
+}
+
+.sci li a {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background: #222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.sci li a:hover {
+  background: #1e4a7e;
+  transition: all 0.5s ease;
+}
+
+.sci li a .fa {
+  color: #fff;
+  font-size: 20px;
+}
+
+.quicklinks {
+  position: relative;
+  width: 25%;
+}
+
+.quicklinks ul li {
+  list-style: none;
+}
+
+.quicklinks ul li a {
+  color: #999;
+  text-decoration: none;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.quicklinks ul li a:hover {
+  color: #fff;
+  padding-left: 8px;
+  transition: all 0.5s ease;
+}
+
+#copyrightText {
+  width: 100%;
+  background: #181818;
+  padding: 2px 10px;
+  text-align: center;
+  color: #fff;
+  height: 100%;
+}
+
+#copyrightText p {
+  margin-top: 8px;
+  color: #999;
+}
+
+.footer-hr {
+  background-color: rgba(42, 111, 151, 1);
+  border-width: 4px;
+  border-radius: 10px;
+}
+
+@media (max-width:991px) {
+  footer {
+    padding: 40px;
   }
-  
-  footer .footer-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    flex-direction: row;
-  }
-  
   footer .footer-container .sec {
-    margin-right: 30px;
+    /* margin-right: 0; */
+    margin-bottom: 40px;
   }
-  
-  footer .footer-container .sec.aboutus {
-    width: 50%;
-  }
-  
-  footer .footer-container h2 {
-    display: flex;
-    justify-content: flex-start;
-    color: #fff;
-    font-weight: 500;
-    margin-bottom: 15px;
-  }
-  
-  footer p {
-    color: #999;
-  }
-  
-  .sci {
-    margin-top: 20px;
-    display: flex;
-  }
-  
-  .sci li {
-    list-style: none;
-  }
-  
-  .sci li a {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    background: #222;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 10px;
-    text-decoration: none;
-    border-radius: 4px;
-  }
-  
-  .sci li a:hover {
-    background: #1e4a7e;
-    transition: all 0.5s ease;
-  }
-  
-  .sci li a .fa {
-    color: #fff;
-    font-size: 20px;
-  }
-  
-  .quicklinks {
-    position: relative;
-    width: 25%;
-  }
-  
-  .quicklinks ul li {
-    list-style: none;
-  }
-  
-  .quicklinks ul li a {
-    color: #999;
-    text-decoration: none;
-    margin-bottom: 10px;
-    display: inline-block;
-  }
-  
-  .quicklinks ul li a:hover {
-    color: #fff;
-    padding-left: 8px;
-    transition: all 0.5s ease;
-  }
-  
-  .copyrightText {
+  footer .footer-container .sec .aboutus, .quicklinks {
     width: 100%;
-    background: #181818;
-    padding: 2px 10px;
-    text-align: center;
-    color: #fff;
   }
-  
-  .copyrightText p {
-    margin-top: 8px;
-    color: #999;
+  footer .footer-container .sec.aboutus {
+    width: 100%;
   }
-  
-  .footer-hr{
-    background-color: rgba(42, 111, 151, 1);
-    border-width: 4px;
-    border-radius: 10px;
-  }
-  
-  
-  @media (max-width:991px) {
-    footer {
-      padding: 40px;
-    }
-    footer .footer-container .sec {
-      /* margin-right: 0; */
-      margin-bottom: 40px;
-    }
-    footer .footer-container .sec .aboutus, .quicklinks {
-      width: 100%;
-    }
-  
-    footer .footer-container .sec.aboutus{
-      width: 100%;
-    }
-  }
+}
