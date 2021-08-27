@@ -238,39 +238,44 @@
             right: 15px;
         }
 
+        footer {
+            position: fixed;
+        }
+
         /* CSS for interactivity stops here */
     </style>
 </head>
 
 <body>
-    <div class='sidebar'>
-        <div class='heading'>
-            <h1>Search Organizations</h1>
-            <!-- <form action="#">
+    <%- include ("./partials/navbar.ejs") %>
+        <div class='sidebar'>
+            <div class='heading'>
+                <h1>Search Organizations</h1>
+                <!-- <form action="#">
                 <div class="input-container email">
                     <input id="email" name="email" placeholder="Organization Name" type="text">
                 </div>
             </form> -->
 
+            </div>
+            <div id="searchWrapper">
+                <input type="text" name="searchBar" id="searchBar" placeholder="Start typing for search" />
+                <div id="resultFound"></div>
+            </div>
+            <div id='listings' class='listings'></div>
         </div>
-        <div id="searchWrapper">
-            <input type="text" name="searchBar" id="searchBar" placeholder="Start typing for search" />
-            <div id="resultFound"></div>
+        <div id="map" class="map">
+            <!-- the map body -->
         </div>
-        <div id='listings' class='listings'></div>
-    </div>
-    <div id="map" class="map">
-        <!-- the map body -->
-    </div>
 
 
 
 
 
+        <%- include ("./partials/footer.ejs") %>
 
 
-
-    <!-- </script>
+            <!-- </script>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
@@ -281,383 +286,383 @@
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script> -->
 
-    <script>
-        var self_marker;
-        $(document).ready(function () {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    console.log(position);
-                    const center = [position.coords.longitude, position.coords.latitude];
+            <script>
+                var self_marker;
+                $(document).ready(function () {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function (position) {
+                            console.log(position);
+                            const center = [position.coords.longitude, position.coords.latitude];
 
-                    map.setCenter(center);
+                            map.setCenter(center);
 
-                    var self = document.createElement('div');
-                    self.className = 'marker_self';
+                            var self = document.createElement('div');
+                            self.className = 'marker_self';
 
-                    self_marker = new mapboxgl.Marker(self)
-                        .setLngLat(center)
-                        .setPopup(new mapboxgl.Popup({ closeOnClick: true }) // add popups
-                            .setHTML('<h3>' + "Your Location" + '</h3>'))
-                        .addTo(map);
+                            self_marker = new mapboxgl.Marker(self)
+                                .setLngLat(center)
+                                .setPopup(new mapboxgl.Popup({ closeOnClick: true }) // add popups
+                                    .setHTML('<h3>' + "Your Location" + '</h3>'))
+                                .addTo(map);
 
-                    addIDandDistanceandSort();
-                    buildLocationList(stores);
+                            addIDandDistanceandSort();
+                            buildLocationList(stores);
 
-                }, function (error) {
-                    if (error.code == error.PERMISSION_DENIED) {
-                        // console.log("Hello");
-                        $.ajax({
-                            type: 'GET',
-                            data: {},
-                            url: '/show-org/owner-details',
-                            success: function (data) {
-                                // console.log(data);
+                        }, function (error) {
+                            if (error.code == error.PERMISSION_DENIED) {
+                                // console.log("Hello");
+                                $.ajax({
+                                    type: 'GET',
+                                    data: {},
+                                    url: '/show-org/owner-details',
+                                    success: function (data) {
+                                        // console.log(data);
 
-                                const center = [data.lat, data.lon];
+                                        const center = [data.lat, data.lon];
 
-                                map.setCenter(center);
+                                        map.setCenter(center);
 
-                                var self = document.createElement('div');
-                                self.className = 'marker_self';
+                                        var self = document.createElement('div');
+                                        self.className = 'marker_self';
 
-                                self_marker = new mapboxgl.Marker(self)
-                                    .setLngLat(center)
-                                    .setPopup(new mapboxgl.Popup({ closeOnClick: true }) // add popups
-                                        .setHTML('<h3>' + "Your Location" + '</h3>'))
-                                    .addTo(map);
+                                        self_marker = new mapboxgl.Marker(self)
+                                            .setLngLat(center)
+                                            .setPopup(new mapboxgl.Popup({ closeOnClick: true }) // add popups
+                                                .setHTML('<h3>' + "Your Location" + '</h3>'))
+                                            .addTo(map);
 
-                                addIDandDistanceandSort();
-                                buildLocationList(stores);
+                                        addIDandDistanceandSort();
+                                        buildLocationList(stores);
+                                    }
+                                });
                             }
                         });
                     }
                 });
-            }
-        });
-        /* This will let you use the .remove() function later on */
-        if (!('remove' in Element.prototype)) {
-            Element.prototype.remove = function () {
-                if (this.parentNode) {
-                    this.parentNode.removeChild(this);
-                }
-            };
-        }
-
-        function distance(lat2, lon2) {
-            const lngLat = self_marker.getLngLat();
-            var lat1 = lngLat.lng;
-            var lon1 = lngLat.lat;
-            // console.log(lat1, lon1);
-            // console.log(lat2, lon2);
-            var minimum;
-            $.ajax({
-                type: 'GET',
-                data: {},
-                async: false,
-                url: `https://api.mapbox.com/directions-matrix/v1/mapbox/driving/${lat1},${lon1};${lat2},${lon2}?annotations=distance&access_token=${mapboxgl.accessToken}`,
-                success: function (data) {
-                    // console.log(data.distances[0][1]);
-                    minimum = data.distances[0][1] / 1000;
-                }
-            });
-            return minimum;
-            // var p = 0.017453292519943295;    // Math.PI / 180
-            // var c = Math.cos;
-            // var a = 0.5 - c((lat2 - lat1) * p) / 2 +
-            //     c(lat1 * p) * c(lat2 * p) *
-            //     (1 - c((lon2 - lon1) * p)) / 2;
-
-            // return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
-        }
-
-        var stores;
-
-        $.ajax({
-            type: 'GET',
-            data: {},
-            async: false,
-            url: '/show-org/details',
-            success: function (data) {
-                // console.log(data);
-                stores = data;
-            }
-        });
-
-        // console.log("After ajax");
-
-        // var stores = {
-        //     "type": "FeatureCollection",
-        //     "features": [
-        //         {
-        //             "type": "Feature",
-        //             "geometry": {
-        //                 "type": "Point",
-        //                 "coordinates": [
-        //                     90.396524,
-        //                     23.725869
-        //                 ]
-        //             },
-        //             "properties": {
-        //                 "contact": "01867057600",
-        //                 "address": "Shewrapara",
-        //                 "title": "Minhaz Kamal"
-        //             }
-        //         }]
-
-        mapboxgl.accessToken = 'pk.eyJ1IjoiaW50cmljYXRlLXBvdGF0byIsImEiOiJja3M0M2VzY3AyMmhmMnBvOTB4bnVuaHVtIn0.eqxegwotqUt-4XoroDJl2g';
-
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/light-v10',
-            // latitude, longitude
-            center: [90.41233760851503, 23.73125557117023],
-            // center: [90.3737413, 23.7911877],
-            zoom: 13,
-            scrollZoom: true
-        });
-
-        function addIDandDistanceandSort() {
-            stores.features.forEach(function (store) {
-                store.properties.distance = distance(store.geometry.coordinates[0], store.geometry.coordinates[1]).toFixed(2);
-            });
-
-            stores.features.sort(function (a, b) {
-                return parseFloat(a.properties.distance) - parseFloat(b.properties.distance);
-            });
-
-            stores.features.forEach(function (store, i) {
-                store.properties.id = i;
-            });
-        }
-
-        // console.log(stores.features.length);
-        /* Adding Distance from initial Position to each store */
-        // stores.features.forEach(function (store) {
-        //     store.properties.distance = distance(store.geometry.coordinates[0], store.geometry.coordinates[0]);
-        // });
-
-
-        /* Assign a unique ID to each store */
-        // stores.features.forEach(function (store, i) {
-        //     store.properties.id = i;
-        // });
-
-        // this code to handle when a location circle on the map is clicked
-        map.on('click', function (e) {
-            /* Determine if a feature in the "locations" layer exists at that point. */
-            var features = map.queryRenderedFeatures(e.point, {
-                layers: ['locations']
-            });
-
-            /* If yes, then: */
-            if (features.length) {
-                var clickedPoint = features[0];
-
-                /* Fly to the point */
-                flyToStore(clickedPoint);
-
-                /* Close all other popups and display popup for clicked store */
-                createPopUp(clickedPoint);
-
-                /* Highlight listing in sidebar (and remove highlight for all other listings) */
-                var activeItem = document.getElementsByClassName('active');
-                if (activeItem[0]) {
-                    activeItem[0].classList.remove('active');
-                }
-                var listing = document.getElementById('listing-' + clickedPoint.properties.id);
-                listing.classList.add('active');
-            }
-        });
-
-        const listingsE1 = document.getElementById('listings');
-        const resultE1 = document.getElementById('resultFound');
-        resultE1.style.background = 'linear-gradient(to bottom, #00ffff 0%, #0066ff 100%)';
-        /* Building The list of Locations */
-        function buildLocationList(data) {
-            // console.log("Hello");
-            // addIDandDistanceandSort(data);
-            // console.log(data);
-            const result_number = document.createElement('p');
-            result_number.style.textAlign = 'center';
-            result_number.style.fontWeight = 'bold';
-            // Clear any existing listings
-            listingsE1.innerHTML = '';
-            resultE1.innerHTML = '';
-            // console.log(data.features.length);
-            if (data.features.length) {
-                result_number.textContent = data.features.length + ' results found';
-                resultE1.appendChild(result_number);
-
-                data.features.forEach(function (store, i) {
-                    /**
-                     * Create a shortcut for `store.properties`,
-                     * which will be used several times below.
-                    **/
-                    var prop = store.properties;
-
-                    /* Add a new listing section to the sidebar. */
-                    var listings = document.getElementById('listings');
-                    var listing = listings.appendChild(document.createElement('div'));
-                    /* Assign a unique `id` to the listing. */
-                    listing.id = "listing-" + data.features[i].properties.id;
-                    /* Assign the `item` class to each listing for styling. */
-                    listing.className = 'item';
-
-                    /* Add the link to the individual listing created above. */
-                    var link = listing.appendChild(document.createElement('a'));
-                    link.href = '#';
-                    link.className = 'title';
-                    link.id = "link-" + prop.id;
-                    link.innerHTML = prop.title;
-
-                    /* Add details to the individual listing. */
-                    var details = listing.appendChild(document.createElement('div'));
-                    details.innerHTML = prop.address;
-                    if (prop.contact) {
-                        details.innerHTML += '<br>Contact: ' + prop.contact;
-                    }
-                    if (prop.distance) {
-                        // var roundedDistance = Math.round(prop.distance * 100) / 100;
-                        details.innerHTML +=
-                            '<p><strong>' + prop.distance + ' kms away</strong></p>';
-                    }
-
-                    // this code to handle when a user clicks a link in the sidebar:
-                    link.addEventListener('click', function (e) {
-                        for (var i = 0; i < data.features.length; i++) {
-                            if (this.id === "link-" + data.features[i].properties.id) {
-                                var clickedListing = data.features[i];
-                                flyToStore(clickedListing);
-                                createPopUp(clickedListing);
-                            }
+                /* This will let you use the .remove() function later on */
+                if (!('remove' in Element.prototype)) {
+                    Element.prototype.remove = function () {
+                        if (this.parentNode) {
+                            this.parentNode.removeChild(this);
                         }
+                    };
+                }
+
+                function distance(lat2, lon2) {
+                    const lngLat = self_marker.getLngLat();
+                    var lat1 = lngLat.lng;
+                    var lon1 = lngLat.lat;
+                    // console.log(lat1, lon1);
+                    // console.log(lat2, lon2);
+                    var minimum;
+                    $.ajax({
+                        type: 'GET',
+                        data: {},
+                        async: false,
+                        url: `https://api.mapbox.com/directions-matrix/v1/mapbox/driving/${lat1},${lon1};${lat2},${lon2}?annotations=distance&access_token=${mapboxgl.accessToken}`,
+                        success: function (data) {
+                            // console.log(data.distances[0][1]);
+                            minimum = data.distances[0][1] / 1000;
+                        }
+                    });
+                    return minimum;
+                    // var p = 0.017453292519943295;    // Math.PI / 180
+                    // var c = Math.cos;
+                    // var a = 0.5 - c((lat2 - lat1) * p) / 2 +
+                    //     c(lat1 * p) * c(lat2 * p) *
+                    //     (1 - c((lon2 - lon1) * p)) / 2;
+
+                    // return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+                }
+
+                var stores;
+
+                $.ajax({
+                    type: 'GET',
+                    data: {},
+                    async: false,
+                    url: '/show-org/details',
+                    success: function (data) {
+                        // console.log(data);
+                        stores = data;
+                    }
+                });
+
+                // console.log("After ajax");
+
+                // var stores = {
+                //     "type": "FeatureCollection",
+                //     "features": [
+                //         {
+                //             "type": "Feature",
+                //             "geometry": {
+                //                 "type": "Point",
+                //                 "coordinates": [
+                //                     90.396524,
+                //                     23.725869
+                //                 ]
+                //             },
+                //             "properties": {
+                //                 "contact": "01867057600",
+                //                 "address": "Shewrapara",
+                //                 "title": "Minhaz Kamal"
+                //             }
+                //         }]
+
+                mapboxgl.accessToken = 'pk.eyJ1IjoiaW50cmljYXRlLXBvdGF0byIsImEiOiJja3M0M2VzY3AyMmhmMnBvOTB4bnVuaHVtIn0.eqxegwotqUt-4XoroDJl2g';
+
+                var map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/light-v10',
+                    // latitude, longitude
+                    center: [90.41233760851503, 23.73125557117023],
+                    // center: [90.3737413, 23.7911877],
+                    zoom: 13,
+                    scrollZoom: true
+                });
+
+                function addIDandDistanceandSort() {
+                    stores.features.forEach(function (store) {
+                        store.properties.distance = distance(store.geometry.coordinates[0], store.geometry.coordinates[1]).toFixed(2);
+                    });
+
+                    stores.features.sort(function (a, b) {
+                        return parseFloat(a.properties.distance) - parseFloat(b.properties.distance);
+                    });
+
+                    stores.features.forEach(function (store, i) {
+                        store.properties.id = i;
+                    });
+                }
+
+                // console.log(stores.features.length);
+                /* Adding Distance from initial Position to each store */
+                // stores.features.forEach(function (store) {
+                //     store.properties.distance = distance(store.geometry.coordinates[0], store.geometry.coordinates[0]);
+                // });
+
+
+                /* Assign a unique ID to each store */
+                // stores.features.forEach(function (store, i) {
+                //     store.properties.id = i;
+                // });
+
+                // this code to handle when a location circle on the map is clicked
+                map.on('click', function (e) {
+                    /* Determine if a feature in the "locations" layer exists at that point. */
+                    var features = map.queryRenderedFeatures(e.point, {
+                        layers: ['locations']
+                    });
+
+                    /* If yes, then: */
+                    if (features.length) {
+                        var clickedPoint = features[0];
+
+                        /* Fly to the point */
+                        flyToStore(clickedPoint);
+
+                        /* Close all other popups and display popup for clicked store */
+                        createPopUp(clickedPoint);
+
+                        /* Highlight listing in sidebar (and remove highlight for all other listings) */
                         var activeItem = document.getElementsByClassName('active');
                         if (activeItem[0]) {
                             activeItem[0].classList.remove('active');
                         }
-                        this.parentNode.classList.add('active');
-                    });
+                        var listing = document.getElementById('listing-' + clickedPoint.properties.id);
+                        listing.classList.add('active');
+                    }
                 });
-            }
-            else if (data.features.length === 0 && searchBar.value !== '') {
-                result_number.textContent = 'No results found';
-                resultE1.appendChild(result_number);
-            }
-        }
 
-        // Functions For Interactivity
-        function flyToStore(currentFeature) {
-            map.flyTo({
-                center: currentFeature.geometry.coordinates,
-                zoom: 15
-            });
-        }
+                const listingsE1 = document.getElementById('listings');
+                const resultE1 = document.getElementById('resultFound');
+                resultE1.style.background = 'linear-gradient(to bottom, #00ffff 0%, #0066ff 100%)';
+                /* Building The list of Locations */
+                function buildLocationList(data) {
+                    // console.log("Hello");
+                    // addIDandDistanceandSort(data);
+                    // console.log(data);
+                    const result_number = document.createElement('p');
+                    result_number.style.textAlign = 'center';
+                    result_number.style.fontWeight = 'bold';
+                    // Clear any existing listings
+                    listingsE1.innerHTML = '';
+                    resultE1.innerHTML = '';
+                    // console.log(data.features.length);
+                    if (data.features.length) {
+                        result_number.textContent = data.features.length + ' results found';
+                        resultE1.appendChild(result_number);
 
-        function createPopUp(currentFeature) {
-            var popUps = document.getElementsByClassName('mapboxgl-popup');
-            /** Check if there is already a popup on the map and if so, remove it */
-            if (popUps[0]) popUps[0].remove();
+                        data.features.forEach(function (store, i) {
+                            /**
+                             * Create a shortcut for `store.properties`,
+                             * which will be used several times below.
+                            **/
+                            var prop = store.properties;
 
-            // create a HTML element for each feature
-            var el = document.createElement('div');
-            el.className = 'marker';
+                            /* Add a new listing section to the sidebar. */
+                            var listings = document.getElementById('listings');
+                            var listing = listings.appendChild(document.createElement('div'));
+                            /* Assign a unique `id` to the listing. */
+                            listing.id = "listing-" + data.features[i].properties.id;
+                            /* Assign the `item` class to each listing for styling. */
+                            listing.className = 'item';
 
-            new mapboxgl.Marker(el)
-                .setLngLat(currentFeature.geometry.coordinates)
-                // .setPopup(new mapboxgl.Popup({ closeOnClick: true }) // add popups
-                //     .setHTML('<h3>' + currentFeature.properties.title + '</h3><h4>' + currentFeature.properties.address + '</h4>'))
-                .addTo(map);
+                            /* Add the link to the individual listing created above. */
+                            var link = listing.appendChild(document.createElement('a'));
+                            link.href = '#';
+                            link.className = 'title';
+                            link.id = "link-" + prop.id;
+                            link.innerHTML = prop.title;
 
-            // var popup = new mapboxgl.Popup({ closeOnClick: false })
-            //     .setLngLat(currentFeature.geometry.coordinates)
-            //     .setHTML('<h3>'+currentFeature.properties.address+'</h3>' +
-            //         '<h4>' + currentFeature.properties.city + '</h4>')
-            //     .addTo(map);
-        }
-        ///////////////////////////////////////
+                            /* Add details to the individual listing. */
+                            var details = listing.appendChild(document.createElement('div'));
+                            details.innerHTML = prop.address;
+                            if (prop.contact) {
+                                details.innerHTML += '<br>Contact: ' + prop.contact;
+                            }
+                            if (prop.distance) {
+                                // var roundedDistance = Math.round(prop.distance * 100) / 100;
+                                details.innerHTML +=
+                                    '<p><strong>' + prop.distance + ' kms away</strong></p>';
+                            }
 
-        map.on('load', () => {
-            // Load an image from an external URL.
-            map.loadImage(
-                '/img/map-icon.png',
-                (error, image) => {
-                    if (error) throw error;
-
-                    // Add the image to the map style.
-                    map.addImage('map-icon', image);
-
-
-                    // Add a layer to use the image to represent the data.
-                    map.addLayer({
-                        "id": "locations",
-                        "type": "symbol",
-                        /* Add a GeoJSON source containing place coordinates and information. */
-                        "source": {
-                            "type": "geojson",
-                            "data": stores
-                        },
-                        "layout": {
-                            "icon-image": 'map-icon',
-                            "icon-size": 0.10,
-                        }
-                    });
-
-                    // buildLocationList(stores);
+                            // this code to handle when a user clicks a link in the sidebar:
+                            link.addEventListener('click', function (e) {
+                                for (var i = 0; i < data.features.length; i++) {
+                                    if (this.id === "link-" + data.features[i].properties.id) {
+                                        var clickedListing = data.features[i];
+                                        flyToStore(clickedListing);
+                                        createPopUp(clickedListing);
+                                    }
+                                }
+                                var activeItem = document.getElementsByClassName('active');
+                                if (activeItem[0]) {
+                                    activeItem[0].classList.remove('active');
+                                }
+                                this.parentNode.classList.add('active');
+                            });
+                        });
+                    }
+                    else if (data.features.length === 0 && searchBar.value !== '') {
+                        result_number.textContent = 'No results found';
+                        resultE1.appendChild(result_number);
+                    }
                 }
-            );
-        });
 
-        const popup = new mapboxgl.Popup({
-            closeButton: false,
-            closeOnClick: false
-        });
+                // Functions For Interactivity
+                function flyToStore(currentFeature) {
+                    map.flyTo({
+                        center: currentFeature.geometry.coordinates,
+                        zoom: 15
+                    });
+                }
 
-        map.on('mouseenter', 'locations', (e) => {
-            // Change the cursor style as a UI indicator.
-            map.getCanvas().style.cursor = 'pointer';
+                function createPopUp(currentFeature) {
+                    var popUps = document.getElementsByClassName('mapboxgl-popup');
+                    /** Check if there is already a popup on the map and if so, remove it */
+                    if (popUps[0]) popUps[0].remove();
 
-            // Copy coordinates array.
-            const coordinates = e.features[0].geometry.coordinates.slice();
-            const description = e.features[0].properties.description;
+                    // create a HTML element for each feature
+                    var el = document.createElement('div');
+                    el.className = 'marker';
 
-            // Ensure that if the map is zoomed out such that multiple
-            // copies of the feature are visible, the popup appears
-            // over the copy being pointed to.
-            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-            }
+                    new mapboxgl.Marker(el)
+                        .setLngLat(currentFeature.geometry.coordinates)
+                        // .setPopup(new mapboxgl.Popup({ closeOnClick: true }) // add popups
+                        //     .setHTML('<h3>' + currentFeature.properties.title + '</h3><h4>' + currentFeature.properties.address + '</h4>'))
+                        .addTo(map);
 
-            // Populate the popup and set its coordinates
-            // based on the feature found.
-            popup.setLngLat(coordinates).setHTML('<h3>' + e.features[0].properties.title + '</h3><h4>' + e.features[0].properties.address + '</h4>').addTo(map);
-        });
+                    // var popup = new mapboxgl.Popup({ closeOnClick: false })
+                    //     .setLngLat(currentFeature.geometry.coordinates)
+                    //     .setHTML('<h3>'+currentFeature.properties.address+'</h3>' +
+                    //         '<h4>' + currentFeature.properties.city + '</h4>')
+                    //     .addTo(map);
+                }
+                ///////////////////////////////////////
 
-        map.on('mouseleave', 'locations', () => {
-            map.getCanvas().style.cursor = '';
-            popup.remove();
-        });
+                map.on('load', () => {
+                    // Load an image from an external URL.
+                    map.loadImage(
+                        '/img/map-icon.png',
+                        (error, image) => {
+                            if (error) throw error;
 
-        const searchBar = document.getElementById('searchBar');
+                            // Add the image to the map style.
+                            map.addImage('map-icon', image);
 
-        searchBar.addEventListener('keyup', (e) => {
-            const searchString = e.target.value.toLowerCase();
 
-            const filteredStores = {
-                type: 'FeatureCollection',
-                features: []
-            }
+                            // Add a layer to use the image to represent the data.
+                            map.addLayer({
+                                "id": "locations",
+                                "type": "symbol",
+                                /* Add a GeoJSON source containing place coordinates and information. */
+                                "source": {
+                                    "type": "geojson",
+                                    "data": stores
+                                },
+                                "layout": {
+                                    "icon-image": 'map-icon',
+                                    "icon-size": 0.10,
+                                }
+                            });
 
-            filteredStores.features = stores.features.filter((store) => {
-                return (
-                    store.properties.title.toLowerCase().includes(searchString) ||
-                    store.properties.address.toLowerCase().includes(searchString)
-                );
-            });
-            // console.log(stores);
-            // console.log(filteredStores);
+                            // buildLocationList(stores);
+                        }
+                    );
+                });
 
-            buildLocationList(filteredStores);
-        });
+                const popup = new mapboxgl.Popup({
+                    closeButton: false,
+                    closeOnClick: false
+                });
+
+                map.on('mouseenter', 'locations', (e) => {
+                    // Change the cursor style as a UI indicator.
+                    map.getCanvas().style.cursor = 'pointer';
+
+                    // Copy coordinates array.
+                    const coordinates = e.features[0].geometry.coordinates.slice();
+                    const description = e.features[0].properties.description;
+
+                    // Ensure that if the map is zoomed out such that multiple
+                    // copies of the feature are visible, the popup appears
+                    // over the copy being pointed to.
+                    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                    }
+
+                    // Populate the popup and set its coordinates
+                    // based on the feature found.
+                    popup.setLngLat(coordinates).setHTML('<h3>' + e.features[0].properties.title + '</h3><h4>' + e.features[0].properties.address + '</h4>').addTo(map);
+                });
+
+                map.on('mouseleave', 'locations', () => {
+                    map.getCanvas().style.cursor = '';
+                    popup.remove();
+                });
+
+                const searchBar = document.getElementById('searchBar');
+
+                searchBar.addEventListener('keyup', (e) => {
+                    const searchString = e.target.value.toLowerCase();
+
+                    const filteredStores = {
+                        type: 'FeatureCollection',
+                        features: []
+                    }
+
+                    filteredStores.features = stores.features.filter((store) => {
+                        return (
+                            store.properties.title.toLowerCase().includes(searchString) ||
+                            store.properties.address.toLowerCase().includes(searchString)
+                        );
+                    });
+                    // console.log(stores);
+                    // console.log(filteredStores);
+
+                    buildLocationList(filteredStores);
+                });
 
         // buildLocationList(stores);
 
@@ -682,17 +687,17 @@
 
         //     buildLocationList(stores);
         // });
-    </script>
-    <script src="assets/js/jquery-3.2.1.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-        crossorigin="anonymous"></script>
+            </script>
+            <script src="assets/js/jquery-3.2.1.min.js"></script>
+            <script src="assets/js/popper.min.js"></script>
+            <script src="assets/js/bootstrap.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+                crossorigin="anonymous"></script>
 
 
 </body>
