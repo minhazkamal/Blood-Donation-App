@@ -12,6 +12,7 @@ var path = require('path');
 var multer = require('multer');
 const { body, check, validationResult } = require('express-validator');
 var mapbox = require('../models/mapbox');
+const { request } = require('express');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
@@ -20,22 +21,40 @@ router.use(bodyParser.json());
 const validateDonation = (value, { req }) => {
 
     // console.log(value);
-    if (value != null) {
-        const [year, month, day] = value.split('-');
+    if (value != '') {
 
-        
+        // const [year, month, day] = value.split('-');
+        let temp_donation = new Date(value);
+        // temp_donation.setTime(temp_donation.getTime() - temp_donation.getTimezoneOffset() * 60 * 1000);
+
         var today = new Date();
+        // today.setTime(today.getTime() - today.getTimezoneOffset() * 60 * 1000);
 
-        var age = today.getFullYear() - year;
-        var m = today.getMonth() - month;
-        if (m < 0 || (m === 0 && today.getDate() < day)) {
-            age--;
+        var today_timePortion = (today.getTime() - today.getTimezoneOffset() * 60 * 1000) % (3600 * 1000 * 24);
+        var temp_donation_timePortion = (temp_donation.getTime() - temp_donation.getTimezoneOffset() * 60 * 1000) % (3600 * 1000 * 24);
+
+
+        var temp_donation_dateonly = new Date(temp_donation - temp_donation_timePortion);
+        var today_dateonly = new Date(today - today_timePortion);
+
+        // console.log(temp_donation_dateonly);
+        // console.log(today_dateonly);
+
+        if (temp_donation_dateonly < today_dateonly) {
+            // console.log('YES!!!');
+            throw new Error('You can\'t set a previous date');
         }
-        if (age < 18) {
-            throw new Error('Your age must be greater than 18');
-        }
+
+        // var age = today.getFullYear() - year;
+        // var m = today.getMonth() - month;
+        // if (m < 0 || (m === 0 && today.getDate() < day)) {
+        //     age--;
+        // }
+        // if (age < 18) {
+        //     throw new Error('Your age must be greater than 18');
+        // }
     }
-    else throw new Error('Date of Birth is empty');
+    else throw new Error('Approx Donation Date is empty');
 
     // }
     // else
@@ -47,12 +66,43 @@ const validateDonation = (value, { req }) => {
 
 
 router.get('/', function (req, res) {
-    // req.session.email = 'minhaz.kamal9900@gmail.com';
-    if (req.session.email || true) {
+    req.session.email = 'minhaz.kamal9900@gmail.com';
+    if (req.session.email) {
         db.getDivisions()
-        .then(result => {
-            res.render('newRequest.ejs', {divisions: result});
-        })
+            .then(result => {
+                let div_result = result;
+                db.getUserAllInfo(req.session.email)
+                    .then(result => {
+                        let user = {
+                            type: 'first',
+                            id: result[0].id,
+                            name: result[0].first_name + ' ' + result[0].last_name,
+                            bg: result[0].BG,
+                            contact: result[0].contact,
+                            cp: result[0].first_name + ' ' + result[0].last_name,
+                            cp_contact: result[0].contact,
+                            pt_bg: result[0].BG,
+                            division: '',
+                            district: '',
+                            upazilla: '',
+                            house: '',
+                            street: '',
+                            patient: '',
+                            quantity: '',
+                            complication: '',
+                            org_details: '',
+                            org: '',
+                            self_check: '',
+                            org_location: '',
+                            lat: '',
+                            lon: ''
+                        }
+                        req.session.temp_user = user;
+                        req.session.div_results = div_result;
+                        res.render('newRequest.ejs', { user, divisions: div_result });
+
+                    })
+            })
     }
     else {
         res.render('message.ejs', { alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type: 'verification' });
@@ -61,48 +111,116 @@ router.get('/', function (req, res) {
 
 
 router.post('/', [
-    check('dob', 'Date of Birth is Empty').notEmpty(),
-    check('dob').custom(validateDonation),
+    check('approx_donation', 'Date of Birth is Empty').notEmpty(),
+    check('approx_donation').custom(validateDonation),
     check('blood_group', 'Blood Group field is empty').notEmpty(),
-    check('gender', 'Gender field is empty').notEmpty(),
-    check('division', 'Division field is empty').notEmpty(),
-    check('district', 'District field is empty').notEmpty(),
-    check('upazilla', 'Upazilla field is empty').notEmpty(),
+    // check('division', 'Division field is empty').notEmpty(),
+    // check('district', 'District field is empty').notEmpty(),
+    // check('upazilla', 'Upazilla field is empty').notEmpty(),
 ],
     function (req, res) {
         let errors = validationResult(req)
 
-        // if (!errors.isEmpty()) {
-        //     //console.log(errors);
-        //     const alert = errors.array();
-        //     let post_user = {
-        //         f_name: req.body.fname,
-        //         l_name: req.body.lname,
-        //         email: req.body.email,
-        //         profile_build: 'error',
-        //         bg: req.body.blood_group,
-        //         dob: req.body.dob,
-        //         gender: req.body.gender,
-        //         contact: req.body.contact,
-        //         division: req.body.division,
-        //         district: req.body.district,
-        //         upazilla: req.body.upazilla,
-        //         zipcode: req.body.zipcode,
-        //         house: req.body.house,
-        //         street: req.body.street
-        //     }
-        //     req.session.temp_user = post_user;
-        //     // console.log(req.session.temp_user);
-        //     res.render('updateProfile', { alert, user: req.session.temp_user, divisions: req.session.div_results });
-        // }
-        // else {
+        req.session.temp_user.cp = req.body.cp_name;
+        req.session.temp_user.cp_contact = req.body.cp_contact;
+        req.session.temp_user.pt_bg = req.body.blood_group;
+        req.session.temp_user.patient = req.body.pt_name;
+        req.session.temp_user.quantity = req.body.quantity;
+        req.session.temp_user.org_details = req.body.orgAddressDetails;
+        if (req.body.self_request == 'yes') req.session.temp_user.self_check = req.body.self_request;
+        else req.session.temp_user.self_check = 'no';
+        req.session.temp_user.org = req.body.org;
+        req.session.temp_user.complication = req.body.complication;
 
-        // }
-        console.log(req.body);
+        if (req.body.org == '0') {
+            if (req.body.current_location == 'yes') {
+                req.session.temp_user.org_location = req.body.current_location;
+                req.session.temp_user.lat = req.body.lat;
+                req.session.temp_user.lon = req.body.lon;
+            }
+            else {
+                req.session.temp_user.org_location = 'no';
+                req.session.temp_user.lat = '';
+                req.session.temp_user.lon = '';
+            }
+
+            req.session.temp_user.division = req.body.division;
+            req.session.temp_user.district = req.body.district;
+            req.session.temp_user.upazilla = req.body.upazilla;
+        }
+        else {
+            req.session.temp_user.division = '';
+            req.session.temp_user.district = '';
+            req.session.temp_user.upazilla = '';
+        }
+
+        req.session.temp_user.house = req.body.organization_name;
+        req.session.temp_user.street = req.body.street;
+
+        if (!errors.isEmpty()) {
+            //console.log(errors);
+            const alert = errors.array();
+
+            req.session.temp_user.type = 'error';
+
+            res.render('newRequest', { user: req.session.temp_user, alert, divisions: req.session.div_results });
+        }
+        else {
+            if (req.body.org == '0') {
+                let organization = {
+                    name: req.body.organization_name,
+                    mobile: '',
+                    street: req.body.street,
+                    longitude: req.body.lon,
+                    latitude: req.body.lat,
+                    division: req.body.division,
+                    district: req.body.district,
+                    upazilla: req.body.upazilla
+                }
+
+                let address = {
+                    division: req.body.division,
+                    district: req.body.district,
+                    upazilla: req.body.upazilla
+                }
+
+                db.getLocationNamesByIds(address)
+                    .then(result => {
+                        var location = organization.name + ', ' + organization.street + ', ' + result[0].upazilla + ', '
+                            + result[0].district + ', ' + result[0].division;
+                        mapbox.forwardGeocoder(location)
+                            .then(result => {
+                                if (organization.latitude == '' || organization.longitude == '') {
+                                    organization.latitude = result.geometry.coordinates[1];
+                                    organization.longitude = result.geometry.coordinates[0];
+                                }
+
+                                // console.log(organization);
+
+                                // db.setOrgInput(organization, function(insert_id){
+                                //     res.send("Hospital with ID: "+insert_id+" insertion successfull");
+                                // })
+
+                            })
+
+                    })
+            }
+            else {
+                res.send("Add a new request");
+            }
+        }
+
         // console.log("Hello");
         // console.log(req.body.latitude);
-        delete req.session.temp_user;
-        delete req.session.div_results;
+        // delete req.session.temp_user;
+        // delete req.session.div_results;
     });
 
+
+router.get('/all-org', function (req, res) {
+    db.getOrgInfo()
+        .then(result => {
+            res.json(result);
+        })
+})
 module.exports = router;

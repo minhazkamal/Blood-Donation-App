@@ -109,12 +109,20 @@
             font-weight: 700;
         }
 
+        .view {
+            color: #b9375e; 
+        }
+
         .listings .item .title small {
             font-weight: 400;
         }
 
         .listings .item.active .title,
         .listings .item .title:hover {
+            color: #2f6690;
+        }
+
+        .view:hover {
             color: #2f6690;
         }
 
@@ -526,6 +534,12 @@
                         details.innerHTML +=
                             '<p><strong>' + prop.distance + ' kms away</strong></p>';
                     }
+
+                    var profile_link = details.appendChild(document.createElement('a'));
+                    profile_link.className = 'view';
+                    profile_link.href = `/view/${prop.user_id}`;
+                    profile_link.target = 'blank';
+                    profile_link.innerHTML = 'View Profile'; 
 
                     // this code to handle when a user clicks a link in the sidebar:
                     link.addEventListener('click', function (e) {

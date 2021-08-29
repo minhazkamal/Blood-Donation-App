@@ -21,6 +21,19 @@ body {
     background: url(/img/waveKYC.png);
 
 }
+
+.container {
+    position: relative;
+    width: 100%;
+    /* display: flex; display flex dile kono kisu hide korle chepe jay */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 30px;
+    margin-top: 60px;
+    margin-bottom: 50px;
+}
+
 .account-settings .user-profile {
     margin: 0 0 1rem 0;
     padding-bottom: 1rem;
@@ -288,12 +301,43 @@ hr{
 } 
 
 
-#basic_dob_day, #basic_bg, #basic_gender, #basic_division, #basic_district, #basic_upazilla{
+#basic_dob_day, #basic_bg, #basic_gender, #basic_division, #basic_district, #basic_upazilla, #org_drop_down, .select2 {
     border-radius: 0.5rem;
     border: 1px solid #1a1919;
     color: #2e323c;
     margin-top: 0;
 }
+
+.select2-container {
+    position: relative;
+}
+
+.select2-dropdown {
+    position: relative;
+    float: none;
+    z-index: 500;
+}
+
+.select2-dropdown--below .select2-results__options {
+    position: relative;
+    float: none;
+}
+
+button#no-results-btn {
+    width: 100%;
+    height: 100%;
+    padding: 6px;
+  }
+
+button#no-results-btn {
+    border: 0;
+    background-color: white;
+    text-align: left;
+  }
+
+  button#no-results-btn:hover {
+    background-color: #5897fb;
+  }
 
 #basic_dob_month{
     border-radius: 0.5rem;
@@ -370,6 +414,9 @@ hr{
         width: 15rem;
         height: 16rem;
         left: 9.5rem;
+    }
+    .select2-container{
+        position: relative;
     }
 }
 

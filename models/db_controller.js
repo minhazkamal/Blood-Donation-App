@@ -384,7 +384,7 @@ module.exports.setOrgInput = (org, callback) => {
             db.query(`SELECT * from divisions WHERE id=${org.division}`, (err, res) => {
                 details += ", "+res[0].name;
                 // console.log(details);
-                    db.query("INSERT INTO `organizations`(`name`,`details`,`contact`,`lon`,`lat`) VALUES (?, ?, ?, ?, ?)", [org.name, details, org.mobile, org.longitude, org.latitude], (err, res) => {
+                    db.query("INSERT INTO `organizations`(`name`,`details`,`contact`,`lon`,`lat`, `division`, `district`, `upazilla`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [org.name, details, org.mobile, org.longitude, org.latitude, org.division, org.district, org.upazilla], (err, res) => {
                         if(err) throw err;
                         callback(res.insertId);
                     })
@@ -403,6 +403,14 @@ module.exports.getOrgInfo = () => {
 }
 
 module.exports.getUserAllInfo = (email) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * from users NATURAL JOIN user_address NATURAL JOIN user_profile WHERE users.email = ?`, [email], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.getUserAllInfoExceptMine = (email) => {
     return new Promise((resolve, reject) => {
         db.query(`SELECT * from users NATURAL JOIN user_address NATURAL JOIN user_profile WHERE users.email != ?`, [email], (err, res) => {
             err ? reject(err) : resolve(res)
@@ -434,3 +442,12 @@ module.exports.getAllUpazilla = () => {
     })
 }
 
+module.exports.getLocationNamesByIds = (address) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT upazillas.name as upazilla, districts.name as district, divisions.name as divison 
+                    FROM divisions, districts, upazillas 
+                    WHERE divisions.id = ? and districts.id = ? and upazillas.id = ?`, [address.division, address.district, address.upazilla], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}

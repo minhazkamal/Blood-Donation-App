@@ -7,6 +7,8 @@ var box = require('../models/mapbox');
 var mysql = require('mysql');
 var hl = require('handy-log');
 const { body, check, validationResult } = require('express-validator');
+var Cryptr = require('cryptr');
+var cryptr = new Cryptr(process.env.SECURITY_KEY);
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
@@ -22,7 +24,7 @@ router.get('/details', function (req, res) {
                     db.getAllUpazilla()
                         .then(result => {
                             var upazilla = result;
-                            db.getUserAllInfo(req.session.email)
+                            db.getUserAllInfoExceptMine(req.session.email)
                                 .then(result => {
                                     // console.log(div);
                                     // console.log(dist);
@@ -35,6 +37,7 @@ router.get('/details', function (req, res) {
 
                                     for (var i = 0; i < result.length; i++) {
                                         var Prop_Obj = {
+                                            user_id: cryptr.encrypt(result[i].id),
                                             contact: result[i].contact,
                                             name: result[i].first_name + ' ' + result[i].last_name,
                                             address: result[i].house + ', ' + result[i].street + ', ' + upazilla.find(item => item.id === result[i].upazilla).name + ', ' + dist[result[i].district - 1].name + ', ' + div[result[i].division - 1].name,

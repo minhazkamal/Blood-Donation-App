@@ -342,7 +342,7 @@ router.post('/', validator, [
                                                         // req.body.lat = result.geometry.coordinates[1];
                                                         // req.body.lon = result.geometry.coordinates[0];
                                                         if (req.body.lat === '' || req.body.lon === '') {
-                                                            console.log('Hello');
+                                                            // console.log('Hello');
                                                             address.lat = result.geometry.coordinates[1];
                                                             address.lon = result.geometry.coordinates[0];
                                                         }
