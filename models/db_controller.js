@@ -468,3 +468,27 @@ module.exports.getOrgNameAndDetails = (id) => {
         })
     })
 }
+
+module.exports.insertActiveStatus = (id, status) => {
+    return new Promise((resolve, reject) => {
+        db.query(`INSERT INTO active_status VALUES (?, ?)`, [id, status], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.getActiveStatusById = (id) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT status FROM active_status WHERE id=?`, [id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.updateActiveStatus = (email, value) => {
+    return new Promise((resolve, reject) => {
+        db.query(`UPDATE active_status SET status = ? WHERE id = (SELECT id FROM users WHERE email = ?)`, [value, email], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}

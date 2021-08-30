@@ -41,6 +41,7 @@ var mapquery = require('./controllers/mapquery');
 var org = require('./controllers/showOrg');
 var donor = require('./controllers/showDonor');
 var newRequest = require('./controllers/newRequest');
+var dashboard = require('./controllers/dashboard');
 
 
 // view engine
@@ -90,6 +91,7 @@ app.use('/map-box', mapquery);
 app.use('/show-org', org);
 app.use('/show-donor', donor);
 app.use('/new-request', newRequest);
+app.use('/dashboard', dashboard);
 //localhost:3940/new-request
 // app.get('/new-request', function(req,res){
 //     res.render('newRequest.ejs');
@@ -141,7 +143,7 @@ app.post('/org-input', function(req,res){
 });
 
 //localhost:3940/dashboard
-app.get('/dashboard', function(req,res){
-    res.render('dashboard.ejs');
-});
+// app.get('/dashboard', function(req,res){
+//     res.render('dashboard.ejs');
+// });
 
