@@ -32,110 +32,119 @@
 
     <%- include ("./partials/navbar.ejs") %>
 
-    <div class="main-container">
-        <main class="container">
+        <div class="main-container">
+            <main class="container">
 
-            <div class="row">
-                <div class="card-03">
-                    <h4>Welcome, Username</h4>
+                <div class="row">
+                    <div class="card-03">
+                        <h4>Welcome, Username</h4>
+                    </div>
+                    <div class="toggle-switch">
+                        <h5 style="margin-right: 1rem;">Active Status </h5>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
                 </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="card-01">
-                    <i class="fa fa-user-plus fa-5x mr-2"></i>
-                    <p class="lead">My Profile </p>
+                <hr>
+                <div class="row">
+                    <div class="card-01">
+                        <i class="fa fa-user-plus fa-5x mr-2"></i>
+                        <p class="lead">My Profile </p>
+                    </div>
+                    <div class="card-01">
+                        <i class="fa fa-user-md fa-5x mr-2"></i>
+                        <p class="lead">Eligibility test </i></p>
+                    </div>
+                    <div class="card-01">
+                        <i class="fa fa-th-list fa-5x mr-2"></i>
+                        <p class="lead">Request Feed </i></p>
+                    </div>
                 </div>
-                <div class="card-01">
-                    <i class="fa fa-user-md fa-5x mr-2"></i>
-                    <p class="lead">Eligibility test </i></p>
+                <div class="row">
+                    <div class="card-01">
+                        <i class="fa fa-group fa-5x mr-2"></i>
+                        <p class="lead">Donors </p>
+                    </div>
+                    <div class="card-01">
+                        <i class="fa fa-hospital-o fa-5x mr-2"></i>
+                        <p class="lead">Organizations </p>
+                    </div>
+                    <div class="card-01">
+                        <i class="fa fa-hourglass-2 fa-5x mr-2"></i>
+                        <p class="lead">My Donations </p>
+                    </div>
                 </div>
-                <div class="card-01">
-                    <i class="fa fa-th-list fa-5x mr-2"></i>
-                    <p class="lead">Request Feed </i></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="card-01">
-                    <i class="fa fa-group fa-5x mr-2"></i>
-                    <p class="lead">Donors </p>
-                </div>
-                <div class="card-01">
-                    <i class="fa fa-hospital-o fa-5x mr-2"></i>
-                    <p class="lead">Organizations </p>
-                </div>
-                <div class="card-01">
-                    <i class="fa fa-hourglass-2 fa-5x mr-2"></i>
-                    <p class="lead">My Donations </p>
-                </div>
-            </div>
-        </main>
-    
-    </div>
+            </main>
 
-   
-    <%- include ("./partials/footer.ejs") %>
+        </div>
 
 
-    <!-- ///////////////NAVBAR//////////////// -->
-    <script type="text/javascript">
-        // jquery for toggle dropdown menus
-        $(document).ready(function () {
-            //toggle sub-menus
-            $(".sub-btn").click(function () {
-                $(this).next(".sub-menu").slideToggle();
-            });
-
-            //toggle more-menus
-            $(".more-btn").click(function () {
-                $(this).next(".more-menu").slideToggle();
-            });
-        });
-
-        //javascript for the responsive navigation menu
-        var menu = document.querySelector(".menu");
-        var menuBtn = document.querySelector(".menu-btn");
-        var closeBtn = document.querySelector(".close-btn");
-
-        menuBtn.addEventListener("click", () => {
-            menu.classList.add("active");
-        });
-
-        closeBtn.addEventListener("click", () => {
-            menu.classList.remove("active");
-        });
-
-        //javascript for the navigation bar effects on scroll
-        window.addEventListener("scroll", function () {
-            var header = document.querySelector("header");
-            header.classList.toggle("sticky", window.scrollY > 0);
-        });
-    </script>
+        <%- include ("./partials/footer.ejs") %>
 
 
-    <!-- //////////////////////////////////// -->
+            <!-- ///////////////NAVBAR//////////////// -->
+            <script type="text/javascript">
+                // jquery for toggle dropdown menus
+                $(document).ready(function () {
+                    //toggle sub-menus
+                    $(".sub-btn").click(function () {
+                        $(this).next(".sub-menu").slideToggle();
+                    });
 
-    <script>
-        window.addEventListener('scroll', function () {
-            let header = document.querySelector('header');
+                    //toggle more-menus
+                    $(".more-btn").click(function () {
+                        $(this).next(".more-menu").slideToggle();
+                    });
+                });
 
-            header.classList.toggle('scrolled', window.scrollY > 0);
-        })
-    </script>
+                //javascript for the responsive navigation menu
+                var menu = document.querySelector(".menu");
+                var menuBtn = document.querySelector(".menu-btn");
+                var closeBtn = document.querySelector(".close-btn");
+
+                menuBtn.addEventListener("click", () => {
+                    menu.classList.add("active");
+                });
+
+                closeBtn.addEventListener("click", () => {
+                    menu.classList.remove("active");
+                });
+
+                //javascript for the navigation bar effects on scroll
+                window.addEventListener("scroll", function () {
+                    var header = document.querySelector("header");
+                    header.classList.toggle("sticky", window.scrollY > 0);
+                });
+            </script>
 
 
-    <script src="assets/js/jquery-3.2.1.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
-        </script>
-    <!-- FOR NAVBAR -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+            <!-- //////////////////////////////////// -->
+
+            <script>
+                window.addEventListener('scroll', function () {
+                    let header = document.querySelector('header');
+
+                    header.classList.toggle('scrolled', window.scrollY > 0);
+                })
+            </script>
+
+
+            <script src="assets/js/jquery-3.2.1.min.js"></script>
+            <script src="assets/js/popper.min.js"></script>
+            <script src="assets/js/bootstrap.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+                crossorigin="anonymous">
+                </script>
+            <!-- FOR NAVBAR -->
+            <script src="https://code.jquery.com/jquery-3.6.0.js"
+                integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 </body>
 
