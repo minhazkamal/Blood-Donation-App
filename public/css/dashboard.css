@@ -134,6 +134,7 @@ hr {
   justify-content: space-between;
   align-items: center;
   margin-right: 1em;
+  margin-bottom: 0.5em;
 }
 
 /* The switch - the box around the slider */
