@@ -79,7 +79,6 @@ a:hover {
   box-shadow: 10px 10px 2px 1px rgba(85, 85, 218, 0.2);
   /* box-shadow: 0 0 10px rgba(251, 27, 27, 0.2); */
   transform: scale(1.10);
-
 }
 
 /* .card-02{
@@ -109,13 +108,14 @@ a:hover {
   /* box-shadow: 0 0 5px rgba(34, 13, 13, 0.2); */
 }
 
-h4{
-  font-family: 'Montserrat',sans-serif;
+h4 {
+  font-family: 'Montserrat', sans-serif;
   font-size: 3rem;
   color: black;
   margin-left: 10px;
 }
-.lead{
+
+.lead {
   font-size: 2rem;
 }
 
@@ -124,12 +124,14 @@ hr {
   background: rgba(0, 0, 0, 0.404);
   margin-bottom: 2rem;
 }
-.toggle{
+
+.toggle {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.toggle-switch{
+
+.toggle-switch {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -138,6 +140,7 @@ hr {
 }
 
 /* The switch - the box around the slider */
+
 .switch {
   position: relative;
   display: inline-block;
@@ -146,6 +149,7 @@ hr {
 }
 
 /* Hide default HTML checkbox */
+
 .switch input {
   opacity: 0;
   width: 0;
@@ -153,6 +157,7 @@ hr {
 }
 
 /* The slider */
+
 .slider {
   position: absolute;
   cursor: pointer;
@@ -177,27 +182,34 @@ hr {
   transition: .4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: #a7dd2a;
 }
 
-input:focus + .slider {
+input:focus+.slider {
   box-shadow: 0 0 1px #a7dd2a;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   -webkit-transform: translateX(24px);
   -ms-transform: translateX(24px);
   transform: translateX(24px);
 }
 
 /* Rounded sliders */
+
 .slider.round {
   border-radius: 34px;
 }
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.stretched-link {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 @media (max-width:800px) {
