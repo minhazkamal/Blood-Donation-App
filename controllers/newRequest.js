@@ -166,24 +166,29 @@ router.post('/', [
             res.render('newRequest', { user: req.session.temp_user, alert, divisions: req.session.div_results });
         }
         else {
+            let donation_date = new Date(req.body.approx_donation);
+            var donation_date_timePortion = (donation_date.getTime() - donation_date.getTimezoneOffset() * 60 * 1000) % (3600 * 1000 * 24);
+            var donation_date_dateonly = new Date(donation_date - donation_date_timePortion);
+
+            req.session.temp_user.approx_date = donation_date_dateonly;
+
+            var organization = {
+                name: req.body.organization_name,
+                mobile: '',
+                street: req.body.street,
+                longitude: req.body.lon,
+                latitude: req.body.lat,
+                division: req.body.division,
+                district: req.body.district,
+                upazilla: req.body.upazilla
+            }
+
+            var address = {
+                division: req.body.division,
+                district: req.body.district,
+                upazilla: req.body.upazilla
+            }
             if (req.body.org == '0') {
-                let organization = {
-                    name: req.body.organization_name,
-                    mobile: '',
-                    street: req.body.street,
-                    longitude: req.body.lon,
-                    latitude: req.body.lat,
-                    division: req.body.division,
-                    district: req.body.district,
-                    upazilla: req.body.upazilla
-                }
-
-                let address = {
-                    division: req.body.division,
-                    district: req.body.district,
-                    upazilla: req.body.upazilla
-                }
-
                 db.getLocationNamesByIds(address)
                     .then(result => {
                         var location = organization.name + ', ' + organization.street + ', ' + result[0].upazilla + ', '
@@ -191,22 +196,29 @@ router.post('/', [
                         mapbox.forwardGeocoder(location)
                             .then(result => {
                                 if (organization.latitude == '' || organization.longitude == '') {
-                                    organization.latitude = result.geometry.coordinates[1];
-                                    organization.longitude = result.geometry.coordinates[0];
+                                    organization.latitude = result.geometry.coordinates[0];
+                                    organization.longitude = result.geometry.coordinates[1];
                                 }
 
                                 // console.log(organization);
 
-                                // db.setOrgInput(organization, function(insert_id){
-                                //     res.send("Hospital with ID: "+insert_id+" insertion successfull");
-                                // })
+                                db.setOrgInput(organization, function (insert_id) {
+                                    req.session.temp_user.org = insert_id;
+                                    db.setNewRequest(req.session.temp_user)
+                                        .then(result => {
+                                            res.send(result);
+                                        })
+                                })
 
                             })
 
                     })
             }
             else {
-                res.send("Add a new request");
+                db.setNewRequest(req.session.temp_user)
+                    .then(result => {
+                        res.send(result);
+                    })
             }
         }
 

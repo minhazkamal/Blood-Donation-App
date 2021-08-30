@@ -36,4 +36,17 @@ router.get('/upazillas', function(req,res){
     // res.render('updateProfile.ejs', {f_name: 'Minhaz', l_name: 'Kamal', email: 'minhaz.kamal9900@gmail.com'});
 });
 
+router.get('/get-org-details', function(req,res){
+    let id = req.query.id;
+    db.getOrgNameAndDetails(id)
+    .then(result => {
+        if(result.length>0)
+        {
+            // console.log(result);
+            res.json(result);
+        }
+    })
+    // res.render('updateProfile.ejs', {f_name: 'Minhaz', l_name: 'Kamal', email: 'minhaz.kamal9900@gmail.com'});
+});
+
 module.exports = router;
