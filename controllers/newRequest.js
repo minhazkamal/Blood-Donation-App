@@ -66,7 +66,7 @@ const validateDonation = (value, { req }) => {
 
 
 router.get('/', function (req, res) {
-    req.session.email = 'minhaz.kamal9900@gmail.com';
+    // req.session.email = 'minhaz.kamal9900@gmail.com';
     if (req.session.email) {
         db.getDivisions()
             .then(result => {
@@ -206,7 +206,7 @@ router.post('/', [
                                     req.session.temp_user.org = insert_id;
                                     db.setNewRequest(req.session.temp_user)
                                         .then(result => {
-                                            res.send(result);
+                                            res.send("Request FEED");
                                         })
                                 })
 
@@ -217,7 +217,7 @@ router.post('/', [
             else {
                 db.setNewRequest(req.session.temp_user)
                     .then(result => {
-                        res.send(result);
+                        res.send("Request FEED");
                     })
             }
         }
