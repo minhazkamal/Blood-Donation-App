@@ -124,10 +124,14 @@ hr {
   background: rgba(0, 0, 0, 0.404);
   margin-bottom: 2rem;
 }
-
+.toggle{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .toggle-switch{
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   margin-right: 1em;
 }
