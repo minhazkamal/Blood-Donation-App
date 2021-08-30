@@ -15,6 +15,9 @@ body{
     margin: 0;
     font-family: 'Montserrat',sans-serif;
     font-weight: 500;
+    background-image: url(/img/waveKYC.png);
+    background-size: cover;
+    background-repeat: no-repeat;   
 }
 
 h1{
@@ -63,9 +66,21 @@ a:hover{
     margin: 10px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    padding: .5rem;
+    transition: .3s;
+    transition-timing-function: ease-in;
+  }
+
+  .card-01:hover{
+    color: white;
+    background: #4194c7;
+    cursor: pointer;
+    box-shadow: 10px 10px 2px 1px rgba(85, 85, 218, 0.2);
+    /* box-shadow: 0 0 10px rgba(251, 27, 27, 0.2); */
+    transform: scale(1.10);
   }
   
-  .card-02{
+  /* .card-02{
     background: #50A7FF;
     position: relative;
     flex: 1;
@@ -74,17 +89,21 @@ a:hover{
     margin: 10px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  }
+  } */
   
   .card-03{
-    background: #FF7675;
+    background: #e09292;
     position: relative;
     flex: 1;
     max-width: 940px;
-    height: 2rem;
-    margin: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    height: 3.5rem;
+    /* top | right | bottom | left */
+    margin: 10px 10px 0px 10px;
+    /* top-left | top-right | bottom-right | bottom-left */
+    border-radius: 8px 8px 0px 0px;
+    border-left: .25rem solid black;
+    padding-left: .3rem;
+    box-shadow: 0 0 5px rgba(34, 13, 13, 0.2);
   }
   
   @media (max-width:800px){
