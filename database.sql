@@ -36,7 +36,7 @@ CREATE TABLE `active_status` (
 
 LOCK TABLES `active_status` WRITE;
 /*!40000 ALTER TABLE `active_status` DISABLE KEYS */;
-INSERT INTO `active_status` VALUES (6,'no'),(7,'no'),(8,'no'),(9,'no'),(10,'no'),(11,'no'),(12,'no'),(13,'no'),(14,'no'),(15,'no'),(16,'no'),(17,'no'),(18,'no'),(19,'no'),(20,'no'),(21,'no'),(22,'no'),(23,'no');
+INSERT INTO `active_status` VALUES (6,'yes'),(7,'no'),(8,'no'),(9,'no'),(10,'no'),(11,'no'),(12,'no'),(13,'no'),(14,'no'),(15,'no'),(16,'no'),(17,'no'),(18,'no'),(19,'no'),(20,'no'),(21,'no'),(22,'no'),(23,'no');
 /*!40000 ALTER TABLE `active_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,6 +87,42 @@ LOCK TABLES `divisions` WRITE;
 /*!40000 ALTER TABLE `divisions` DISABLE KEYS */;
 INSERT INTO `divisions` VALUES (1,'Barisal'),(2,'Chittagong'),(3,'Dhaka'),(4,'Khulna'),(5,'Rajshahi'),(6,'Rangpur'),(7,'Sylhet'),(8,'Mymensingh');
 /*!40000 ALTER TABLE `divisions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `eligibility_report`
+--
+
+DROP TABLE IF EXISTS `eligibility_report`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `eligibility_report` (
+  `id` int NOT NULL,
+  `asthma` enum('yes','no') NOT NULL,
+  `high_bp` enum('yes','no') NOT NULL,
+  `cancer` enum('yes','no') NOT NULL,
+  `diabetes` enum('yes','no') NOT NULL,
+  `heart_disease` enum('yes','no') NOT NULL,
+  `hepatitis` enum('yes','no') NOT NULL,
+  `anemia` enum('yes','no') NOT NULL,
+  `tuberculosis` enum('yes','no') NOT NULL,
+  `smoke` enum('0','1','2') NOT NULL,
+  `drinking` enum('0','1','2') NOT NULL,
+  `depression` enum('0','1','2') NOT NULL,
+  `last_donation` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `elg_report_id` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `eligibility_report`
+--
+
+LOCK TABLES `eligibility_report` WRITE;
+/*!40000 ALTER TABLE `eligibility_report` DISABLE KEYS */;
+INSERT INTO `eligibility_report` VALUES (6,'no','yes','yes','no','yes','no','no','yes','0','0','0',NULL);
+/*!40000 ALTER TABLE `eligibility_report` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -327,7 +363,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (6,'Minhaz','Kamal','minhaz.kamal9900@gmail.com',NULL,'yes','yes','yes','no','2021-08-09','google'),(7,'Saidul','Islam','saidulislam@ctgmail.com','$2a$10$5EHNT1zc7RyqjQPRHhHAXeV0l0iDLCHQmboHgOHQhIeXcDqZMpTgK','yes','yes','yes','no','2021-08-14','self'),(8,'Anas ','Jawad','anasjawad@ctgmail.com','$2a$10$2bVz1.ApAW2kexix1dVtsOYIDlZU2yMjCLFG90cTKcd/7OSm739l6','yes','yes','yes','no','2021-08-14','self'),(9,'Sartaj','Ekram','sartajekram@ctgmail.com','$2a$10$xJXR.1JJ15vC5PDxVx2OL.P06h8Cw5lf.7e1HBJH7WJ4aDDI0HMx2','yes','yes','yes','no','2021-08-14','self'),(10,'Sajid','Altaf','sajidaltaf@ctgmail.com','$2a$10$oIJ2ie4Ce5bvo2ntqvIXu.euv4k6umGDFAzS9aa7uSukp0r9Rvxne','yes','yes','yes','no','2021-08-14','self'),(11,'Zibran ','Zarif','zibranzarif@ctgmail.com','$2a$10$gIwSkg0AycUncolLZqBS2eDrnbKwv5PbuFi9FEKLmdWMxWEF21fb6','yes','yes','yes','no','2021-08-14','self'),(12,'Anas Azmayeen','Zamee','anaszamee@ctgmail.com','$2a$10$7NAu49kZ9lPezJ/8lMzPVuA3qF3NJpSHu7HCxLuoXbaCxg1O9EW4W','yes','yes','yes','no','2021-08-14','self'),(13,'Raihan','Mahmud','raihanmahmud@ctgmail.com','$2a$10$fCBDWHM6SECAn7iu.ZChSOTPXktYEFC4R8kZR5MkpwDi54D1XnmJm','yes','yes','yes','no','2021-08-14','self'),(14,'Zawad','Chowdhury','zawadchowdhury@ctgmail.com','$2a$10$eddsbEG2zlLDCrCbpdPZ7OE8nfXllfGqg/eUiW5yVVnfvcDorchBq','yes','yes','yes','no','2021-08-14','self'),(15,'Eraj','Chowdhury','eraj@ctgmail.com','$2a$10$jfqEoO/jbdv837HY7VUSae6uo.0lnWwvUKywXEnANJDNOQjqLhxr6','yes','yes','yes','no','2021-08-14','self'),(16,'Najmul','Bari','najmuk@dhkmail.com','$2a$10$l2//I7uxveu/MFKGqAMG3O0BdiGeBgjqwe4a5pD49r7ikrAGxZI5i','yes','yes','yes','no','2021-08-14','self'),(17,'Talha','Chowdhury','talha@dhkmail.com','$2a$10$aYHGv1UULysJEQ8drnf20eVfgzL46BnTMaIKQz5pFYm.UVx18ckJm','yes','yes','yes','no','2021-08-14','self'),(18,'Intiser','Chowdhury','intiser@dhkmail.com','$2a$10$B7sgkFDyp9mVGEWC/X/7YuVDEyI1O5ZR1iEdOwdmzSyNr.kZjOoUW','yes','yes','yes','no','2021-08-14','self'),(19,'Afeef','Ahmed','afeef@dhkmail.com','$2a$10$Xl/qnyVWkzz2buXaVI3T2e.UuNv9Qt5.FsE3cNM1sLcQQf.u6k7L6','yes','yes','yes','no','2021-08-14','self'),(20,'Ifrad','Towhid','ifrad@dhkmail.com','$2a$10$ZWHUgyxpuCLPA7P8g7y2Nut6Q1eqWE266v7moI3/KU5sit.c9CRgO','yes','yes','yes','no','2021-08-14','self'),(21,'Mehdad','Hussain','mehdad@dhkmail.com','$2a$10$e4cewSq926PXBaa2JQekkehjNdZfLyF2puCwgYND8.FJf4vahCotq','yes','yes','yes','no','2021-08-14','self'),(22,'Rayan','Iqbal','rayaniqbalorion@gmail.com','$2a$10$9zS3l34nwm8msQwu0rFRP.LMkznBap/xx5P/7D99ukC2KZ/hyD8Gi','yes','yes','yes','no','2021-08-21','self'),(23,'Minhaz','Kamal','minhaz.kamal9903@gmail.com',NULL,'yes','no','no','no','2021-08-26','google');
+INSERT INTO `users` VALUES (6,'Minhaz','Kamal','minhaz.kamal9900@gmail.com',NULL,'yes','yes','yes','yes','2021-08-09','google'),(7,'Saidul','Islam','saidulislam@ctgmail.com','$2a$10$5EHNT1zc7RyqjQPRHhHAXeV0l0iDLCHQmboHgOHQhIeXcDqZMpTgK','yes','yes','yes','no','2021-08-14','self'),(8,'Anas ','Jawad','anasjawad@ctgmail.com','$2a$10$2bVz1.ApAW2kexix1dVtsOYIDlZU2yMjCLFG90cTKcd/7OSm739l6','yes','yes','yes','no','2021-08-14','self'),(9,'Sartaj','Ekram','sartajekram@ctgmail.com','$2a$10$xJXR.1JJ15vC5PDxVx2OL.P06h8Cw5lf.7e1HBJH7WJ4aDDI0HMx2','yes','yes','yes','no','2021-08-14','self'),(10,'Sajid','Altaf','sajidaltaf@ctgmail.com','$2a$10$oIJ2ie4Ce5bvo2ntqvIXu.euv4k6umGDFAzS9aa7uSukp0r9Rvxne','yes','yes','yes','no','2021-08-14','self'),(11,'Zibran ','Zarif','zibranzarif@ctgmail.com','$2a$10$gIwSkg0AycUncolLZqBS2eDrnbKwv5PbuFi9FEKLmdWMxWEF21fb6','yes','yes','yes','no','2021-08-14','self'),(12,'Anas Azmayeen','Zamee','anaszamee@ctgmail.com','$2a$10$7NAu49kZ9lPezJ/8lMzPVuA3qF3NJpSHu7HCxLuoXbaCxg1O9EW4W','yes','yes','yes','no','2021-08-14','self'),(13,'Raihan','Mahmud','raihanmahmud@ctgmail.com','$2a$10$fCBDWHM6SECAn7iu.ZChSOTPXktYEFC4R8kZR5MkpwDi54D1XnmJm','yes','yes','yes','no','2021-08-14','self'),(14,'Zawad','Chowdhury','zawadchowdhury@ctgmail.com','$2a$10$eddsbEG2zlLDCrCbpdPZ7OE8nfXllfGqg/eUiW5yVVnfvcDorchBq','yes','yes','yes','no','2021-08-14','self'),(15,'Eraj','Chowdhury','eraj@ctgmail.com','$2a$10$jfqEoO/jbdv837HY7VUSae6uo.0lnWwvUKywXEnANJDNOQjqLhxr6','yes','yes','yes','no','2021-08-14','self'),(16,'Najmul','Bari','najmuk@dhkmail.com','$2a$10$l2//I7uxveu/MFKGqAMG3O0BdiGeBgjqwe4a5pD49r7ikrAGxZI5i','yes','yes','yes','no','2021-08-14','self'),(17,'Talha','Chowdhury','talha@dhkmail.com','$2a$10$aYHGv1UULysJEQ8drnf20eVfgzL46BnTMaIKQz5pFYm.UVx18ckJm','yes','yes','yes','no','2021-08-14','self'),(18,'Intiser','Chowdhury','intiser@dhkmail.com','$2a$10$B7sgkFDyp9mVGEWC/X/7YuVDEyI1O5ZR1iEdOwdmzSyNr.kZjOoUW','yes','yes','yes','no','2021-08-14','self'),(19,'Afeef','Ahmed','afeef@dhkmail.com','$2a$10$Xl/qnyVWkzz2buXaVI3T2e.UuNv9Qt5.FsE3cNM1sLcQQf.u6k7L6','yes','yes','yes','no','2021-08-14','self'),(20,'Ifrad','Towhid','ifrad@dhkmail.com','$2a$10$ZWHUgyxpuCLPA7P8g7y2Nut6Q1eqWE266v7moI3/KU5sit.c9CRgO','yes','yes','yes','no','2021-08-14','self'),(21,'Mehdad','Hussain','mehdad@dhkmail.com','$2a$10$e4cewSq926PXBaa2JQekkehjNdZfLyF2puCwgYND8.FJf4vahCotq','yes','yes','yes','no','2021-08-14','self'),(22,'Rayan','Iqbal','rayaniqbalorion@gmail.com','$2a$10$9zS3l34nwm8msQwu0rFRP.LMkznBap/xx5P/7D99ukC2KZ/hyD8Gi','yes','yes','yes','no','2021-08-21','self'),(23,'Minhaz','Kamal','minhaz.kamal9903@gmail.com',NULL,'yes','no','no','no','2021-08-26','google');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -340,4 +376,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-31  1:55:30
+-- Dump completed on 2021-09-03  1:02:22

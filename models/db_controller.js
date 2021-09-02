@@ -492,3 +492,50 @@ module.exports.updateActiveStatus = (email, value) => {
         })
     })
 }
+
+module.exports.setEligibilityReport = (elg, flag) => {
+    if(flag == 'no') {
+        return new Promise((resolve, reject) => {
+            db.query(`INSERT INTO eligibility_report VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
+            [elg.id, elg.asthma, elg.high_bp, elg.cancer, elg.diabetes, elg.heart_disease, elg.hepatitis, elg.anemia, 
+                elg.tuberculosis, elg.smoke, elg.drinking, elg.depression, elg.last_donation], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
+        })
+    }
+    else {
+        return new Promise((resolve, reject) => {
+            db.query(`UPDATE eligibility_report SET asthma = ?, high_bp = ?, cancer = ?, diabetes = ?, heart_disease = ?, 
+            hepatitis = ?, anemia = ?, tuberculosis = ?, smoke = ?, drinking = ?, depression = ?, last_donation = ? WHERE id = ?`, 
+            [elg.asthma, elg.high_bp, elg.cancer, elg.diabetes, elg.heart_disease, elg.hepatitis, elg.anemia, 
+                elg.tuberculosis, elg.smoke, elg.drinking, elg.depression, elg.last_donation, elg.id], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
+        })
+    }
+    
+}
+
+module.exports.getEligibilityReport = (email) => {
+    return new Promise((resolve, reject) => {
+        db.query("SELECT * FROM eligibility_report WHERE id = (SELECT id FROM users WHERE email = ?)", [email], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.getDOB = (email) => {
+    return new Promise((resolve, reject) => {
+        db.query("SELECT dob FROM user_profile WHERE id = (SELECT id FROM users WHERE email = ?)", [email], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.updateEligibilityStatus = (id, value) => {
+    return new Promise((resolve, reject) => {
+        db.query(`UPDATE users SET eligibility_test = ? WHERE id = ?`, [value, id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
