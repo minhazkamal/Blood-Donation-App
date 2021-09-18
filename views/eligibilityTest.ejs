@@ -56,27 +56,15 @@
           </div>
         </div>
 
-  <%- include ("./partials/navbar.ejs") %>
-  
-
-  <div class="container">
-    <div class="container-card">
-      <div class="card-heading">
-        <h1>Click to learn more.</h1>
-      </div>
-      <div class="card">
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blobEligibility1">
-          <path fill="#457b9d"
-            d="M59.6,-20.9C67.4,4.8,57.3,34.9,42.1,42.2C26.9,49.6,6.6,34.2,-9,20.9C-24.5,7.6,-35.3,-3.7,-33,-21.8C-30.8,-39.9,-15.4,-64.8,5.2,-66.5C25.9,-68.3,51.7,-46.7,59.6,-20.9Z"
-            transform="translate(100 100)" />
-        </svg>
-        <h2>Comorbidities</h2>
-        <hr class="hr1">
-        <div class="content">
-          <h4>Card One</h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi vitae facilis vel laborum excepturi
-            perferendis dolorem optio nulla sed ea veritatis, at quaerat odio accusamus dolorum! Delectus vero
-            temporibus maiores.</p>
+        <div class="card">
+          <h2>Lifestyle</h2>
+          <hr class="hr1">
+          <div class="content">
+            <h4>Card Two</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi vitae facilis vel laborum excepturi
+              perferendis dolorem optio nulla sed ea veritatis, at quaerat odio accusamus dolorum! Delectus vero
+              temporibus maiores.</p>
+          </div>
         </div>
 
         <div class="card">
@@ -329,12 +317,10 @@
 
       <script>
         const card = document.querySelectorAll(".card");
-
         function clickCard() {
           this.classList.toggle('is-clicked');
         }
         card.forEach((card) => card.addEventListener("click", clickCard));
-
       </script>
 
       <script>
@@ -348,11 +334,9 @@
             $('input:radio[name="Hepatitis"]').filter('[value="' + $("#user_hepatitis").val() + '"]').attr('checked', true);
             $('input:radio[name="anemia"]').filter('[value="' + $("#user_anemia").val() + '"]').attr('checked', true);
             $('input:radio[name="Tuberculosis"]').filter('[value="' + $("#user_tuberculosis").val() + '"]').attr('checked', true);
-
             document.getElementById('smokeRange').value = $("#user_smoke").val();
             document.getElementById('drinkRange').value = $("#user_drinking").val();
             document.getElementById('depressionRange').value = $("#user_depression").val();
-
             if($("#user_last_donation").val() == '') {
               document.getElementById('last_donation_check').checked = true;
               // document.getElementById("last-donation").required = false;
@@ -398,7 +382,6 @@
         if (mm < 10) {
           mm = '0' + mm
         }
-
         today = yyyy + '-' + mm + '-' + dd;
         // console.log(today);
         document.getElementById("last-donation").setAttribute("max", today);
@@ -425,7 +408,6 @@
           if (mm < 10) {
             mm = '0' + mm
           }
-
           minDate = yyyy + '-' + mm + '-' + dd;
           // console.log(minDate);
           document.getElementById("last-donation").setAttribute("min", minDate);
