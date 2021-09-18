@@ -142,6 +142,10 @@ app.post('/org-input', function(req,res){
     })
 });
 
+app.get('/request-feed', function(req,res){
+    res.render('requestFeed.ejs');
+});
+
 //localhost:3940/dashboard
 // app.get('/dashboard', function(req,res){
 //     res.render('dashboard.ejs');
