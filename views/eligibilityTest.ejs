@@ -34,48 +34,8 @@
 
 <body>
 
-  <!-- ///////////////NAVBARHTML//////////////// -->
-  <header>
-    <a href="#" class="logo">GLEAM</a>
-    <div class="navigation">
-      <ul class="menu">
-        <div class="close-btn"></div>
-        <li class="menu-item"><a href="#">Home</a></li>
-        <li class="menu-item">
-          <a class="sub-btn" id="sub-button" href="#">Dropdown <i class="fas fa-angle-down"></i></a>
-          <!-- <button class="sub-btn">Dropdown <i class="fas fa-angle-down"></i></button> -->
-          <ul class="sub-menu" id="sub-list">
-            <li class="sub-item"><a href="#">Sub Item 01</a></li>
-            <li class="sub-item"><a href="#">Sub Item 02</a></li>
-            <li class="sub-item"><a href="#">Sub Item 03</a></li>
-          </ul>
-        </li>
-        <li class="menu-item">
-          <a class="sub-btn" href="#">With Sub-dropdown <i class="fas fa-angle-down"></i></a>
-          <!-- <button class="sub-btn">With Sub-dropdown <i class="fas fa-angle-down"></i></button> -->
-          <ul class="sub-menu">
-            <li class="sub-item"><a href="#">Sub Item 01</a></li>
-            <li class="sub-item"><a href="#">Sub Item 02</a></li>
-            <li class="sub-item"><a href="#">Sub Item 03</a></li>
-            <li class="sub-item"><a href="#">Sub Item 04</a></li>
-            <li class="sub-item more">
-              <a class="more-btn" href="#">More Items <i class="fas fa-angle-right"></i></a>
-              <ul class="more-menu">
-                <li class="more-item"><a href="#">More Item 01</a></li>
-                <li class="more-item"><a href="#">More Item 02</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li class="menu-item"><a href="#">Services</a></li>
-        <li class="menu-item"><a href="#">About</a></li>
-        <li class="menu-item"><a href="#">Contact</a></li>
-      </ul>
-    </div>
-    <div class="menu-btn"></div>
-  </header>
-
-  <!-- //////////////////////////////////// -->
+  <%- include ("./partials/navbar.ejs") %>
+  
 
   <div class="container">
     <div class="container-card">
@@ -332,111 +292,7 @@
 
   </div>
 
-  <!-- ///////////////FOOTER//////////////// -->
-
-  <footer>
-    <div class="footer-container">
-      <div class="sec aboutus">
-        <h2>About Us</h2>
-        <hr class="footer-hr">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident amet enim eligendi quidem consequatur
-          soluta corporis perferendis, doloremque fugiat sint doloribus sed temporibus iusto neque inventore nostrum in
-          eum cumque.</p>
-        <ul class="sci">
-          <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-          <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-          <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-          <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
-
-        </ul>
-      </div>
-      <div class="sec quicklinks">
-        <h2>Quick Links</h2>
-        <hr class="footer-hr">
-        <ul>
-          <li><a href="#">About</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Help</a></li>
-          <li><a href="#">Terms & Conditions</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </div>
-      <!-- <div class="sec contact">
-        <h2>Contact Info</h2>
-        <ul class="info">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </ul>
-      </div> -->
-    </div>
-  </footer>
-  <div class="copyrightText">
-    <p>Copyright <i class="fa fa-copyright"></i> 2021 G L E A M. All Rights Reserved.</p>
-  </div>
-  <!-- //////////////////////////////////// -->
-
-
-
-  <script>
-    const card = document.querySelectorAll(".card");
-
-    function clickCard() {
-      this.classList.toggle('is-clicked');
-    }
-    card.forEach((card) => card.addEventListener("click", clickCard));
-
-  </script>
-
-
-  <!-- ///////////////NAVBARJS//////////////// -->
-  <script type="text/javascript">
-    // jquery for toggle dropdown menus
-    $(document).ready(function () {
-      //toggle sub-menus
-      $(".sub-btn").click(function () {
-        $(this).next(".sub-menu").slideToggle();
-      });
-
-      //toggle more-menus
-      $(".more-btn").click(function () {
-        $(this).next(".more-menu").slideToggle();
-      });
-    });
-
-    //javascript for the responsive navigation menu
-    var menu = document.querySelector(".menu");
-    var menuBtn = document.querySelector(".menu-btn");
-    var closeBtn = document.querySelector(".close-btn");
-
-    menuBtn.addEventListener("click", () => {
-      menu.classList.add("active");
-    });
-
-    closeBtn.addEventListener("click", () => {
-      menu.classList.remove("active");
-    });
-
-    //javascript for the navigation bar effects on scroll
-    window.addEventListener("scroll", function () {
-      var header = document.querySelector("header");
-      header.classList.toggle("sticky", window.scrollY > 0);
-    });
-  </script>
-
-  <script>
-    window.addEventListener('scroll', function () {
-      let header = document.querySelector('header');
-
-      header.classList.toggle('scrolled', window.scrollY > 0);
-    })
-  </script>
-
-
-  <!-- //////////////////////////////////// -->
+  <%- include ("./partials/footer.ejs") %>
 
 
 
