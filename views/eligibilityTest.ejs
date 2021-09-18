@@ -23,16 +23,38 @@
   <link rel="stylesheet" type="text/css" href="/css/eligibilityTest.css">
 
   <!-- FOR NAVBAR -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script> -->
 
   <!--[if lt IE 9]>
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>    
 	<![endif]-->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 </head>
 
 <body>
+  <%- include ("./partials/navbar.ejs") %>
+    <div class="container">
+      <div class="container-card">
+        <div class="card-heading">
+          <h1>Click to learn more.</h1>
+        </div>
+        <div class="card">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blobEligibility1">
+            <path fill="#457b9d"
+              d="M59.6,-20.9C67.4,4.8,57.3,34.9,42.1,42.2C26.9,49.6,6.6,34.2,-9,20.9C-24.5,7.6,-35.3,-3.7,-33,-21.8C-30.8,-39.9,-15.4,-64.8,5.2,-66.5C25.9,-68.3,51.7,-46.7,59.6,-20.9Z"
+              transform="translate(100 100)" />
+          </svg>
+          <h2>Comorbidities</h2>
+          <hr class="hr1">
+          <div class="content">
+            <h4>Card One</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi vitae facilis vel laborum excepturi
+              perferendis dolorem optio nulla sed ea veritatis, at quaerat odio accusamus dolorum! Delectus vero
+              temporibus maiores.</p>
+          </div>
+        </div>
 
   <%- include ("./partials/navbar.ejs") %>
   
@@ -56,259 +78,383 @@
             perferendis dolorem optio nulla sed ea veritatis, at quaerat odio accusamus dolorum! Delectus vero
             temporibus maiores.</p>
         </div>
-      </div>
 
-      <div class="card">
-        <h2>Lifestyle</h2>
-        <hr class="hr1">
-        <div class="content">
-          <h4>Card Two</h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi vitae facilis vel laborum excepturi
-            perferendis dolorem optio nulla sed ea veritatis, at quaerat odio accusamus dolorum! Delectus vero
-            temporibus maiores.</p>
+        <div class="card">
+          <h2>Donation Intervals</h2>
+          <hr class="hr1">
+          <div class="content">
+            <h4>Card Three</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi vitae facilis vel laborum excepturi
+              perferendis dolorem optio nulla sed ea veritatis, at quaerat odio accusamus dolorum! Delectus vero
+              temporibus maiores.</p>
+          </div>
         </div>
       </div>
 
-      <div class="card">
-        <h2>Donation Intervals</h2>
-        <hr class="hr1">
-        <div class="content">
-          <h4>Card Three</h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi vitae facilis vel laborum excepturi
-            perferendis dolorem optio nulla sed ea veritatis, at quaerat odio accusamus dolorum! Delectus vero
-            temporibus maiores.</p>
-        </div>
-      </div>
-    </div>
-
-
-
-    <div class="container-form">
-      <hr>
-      <h1>Let us know about your Comorbidities.</h1>
-      <div class="row">
-        <div class="form-left">
-          <form class="form">
-            <h3>Do you have asthma?</h3>
-            <div class="switch-field">
-              <input type="radio" id="asthma-y" name="asthma" value="yes" />
-              <label for="asthma-y">Yes</label>
-              <input type="radio" id="asthma-n" name="asthma" value="no" />
-              <label for="asthma-n">No</label>
-            </div>
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blobEligibility2">
-              <path fill="#89c2d9"
-                d="M51.2,-23.7C55.7,-2.7,41.4,17.3,24.1,28.9C6.8,40.5,-13.6,43.6,-23.4,35.7C-33.1,27.8,-32.2,8.8,-26.5,-13.8C-20.9,-36.4,-10.4,-62.6,6.4,-64.7C23.3,-66.8,46.6,-44.8,51.2,-23.7Z"
-                transform="translate(100 100)" />
-            </svg>
-          </form>
-        </div>
-
-        <div class="form-right">
-          <form class="form">
-            <h3>Do you have high blood pressure?</h3>
-            <div class="switch-field">
-              <input type="radio" id="highbp-y" name="highbp" value="yes" />
-              <label for="highbp-y">Yes</label>
-              <input type="radio" id="highbp-n" name="highbp" value="no" />
-              <label for="highbp-n">No</label>
-            </div>
-
-          </form>
-        </div>
+      <div style="display: none;" id="user_eligibility">
+        <input id="user_test" type="text" value="<%= user.test %>">
+        <input id="user_asthma" type="text" value="<%= user.asthma %>">
+        <input id="user_high_bp" type="text" value="<%= user.high_bp %>">
+        <input id="user_cancer" type="text" value="<%= user.cancer %>">
+        <input id="user_diabetes" type="text" value="<%= user.diabetes %>">
+        <input id="user_heart_disease" type="text" value="<%= user.heart_disease %>">
+        <input id="user_hepatitis" type="text" value="<%= user.hepatitis %>">
+        <input id="user_anemia" type="text" value="<%= user.anemia %>">
+        <input id="user_tuberculosis" type="text" value="<%= user.tuberculosis %>">
+        <input id="user_smoke" type="text" value="<%= user.smoke %>">
+        <input id="user_drinking" type="text" value="<%= user.drinking %>">
+        <input id="user_depression" type="text" value="<%= user.depression %>">
+        <input id="user_dob" type="date" value="<%= user.dob %>">
+        <input id="user_last_donation" type="date" value="<%= user.last_donation %>">
       </div>
 
-      <!-- <hr> -->
-      <div class="row">
-        <div class="form-left">
-          <form class="form">
-
-            <h3>Do you have any cancer history?</h3>
-            <div class="switch-field">
-              <input type="radio" id="cancer-y" name="cancer" value="yes" />
-              <label for="cancer-y">Yes</label>
-              <input type="radio" id="cancer-n" name="cancer" value="no" />
-              <label for="cancer-n">No</label>
-            </div>
-
-          </form>
-        </div>
-
-        <div class="form-right">
-          <form class="form">
-
-            <h3>Do you have diabetes?</h3>
-            <div class="switch-field">
-              <input type="radio" id="diabetes-y" name="diabetes" value="yes" />
-              <label for="diabetes-y">Yes</label>
-              <input type="radio" id="diabetes-n" name="diabetes" value="no" />
-              <label for="diabetes-n">No</label>
-            </div>
-
-          </form>
-        </div>
-      </div>
-
-      <!-- <hr> -->
-      <div class="row">
-        <div class="form-left">
-          <form class="form">
-
-            <h3>Do you have any heart disease?</h3>
-            <div class="switch-field">
-              <input type="radio" id="HeartDiesease-y" name="HeartDiesease" value="yes" />
-              <label for="HeartDiesease-y">Yes</label>
-              <input type="radio" id="HeartDiesease-n" name="HeartDiesease" value="no" />
-              <label for="HeartDiesease-n">No</label>
-            </div>
-
-          </form>
-        </div>
-
-        <div class="form-right">
-          <form class="form">
-
-            <h3>Do you have Hepatitis?</h3>
-            <div class="switch-field">
-              <input type="radio" id="Hepatitis-y" name="Hepatitis" value="yes" />
-              <label for="Hepatitis-y">Yes</label>
-              <input type="radio" id="Hepatitis-n" name="Hepatitis" value="no" />
-              <label for="Hepatitis-n">No</label>
-            </div>
-
-          </form>
-        </div>
-      </div>
-
-      <!-- <hr> -->
-      <div class="row">
-        <div class="form-left">
-          <form class="form">
-
-            <h3>Do you have Anemia?</h3>
-            <div class="switch-field">
-              <input type="radio" id="anemia-y" name="anemia" value="yes" />
-              <label for="anemia-y">Yes</label>
-              <input type="radio" id="anemia-n" name="anemia" value="no" />
-              <label for="anemia-n">No</label>
-            </div>
-
-          </form>
-        </div>
-
-        <div class="form-right">
-          <form class="form">
-
-            <h3>Do you have Tuberculosis(TB)?</h3>
-            <div class="switch-field">
-              <input type="radio" id="Tuberculosis-y" name="Tuberculosis" value="yes" />
-              <label for="Tuberculosis-y">Yes</label>
-              <input type="radio" id="Tuberculosis-n" name="Tuberculosis" value="no" />
-              <label for="Tuberculosis-n">No</label>
-            </div>
-
-          </form>
-        </div>
-      </div>
-
-      <hr>
-
-      <h1>A little about your lifestyle.</h1>
-
-      <div class="row-lifestyle">
-        <div class="form-left">
-          <form class="form">
-
-            <h3>How often do you smoke?</h3>
-
-            <input type="range" class="custom-range" min="0" max="2" id="customRange2">
-            <div class="range">
-              <label for="">Never</label>
-              <label for="">Frequently</label>
-              <label for="">Extreme</label>
-            </div>
-
-          </form>
-        </div>
-
-        <div class="form-right">
-          <form class="form">
-
-            <h3>How often do you drink?</h3>
-            <input type="range" class="custom-range" min="0" max="2" id="customRange2">
-            <div class="range">
-              <label for="">Never</label>
-              <label for="">Frequently</label>
-              <label for="">Extreme</label>
-            </div>
-
-          </form>
-        </div>
-      </div>
-
-      <div class="row-lifestyle">
-        <div class="form-left">
-          <form class="form">
-
-            <h3>Are you in depression?</h3>
-            <input type="range" class="custom-range" min="0" max="2" id="customRange2">
-            <div class="range">
-              <label for="">No</label>
-              <label for="">Medium</label>
-              <label for="">Severe</label>
-            </div>
 
 
-          </form>
-        </div>
-      </div>
-      <hr>
-
-      <div class="row-depression">
-        <div class="form-left">
-          <form class="form">
-
-            <h3>When did you last donate?</h3>
-            <div class="input-container cta">
-              <label class="checkbox-container">
-                <input type="checkbox" name="remember" value="false">
-                <span class="checkmark mt-1"></span>
-                (Not Applicable)
-              </label>
-              <div class="input-container lname">
-                <input id="DOB" name="dob" type="date" style="margin-bottom: 0;">
+      <div class="container-form">
+        <hr>
+        <h1>Let us know about your Comorbidities.</h1>
+        <form method="POST">
+          <div class="row">
+            <div class="form-left">
+              <!-- <form class="form"> -->
+              <h3>Do you have asthma?</h3>
+              <div class="switch-field">
+                <input type="radio" id="asthma-y" name="asthma" value="yes" required />
+                <label for="asthma-y">Yes</label>
+                <input type="radio" id="asthma-n" name="asthma" value="no" />
+                <label for="asthma-n">No</label>
               </div>
+              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blobEligibility2">
+                <path fill="#89c2d9"
+                  d="M51.2,-23.7C55.7,-2.7,41.4,17.3,24.1,28.9C6.8,40.5,-13.6,43.6,-23.4,35.7C-33.1,27.8,-32.2,8.8,-26.5,-13.8C-20.9,-36.4,-10.4,-62.6,6.4,-64.7C23.3,-66.8,46.6,-44.8,51.2,-23.7Z"
+                  transform="translate(100 100)" />
+              </svg>
+              <!-- </form> -->
             </div>
 
-          </form>
-        </div>
+            <div class="form-right">
+              <!-- <form class="form"> -->
+              <h3>Do you have high blood pressure?</h3>
+              <div class="switch-field">
+                <input type="radio" id="highbp-y" name="highbp" value="yes" required />
+                <label for="highbp-y">Yes</label>
+                <input type="radio" id="highbp-n" name="highbp" value="no" />
+                <label for="highbp-n">No</label>
+              </div>
+
+              <!-- </form> -->
+            </div>
+          </div>
+
+          <!-- <hr> -->
+          <div class="row">
+            <div class="form-left">
+              <!-- <form class="form"> -->
+
+              <h3>Do you have any cancer history?</h3>
+              <div class="switch-field">
+                <input type="radio" id="cancer-y" name="cancer" value="yes" required />
+                <label for="cancer-y">Yes</label>
+                <input type="radio" id="cancer-n" name="cancer" value="no" />
+                <label for="cancer-n">No</label>
+              </div>
+
+              <!-- </form> -->
+            </div>
+
+            <div class="form-right">
+              <!-- <form class="form"> -->
+
+              <h3>Do you have diabetes?</h3>
+              <div class="switch-field">
+                <input type="radio" id="diabetes-y" name="diabetes" value="yes" required />
+                <label for="diabetes-y">Yes</label>
+                <input type="radio" id="diabetes-n" name="diabetes" value="no" />
+                <label for="diabetes-n">No</label>
+              </div>
+
+              <!-- </form> -->
+            </div>
+          </div>
+
+          <!-- <hr> -->
+          <div class="row">
+            <div class="form-left">
+              <!-- <form class="form"> -->
+
+              <h3>Do you have any heart disease?</h3>
+              <div class="switch-field">
+                <input type="radio" id="HeartDisease-y" name="HeartDisease" value="yes" required />
+                <label for="HeartDisease-y">Yes</label>
+                <input type="radio" id="HeartDisease-n" name="HeartDisease" value="no" />
+                <label for="HeartDisease-n">No</label>
+              </div>
+
+              <!-- </form> -->
+            </div>
+
+            <div class="form-right">
+              <!-- <form class="form"> -->
+
+              <h3>Do you have Hepatitis?</h3>
+              <div class="switch-field">
+                <input type="radio" id="Hepatitis-y" name="Hepatitis" value="yes" required />
+                <label for="Hepatitis-y">Yes</label>
+                <input type="radio" id="Hepatitis-n" name="Hepatitis" value="no" />
+                <label for="Hepatitis-n">No</label>
+              </div>
+
+              <!-- </form> -->
+            </div>
+          </div>
+
+          <!-- <hr> -->
+          <div class="row">
+            <div class="form-left">
+              <!-- <form class="form"> -->
+
+              <h3>Do you have Anemia?</h3>
+              <div class="switch-field">
+                <input type="radio" id="anemia-y" name="anemia" value="yes" required />
+                <label for="anemia-y">Yes</label>
+                <input type="radio" id="anemia-n" name="anemia" value="no" />
+                <label for="anemia-n">No</label>
+              </div>
+
+              <!-- </form> -->
+            </div>
+
+            <div class="form-right">
+              <!-- <form class="form"> -->
+
+              <h3>Do you have Tuberculosis(TB)?</h3>
+              <div class="switch-field">
+                <input type="radio" id="Tuberculosis-y" name="Tuberculosis" value="yes" required />
+                <label for="Tuberculosis-y">Yes</label>
+                <input type="radio" id="Tuberculosis-n" name="Tuberculosis" value="no" />
+                <label for="Tuberculosis-n">No</label>
+              </div>
+
+              <!-- </form> -->
+            </div>
+          </div>
+
+          <hr>
+
+          <h1>A little about your lifestyle.</h1>
+
+          <div class="row-lifestyle">
+            <div class="form-left">
+              <!-- <form class="form"> -->
+
+              <h3>How often do you smoke?</h3>
+
+              <input type="range" class="custom-range" name="smoke" min="0" max="2" id="smokeRange">
+              <div class="range">
+                <label for="">Never</label>
+                <label for="">Frequently</label>
+                <label for="">Extreme</label>
+              </div>
+
+              <!-- </form> -->
+            </div>
+
+            <div class="form-right">
+              <!-- <form class="form"> -->
+
+              <h3>How often do you drink?</h3>
+              <input type="range" class="custom-range" name="drinking" min="0" max="2" id="drinkRange">
+              <div class="range">
+                <label for="">Never</label>
+                <label for="">Frequently</label>
+                <label for="">Extreme</label>
+              </div>
+
+              <!-- </form> -->
+            </div>
+          </div>
+
+          <div class="row-lifestyle">
+            <div class="form-left">
+              <!-- <form class="form"> -->
+
+              <h3>Are you in depression?</h3>
+              <input type="range" class="custom-range" name="depression" min="0" max="2" id="depressionRange">
+              <div class="range">
+                <label for="">No</label>
+                <label for="">Medium</label>
+                <label for="">Severe</label>
+              </div>
+
+
+              <!-- </form> -->
+            </div>
+          </div>
+          <hr>
+
+          <div class="row-depression">
+            <div class="form-left">
+              <!-- <form class="form"> -->
+
+              <h3>When did you last donate?</h3>
+              <div class="input-container cta">
+                <label class="checkbox-container">
+                  <input type="checkbox" id="last_donation_check" name="last_donation_check" value="false"
+                    onClick="setDateField()">
+                  <span class="checkmark mt-1"></span>
+                  (Not Applicable)
+                </label>
+                <div class="input-container lname" id="last-donation-container">
+                  <input id="last-donation" name="last_donation" type="date" value="" style="margin-bottom: 0;"
+                    required>
+                </div>
+              </div>
+
+              <!-- </form> -->
+            </div>
+
+          </div>
 
       </div>
+      <div class="btn">
+        <button class="signup-btn" type="submit">Submit</button>
+      </div>
+      </form>
 
     </div>
-    <div class="btn">
-      <button class="signup-btn" type="submit">Submit</button>
-    </div>
-
-  </div>
-
-  <%- include ("./partials/footer.ejs") %>
+    <%- include ("./partials/footer.ejs") %>
 
 
 
 
-  <script src="assets/js/jquery-3.2.1.min.js"></script>
-  <script src="assets/js/popper.min.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
-    </script>
-  <!-- FOR NAVBAR -->
-  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-    crossorigin="anonymous"></script>
+      <script>
+        const card = document.querySelectorAll(".card");
+
+        function clickCard() {
+          this.classList.toggle('is-clicked');
+        }
+        card.forEach((card) => card.addEventListener("click", clickCard));
+
+      </script>
+
+      <script>
+        $(document).ready(function () {
+          if ($("#user_test").val() === 'yes') {
+            $('input:radio[name="asthma"]').filter('[value="' + $("#user_asthma").val() + '"]').attr('checked', true);
+            $('input:radio[name="highbp"]').filter('[value="' + $("#user_high_bp").val() + '"]').attr('checked', true);
+            $('input:radio[name="cancer"]').filter('[value="' + $("#user_cancer").val() + '"]').attr('checked', true);
+            $('input:radio[name="diabetes"]').filter('[value="' + $("#user_diabetes").val() + '"]').attr('checked', true);
+            $('input:radio[name="HeartDisease"]').filter('[value="' + $("#user_heart_disease").val() + '"]').attr('checked', true);
+            $('input:radio[name="Hepatitis"]').filter('[value="' + $("#user_hepatitis").val() + '"]').attr('checked', true);
+            $('input:radio[name="anemia"]').filter('[value="' + $("#user_anemia").val() + '"]').attr('checked', true);
+            $('input:radio[name="Tuberculosis"]').filter('[value="' + $("#user_tuberculosis").val() + '"]').attr('checked', true);
+
+            document.getElementById('smokeRange').value = $("#user_smoke").val();
+            document.getElementById('drinkRange').value = $("#user_drinking").val();
+            document.getElementById('depressionRange').value = $("#user_depression").val();
+
+            if($("#user_last_donation").val() == '') {
+              document.getElementById('last_donation_check').checked = true;
+              // document.getElementById("last-donation").required = false;
+              // $("#last-donation-container").hide();
+              setMinDate($("#user_dob").val(), false);
+            }
+            else {
+              document.getElementById('last_donation_check').checked = false;
+              document.getElementById('last_donation_check').disabled = true;
+              $("#last-donation").val($("#user_last_donation").val());
+              setMinDate($("#user_last_donation").val(), true);
+            }
+          }
+          else{
+            setMinDate($("#user_dob").val(), false);
+          }
+          setDateField();
+        });
+      </script>
+
+      <script>
+        function setDateField() {
+          var checkBox = document.getElementById('last_donation_check');
+          if (checkBox.checked == true) {
+            document.getElementById("last-donation").required = false;
+            $("#last-donation-container").hide();
+          }
+          else {
+            document.getElementById("last-donation").required = true;
+            $("#last-donation-container").show();
+          }
+        }
+      </script>
+
+      <script>
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+          dd = '0' + dd
+        }
+        if (mm < 10) {
+          mm = '0' + mm
+        }
+
+        today = yyyy + '-' + mm + '-' + dd;
+        // console.log(today);
+        document.getElementById("last-donation").setAttribute("max", today);
+      </script>
+
+      <script>
+        function setMinDate(date , flag) {
+          // console.log(date);
+          var minDate = new Date(date);
+          if(flag == true) minDate.setMonth(minDate.getMonth() + 3);
+          // console.log(minDate);
+          // console.log(new Date(document.getElementById('last-donation').max));
+          if(minDate > new Date(document.getElementById('last-donation').max))
+          {
+            document.getElementById('last-donation').disabled = true;
+            return;
+          }
+          var dd = minDate.getDate();
+          var mm = minDate.getMonth() + 1; //January is 0!
+          var yyyy = minDate.getFullYear();
+          if (dd < 10) {
+            dd = '0' + dd
+          }
+          if (mm < 10) {
+            mm = '0' + mm
+          }
+
+          minDate = yyyy + '-' + mm + '-' + dd;
+          // console.log(minDate);
+          document.getElementById("last-donation").setAttribute("min", minDate);
+        }
+      </script>
+
+      <script>
+        $('input:invalid').focus(function () {
+          var element = $(this);
+          if (element.offset().top - $(window).scrollTop() < 180) {
+            $('html, body').animate({
+              scrollTop: element.offset().top - 180 /* 180 is height of navbar + input label */
+            }, 500);
+          }
+        });
+      </script>
+
+
+
+      <script src="assets/js/jquery-3.2.1.min.js"></script>
+      <script src="assets/js/popper.min.js"></script>
+      <script src="assets/js/bootstrap.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+        </script>
 
 </body>
 

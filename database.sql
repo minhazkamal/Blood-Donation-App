@@ -16,6 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `active_status`
+--
+
+DROP TABLE IF EXISTS `active_status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `active_status` (
+  `id` int NOT NULL,
+  `status` enum('yes','no') NOT NULL DEFAULT 'no',
+  PRIMARY KEY (`id`),
+  CONSTRAINT `active_status_id` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `active_status`
+--
+
+LOCK TABLES `active_status` WRITE;
+/*!40000 ALTER TABLE `active_status` DISABLE KEYS */;
+INSERT INTO `active_status` VALUES (6,'yes'),(7,'no'),(8,'no'),(9,'no'),(10,'no'),(11,'no'),(12,'no'),(13,'no'),(14,'no'),(15,'no'),(16,'no'),(17,'no'),(18,'no'),(19,'no'),(20,'no'),(21,'no'),(22,'no'),(23,'no');
+/*!40000 ALTER TABLE `active_status` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `districts`
 --
 
@@ -65,6 +90,42 @@ INSERT INTO `divisions` VALUES (1,'Barisal'),(2,'Chittagong'),(3,'Dhaka'),(4,'Kh
 UNLOCK TABLES;
 
 --
+-- Table structure for table `eligibility_report`
+--
+
+DROP TABLE IF EXISTS `eligibility_report`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `eligibility_report` (
+  `id` int NOT NULL,
+  `asthma` enum('yes','no') NOT NULL,
+  `high_bp` enum('yes','no') NOT NULL,
+  `cancer` enum('yes','no') NOT NULL,
+  `diabetes` enum('yes','no') NOT NULL,
+  `heart_disease` enum('yes','no') NOT NULL,
+  `hepatitis` enum('yes','no') NOT NULL,
+  `anemia` enum('yes','no') NOT NULL,
+  `tuberculosis` enum('yes','no') NOT NULL,
+  `smoke` enum('0','1','2') NOT NULL,
+  `drinking` enum('0','1','2') NOT NULL,
+  `depression` enum('0','1','2') NOT NULL,
+  `last_donation` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `elg_report_id` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `eligibility_report`
+--
+
+LOCK TABLES `eligibility_report` WRITE;
+/*!40000 ALTER TABLE `eligibility_report` DISABLE KEYS */;
+INSERT INTO `eligibility_report` VALUES (6,'no','yes','yes','no','yes','no','no','yes','0','0','0',NULL);
+/*!40000 ALTER TABLE `eligibility_report` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `nid`
 --
 
@@ -104,8 +165,11 @@ CREATE TABLE `organizations` (
   `contact` varchar(11) DEFAULT NULL,
   `lon` double DEFAULT NULL,
   `lat` double DEFAULT NULL,
+  `division` int NOT NULL,
+  `district` int NOT NULL,
+  `upazilla` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +178,7 @@ CREATE TABLE `organizations` (
 
 LOCK TABLES `organizations` WRITE;
 /*!40000 ALTER TABLE `organizations` DISABLE KEYS */;
-INSERT INTO `organizations` VALUES (1,'Dhaka Medical College Hospital','Secretariat Road, Shahbag, Dhaka, Dhaka','02-55165088',23.725869,90.396524),(2,'Sir Salimullah Medical College Hospitals','Mitford road, Chackbazar, Dhaka, Dhaka','01703636314',23.711423,90.401239),(3,'Square Hospitals','Bir Uttam Qazi Nuruzzaman Road, Tejgaon, Dhaka, Dhaka','02-8144400',23.752927,90.381731),(4,'Evercare Hospital Dhaka','Hospital Road, Vatara, Dhaka, Dhaka','10678',23.810054,90.43254),(5,'Mymensingh Medical College','Dhaka-Mymensingh Road, Mymensingh Sadar, Mymensingh, Mymensingh','01713332468',24.743187,90.409051),(6,'Chittagong Medical College','KBF Kader Road, Kotwali, Chittagong, Chittagong','031-630335',22.359414,91.830903),(7,'Evercare Hospital Chitagong','Kuwaish Road, Chandgaon, Chittagong, Chittagong','10678',22.401834,91.849365),(8,'Chittagong General Hospital','Anderkilla Road, Kotwali, Chittagong, Chittagong','01711468326',22.340604,91.837763),(9,'BIRDEM General Hospital','Kazi Nazrul Islam Ave, Shahbag, Dhaka, Dhaka','02-41060501',23.738799,90.396402),(10,'BSMMU Hospitals','Kazi Nazrul Islam Avenue, Shahbag, Dhaka, Dhaka','01866637482',23.739668,90.394563),(11,'United Hospital Ltd.','Hospital Road, Gulshan, Dhaka, Dhaka','',23.804578,90.415648),(12,'Parkview Hospital Ltd','Pachlaish Road, Panchlaish, Chittagong, Chittagong','01976022333',22.363095,91.835649),(13,'National Hospital Pvt Ltd','Mehedibag Road, Kotwali, Chittagong, Chittagong','031623753',22.35486,91.82491),(14,'Max Hospitals Ltd','Hussain Park Street, Kotwali, Chittagong, Chittagong','01713998199',22.355308,91.825237),(15,'Imperial Hospitals Ltd','Zakir Hussain Road, Kulshi, Chittagong, Chittagong','0961224724',22.359176,91.795598),(16,'Shaheed Tajuddin Ahmed Medical College Hospital ','Hospital Road, Gazipur Sadar-Joydebpur, Gazipur, Dhaka','',23.9992261,90.424614);
+INSERT INTO `organizations` VALUES (1,'Dhaka Medical College Hospital','Secretariat Road, Shahbag, Dhaka, Dhaka','02-55165088',23.725869,90.396524,3,1,533),(2,'Sir Salimullah Medical College Hospitals','Mitford road, Chackbazar, Dhaka, Dhaka','01703636314',23.711423,90.401239,3,1,500),(3,'Square Hospitals','Bir Uttam Qazi Nuruzzaman Road, Tejgaon, Dhaka, Dhaka','02-8144400',23.752927,90.381731,3,1,538),(4,'Evercare Hospital Dhaka','Hospital Road, Vatara, Dhaka, Dhaka','10678',23.810054,90.43254,3,1,544),(5,'Mymensingh Medical College','Dhaka-Mymensingh Road, Mymensingh Sadar, Mymensingh, Mymensingh','01713332468',24.743187,90.409051,8,10,217),(6,'Chittagong Medical College','KBF Kader Road, Kotwali, Chittagong, Chittagong','031-630335',22.359414,91.830903,2,43,566),(7,'Evercare Hospital Chitagong','Kuwaish Road, Chandgaon, Chittagong, Chittagong','10678',22.401834,91.849365,2,43,560),(8,'Chittagong General Hospital','Anderkilla Road, Kotwali, Chittagong, Chittagong','01711468326',22.340604,91.837763,2,43,566),(9,'BIRDEM General Hospital','Kazi Nazrul Islam Ave, Shahbag, Dhaka, Dhaka','02-41060501',23.738799,90.396402,3,1,533),(10,'BSMMU Hospitals','Kazi Nazrul Islam Avenue, Shahbag, Dhaka, Dhaka','01866637482',23.739668,90.394563,3,1,533),(11,'United Hospital Ltd.','Hospital Road, Gulshan, Dhaka, Dhaka','',23.804578,90.415648,3,1,508),(12,'Parkview Hospital Ltd','Pachlaish Road, Panchlaish, Chittagong, Chittagong','01976022333',22.363095,91.835649,2,43,569),(13,'National Hospital Pvt Ltd','Mehedibag Road, Kotwali, Chittagong, Chittagong','031623753',22.35486,91.82491,2,43,566),(14,'Max Hospitals Ltd','Hussain Park Street, Kotwali, Chittagong, Chittagong','01713998199',22.355308,91.825237,2,43,566),(15,'Imperial Hospitals Ltd','Zakir Hussain Road, Kulshi, Chittagong, Chittagong','0961224724',22.359176,91.795598,2,43,567),(16,'Shaheed Tajuddin Ahmed Medical College Hospital ','Hospital Road, Gazipur Sadar-Joydebpur, Gazipur, Dhaka','',23.9992261,90.424614,3,3,159),(20,'Al Helal Specialized Hospital','Mirpur-10, Mirpur Model, Dhaka, Dhaka','',23.793702,90.362237,3,1,519);
 /*!40000 ALTER TABLE `organizations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,6 +205,43 @@ LOCK TABLES `profile_picture` WRITE;
 /*!40000 ALTER TABLE `profile_picture` DISABLE KEYS */;
 INSERT INTO `profile_picture` VALUES (6,'avatar.png'),(7,'avatar.png'),(8,'avatar.png'),(9,'avatar.png'),(10,'avatar.png'),(11,'avatar.png'),(12,'avatar.png'),(13,'avatar.png'),(14,'avatar.png'),(15,'avatar.png'),(16,'avatar.png'),(17,'avatar.png'),(18,'avatar.png'),(19,'avatar.png'),(20,'avatar.png'),(21,'avatar.png'),(22,'avatar.png'),(23,'avatar.png');
 /*!40000 ALTER TABLE `profile_picture` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `requests`
+--
+
+DROP TABLE IF EXISTS `requests`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `requests` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `post_by` int NOT NULL,
+  `patient` varchar(250) NOT NULL,
+  `contact_person` varchar(250) NOT NULL,
+  `contact` varchar(11) NOT NULL,
+  `approx_donation_date` date NOT NULL,
+  `BG` enum('A+','A-','B+','B-','O+','O-','AB+','AB-') NOT NULL,
+  `complication` varchar(500) DEFAULT NULL,
+  `quantity` int NOT NULL,
+  `organization_id` int NOT NULL,
+  `org_address_details` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `posted_by_idx` (`post_by`),
+  KEY `organization_id_idx` (`organization_id`),
+  CONSTRAINT `organization_id` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `posted_by` FOREIGN KEY (`post_by`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `requests`
+--
+
+LOCK TABLES `requests` WRITE;
+/*!40000 ALTER TABLE `requests` DISABLE KEYS */;
+INSERT INTO `requests` VALUES (2,6,'Minhaz','Minhaz Kamal','01867057600','2021-08-30','O+','Accident',2,1,''),(4,6,'Minhaz Kamal','Kamal','01521503910','2021-08-30','O+','Accident',2,20,'Near Mirpur-10 circle');
+/*!40000 ALTER TABLE `requests` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -262,7 +363,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (6,'Minhaz','Kamal','minhaz.kamal9900@gmail.com',NULL,'yes','yes','yes','no','2021-08-09','google'),(7,'Saidul','Islam','saidulislam@ctgmail.com','$2a$10$5EHNT1zc7RyqjQPRHhHAXeV0l0iDLCHQmboHgOHQhIeXcDqZMpTgK','yes','yes','yes','no','2021-08-14','self'),(8,'Anas ','Jawad','anasjawad@ctgmail.com','$2a$10$2bVz1.ApAW2kexix1dVtsOYIDlZU2yMjCLFG90cTKcd/7OSm739l6','yes','yes','yes','no','2021-08-14','self'),(9,'Sartaj','Ekram','sartajekram@ctgmail.com','$2a$10$xJXR.1JJ15vC5PDxVx2OL.P06h8Cw5lf.7e1HBJH7WJ4aDDI0HMx2','yes','yes','yes','no','2021-08-14','self'),(10,'Sajid','Altaf','sajidaltaf@ctgmail.com','$2a$10$oIJ2ie4Ce5bvo2ntqvIXu.euv4k6umGDFAzS9aa7uSukp0r9Rvxne','yes','yes','yes','no','2021-08-14','self'),(11,'Zibran ','Zarif','zibranzarif@ctgmail.com','$2a$10$gIwSkg0AycUncolLZqBS2eDrnbKwv5PbuFi9FEKLmdWMxWEF21fb6','yes','yes','yes','no','2021-08-14','self'),(12,'Anas Azmayeen','Zamee','anaszamee@ctgmail.com','$2a$10$7NAu49kZ9lPezJ/8lMzPVuA3qF3NJpSHu7HCxLuoXbaCxg1O9EW4W','yes','yes','yes','no','2021-08-14','self'),(13,'Raihan','Mahmud','raihanmahmud@ctgmail.com','$2a$10$fCBDWHM6SECAn7iu.ZChSOTPXktYEFC4R8kZR5MkpwDi54D1XnmJm','yes','yes','yes','no','2021-08-14','self'),(14,'Zawad','Chowdhury','zawadchowdhury@ctgmail.com','$2a$10$eddsbEG2zlLDCrCbpdPZ7OE8nfXllfGqg/eUiW5yVVnfvcDorchBq','yes','yes','yes','no','2021-08-14','self'),(15,'Eraj','Chowdhury','eraj@ctgmail.com','$2a$10$jfqEoO/jbdv837HY7VUSae6uo.0lnWwvUKywXEnANJDNOQjqLhxr6','yes','yes','yes','no','2021-08-14','self'),(16,'Najmul','Bari','najmuk@dhkmail.com','$2a$10$l2//I7uxveu/MFKGqAMG3O0BdiGeBgjqwe4a5pD49r7ikrAGxZI5i','yes','yes','yes','no','2021-08-14','self'),(17,'Talha','Chowdhury','talha@dhkmail.com','$2a$10$aYHGv1UULysJEQ8drnf20eVfgzL46BnTMaIKQz5pFYm.UVx18ckJm','yes','yes','yes','no','2021-08-14','self'),(18,'Intiser','Chowdhury','intiser@dhkmail.com','$2a$10$B7sgkFDyp9mVGEWC/X/7YuVDEyI1O5ZR1iEdOwdmzSyNr.kZjOoUW','yes','yes','yes','no','2021-08-14','self'),(19,'Afeef','Ahmed','afeef@dhkmail.com','$2a$10$Xl/qnyVWkzz2buXaVI3T2e.UuNv9Qt5.FsE3cNM1sLcQQf.u6k7L6','yes','yes','yes','no','2021-08-14','self'),(20,'Ifrad','Towhid','ifrad@dhkmail.com','$2a$10$ZWHUgyxpuCLPA7P8g7y2Nut6Q1eqWE266v7moI3/KU5sit.c9CRgO','yes','yes','yes','no','2021-08-14','self'),(21,'Mehdad','Hussain','mehdad@dhkmail.com','$2a$10$e4cewSq926PXBaa2JQekkehjNdZfLyF2puCwgYND8.FJf4vahCotq','yes','yes','yes','no','2021-08-14','self'),(22,'Rayan','Iqbal','rayaniqbalorion@gmail.com','$2a$10$9zS3l34nwm8msQwu0rFRP.LMkznBap/xx5P/7D99ukC2KZ/hyD8Gi','yes','yes','yes','no','2021-08-21','self'),(23,'Minhaz','Kamal','minhaz.kamal9903@gmail.com',NULL,'yes','no','no','no','2021-08-26','google');
+INSERT INTO `users` VALUES (6,'Minhaz','Kamal','minhaz.kamal9900@gmail.com',NULL,'yes','yes','yes','yes','2021-08-09','google'),(7,'Saidul','Islam','saidulislam@ctgmail.com','$2a$10$5EHNT1zc7RyqjQPRHhHAXeV0l0iDLCHQmboHgOHQhIeXcDqZMpTgK','yes','yes','yes','no','2021-08-14','self'),(8,'Anas ','Jawad','anasjawad@ctgmail.com','$2a$10$2bVz1.ApAW2kexix1dVtsOYIDlZU2yMjCLFG90cTKcd/7OSm739l6','yes','yes','yes','no','2021-08-14','self'),(9,'Sartaj','Ekram','sartajekram@ctgmail.com','$2a$10$xJXR.1JJ15vC5PDxVx2OL.P06h8Cw5lf.7e1HBJH7WJ4aDDI0HMx2','yes','yes','yes','no','2021-08-14','self'),(10,'Sajid','Altaf','sajidaltaf@ctgmail.com','$2a$10$oIJ2ie4Ce5bvo2ntqvIXu.euv4k6umGDFAzS9aa7uSukp0r9Rvxne','yes','yes','yes','no','2021-08-14','self'),(11,'Zibran ','Zarif','zibranzarif@ctgmail.com','$2a$10$gIwSkg0AycUncolLZqBS2eDrnbKwv5PbuFi9FEKLmdWMxWEF21fb6','yes','yes','yes','no','2021-08-14','self'),(12,'Anas Azmayeen','Zamee','anaszamee@ctgmail.com','$2a$10$7NAu49kZ9lPezJ/8lMzPVuA3qF3NJpSHu7HCxLuoXbaCxg1O9EW4W','yes','yes','yes','no','2021-08-14','self'),(13,'Raihan','Mahmud','raihanmahmud@ctgmail.com','$2a$10$fCBDWHM6SECAn7iu.ZChSOTPXktYEFC4R8kZR5MkpwDi54D1XnmJm','yes','yes','yes','no','2021-08-14','self'),(14,'Zawad','Chowdhury','zawadchowdhury@ctgmail.com','$2a$10$eddsbEG2zlLDCrCbpdPZ7OE8nfXllfGqg/eUiW5yVVnfvcDorchBq','yes','yes','yes','no','2021-08-14','self'),(15,'Eraj','Chowdhury','eraj@ctgmail.com','$2a$10$jfqEoO/jbdv837HY7VUSae6uo.0lnWwvUKywXEnANJDNOQjqLhxr6','yes','yes','yes','no','2021-08-14','self'),(16,'Najmul','Bari','najmuk@dhkmail.com','$2a$10$l2//I7uxveu/MFKGqAMG3O0BdiGeBgjqwe4a5pD49r7ikrAGxZI5i','yes','yes','yes','no','2021-08-14','self'),(17,'Talha','Chowdhury','talha@dhkmail.com','$2a$10$aYHGv1UULysJEQ8drnf20eVfgzL46BnTMaIKQz5pFYm.UVx18ckJm','yes','yes','yes','no','2021-08-14','self'),(18,'Intiser','Chowdhury','intiser@dhkmail.com','$2a$10$B7sgkFDyp9mVGEWC/X/7YuVDEyI1O5ZR1iEdOwdmzSyNr.kZjOoUW','yes','yes','yes','no','2021-08-14','self'),(19,'Afeef','Ahmed','afeef@dhkmail.com','$2a$10$Xl/qnyVWkzz2buXaVI3T2e.UuNv9Qt5.FsE3cNM1sLcQQf.u6k7L6','yes','yes','yes','no','2021-08-14','self'),(20,'Ifrad','Towhid','ifrad@dhkmail.com','$2a$10$ZWHUgyxpuCLPA7P8g7y2Nut6Q1eqWE266v7moI3/KU5sit.c9CRgO','yes','yes','yes','no','2021-08-14','self'),(21,'Mehdad','Hussain','mehdad@dhkmail.com','$2a$10$e4cewSq926PXBaa2JQekkehjNdZfLyF2puCwgYND8.FJf4vahCotq','yes','yes','yes','no','2021-08-14','self'),(22,'Rayan','Iqbal','rayaniqbalorion@gmail.com','$2a$10$9zS3l34nwm8msQwu0rFRP.LMkznBap/xx5P/7D99ukC2KZ/hyD8Gi','yes','yes','yes','no','2021-08-21','self'),(23,'Minhaz','Kamal','minhaz.kamal9903@gmail.com',NULL,'yes','no','no','no','2021-08-26','google');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -275,4 +376,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-27 11:48:31
+-- Dump completed on 2021-09-03  1:02:22

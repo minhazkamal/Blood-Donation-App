@@ -356,8 +356,11 @@ router.post('/', validator, [
                                                                             // console.log(result);
                                                                             db.updateUsers(req.session.user_id, req.body.fname, req.body.lname, 'yes', 'yes')
                                                                                 .then(result => {
-
-                                                                                    res.send("<h1>Dashboard</h1><br><span>Under Progress....</span>");
+                                                                                    db.insertActiveStatus(req.session.user_id, 'no')
+                                                                                    .then(result => {
+                                                                                        res.redirect('/dashboard');
+                                                                                    })
+                                                                                    // res.send("<h1>Dashboard</h1><br><span>Under Progress....</span>");
                                                                                     // console.log('insertion successfull');
                                                                                 })
                                                                         })
@@ -379,7 +382,8 @@ router.post('/', validator, [
                                                                             db.updateUsers(req.session.user_id, req.body.fname, req.body.lname, 'yes', 'yes')
                                                                                 .then(result => {
 
-                                                                                    res.send("<h1>Dashboard</h1><br><span>Under Progress....</span>");
+                                                                                    res.redirect('/dashboard');
+                                                                                    // res.send("<h1>Dashboard</h1><br><span>Under Progress....</span>");
                                                                                     // console.log('insertion successfull');
                                                                                 })
                                                                         })

@@ -34,19 +34,26 @@
 
         <div class="main-container">
             <main class="container">
+                <div style="display: none;" id="user">
+                    <input id="user_name" type="text" value="<%= user_status.name %>">
+                    <input id="user_eligibility" type="text" value="<%= user_status.eligibility %>">
+                    <input id="user_active" type="text" value="<%= user_status.active %>">
+                </div>
 
                 <div class="row">
                     <div class="card-03">
-                        <h4>Welcome, Username</h4>
+                        <h4>Welcome, <b><span id='name'>Username</span></b></h4>
                     </div>
                     <div class="toggle">
                         <div class="toggle-switch">
                             <h5 style="margin-right: 1rem;">Active Status </h5>
                             <label class="switch">
-                                <input type="checkbox">
+                                <input type="checkbox" id="active_status" value="false" onclick="updateActive()">
                                 <span class="slider round"></span>
                             </label>
                         </div>
+                        <span id="warning-message" style="display: none; color: red;">* Perform eligibility test to
+                            enable the option</span>
                         <!--     
                         <div class="toggle-switch">
                             <h5 style="margin-right: 1rem;">Eligibility Status </h5>
@@ -69,7 +76,8 @@
 
                         </div>
                         <div class="card-01">
-                            <a href="#" class="stretched-link" style="  text-decoration: none; color: inherit;">
+                            <a href="/eligibility-test" class="stretched-link"
+                                style="  text-decoration: none; color: inherit;">
                                 <i class="fa fa-user-md fa-5x mr-2"></i>
                                 <p class="lead">Eligibility test </i></p>
                             </a>
@@ -83,13 +91,15 @@
                     </div>
                     <div class="row">
                         <div class="card-01">
-                            <a href="#" class="stretched-link" style="  text-decoration: none; color: inherit;">
+                            <a href="/search-donor" class="stretched-link"
+                                style="  text-decoration: none; color: inherit;">
                                 <i class="fa fa-group fa-5x mr-2"></i>
                                 <p class="lead">Donors </p>
                             </a>
                         </div>
                         <div class="card-01">
-                            <a href="#" class="stretched-link" style="  text-decoration: none; color: inherit;">
+                            <a href="/search-org" class="stretched-link"
+                                style="  text-decoration: none; color: inherit;">
                                 <i class="fa fa-hospital-o fa-5x mr-2"></i>
                                 <p class="lead">Organizations </p>
                             </a>
@@ -101,6 +111,14 @@
                             </a>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="card-01">
+                            <a href="#" class="stretched-link" style="  text-decoration: none; color: inherit;">
+                                <i class="fas fa-hand-holding-heart fa-5x mr-2"></i>
+                                <p class="lead">My Requests </p>
+                            </a>
+                        </div>
+                    </div>
             </main>
 
         </div>
@@ -109,50 +127,47 @@
         <%- include ("./partials/footer.ejs") %>
 
 
-            <!-- ///////////////NAVBAR//////////////// -->
-            <script type="text/javascript">
-                // jquery for toggle dropdown menus
-                $(document).ready(function () {
-                    //toggle sub-menus
-                    $(".sub-btn").click(function () {
-                        $(this).next(".sub-menu").slideToggle();
-                    });
-
-                    //toggle more-menus
-                    $(".more-btn").click(function () {
-                        $(this).next(".more-menu").slideToggle();
-                    });
-                });
-
-                //javascript for the responsive navigation menu
-                var menu = document.querySelector(".menu");
-                var menuBtn = document.querySelector(".menu-btn");
-                var closeBtn = document.querySelector(".close-btn");
-
-                menuBtn.addEventListener("click", () => {
-                    menu.classList.add("active");
-                });
-
-                closeBtn.addEventListener("click", () => {
-                    menu.classList.remove("active");
-                });
-
-                //javascript for the navigation bar effects on scroll
-                window.addEventListener("scroll", function () {
-                    var header = document.querySelector("header");
-                    header.classList.toggle("sticky", window.scrollY > 0);
-                });
-            </script>
-
-
-            <!-- //////////////////////////////////// -->
-
             <script>
-                window.addEventListener('scroll', function () {
-                    let header = document.querySelector('header');
+                $(document).ready(function () {
+                    $("#name").html($("#user_name").val());
+                    if ($("#user_eligibility").val() === 'yes') {
+                        if ($("#user_active").val() === 'yes') $("#active_status").attr('checked', true);
+                        else $("#active_status").attr('checked', false);
+                    }
+                    else {
+                        $("#active_status").attr('checked', false);
+                        $("#active_status").attr('disabled', true);
+                        $("#warning-message").show();
+                    }
+                });
 
-                    header.classList.toggle('scrolled', window.scrollY > 0);
-                })
+                function updateActive() {
+                    var decider = document.getElementById('active_status');
+                    if (decider.checked == true) {
+                        $.ajax({
+                            type: 'GET',
+                            data: { value: 'yes' },
+                            url: '/dashboard/update-active',
+                            async: false,
+                            success: function (data) {
+                                // console.log(data);
+                            }
+                        });
+                    } else {
+                        $.ajax({
+                            type: 'GET',
+                            data: { value: 'no' },
+                            url: '/dashboard/update-active',
+                            async: false,
+                            success: function (data) {
+                                // console.log(data);
+                            }
+                        });
+                    }
+                }
+
+
+
             </script>
 
 
@@ -168,8 +183,9 @@
                 crossorigin="anonymous">
                 </script>
             <!-- FOR NAVBAR -->
-            <script src="https://code.jquery.com/jquery-3.6.0.js"
-                integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+            <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"
+                integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
+                <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 </body>
 
