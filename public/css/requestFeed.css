@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    --primary-blue: #2f6690;
+    --primary-pink: #b9375e;
+    box-sizing: border-box;
+    /* font-size: 1em;  */
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    margin-top: 120px;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.card-02 {
+    z-index: -1;
+    background: rgb(243, 243, 243);
+    position: relative;
+    flex: 1;
+    max-width: 940px;
+    height: 300px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter{
+height: 100%;
+margin-top: 1.5rem;
+}
+
+.card-01 {
+    z-index: -1;
+    background: rgb(243, 243, 243);
+    position: relative;
+    flex: 1;
+    max-width: 940px;
+    height: 300px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-card {
+    display: flex;
+    align-items: center;
+}
+
+.profile {
+    z-index: 9;
+    background: #ffc3cc;
+    width: 270px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    transform: translateX(-3em);
+    border-radius: 5px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+    margin-left: 5px;
+    flex-direction: column;
+    position: relative;
+}
+
+.name {
+    font-size: large;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.blood-group {
+    font-size: x-large;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.blood-required {
+    font-size: large;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+i.fa-user-circle {
+    margin-top: 15px;
+    z-index: 999;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.card-02 .btn {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    transform: translateY(6.5em);
+    flex-direction: row;
+}
+
+.view-profile-btn {
+    margin-right: 15px;
+    background: var(--primary-pink);
+    color: white;
+    font-weight: 500;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: 0.3s;
+    font-size: 0.875rem;
+}
+
+.view-profile-btn:hover {
+    background: #d34e76;
+    cursor: pointer;
+}
+
+.respond-btn {
+    background: var(--primary-blue);
+    color: white;
+    font-weight: 500;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: 0.3s;
+    font-size: 0.875rem;
+}
+
+.respond-btn:hover {
+    background: #3a7ca5;
+    cursor: pointer;
+}
+
+.info {
+    margin-left: 1em;
+    width: 100%;
+    font-size: 1.25em;
+}
+
+.learnmore-btn {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 8px;
+    text-transform: uppercase;
+    margin-right: 2em;
+}
+.learnmore-btn:hover {
+    background: black;
+}
+@media (max-width:800px) {
+    .row{
+        margin-bottom: 8rem;
+        margin-left: 0;
+    }
+    .container {
+        margin-top: 180px;
+    }
+    .card-02 {   
+        max-width: 600px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .profile {
+        z-index: 9;
+        background: #ffc3cc;
+        max-width: 100%;
+        max-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        transform: translate(0, -6em);
+    }
+    .card-02 .btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0;
+        transform: translateY(-7em);
+    }
+    .profile-card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        transform: translateY(2em);
+        height: 100%;
+    }
+    .info {
+        visibility: hidden;
+    }
+    .learnmore-btn {
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 0.5rem;
+        border-radius: 8px;
+        text-transform: uppercase;
+        margin-left: 2em;
+    }
+    .learnmore-btn:hover {
+        background: black;
+    }
+}
