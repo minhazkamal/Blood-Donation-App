@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    --primary-blue: #2f6690;
+    --primary-pink: #b9375e;
+    box-sizing: border-box;
+
+    /* font-size: 1em;  */
+}
 :root{
     font-size: 100%;
     font-size: 16px;
@@ -10,28 +20,31 @@
 
 body {
     margin: 0;
-    padding-top: 40px;
+    padding: 0;
     color: #2e323c;
+    width: 100%;
+    height: 100%;
     /* background: url(https://images.unsplash.com/photo-1514451380751-c374d1d0d4d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxhbGx8fHx8fHx8fHwxNjI1MTIwMjYz&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit); */
     /* position: relative; */
     /* height: 100%; */
-    background-size: cover;
     font-family: 'Montserrat',sans-serif;
-    padding-bottom: 40px;
-    background: url(/img/waveKYC.png);
+    background: url(/img/waveNewRequest.png) no-repeat;
+    background-size: cover;
 
 }
 
 .container {
     position: relative;
     width: 100%;
-    /* display: flex; display flex dile kono kisu hide korle chepe jay */
+    height: fit-content;
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     padding: 30px;
     margin-top: 60px;
     margin-bottom: 50px;
+    
 }
 
 .account-settings .user-profile {
@@ -65,6 +78,9 @@ input[type="text"],input[type="email"],input[type="tel"],input[type="date"],inpu
     font-weight: 500;
 }
 
+input[type="checkbox"]{
+    zoom: 1.25;
+}
 
 ::placeholder{
     color: black;
@@ -74,31 +90,9 @@ input[type="text"],input[type="email"],input[type="tel"],input[type="date"],inpu
     font-family: 'Montserrat',sans-serif;
 }
 
-input[type="textarea"]::placeholder{
-    color: black;
-    opacity: 0.75;
-    text-align: left;
-    word-wrap: break-word;
-}
-input[type="textarea"]{
-    /* margin: 0 0 0.5rem 0; */
-
-    display: block;
-    width: 100%;
-    height: 15rem;
-    box-sizing: border-box;
-    background-color: #f8f9fa15;
-    border-radius: 8px;
-    border: 1px solid #1a1919;
-    padding: 1em;
-    margin-bottom: 1rem;
-    font-size: 0.875rem;
-    word-wrap: break-word;
-}
 textarea{
     display: block;
     width: 100%;
-    height: 15rem;
     box-sizing: border-box;
     background-color: #f8f9fa15;
     border-radius: 8px;
@@ -108,6 +102,19 @@ textarea{
     font-size: 0.875rem;
     word-wrap: break-word;
 }
+
+textarea::placeholder{
+    color: black;
+    opacity: 0.75;
+    text-align: left;
+    word-wrap: break-word; 
+}
+
+.add-requirements{
+    padding-left: 14px;
+    width: 97%;
+}
+
 
 .input-group mb-3{
     display: block;
@@ -233,7 +240,7 @@ h6{
     transition: 0.3s;
     font-size: 0.875rem;
     display: inline;
-    width: 25%;
+    width: 30%;
 }
 
 .btn2:hover{
@@ -369,126 +376,7 @@ button#no-results-btn {
     margin-top: 0;
 }
 
-.blobUpdateProf{
-    position: absolute;
-    z-index: -1;
-    width: 15rem;
-    height: 17rem;
-    left: 28rem;
-}
 
-@media screen and (max-width:1200px) {
-    .blobUpdateProf{
-        position: absolute;
-        z-index: -1;
-        width: 15rem;
-        height: 17rem;
-        left: 22.5rem;
-    }
-}
-
-@media screen and (max-width:992px) {
-    .blobUpdateProf{
-        position: absolute;
-        z-index: -1;
-        width: 15rem;
-        height: 17rem;
-        left: 15rem;
-    }
-}
-
-@media screen and (max-width:768px) {
-    .blobUpdateProf{
-        position: absolute;
-        z-index: -1;
-        width: 15rem;
-        height: 16rem;
-        left: 9.5rem;
-    }
-}
-
-@media screen and (max-width:575px) {
-    .blobUpdateProf{
-        position: absolute;
-        z-index: -1;
-        width: 15rem;
-        height: 16rem;
-        left: 9.5rem;
-    }
-    .select2-container{
-        position: relative;
-    }
-}
-
-@media screen and (max-width:456px) {
-    .blobUpdateProf{
-        position: absolute;
-        z-index: -1;
-        width: 15rem;
-        height: 16rem;
-        left: 6rem;
-    }
-}
-
-@media screen and (max-width:416px) {
-    .blobUpdateProf{
-        position: absolute;
-        z-index: -1;
-        width: 15rem;
-        height: 16rem;
-        left: 5rem;
-    }
-}
-
-@media screen and (max-width:360px) {
-    .blobUpdateProf{
-        position: absolute;
-        z-index: -1;
-        width: 15rem;
-        height: 16rem;
-        left: 3.5rem;
-    }
-}
-
-@media screen and (max-width:375px) {
-    .blobUpdateProf{
-        position: absolute;
-        z-index: -1;
-        width: 15rem;
-        height: 16rem;
-        left: 1rem;
-    }
-    body{
-        background: cover;
-    }
-}
-
-
-@media screen and (max-width:320px) {
-    .blobUpdateProf{
-        position: absolute;
-        z-index: -1;
-        width: 15rem;
-        height: 16rem;
-        left: 2.5rem;
-    }
-    body{
-        background: cover;
-    }
-}
-
-@media screen and (max-width:280px) {
-    .blobUpdateProf{
-        position: absolute;
-        z-index: -1;
-        width: 15rem;
-        height: 18rem;
-        left: 1rem;
-    }
-    body{
-        background: cover;
-    }
-}
 
 /* form input[type="text"] {
     display: block;
@@ -506,16 +394,16 @@ form input[type="text"]::selection {
     border: 2px solid var(--primary-pink);
 } */
 
-input:focus { 
+/* input:focus { 
     outline: none !important;
     border-color: var(--primary-pink);
     box-shadow: 0 0 10px var(--primary-pink);
-}
-textarea:focus { 
+} */
+/* textarea:focus { 
     outline: none !important;
     border-color: var(--primary-pink);
     box-shadow: 0 0 10px var(--primary-pink);
-}
+} */
 
 .address-details {
     min-height: 7rem;

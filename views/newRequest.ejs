@@ -29,13 +29,8 @@
 			<form method="Post">
 				<div class="row gutters" style="padding-bottom: 5rem;">
 					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
-						<!-- <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blobUpdateProf">
-						<path fill="#E1E1E1"
-							d="M59.7,-32.4C71.3,-14.4,70.4,12.8,58.3,34.2C46.3,55.6,23.2,71.1,1,70.6C-21.2,70,-42.4,53.4,-54.4,32C-66.3,10.7,-68.9,-15.3,-58.3,-32.7C-47.7,-50.2,-23.9,-59,0.1,-59.1C24.1,-59.2,48.1,-50.4,59.7,-32.4Z"
-							transform="translate(100 100)" />
-					</svg> -->
-						<section>
-							<h2>Post a New Request in <div class="brandname" style="font-weight: 600;"> G L E A M </div>
+						<section style="margin-top:2rem;">
+							<h2 style="margin-bottom: 0 !important;">Post Your New Request In Our <div class="brandname" style="font-weight: 600;"> G L E A M </div>
 								Community.
 							</h2>
 
@@ -44,19 +39,6 @@
 						<!-- Profile Picture Upload -->
 						<div class="account-settings">
 							<div class="user-profile">
-								<!-- <div class="user-avatar">
-
-								<img id="imageResult" src="img/avatar.png" alt="">
-							</div> -->
-
-								<!-- <section class="section-preview">
-
-								<div class="input-group mb-3">
-
-									<input class="form-control" name="avatar" type="file" id="upload"
-										onchange="readURL(this);" accept="image/png, image/jpeg, image/jpg">
-								</div>
-							</section> -->
 
 							</div>
 
@@ -99,10 +81,14 @@
 						</div>
 
 						<hr>
+						<div>
+							<input type="checkbox" id="self-request" name="self_request" value="yes"
+								style="padding: 1em;" onclick="selfRequest()">
+							<label for="self-request" style="font-size: 1em; font-style: italic;"> Do you want to request for
+								yourself?</label><br>
+						</div>
 
-						<input type="checkbox" id="self-request" name="self_request" value="yes"
-							onclick="selfRequest()">
-						<label for="self-request"> Do you want to request for yourself?</label><br>
+
 
 						<div class="row gutters">
 							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -122,9 +108,11 @@
 										required>
 								</div>
 								<div class="input-container lname">
-									<input id="complication" name="complication"
+									<textarea name="complication" id="complication" cols="67" rows="7"
+										placeholder="Complications (if any)" value=""></textarea>
+									<!-- <input id="complication" name="complication"
 										placeholder="Complications or Specific Requirements (if any)" value=""
-										type="text">
+										type="textarea"> -->
 								</div>
 
 							</div>
@@ -181,11 +169,15 @@
 								<h6 class="mb-2">Quantity <span class="font-italic font-weight-normal">(bag/s)</span>
 								</h6>
 								<div class="row">
-									<div class="col-md-6 mb-4">
+									<div class="col-md-6 mb-6" style="margin: 0 !important;">
 										<div class="input-container lname">
 											<input id="quantity" name="quantity" placeholder="Example: 3" maxlength="1"
 												pattern="[1-9]" type="text" required>
 										</div>
+									</div>
+									<div class="add-requirements">
+										<textarea name="complication" id="complication" cols="40" rows="4" style="padding-left: 15px;"
+										placeholder="Additional Requirements (if any)" value=""></textarea>
 									</div>
 								</div>
 							</div>
@@ -279,7 +271,7 @@
 									<!-- <input name="house" placeholder="Address details" type="textarea"
 									rows="3" required> -->
 									<textarea name="orgAddressDetails" placeholder="Details about organization (if any)"
-										id="orgAddressDetails" cols="1" rows="1"></textarea>
+										id="orgAddressDetails" cols="1" rows="7"></textarea>
 								</div>
 							</div>
 						</div>
