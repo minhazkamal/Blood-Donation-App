@@ -25,7 +25,6 @@ html, body {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 1.5rem;
 }
 
 .card-02 {
@@ -41,6 +40,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 1.5rem;
 }
 
 .filter{
@@ -111,12 +111,11 @@ i.fa-user-circle {
     color: rgba(0, 0, 0, 0.7);
 }
 
-.card-02 .btn {
+.btn {
     width: 100%;
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    transform: translateY(6.5em);
+    justify-content: center;
+    align-items: senter;
     flex-direction: row;
 }
 
@@ -155,6 +154,7 @@ i.fa-user-circle {
 }
 
 .respond-btn:hover {
+
     background: #3a7ca5;
     cursor: pointer;
 }
@@ -165,17 +165,10 @@ i.fa-user-circle {
     font-size: 1.25em;
 }
 
-.learnmore-btn {
-    width: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 0.5rem;
-    border-radius: 8px;
-    text-transform: uppercase;
-    margin-right: 2em;
-}
-.learnmore-btn:hover {
-    background: black;
+hr{
+    border-width: 0.5px;
+    background: rgba(0, 0, 0, 0.404);
+    margin-bottom: 2rem;
 }
 @media (max-width:800px) {
     .row{
@@ -204,7 +197,7 @@ i.fa-user-circle {
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
         transform: translate(0, -6em);
     }
-    .card-02 .btn {
+    .btn {
         width: 100%;
         display: flex;
         align-items: center;
@@ -223,15 +216,10 @@ i.fa-user-circle {
     .info {
         visibility: hidden;
     }
-    .learnmore-btn {
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 0.5rem;
-        border-radius: 8px;
-        text-transform: uppercase;
-        margin-left: 2em;
-    }
-    .learnmore-btn:hover {
-        background: black;
+    hr{
+        transform: translateY(-7em);
+        border-width: 0.5px;
+        background: rgba(0, 0, 0, 0.404);
+        margin-bottom: 2rem;
     }
 }
