@@ -27,6 +27,13 @@ html, body {
     flex-wrap: wrap;
 }
 
+.row-filter {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 .card-02 {
     z-index: -1;
     background: rgb(243, 243, 243);
@@ -43,9 +50,9 @@ html, body {
     margin-top: 1.5rem;
 }
 
-.filter{
-height: 100%;
-margin-top: 1.5rem;
+.filter {
+    height: 100%;
+    margin-top: 1.5rem;
 }
 
 .card-01 {
@@ -115,7 +122,15 @@ i.fa-user-circle {
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: senter;
+    align-items: center;
+    flex-direction: row;
+}
+
+.btn-01 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: row;
 }
 
@@ -154,8 +169,45 @@ i.fa-user-circle {
 }
 
 .respond-btn:hover {
-
     background: #3a7ca5;
+    cursor: pointer;
+}
+
+.reset-btn {
+    margin-right: 15px;
+    background: #ef233c;
+    color: white;
+    font-weight: 400;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: 0.3s;
+}
+
+.reset-btn:hover {
+    background: #d90429;
+    cursor: pointer;
+}
+
+.apply-btn {
+    margin-right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-weight: 400;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: 0.3s;
+}
+
+.apply-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
     cursor: pointer;
 }
 
@@ -165,20 +217,36 @@ i.fa-user-circle {
     font-size: 1.25em;
 }
 
-hr{
+.lineafterpost {
     border-width: 0.5px;
     background: rgba(0, 0, 0, 0.404);
     margin-bottom: 2rem;
 }
+
+.form-control {
+    background: transparent;
+    /* border: 1px solid #1a1919; */
+    border-radius: 5px;
+    box-sizing: border-box;
+    /* color: black; */
+    font-weight: 500;
+    font-size: 0.875rem;
+    border-color: black !important;
+}
+
 @media (max-width:800px) {
-    .row{
+    .row {
         margin-bottom: 8rem;
         margin-left: 0;
+        margin-top: 8em;
+    }
+    .row-filter {
+        margin-bottom: 0;
     }
     .container {
         margin-top: 180px;
     }
-    .card-02 {   
+    .card-02 {
         max-width: 600px;
         display: flex;
         align-items: center;
@@ -205,6 +273,13 @@ hr{
         margin-top: 0;
         transform: translateY(-7em);
     }
+    .btn-01 {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0;
+    }
     .profile-card {
         display: flex;
         align-items: center;
@@ -216,7 +291,7 @@ hr{
     .info {
         visibility: hidden;
     }
-    hr{
+    .lineafterpost {
         transform: translateY(-7em);
         border-width: 0.5px;
         background: rgba(0, 0, 0, 0.404);
