@@ -17,14 +17,30 @@ html, body {
 }
 
 .container {
-    margin-top: 120px;
+    margin-top: 60px;
+    margin-bottom: 50px;
 }
+
+.upper-container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-150%, -50%);
+    font-family: 'Montserrat',sans-serif;
+    
+  }
 
 .row {
     width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: 2em;
 }
 
 .row-filter {
@@ -35,13 +51,13 @@ html, body {
 }
 
 .card-02 {
-    z-index: -1;
+    /* z-index: -1; */
     background: rgb(243, 243, 243);
     position: relative;
     flex: 1;
-    max-width: 940px;
+    max-width: 1000px;
     height: 300px;
-    margin: 10px;
+    /* margin: 10px; */
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     display: flex;
@@ -56,7 +72,7 @@ html, body {
 }
 
 .card-01 {
-    z-index: -1;
+    /* z-index: -1; */
     background: rgb(243, 243, 243);
     position: relative;
     flex: 1;
@@ -76,7 +92,7 @@ html, body {
 }
 
 .profile {
-    z-index: 9;
+    /* z-index: 2; */
     background: #ffc3cc;
     width: 270px;
     height: 250px;
@@ -114,16 +130,17 @@ html, body {
 
 i.fa-user-circle {
     margin-top: 15px;
-    z-index: 999;
+    /* z-index: 3; */
     color: rgba(0, 0, 0, 0.7);
 }
 
 .btn {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     flex-direction: row;
+    transform: translateY(8em);
 }
 
 .btn-01 {
@@ -215,6 +232,7 @@ i.fa-user-circle {
     margin-left: 1em;
     width: 100%;
     font-size: 1.25em;
+    letter-spacing: 1px;
 }
 
 .lineafterpost {
@@ -234,7 +252,51 @@ i.fa-user-circle {
     border-color: black !important;
 }
 
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: #0a98f7;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.upper-container .post-btn {
+    width: 25%;
+    position: absolute;
+    top: 60%;
+    left: 24%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .upper-container .post-btn:hover {
+    background-color: black;
+  }
+
 @media (max-width:800px) {
+    .container {
+        margin-top: 80px !important;
+    }
     .row {
         margin-bottom: 8rem;
         margin-left: 0;
@@ -254,7 +316,7 @@ i.fa-user-circle {
         flex-direction: column;
     }
     .profile {
-        z-index: 9;
+        /* z-index: 2; */
         background: #ffc3cc;
         max-width: 100%;
         max-height: 100%;
@@ -291,10 +353,32 @@ i.fa-user-circle {
     .info {
         visibility: hidden;
     }
-    .lineafterpost {
-        transform: translateY(-7em);
-        border-width: 0.5px;
-        background: rgba(0, 0, 0, 0.404);
-        margin-bottom: 2rem;
+
+    .upper-container{
+        margin-top: 70px ;
     }
+
+    .centered {
+        width: 50%;
+        position: absolute;
+        top: 40%;
+        left: 75%;
+        transform: translate(-150%, -50%);
+        font-family: 'Montserrat',sans-serif; 
+     
+      }
+      h1{
+        font-size: 1.2em; 
+      }
+      .upper-container .post-btn {
+        width: 40%;
+        position: absolute;
+        top: 65%;
+        left: 24%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        font-size: 1em;
+      }
+      
+
 }
