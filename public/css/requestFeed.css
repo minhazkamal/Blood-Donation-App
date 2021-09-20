@@ -35,6 +35,10 @@ html, body {
     
   }
 
+  img{
+      opacity: 0.8;
+  }
+
 .row {
     width: 100%;
     display: flex;
