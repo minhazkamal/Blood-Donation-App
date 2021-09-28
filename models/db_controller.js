@@ -454,8 +454,8 @@ module.exports.getLocationNamesByIds = (address) => {
 
 module.exports.setNewRequest = (request) => {
     return new Promise((resolve, reject) => {
-        db.query("INSERT INTO `requests`(`post_by`,`patient`,`contact_person`,`contact`,`approx_donation_date`, `BG`, `complication`, `quantity`, `organization_id`, `org_address_details`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
-                                        [request.id, request.patient, request.cp, request.cp_contact, request.approx_date, request.bg, request.complication, request.quantity, request.org, request.org_details], (err, res) => {
+        db.query("INSERT INTO `requests`(`post_by`,`patient`,`contact_person`,`contact`,`approx_donation_date`, `BG`, `complication`, `requirements`, `quantity`, `organization_id`, `org_address_details`, `posted_on`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
+                                        [request.id, request.patient, request.cp, request.cp_contact, request.approx_date, request.bg, request.complication, request.requirements, request.quantity, request.org, request.org_details, request.posted_on], (err, res) => {
             err ? reject(err) : resolve(res)
         })
     })

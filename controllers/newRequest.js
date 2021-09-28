@@ -95,7 +95,9 @@ router.get('/', function (req, res) {
                             self_check: '',
                             org_location: '',
                             lat: '',
-                            lon: ''
+                            lon: '',
+                            requirements: '',
+                            posted_on: ''
                         }
                         req.session.temp_user = user;
                         req.session.div_results = div_result;
@@ -131,6 +133,7 @@ router.post('/', [
         else req.session.temp_user.self_check = 'no';
         req.session.temp_user.org = req.body.org;
         req.session.temp_user.complication = req.body.complication;
+        req.session.temp_user.requirements = req.body.requirements;
 
         if (req.body.org == '0') {
             if (req.body.current_location == 'yes') {
@@ -188,6 +191,13 @@ router.post('/', [
                 district: req.body.district,
                 upazilla: req.body.upazilla
             }
+
+
+            let posted_on = new Date();
+            posted_on.setHours(posted_on.getHours() + 6);
+
+            req.session.temp_user.posted_on = posted_on.toISOString().slice(0, 19).replace('T', ' ');
+
             if (req.body.org == '0') {
                 db.getLocationNamesByIds(address)
                     .then(result => {

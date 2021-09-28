@@ -78,6 +78,7 @@
 							<input id="user_current_location" type="text" value="<%= user.org_location %>">
 							<input id="user_lat" type="text" value="<%= user.lat %>">
 							<input id="user_lon" type="text" value="<%= user.lon %>">
+							<input id="user_requirements" type="text" value="<%= user.requirements %>">
 						</div>
 
 						<hr>
@@ -176,8 +177,8 @@
 										</div>
 									</div>
 									<div class="add-requirements">
-										<textarea name="complication" id="complication" cols="40" rows="4" style="padding-left: 15px;"
-										placeholder="Additional Requirements (if any)" value="" style="resize: none;"></textarea>
+										<textarea name="requirements" id="requirements" cols="40" rows="4" style="padding-left: 15px; resize: none;"
+										placeholder="Additional Requirements (if any)" value=""></textarea>
 									</div>
 								</div>
 							</div>
@@ -324,6 +325,7 @@
 						$("#pt_name").val($("#user_patient").val());
 						$("#quantity").val($("#user_quantity").val());
 						$("#complication").val($("#user_complications").val());
+						$("#requirements").val($("#user_requirements").val());
 						$("#orgAddressDetails").val($("#user_org_details").val());
 						$("#org-name").val($("#user_org_name").val());
 						$("#street").val($("#user_org_street").val());
