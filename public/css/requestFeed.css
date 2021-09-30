@@ -298,6 +298,16 @@ i.fa-user-circle {
     background-color: black;
   }
 
+  .right-col {
+    align-self: flex-start;
+    position: relative;
+    position: -webkit-sticky;
+    position: sticky;
+    overflow-y: scroll;
+    top: 10%;
+    height: 30%;
+  }
+
 @media (max-width:800px) {
     .row {
         margin-bottom: 8rem;
