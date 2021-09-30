@@ -410,6 +410,16 @@ i.fa-user-circle {
     flex-direction: column;
 }
 
+.filter-icon{
+    display: none;
+    position: fixed;
+    top: 40%;
+    right: 0%;
+    width: fit-content;
+    padding: 2px;
+    border-radius: 10px 0 0 10px;
+}
+
 
 @media (max-width: 1100px){
     .left-col{
