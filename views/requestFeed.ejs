@@ -21,119 +21,175 @@
 
 
 	<%- include ("./partials/navbar.ejs") %>
-	<div class="upper-container">
-		<img src="img/requestFeedimg.jpg" alt="Snow" style="width:100%;">
-		<div class="centered"><h1>Post Your Request</h1> </div>
-		<button class="post-btn">New Request</button>
-	  </div>
-	
-		<div class="container">
-			
-			<div class="row-filter">
-				<div class="filter">
-					<h1>Add Filters</h1>
-				</div>
-				<br>
-				<div class="row-filter">
-					<div class="col-md-6 mb-4">
-						<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
-											aria-hidden=" true" required>
-							<option disabled selected value="">Blood Group</option>
-							<option value="A+">A+</option>
-							<option value="A-">A-</option>
-							<option value="B+">B+</option>
-							<option value="B-">B-</option>
-							<option value="O+">O+</option>
-							<option value="O-">O-</option>
-							<option value="AB+">AB+</option>
-							<option value="AB-">AB-</option>
-						</select>
-					</div>
-				</div>
-				<div class="row-filter">
-					<div class="col-md-6 mb-4">
-						<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
-										aria-hidden=" true" required>
-							<option disabled selected value="">District</option>
-							<option value="Male">Male</option>
-							<option value="Female">Female</option>
-							<option value="Others">Others</option>
-						</select>
-					</div>
-				</div>
-				<div class="row-filter">
-					<div class="col-md-6 mb-4">
-						<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
-										aria-hidden=" true" required>
-							<option disabled selected value="">District</option>
-							<option value="Male">Male</option>
-							<option value="Female">Female</option>
-							<option value="Others">Others</option>
-						</select>
+		<div class="upper-container">
+			<img src="img/requestFeedimg.jpg" alt="Snow" style="width:100%;">
+			<div class="centered">
+				<h1>Post Your Request</h1>
+			</div>
+			<button class="post-btn">New Request</button>
+		</div>
+
+		<div class="main">
+			<div class="wrapper">
+				<div class="left-col">
+					<div class="row">
+						<div class="card-02">
+							<div class="profile-card">
+								<div class="profile"><i class="far fa-user-circle fa-7x"></i>
+									<div class="name">ABCD XYZ</div>
+									<div class="blood-group">A+</div>
+									<div class="blood-required">2 bag(s)</div>
+									<div class="timeline">Posted some minutes ago</div>
+								</div>
+							</div>
+
+
+							<div class="info">
+								<div class="place">Place:</div>
+								<div class="add-requirements">Additional Requirements:</div>
+								<div class="complications">Complications:</div>
+							</div>
+							<div class="btn">
+								<button class="view-profile-btn" type="submit">View Profile</button>
+								<button class="respond-btn" type="submit">Respond</button>
+							</div>
+
+						</div>
+
 					</div>
 
+
+
+					<div class="row">
+						<div class="card-02">
+							<div class="profile-card">
+								<div class="profile"><i class="far fa-user-circle fa-7x"></i>
+									<div class="name">ABCD XYZ</div>
+									<div class="blood-group">A+</div>
+									<div class="blood-required">2 bag(s)</div>
+									<div class="timeline">Posted some minutes ago</div>
+								</div>
+							</div>
+
+
+							<div class="info">
+								<div class="place">Place:</div>
+								<div class="add-requirements">Additional Requirements:</div>
+								<div class="complications">Complications:</div>
+							</div>
+							<div class="btn">
+								<button class="view-profile-btn" type="submit">View Profile</button>
+								<button class="respond-btn" type="submit">Respond</button>
+							</div>
+
+						</div>
+
+					</div>
 				</div>
-				<div class="btn-01">
-					<button class="reset-btn" type="submit">Reset</button>
-					<button class="apply-btn" type="submit">Apply</button>
+
+				<div class="right-col">
+					<div class="row-filter">
+						<div class="filter">
+							<h1>Add Filters</h1>
+						</div>
+						<br>
+						<div class="row-filter">
+							<div class="col-md-12 mb-4">
+								<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
+													aria-hidden=" true" required>
+									<option disabled selected value="">Blood Group</option>
+									<option value="A+">A+</option>
+									<option value="A-">A-</option>
+									<option value="B+">B+</option>
+									<option value="B-">B-</option>
+									<option value="O+">O+</option>
+									<option value="O-">O-</option>
+									<option value="AB+">AB+</option>
+									<option value="AB-">AB-</option>
+								</select>
+							</div>
+						</div>
+						<div class="row-filter">
+							<div class="col-md-12 mb-4">
+								<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
+												aria-hidden=" true" required>
+									<option disabled selected value="">District</option>
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+									<option value="Others">Others</option>
+								</select>
+							</div>
+						</div>
+						<div class="row-filter">
+							<div class="col-md-12 mb-4">
+								<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
+												aria-hidden=" true" required>
+									<option disabled selected value="">District</option>
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+									<option value="Others">Others</option>
+								</select>
+							</div>
+
+						</div>
+						<div class="btn-01">
+							<button class="reset-btn" type="submit">Reset</button>
+							<button class="apply-btn" type="submit">Apply</button>
+						</div>
+
+					</div>
+					<hr>
+					<div class="footer-container" style="margin-top: 4rem;">
+						<div class="sec aboutus" style="margin-bottom: 2rem;">
+							<h2>About Us</h2>
+							<hr class="footer-hr">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident amet enim eligendi
+								quidem consequatur
+								soluta corporis perferendis, doloremque fugiat sint doloribus sed temporibus iusto neque
+								inventore nostrum in
+								eum cumque.</p>
+							<ul class="sci" style="padding: 0;">
+								<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+
+							</ul>
+						</div>
+						<div class="sec quicklinks">
+							<h2>Quick Links</h2>
+							<hr class="footer-hr">
+							<ul style="padding: 0;">
+								<li><a href="#">About</a></li>
+								<li><a href="#">FAQ</a></li>
+								<li><a href="#">Privacy Policy</a></li>
+								<li><a href="#">Help</a></li>
+								<li><a href="#">Terms & Conditions</a></li>
+								<li><a href="#">Contact</a></li>
+							</ul>
+						</div>
+						<!-- <div class="sec contact">
+						  <h2>Contact Info</h2>
+						  <ul class="info">
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+						  </ul>
+						</div> -->
+						<p>Copyright <i class="fa fa-copyright"></i> 2021 G L E A M. All Rights Reserved.</p>
+					</div>
 				</div>
-			
 			</div>
+		</div>
+
+		<!-- <div class="container">
+			
+
 			<hr>
 
-			<div class="row">
-				<div class="card-02">
-					<div class="profile-card">
-						<div class="profile"><i class="far fa-user-circle fa-7x"></i>
-							<div class="name">ABCD XYZ</div>
-							<div class="blood-group">A+</div>
-							<div class="blood-required">2 bag(s)</div>
-							<div class="timeline">Posted some minutes ago</div>
-						</div>
-					</div>
-					
 
-					<div class="info">
-						<div class="place">Place:</div>
-						<div class="add-requirements">Additional Requirements:</div>
-						<div class="complications">Complications:</div>
-					</div>
-					<div class="btn">
-						<button class="view-profile-btn" type="submit">View Profile</button>
-						<button class="respond-btn" type="submit">Respond</button>
-					</div>
-
-				</div>
-
-			</div>
-
-		
-
-			<div class="row">
-				<div class="card-02">
-					<div class="profile-card">
-						<div class="profile"><i class="far fa-user-circle fa-7x"></i>
-							<div class="name">ABCD XYZ</div>
-							<div class="blood-group">A+</div>
-							<div class="blood-required">2 bag(s)</div>
-							<div class="timeline">Posted some minutes ago</div>
-						</div>
-					</div>
-					
-
-					<div class="info">
-						<div class="place">Place:</div>
-						<div class="add-requirements">Additional Requirements:</div>
-						<div class="complications">Complications:</div>
-					</div>
-					<div class="btn">
-						<button class="view-profile-btn" type="submit">View Profile</button>
-						<button class="respond-btn" type="submit">Respond</button>
-					</div>
-
-				</div>
-
-			</div>
 
 			<div class="pagination">
 				<a href="#">&laquo;</a>
@@ -146,21 +202,21 @@
 				<a href="#">&raquo;</a>
 			  </div>
 
-		</div>
+		</div> -->
 
 
-		<%- include ("./partials/footer.ejs") %>
 
-			<script src="assets/js/jquery-3.2.1.min.js"></script>
-			<script src="assets/js/popper.min.js"></script>
-			<script src="assets/js/bootstrap.min.js"></script>
-			<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-				integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-				crossorigin="anonymous"></script>
-			<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-				integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-				crossorigin="anonymous"></script>
+
+		<script src="assets/js/jquery-3.2.1.min.js"></script>
+		<script src="assets/js/popper.min.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+			crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+			crossorigin="anonymous"></script>
 
 </body>
 
