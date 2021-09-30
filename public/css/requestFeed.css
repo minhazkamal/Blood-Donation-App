@@ -30,7 +30,7 @@ html, body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-150%, -50%);
+    transform: translate(-168%, -50%);
     font-family: 'Montserrat',sans-serif;
     
   }
@@ -402,6 +402,7 @@ i.fa-user-circle {
     display: grid;
     grid-template-columns: 75% 25%;
     grid-gap: 50px;
+    position: sticky;
 }
 
 .left-col{
@@ -514,7 +515,7 @@ footer {
   }
   
   .quicklinks ul li a:hover {
-    color: #fff;
+    color: rgb(0, 0, 0);
     padding-left: 8px;
     transition: all 0.5s ease;
   }
