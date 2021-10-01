@@ -382,22 +382,13 @@ i.fa-user-circle {
 /* ///////////////////////////// */
 
 .main {
+  transform: translateY(-20em);
   width: 100%;
-  padding: 40px 0;
   display: grid;
   grid-template-columns: 80% 20%;
-  margin-top: 50px;
 }
 
-.wrapper {
-  width: 80%;
-  /* max-width: 1000px; */
-  /* margin: 20px; */
-  display: grid;
-  grid-template-columns: 75% 25%;
-  grid-gap: 50px;
-  position: sticky;
-}
+
 
 .left-col {
   display: flex;
@@ -410,12 +401,12 @@ i.fa-user-circle {
   position: -webkit-sticky;
   position: sticky;
   overflow-y: hidden;
-  top: 10%;
+  top: 50%;
   margin-right: 3em;
 }
 
 .popup {
-  visibility: hidden;
+  opacity: 0;
 }
 
 .popup-button{
@@ -424,6 +415,7 @@ i.fa-user-circle {
 
 @media (max-width: 1100px) {
   .main {
+    transform: translateY(0);
     width: 100%;
     padding: 40px 0;
     display: grid;
