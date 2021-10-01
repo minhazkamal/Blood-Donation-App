@@ -21,6 +21,7 @@
 
 
 	<%- include ("./partials/navbar.ejs") %>
+
 		<div class="upper-container">
 			<img src="img/requestFeedimg.jpg" alt="Snow" style="width:100%;">
 			<div class="centered">
@@ -28,7 +29,63 @@
 			</div>
 			<button class="post-btn">New Request</button>
 		</div>
-		<div class="filter-icon"><i class="fas fa-filter fa-2x"></i></div>
+
+		<div class="popup">
+			<div class="popup__container">
+				<button type="button" class="close-button"></button>
+				<div class="row-filter">
+					<div class="filter">
+						<h1>Add Filters</h1>
+					</div>
+					<br>
+					<div class="row-filter">
+						<div class="col-md-12 mb-4">
+							<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
+											aria-hidden=" true" required>
+								<option disabled selected value="">Blood Group</option>
+								<option value="A+">A+</option>
+								<option value="A-">A-</option>
+								<option value="B+">B+</option>
+								<option value="B-">B-</option>
+								<option value="O+">O+</option>
+								<option value="O-">O-</option>
+								<option value="AB+">AB+</option>
+								<option value="AB-">AB-</option>
+							</select>
+						</div>
+					</div>
+					<div class="row-filter">
+						<div class="col-md-12 mb-4">
+							<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
+										aria-hidden=" true" required>
+								<option disabled selected value="">District</option>
+								<option value="Male">Male</option>
+								<option value="Female">Female</option>
+								<option value="Others">Others</option>
+							</select>
+						</div>
+					</div>
+					<div class="row-filter">
+						<div class="col-md-12 mb-4">
+							<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
+										aria-hidden=" true" required>
+								<option disabled selected value="">District</option>
+								<option value="Male">Male</option>
+								<option value="Female">Female</option>
+								<option value="Others">Others</option>
+							</select>
+						</div>
+
+					</div>
+					<div class="btn-01">
+						<button class="reset-btn" type="submit">Reset</button>
+						<button class="apply-btn" type="submit">Apply</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="popup-button"><i class="fas fa-filter fa-2x"></i></div>
 		<div class="main">
 
 
@@ -495,7 +552,19 @@
 
 		</div> -->
 
+		<script>
+			const callButton = document.querySelector('.popup-button');
+			const popup = document.querySelector('.popup');
+			const closeButton = popup.querySelector('.close-button');
 
+			popupToggle = () => {
+				popup.classList.toggle('popup_opened');
+			}
+
+			callButton.addEventListener('click', popupToggle);
+
+			closeButton.addEventListener('click', popupToggle);
+		</script>
 
 
 		<script src="assets/js/jquery-3.2.1.min.js"></script>
