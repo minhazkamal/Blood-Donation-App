@@ -452,6 +452,7 @@ i.fa-user-circle {
     border: 3px solid rgba(42, 111, 151, 1);
     border-radius: 50% 0 0 50%;
     background-color: rgba(97, 95, 95, 0.123);
+    cursor: pointer;
   }
   .popup {
     z-index: 999;

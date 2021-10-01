@@ -564,6 +564,11 @@
 			callButton.addEventListener('click', popupToggle);
 
 			closeButton.addEventListener('click', popupToggle);
+
+			closeOnBlack = (event) => {
+				if (event.target === event.currentTarget) popupToggle();
+			}
+			popup.addEventListener('click', closeOnBlack);
 		</script>
 
 
