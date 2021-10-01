@@ -298,15 +298,7 @@ i.fa-user-circle {
     background-color: black;
   }
 
-  .right-col {
-    align-self: flex-start;
-    position: relative;
-    position: -webkit-sticky;
-    position: sticky;
-    overflow-y: scroll;
-    top: 10%;
-    height: 30%;
-  }
+
 
 @media (max-width:800px) {
     .row {
@@ -400,8 +392,8 @@ i.fa-user-circle {
 .main{
     width: 100%;
     padding: 40px 0;
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 80% 20%;
     margin-top: 50px;
 }
 
@@ -418,6 +410,16 @@ i.fa-user-circle {
 .left-col{
     display: flex;
     flex-direction: column;
+}
+
+.right-col {
+  align-self: flex-start;
+  position: relative;
+  position: -webkit-sticky;
+  position: sticky;
+  overflow-y: hidden;
+  top: 10%;
+  margin-right: 3em;
 }
 
 .filter-icon{
