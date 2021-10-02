@@ -91,7 +91,7 @@ body {
   visibility: visible;
   opacity: 1;
   margin-top: 20px;
-  transition-delay: 0.5s;
+  transition-delay: 0.2s;
 }
 
 h2 {
@@ -114,14 +114,14 @@ p {
 hr {
   border-width: 0.5px;
   background: rgba(0, 0, 0, 0.404);
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
 }
 
-.hr1 {
+/* .hr1 {
   border-width: 0.5px;
   background: rgba(0, 0, 0, 0.404);
   margin-bottom: 2rem;
-}
+} */
 
 .switch-field {
   display: flex;

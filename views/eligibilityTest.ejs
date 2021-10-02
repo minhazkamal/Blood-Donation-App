@@ -38,7 +38,7 @@
     <div class="container">
       <div class="container-card">
         <div class="card-heading">
-          <h1>Click to learn more.</h1>
+          <h1>Eligibility Test</h1>
         </div>
         <div class="card">
           <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blobEligibility1">
@@ -49,10 +49,10 @@
           <h2>Comorbidities</h2>
           <hr class="hr1">
           <div class="content">
-            <h4>Card One</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi vitae facilis vel laborum excepturi
-              perferendis dolorem optio nulla sed ea veritatis, at quaerat odio accusamus dolorum! Delectus vero
-              temporibus maiores.</p>
+            <!-- <h4>Card One</h4> -->
+            <p> Comorbidity is the presence of one or more additional conditions often co-occurring (that is,
+              concomitant or concurrent) with a primary condition which describes the effect of all other
+              conditions an individual patient might have other than the primary condition of interest. </p>
           </div>
         </div>
 
@@ -60,10 +60,9 @@
           <h2>Lifestyle</h2>
           <hr class="hr1">
           <div class="content">
-            <h4>Card Two</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi vitae facilis vel laborum excepturi
-              perferendis dolorem optio nulla sed ea veritatis, at quaerat odio accusamus dolorum! Delectus vero
-              temporibus maiores.</p>
+            <!-- <h4>Card Two</h4> -->
+            <p>Healthy life-style is a must for fit body. Sleeping on time, excercising, abstraining from nicotine,
+              drugs and caffine. Remmeber, a good lifestyle will always make one more eligible for blood donation.</p>
           </div>
         </div>
 
@@ -71,10 +70,10 @@
           <h2>Donation Intervals</h2>
           <hr class="hr1">
           <div class="content">
-            <h4>Card Three</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi vitae facilis vel laborum excepturi
-              perferendis dolorem optio nulla sed ea veritatis, at quaerat odio accusamus dolorum! Delectus vero
-              temporibus maiores.</p>
+            <!-- <h4>Card Three</h4> -->
+            <p>Donating is good, but not too much. For a healthy person, donating two full bags of blood should have the
+              interval of at least two months. For platelets, donation frequency is 7 days, up to 24 times/year. For
+              plasma donation, the frequency is 28 days, up to 13 times/year.</p>
           </div>
         </div>
       </div>
@@ -337,7 +336,7 @@
             document.getElementById('smokeRange').value = $("#user_smoke").val();
             document.getElementById('drinkRange').value = $("#user_drinking").val();
             document.getElementById('depressionRange').value = $("#user_depression").val();
-            if($("#user_last_donation").val() == '') {
+            if ($("#user_last_donation").val() == '') {
               document.getElementById('last_donation_check').checked = true;
               // document.getElementById("last-donation").required = false;
               // $("#last-donation-container").hide();
@@ -350,7 +349,7 @@
               setMinDate($("#user_last_donation").val(), true);
             }
           }
-          else{
+          else {
             setMinDate($("#user_dob").val(), false);
           }
           setDateField();
@@ -388,14 +387,13 @@
       </script>
 
       <script>
-        function setMinDate(date , flag) {
+        function setMinDate(date, flag) {
           // console.log(date);
           var minDate = new Date(date);
-          if(flag == true) minDate.setMonth(minDate.getMonth() + 3);
+          if (flag == true) minDate.setMonth(minDate.getMonth() + 3);
           // console.log(minDate);
           // console.log(new Date(document.getElementById('last-donation').max));
-          if(minDate > new Date(document.getElementById('last-donation').max))
-          {
+          if (minDate > new Date(document.getElementById('last-donation').max)) {
             document.getElementById('last-donation').disabled = true;
             return;
           }
