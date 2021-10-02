@@ -92,6 +92,7 @@ app.use('/show-org', org);
 app.use('/show-donor', donor);
 app.use('/new-request', newRequest);
 app.use('/dashboard', dashboard);
+
 //localhost:3940/new-request
 // app.get('/new-request', function(req,res){
 //     res.render('newRequest.ejs');
@@ -144,6 +145,10 @@ app.post('/org-input', function(req,res){
 
 app.get('/request-feed', function(req,res){
     res.render('requestFeed.ejs');
+});
+
+app.get('/view-profile', function(req,res){
+    res.render('viewProfile.ejs');
 });
 
 //localhost:3940/dashboard
