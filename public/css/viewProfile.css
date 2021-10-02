@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+:root{
+    font-size: 100%;
+    font-size: 16px;
+    line-height: 1.5;
+    --primary-pink: #b9375e;
+    --primary-blue: #2f6690;
+}
+
 body{
     background: -webkit-linear-gradient(left, #3931af, #00c6ff);
 }
@@ -35,7 +45,7 @@ body{
     color: #333;
 }
 .profile-head h6{
-    color: #0062cc;
+    color: #cc0011;
 }
 .profile-edit-btn{
     border: none;
@@ -65,7 +75,7 @@ body{
 }
 .profile-head .nav-tabs .nav-link.active{
     border: none;
-    border-bottom:2px solid #0062cc;
+    border-bottom:3px solid var(--primary-pink);
 }
 .profile-work{
     padding: 14%;
@@ -91,5 +101,5 @@ body{
 }
 .profile-tab p{
     font-weight: 600;
-    color: #0062cc;
+    color: var(--primary-pink);
 }
