@@ -42,8 +42,8 @@
                                     <h4>John Doe</h4>
                                     <p class="text-secondary mb-1">Full Stack Developer</p>
                                     <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                                    <button class="btn btn-primary">Follow</button>
-                                    <button class="btn btn-outline-primary">Message</button>
+                                    <!-- <button class="btn btn-primary">Follow</button> -->
+                                    <button class="btn btn-outline-danger">Notifications</button> 
                                 </div>
                             </div>
                         </div>
@@ -52,17 +52,15 @@
                         <div class="tab">
                             <button class="tablinks" onclick="openCity(event, 'London')"
                                 id="defaultOpen">General</button>
-                            <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-                            <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+                            <button class="tablinks" onclick="openCity(event, 'Paris')">My Donations</button>
+                            <button class="tablinks" onclick="openCity(event, 'Tokyo')">My Requests</button>
                         </div>
 
 
 
                     </div>
                 </div>
-                <div class="col-md-8">
-                  
-
+                <div class="col-md-8">                 
                     <div id="London" class="tabcontent">
 
                         <div class="card mb-3">
@@ -137,7 +135,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row gutters-sm">
                             <!-- <div id="London" class="tabcontent"> -->
                             <div class="col-sm-6 mb-3">
@@ -185,13 +183,79 @@
                     </div>
 
                     <div id="Paris" class="tabcontent">
-                        <h3>Paris</h3>
-                        <p>Paris is the capital of France.</p>
+                        <table class="table">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Donee's Name</th>
+                                <th scope="col">Location</th>
+                                <th scope="col">Date of Donation</th>
+                                <th scope="col">Quantity(bag/s)</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>Mark Zuckerberg</td>
+                                <td>Square Hospitals,Dhaka</td>
+                                <td>09/13/2021</td>
+                                <td>8</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">2</th>
+                                <td>Mark</td>
+                                <td>Square Hospitals,Dhaka</td>
+                                <td>09/13/2021</td>
+                                <td>8</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">3</th>
+                                <td>Mark</td>
+                                <td>Square Hospitals,Dhaka</td>
+                                <td>09/13/2021</td>
+                                <td>8</td>
+                              </tr>
+                            </tbody>
+                          </table>
                     </div>
 
                     <div id="Tokyo" class="tabcontent">
-                        <h3>Tokyo</h3>
-                        <p>Tokyo is the capital of Japan.</p>
+                        <div class="table-responsive-sm">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Donee's Name</th>
+                                    <th scope="col">Location</th>
+                                    <th scope="col">Date of Donation</th>
+                                    <th scope="col">Quantity(bag/s)</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <th scope="row">1</th>
+                                    <td>George Bush Bush</td>
+                                    <td>United Hospitals,Dhaka</td>
+                                    <td>09/13/2021</td>
+                                    <td>8</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">2</th>
+                                    <td>George Bush</td>
+                                    <td>Square Hospitals,Dhaka</td>
+                                    <td>09/13/2021</td>
+                                    <td>8</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">3</th>
+                                    <td>George Bush</td>
+                                    <td>Apollo Hospitals,Dhaka</td>
+                                    <td>09/13/2021</td>
+                                    <td>8</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </div>
                     </div>
 
 
