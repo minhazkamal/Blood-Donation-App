@@ -85,7 +85,7 @@ body{
     cursor: pointer;
 }
 
-h4,h1,h6{
+h4,h1{
     text-align: center;
 }
 .eligibility-score{
@@ -127,7 +127,11 @@ h4,h1,h6{
     color: green;
 }
 .no-of-requests{
-    color: green;
+    color: purple;
+}
+
+.text{
+    text-align: center;
 }
 /* Style the tab */
 .tab {
