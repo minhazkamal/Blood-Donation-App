@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-body{
+body {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -8,14 +7,15 @@ body{
     color: #1a202c;
     text-align: left;
     /* background-color: #e2e8f0;  */
-    font-family: 'Montserrat',sans-serif;
-
+    font-family: 'Montserrat', sans-serif;
 }
+
 .main-body {
     padding: 15px;
 }
+
 .card {
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
 }
 
 .card {
@@ -26,7 +26,7 @@ body{
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    border: 0 solid rgba(0,0,0,.125);
+    border: 0 solid rgba(0, 0, 0, .125);
     border-radius: .25rem;
 }
 
@@ -34,8 +34,7 @@ body{
     flex: 1 1 auto;
     min-height: 1px;
     padding: 1rem;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
-
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
 }
 
 .tabcontent {
@@ -47,6 +46,7 @@ body{
     padding-right: 8px;
     padding-left: 8px;
 }
+
 .mb-3, .my-3 {
     margin-bottom: 1rem!important;
 }
@@ -54,15 +54,16 @@ body{
 .bg-gray-300 {
     background-color: #e2e8f0;
 }
+
 .h-100 {
     height: 100%!important;
 }
+
 .shadow-none {
     box-shadow: none!important;
 }
 
-.edit-profile-btn{
-
+.edit-profile-btn {
     background: #2f6690;
     color: white;
     font-weight: 500;
@@ -80,24 +81,26 @@ body{
     align-items: center;
 }
 
-.edit-profile-btn:hover{
+.edit-profile-btn:hover {
     background: #3a7ca5;
     cursor: pointer;
 }
 
-h4,h1{
+h4, h1 {
     text-align: center;
 }
-.eligibility-score{
+
+.eligibility-score {
     color: rgb(201, 25, 25);
 }
-#myDIV{
+
+#myDIV {
     text-align: center;
     font-size: 1.5em;
     font-weight: 500;
-
 }
-.activate-button{
+
+.activate-button {
     text-decoration: none;
     background: #b9375e;
     color: white;
@@ -110,38 +113,43 @@ h4,h1{
     letter-spacing: 0.5px;
     transition: 0.3s;
     font-size: 0.875rem;
-
 }
-.activate-button:hover{
+
+.activate-button:hover {
     background: #d34e76;
     cursor: pointer;
 }
 
-.btn{
+.btn {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.no-of-responds{
+.no-of-responds {
     color: green;
 }
-.no-of-requests{
+
+.no-of-requests {
     color: purple;
 }
 
-.text{
+.text {
     text-align: center;
 }
+
 /* Style the tab */
+
 .tab {
-    float: left;   
+    float: left;
     background-color: #fffefe;
     width: 100%;
-  }
-  
-  /* Style the buttons inside the tab */
-  .tab button {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+}
+
+/* Style the buttons inside the tab */
+
+.tab button {
     display: block;
     background-color: inherit;
     color: black;
@@ -153,22 +161,25 @@ h4,h1{
     cursor: pointer;
     transition: 0.3s;
     font-size: 17px;
-  }
-  
-  /* Change background color of buttons on hover */
-  .tab button:hover {
-      color: white;
-    background-color:#5681a1;
-  }
-  
-  /* Create an active/current "tab button" class */
-  .tab button.active {
-    color: white;
-    background-color:#5681a1;
-  }
-  
-  /* Style the tab content */
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+}
 
-.tabcontent{
+/* Change background color of buttons on hover */
+
+.tab button:hover {
+    color: white;
+    background-color: #5681a1;
+}
+
+/* Create an active/current "tab button" class */
+
+.tab button.active {
+    color: white;
+    background-color: #5681a1;
+}
+
+/* Style the tab content */
+
+.tabcontent {
     padding: 0px 7px;
 }
