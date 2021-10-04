@@ -10,6 +10,10 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+.container{
+    margin-top: 7rem;
+}
+
 .main-body {
     padding: 15px;
 }
@@ -245,7 +249,7 @@ h4, h1 {
     margin-right: 1rem;
 }
 
-a{
+.add-link{
     color: white;
     text-align: center;
     display: flex;
@@ -253,7 +257,7 @@ a{
     text-decoration: none;
 }
 
-a:hover{
+.add-link:hover{
     color: white;
     text-decoration: none;
 }
