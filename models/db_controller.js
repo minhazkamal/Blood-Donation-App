@@ -444,7 +444,7 @@ module.exports.getAllUpazilla = () => {
 
 module.exports.getLocationNamesByIds = (address) => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT upazillas.name as upazilla, districts.name as district, divisions.name as divison 
+        db.query(`SELECT upazillas.name as upazilla, districts.name as district, divisions.name as division 
                     FROM divisions, districts, upazillas 
                     WHERE divisions.id = ? and districts.id = ? and upazillas.id = ?`, [address.division, address.district, address.upazilla], (err, res) => {
             err ? reject(err) : resolve(res)
