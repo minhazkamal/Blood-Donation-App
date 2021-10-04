@@ -42,6 +42,7 @@ var org = require('./controllers/showOrg');
 var donor = require('./controllers/showDonor');
 var newRequest = require('./controllers/newRequest');
 var dashboard = require('./controllers/dashboard');
+var myProfile = require('./controllers/myProfile');
 
 
 // view engine
@@ -53,6 +54,7 @@ app.use(passport.session());
 
 // middlewares
 app.use(express.static('./public'));
+app.use('/profile', express.static('profile'));
 // app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
@@ -92,6 +94,7 @@ app.use('/show-org', org);
 app.use('/show-donor', donor);
 app.use('/new-request', newRequest);
 app.use('/dashboard', dashboard);
+app.use('/my-profile', myProfile);
 
 //localhost:3940/new-request
 // app.get('/new-request', function(req,res){
@@ -151,9 +154,9 @@ app.get('/view-profile', function(req,res){
     res.render('viewProfile.ejs');
 });
 
-app.get('/my-profile', function(req,res){
-    res.render('myProfile.ejs');
-});
+// app.get('/my-profile', function(req,res){
+//     res.render('myProfile.ejs');
+// });
 
 //localhost:3940/dashboard
 // app.get('/dashboard', function(req,res){
