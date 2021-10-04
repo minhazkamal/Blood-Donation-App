@@ -37,11 +37,15 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-column align-items-center text-center">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                                    <!-- <img src="../profile/avatar.png" alt="User"
+                                        class="rounded-circle" width="200"> -->
+                                    <img src="<%= user.img %>" alt="User"
                                         class="rounded-circle" width="200">
                                     <div class="mt-3">
-                                        <h4>John Doe</h4>
-                                        <p class="text-danger mb-1" style="font-weight: 500; font-size: x-large;">AB+
+                                        <h4><%= user.fullname %></h4>
+                                        <p class="text-danger mb-1" style="font-weight: 500; font-size: x-large;">
+                                            <%= user.bg %>
+                                            <!-- AB+ -->
                                         </p>
                                         <!-- <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p> -->
                                         <!-- <button class="btn btn-primary">Follow</button> -->
@@ -52,10 +56,10 @@
                         </div>
                         <div class="card mt-3">
                             <div class="tab">
-                                <button class="tablinks" onclick="openCity(event, 'London')"
+                                <button class="tablinks" onclick="openContent(event, 'general')"
                                     id="defaultOpen">General</button>
-                                <button class="tablinks" onclick="openCity(event, 'Paris')">My Donations</button>
-                                <button class="tablinks" onclick="openCity(event, 'Tokyo')">My Requests</button>
+                                <button class="tablinks" onclick="openContent(event, 'donations')">My Donations</button>
+                                <button class="tablinks" onclick="openContent(event, 'requests')">My Requests</button>
                             </div>
 
 
@@ -63,12 +67,12 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <div id="London" class="tabcontent">
+                        <div id="general" class="tabcontent">
 
 
 
                             <div class="row gutters-sm">
-                                <!-- <div id="London" class="tabcontent"> -->
+                                <!-- <div id="general" class="tabcontent"> -->
                                 <!-- <div class="col-sm-6 mb-3">
                                 <div class="card h-100">
                                     <div class="card-body">
@@ -83,7 +87,7 @@
                                     <div class="card h-100">
                                         <div class="card-body">
                                             <h4>Eligibility Score</h4>
-                                            <h1 class="eligibility-score">8</h1>
+                                            <h1 class="eligibility-score" id="elg-score">8</h1>
                                             <h6 class="text">out of 10</h6>
                                         </div>
                                     </div>
@@ -91,10 +95,10 @@
                                 <div class="col-sm-4 mb-3">
                                     <div class="card h-100">
                                         <div class="card-body">
-                                            <h4>Responded</h4>
-                                            <h6 class="text">to</h6>
-                                            <h1 class="no-of-responds">50</h1>
-                                            <h6 class="text">requests</h6>
+                                            <h4>Donated</h4>
+                                            <h6 class="text">about</h6>
+                                            <h1 class="no-of-responds" id="responds-count">50</h1>
+                                            <h6 class="text">times</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -103,7 +107,7 @@
                                         <div class="card-body">
                                             <h4>Requested</h4>
                                             <h6 class="text">for</h6>
-                                            <h1 class="no-of-requests">5</h1>
+                                            <h1 class="no-of-requests" id="requests-count">5</h1>
                                             <h6 class="text">bag(s)</h6>
                                         </div>
                                     </div>
@@ -117,7 +121,8 @@
                                             <h6 class="mb-0">Full Name</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            Kenneth Valdez
+                                            <%= user.fullname %>
+                                            <!-- Kenneth Valdez -->
                                         </div>
                                     </div>
                                     <hr>
@@ -126,7 +131,8 @@
                                             <h6 class="mb-0">Contact Number</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            (239) 816-9029
+                                            <%= user.contact %>
+                                            <!-- (239) 816-9029 -->
                                         </div>
                                     </div>
                                     <hr>
@@ -135,7 +141,8 @@
                                             <h6 class="mb-0">Email Address</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            abcd@gmail.com
+                                            <%= user.email %>
+                                            <!-- abcd@gmail.com -->
                                         </div>
                                     </div>
                                     <hr>
@@ -144,7 +151,8 @@
                                             <h6 class="mb-0">Date of Birth</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            03/28/1999
+                                            <%= user.dob %>
+                                            <!-- 03/28/1999 -->
                                         </div>
                                     </div>
                                     <hr>
@@ -153,7 +161,8 @@
                                             <h6 class="mb-0">Blood Group</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            AB+
+                                            <%= user.bg %>
+                                            <!-- AB+ -->
                                         </div>
                                     </div>
                                     <hr>
@@ -162,7 +171,8 @@
                                             <h6 class="mb-0">Gender</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            Female
+                                            <%= user.gender %>
+                                            <!-- Female -->
                                         </div>
                                     </div>
                                     <hr>
@@ -171,20 +181,23 @@
                                             <h6 class="mb-0">Address</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            Bay Area, San Francisco, CA
+                                            <%= user.address %>
+                                            <!-- Bay Area, San Francisco, CA -->
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row" style="display: flex; justify-content: center;">
                                         <div class="col-sm-6">
-                                            <button class="edit-profile-btn">Edit profile</button>
+                                            <span class="edit-profile-btn"><a href="<%= user.editLink %>" class="add-link">Edit
+                                                Profile</a></span>
+                                            <!-- <button class="edit-profile-btn">Edit profile</button> -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div id="Paris" class="tabcontent">
+                        <div id="donations" class="tabcontent">
                             <div class="row gutters-sm">
                                 <div class="col-sm-12 mb-3">
                                     <div class="card h-100">
@@ -296,7 +309,7 @@
                             </div>
                         </div>
 
-                        <div id="Tokyo" class="tabcontent">
+                        <div id="requests" class="tabcontent">
                             <div class="row gutters-sm">
                                 <div class="col-sm-12 mb-3">
                                     <div class="card h-100">
@@ -412,7 +425,7 @@
         </div>
         <%- include ("./partials/footer.ejs") %>
             <script>
-                function openCity(evt, cityName) {
+                function openContent(evt, tabName) {
                     var i, tabcontent, tablinks;
                     tabcontent = document.getElementsByClassName("tabcontent");
                     for (i = 0; i < tabcontent.length; i++) {
@@ -422,7 +435,7 @@
                     for (i = 0; i < tablinks.length; i++) {
                         tablinks[i].className = tablinks[i].className.replace(" active", "");
                     }
-                    document.getElementById(cityName).style.display = "block";
+                    document.getElementById(tabName).style.display = "block";
                     evt.currentTarget.className += " active";
                 }
 
@@ -431,14 +444,25 @@
             </script>
 
             <script>
-                function myFunction() {
-                    var x = document.getElementById("myDIV");
-                    if (x.innerHTML === "Active") {
-                        x.innerHTML = "Inactive";
-                    } else {
-                        x.innerHTML = "Active";
-                    }
+                function animateValue(id, start, end, duration) {
+                    if (start === end) return;
+                    var range = end - start;
+                    var current = start;
+                    var increment = end > start ? 1 : -1;
+                    var stepTime = Math.abs(Math.floor(duration / range));
+                    var obj = document.getElementById(id);
+                    var timer = setInterval(function () {
+                        current += increment;
+                        obj.innerHTML = current;
+                        if (current == end) {
+                            clearInterval(timer);
+                        }
+                    }, stepTime);
                 }
+
+                animateValue("elg-score", 0, 8, 500);
+                animateValue("responds-count", 0, 50, 500);
+                animateValue("requests-count", 0, 5, 500);
             </script>
 
 
