@@ -6,7 +6,7 @@ body {
     height: 100vh;
     color: #1a202c;
     text-align: left;
-    /* background-color: #e2e8f0;  */
+    background-color: transparent; 
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -182,4 +182,126 @@ h4, h1 {
 
 .tabcontent {
     padding: 0px 7px;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    background-color: rgba(0, 0, 0, .5);
+    opacity: 0;
+    transition: visibility 300ms, opacity 500ms;
+}
+
+.popup__container {
+    z-index: 999;
+    visibility: visible;
+    background-color: #fff;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    text-align: center;
+    margin: auto;
+    margin-right: 1em;
+    margin-left: 1em;
+    position: relative;
+    padding: 15px;
+}
+
+.close-button {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    border: 0;
+    background: url(/img/cancel.svg) center center / 100% 100% no-repeat;
+    width: 20px;
+    height: 20px;
+    fill: #000;
+    padding: 0;
+    cursor: pointer;
+    display: block;
+}
+
+.row-filter {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.filter {
+    height: 100%;
+    margin-top: 1.5rem;
+}
+
+.btn-01 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.btn-01 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+}
+
+.reset-btn {
+    margin-right: 15px;
+    background: #ef233c;
+    color: white;
+    font-weight: 400;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: 0.3s;
+}
+
+.reset-btn:hover {
+    background: #d90429;
+    cursor: pointer;
+}
+
+.apply-btn {
+    margin-right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-weight: 400;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: 0.3s;
+}
+
+.apply-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+}
+
+.popup-button {
+    visibility: visible;
+    z-index: 1;
+    cursor: pointer;
+    position: fixed;
+    top: 40%;
+    right: -1%;
+    width: fit-content;
+    padding: 10px;
+    color: rgba(42, 111, 151, 1);
+    border: 3px solid rgba(42, 111, 151, 1);
+    border-radius: 50% 0 0 50%;
+    background-color: rgba(97, 95, 95, 0.123);
+    
 }
