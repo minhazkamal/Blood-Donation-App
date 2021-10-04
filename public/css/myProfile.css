@@ -227,3 +227,25 @@ h4, h1 {
     background: rgba(0, 0, 0, 0.9);
     cursor: pointer;
   }
+
+  .add-donation-btn{
+    display: block;
+    width: 100%;
+    background: #b9375e;
+    color: white;
+    font-weight: 500;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: 0.3s;
+    font-size: 0.875rem;
+    margin-right: 1rem;
+}
+
+.add-donation-btn:hover{
+    background: #d34e76;
+    cursor: pointer;
+}
