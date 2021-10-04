@@ -30,7 +30,7 @@ function mysql2JsLocal(str) {
 }
 
 router.get('/', function (req, res) {
-    req.session.email = 'minhaz.kamal9900@gmail.com';
+    // req.session.email = 'minhaz.kamal9900@gmail.com';
     let user = {
         fullname: '',
         contact: '',
