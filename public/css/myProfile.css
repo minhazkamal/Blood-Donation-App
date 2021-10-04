@@ -245,6 +245,19 @@ h4, h1 {
     margin-right: 1rem;
 }
 
+a{
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+
+a:hover{
+    color: white;
+    text-decoration: none;
+}
+
 .add-donation-btn:hover{
     background: #d34e76;
     cursor: pointer;
