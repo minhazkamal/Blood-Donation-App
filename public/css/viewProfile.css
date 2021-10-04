@@ -27,7 +27,9 @@ body{
     flex: 1 1 auto;
     min-height: 1px;
     padding: 1rem;
+    
 }
+
 
 .gutters-sm {
     margin-right: -8px;
@@ -52,3 +54,24 @@ body{
     box-shadow: none!important;
 }
 
+
+
+/* CSS for the top table */
+.card-body2 {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+    text-align: center;
+}
+
+.eligibility-score {
+    color: rgb(201, 25, 25);
+}
+.no-of-responds {
+    color: green;
+}
+
+.no-of-requests {
+    color: purple;
+}
