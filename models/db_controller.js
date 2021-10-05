@@ -278,7 +278,7 @@ module.exports.updateUsers = (id, f_name, l_name, nid_verified, profile_build) =
 
 module.exports.setUserProfile = (profile) => {
     return new Promise((resolve, reject) => {
-        db.query("INSERT INTO user_profile VALUES (?, ?, ?, ?, ?)", [profile.id, profile.contact, profile.dob, profile.bg, profile.gender], (err, res) => {
+        db.query("INSERT INTO user_profile VALUES (?, ?, ?, ?, ?)", [profile.id, profile.contact, profile.dob, profile.bg, profile.gender, profile.profession], (err, res) => {
             err ? reject(err) : resolve(res)
         })
     })
@@ -294,7 +294,7 @@ module.exports.getProfile = (id) => {
 
 module.exports.updateUserProfile = (profile) => {
     return new Promise((resolve, reject) => {
-        db.query("UPDATE user_profile SET contact=?, dob=?, BG=?, gender=? WHERE id=?", [profile.contact, profile.dob, profile.bg, profile.gender, profile.id], (err, res) => {
+        db.query("UPDATE user_profile SET contact=?, dob=?, BG=?, gender=?, profession=? WHERE id=?", [profile.contact, profile.dob, profile.bg, profile.gender, profile.profession, profile.id], (err, res) => {
             err ? reject(err) : resolve(res)
         })
     })
@@ -535,6 +535,30 @@ module.exports.getDOB = (email) => {
 module.exports.updateEligibilityStatus = (id, value) => {
     return new Promise((resolve, reject) => {
         db.query(`UPDATE users SET eligibility_test = ? WHERE id = ?`, [value, id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.countBloodRequests = (email) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT SUM(quantity) as total_requests FROM requests WHERE post_by = (SELECT id FROM users WHERE email = ?)`, [email], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.getRequestByPoster = (email) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT 
+        r.id as id,
+        r.patient as patient,
+        o.name as orgname,
+        o.details as orgdetails,
+        r.approx_donation_date as date,
+        r.BG as bg,
+        r.quantity as quantity
+        FROM requests r INNER JOIN organizations o ON r.organization_id = o.id WHERE r.post_by = (SELECT id FROM users WHERE email = ?) ORDER BY date DESC`, [email], (err, res) => {
             err ? reject(err) : resolve(res)
         })
     })
