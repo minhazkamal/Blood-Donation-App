@@ -22,6 +22,8 @@
     <!-- FOR NAVBAR -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
     <!--[if lt IE 9]>
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>    
@@ -39,13 +41,14 @@
                                 <div class="d-flex flex-column align-items-center text-center">
                                     <!-- <img src="../profile/avatar.png" alt="User"
                                         class="rounded-circle" width="200"> -->
-                                    <img src="<%= user.img %>" alt="User"
-                                        class="rounded-circle" width="200">
+                                    <img src="<%= user.img %>" alt="User" class="rounded-circle" width="200">
                                     <div class="mt-3">
-                                        <h4><%= user.fullname %></h4>
+                                        <h4>
+                                            <%= user.fullname %>
+                                        </h4>
                                         <p class="text-danger mb-1" style="font-weight: 500; font-size: x-large;">
                                             <%= user.bg %>
-                                            <!-- AB+ -->
+                                                <!-- AB+ -->
                                         </p>
                                         <!-- <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p> -->
                                         <!-- <button class="btn btn-primary">Follow</button> -->
@@ -54,12 +57,19 @@
                                 </div>
                             </div>
                         </div>
+                        <div style="display: none;" id="profile">
+                            <input id="opening_tab" type="text" value="<%= tab %>">
+                            <input id="requests_counting" type="text" value="<%= user.requests_count %>">
+                            <input id="eligibility_counting" type="text" value="<%= user.eligibility_score %>">
+                        </div>
                         <div class="card mt-3">
                             <div class="tab">
                                 <button class="tablinks" onclick="openContent(event, 'general')"
-                                    id="defaultOpen">General</button>
-                                <button class="tablinks" onclick="openContent(event, 'donations')">My Donations</button>
-                                <button class="tablinks" onclick="openContent(event, 'requests')">My Requests</button>
+                                    id="generalContent">General</button>
+                                <button class="tablinks" id="donationsContent"
+                                    onclick="openContent(event, 'donations')">My Donations</button>
+                                <button class="tablinks" id="requestsContent"
+                                    onclick="openContent(event, 'requests')">My Requests</button>
                             </div>
 
 
@@ -122,7 +132,7 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <%= user.fullname %>
-                                            <!-- Kenneth Valdez -->
+                                                <!-- Kenneth Valdez -->
                                         </div>
                                     </div>
                                     <hr>
@@ -132,7 +142,7 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <%= user.contact %>
-                                            <!-- (239) 816-9029 -->
+                                                <!-- (239) 816-9029 -->
                                         </div>
                                     </div>
                                     <hr>
@@ -142,7 +152,7 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <%= user.email %>
-                                            <!-- abcd@gmail.com -->
+                                                <!-- abcd@gmail.com -->
                                         </div>
                                     </div>
                                     <hr>
@@ -152,7 +162,7 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <%= user.dob %>
-                                            <!-- 03/28/1999 -->
+                                                <!-- 03/28/1999 -->
                                         </div>
                                     </div>
                                     <hr>
@@ -162,7 +172,7 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <%= user.bg %>
-                                            <!-- AB+ -->
+                                                <!-- AB+ -->
                                         </div>
                                     </div>
                                     <hr>
@@ -172,7 +182,7 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <%= user.gender %>
-                                            <!-- Female -->
+                                                <!-- Female -->
                                         </div>
                                     </div>
                                     <hr>
@@ -182,14 +192,15 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <%= user.address %>
-                                            <!-- Bay Area, San Francisco, CA -->
+                                                <!-- Bay Area, San Francisco, CA -->
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row" style="display: flex; justify-content: center;">
                                         <div class="col-sm-6">
-                                            <span class="edit-profile-btn"><a href="<%= user.editLink %>" class="add-link">Edit
-                                                Profile</a></span>
+                                            <span class="edit-profile-btn"><a href="<%= user.editLink %>"
+                                                    class="add-link">Edit
+                                                    Profile</a></span>
                                             <!-- <button class="edit-profile-btn">Edit profile</button> -->
                                         </div>
                                     </div>
@@ -390,11 +401,28 @@
                                             <th scope="col">Donee's Name</th>
                                             <th scope="col">Location</th>
                                             <th scope="col">Date of Donation</th>
+                                            <th scope="col">Blood Group</th>
                                             <th scope="col">Quantity(bag/s)</th>
+                                            <th scope="col">View</th>
+                                            <th scope="col">Resolve</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <% if(typeof request !='undefined' ) { %>
+                                            <% request.forEach(function(req) { %>
+                                            <tr>
+                                                <th scope="row"><%= req.serialID %></th>
+                                                <td><%= req.patient %></td>
+                                                <td><%= req.location %></td>
+                                                <td><%= req.date %></td>
+                                                <td><%= req.bg %></td>
+                                                <td><%= req.quantity %></td>
+                                                <td><a href="/request/view/<%= req.id %>">View</a></td>
+                                                <td><a href="/request/resolve/<%= req.id %>">Resolve</a></td>
+                                            </tr>
+                                            <% }) %>
+                                        <% } %>
+                                                        <!-- <tr>
                                             <th scope="row">1</th>
                                             <td>George Bush Bush</td>
                                             <td>United Hospitals,Dhaka</td>
@@ -414,7 +442,7 @@
                                             <td>Apollo Hospitals,Dhaka</td>
                                             <td>09/13/2021</td>
                                             <td>8</td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -441,7 +469,10 @@
                 }
 
                 // Get the element with id="defaultOpen" and click on it
-                document.getElementById("defaultOpen").click();
+                if ($("#opening_tab").val() == 'general') document.getElementById("generalContent").click();
+                else if ($("#opening_tab").val() == 'donation') document.getElementById("donationsContent").click();
+                else if ($("#opening_tab").val() == 'request') document.getElementById("requestsContent").click();
+
             </script>
 
             <script>
@@ -461,9 +492,9 @@
                     }, stepTime);
                 }
 
-                animateValue("elg-score", 0, 8, 500);
+                animateValue("elg-score", 0, $("#eligibility_counting").val(), 500);
                 animateValue("responds-count", 0, 50, 500);
-                animateValue("requests-count", 0, 5, 500);
+                animateValue("requests-count", 0, $("#requests_counting").val(), 500);
             </script>
 
 
