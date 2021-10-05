@@ -469,10 +469,10 @@
                 }
 
                 // Get the element with id="defaultOpen" and click on it
-                if ($("#opening_tab").val() == 'general') document.getElementById("generalContent").click();
-                else if ($("#opening_tab").val() == 'donation') document.getElementById("donationsContent").click();
+                
+                if ($("#opening_tab").val() == 'donation') document.getElementById("donationsContent").click();
                 else if ($("#opening_tab").val() == 'request') document.getElementById("requestsContent").click();
-
+                else document.getElementById("generalContent").click();
             </script>
 
             <script>
