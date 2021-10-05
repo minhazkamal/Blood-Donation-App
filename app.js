@@ -154,9 +154,9 @@ app.get('/view-profile', function(req,res){
     res.render('viewProfile.ejs');
 });
 
-// app.get('/my-profile', function(req,res){
-//     res.render('myProfile.ejs');
-// });
+app.get('/view-request', function(req,res){
+    res.render('viewRequest.ejs');
+});
 
 //localhost:3940/dashboard
 // app.get('/dashboard', function(req,res){
