@@ -109,7 +109,7 @@ router.get('/', function (req, res) {
                                                 {
                                                     // console.log(i);
                                                     var eachrequest = {
-                                                        id: result5[i].id,
+                                                        id: cryptr.encrypt(result5[i].id),
                                                         serialID: i+1,
                                                         patient: result5[i].patient,
                                                         location: result5[i].orgname +', '+ result5[i].orgdetails,
