@@ -51,6 +51,9 @@
 									<input id="user_zipcode" type="text" value="<%= user.zipcode %>">
 									<input id="user_house" type="text" value="<%= user.house %>">
 									<input id="user_street" type="text" value="<%= user.street %>">
+									<input id="user_imgName" type="text" value="<%= user.imgName %>">
+									<input id="user_imgLink" type="text" value="<%= user.imgLink %>">
+									<input id="user_profession" type="text" value="<%= user.profession %>">
 								</div>
 
 								<section class="section-preview">
@@ -99,7 +102,7 @@
 										type="email" readonly>
 								</div>
 								<div class="input-container lname">
-									<input id="lname" name="lname" placeholder="Profession" value=""
+									<input id="profession" name="profession" placeholder="Profession" value=""
 										type="text">
 								</div>
 
@@ -274,11 +277,12 @@
 
 					if ($("#profile_build").val() === 'yes' || $("#profile_build").val() == 'error') {
 						$("#basic_bg").val($("#user_bg").val());
+						$("#profession").val($("#user_profession").val());
 						$("#DOB").val($("#user_dob").val());
 						$("#house").val($("#user_house").val());
 						$("#contact").val($("#user_contact").val());
 						$("#basic_gender").val($("#user_gender").val());
-						$("#basic_bg").val($("#user_bg").val());
+						// $("#basic_bg").val($("#user_bg").val());
 						$("#street").val($("#user_street").val());
 						$("#zipcode").val($("#user_zipcode").val());
 						$("#basic_division").val($("#user_division").val());
@@ -288,6 +292,12 @@
 						upazilla();
 						$("#basic_upazilla").val($("#user_upazilla").val());
 						// console.log($("#zipcode").val());
+					}
+
+					if($("#profile_build").val() === 'yes') {
+						$('#basic_bg option:not(:selected)').attr('disabled', true);
+						$("#DOB").attr('readonly', 'readonly');
+						$('#imageResult').attr('src', $("#user_imgLink").val());
 					}
 				});
 
