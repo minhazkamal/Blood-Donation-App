@@ -36,7 +36,7 @@ CREATE TABLE `active_status` (
 
 LOCK TABLES `active_status` WRITE;
 /*!40000 ALTER TABLE `active_status` DISABLE KEYS */;
-INSERT INTO `active_status` VALUES (6,'yes'),(7,'no'),(8,'no'),(9,'no'),(10,'no'),(11,'no'),(12,'no'),(13,'no'),(14,'no'),(15,'no'),(16,'no'),(17,'no'),(18,'no'),(19,'no'),(20,'no'),(21,'no'),(22,'no'),(23,'no');
+INSERT INTO `active_status` VALUES (6,'no'),(7,'no'),(8,'no'),(9,'no'),(10,'no'),(11,'no'),(12,'no'),(13,'no'),(14,'no'),(15,'no'),(16,'no'),(17,'no'),(18,'no'),(19,'no'),(20,'no'),(21,'no'),(22,'no'),(23,'no');
 /*!40000 ALTER TABLE `active_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -203,7 +203,7 @@ CREATE TABLE `profile_picture` (
 
 LOCK TABLES `profile_picture` WRITE;
 /*!40000 ALTER TABLE `profile_picture` DISABLE KEYS */;
-INSERT INTO `profile_picture` VALUES (6,'avatar.png'),(7,'avatar.png'),(8,'avatar.png'),(9,'avatar.png'),(10,'avatar.png'),(11,'avatar.png'),(12,'avatar.png'),(13,'avatar.png'),(14,'avatar.png'),(15,'avatar.png'),(16,'avatar.png'),(17,'avatar.png'),(18,'avatar.png'),(19,'avatar.png'),(20,'avatar.png'),(21,'avatar.png'),(22,'avatar.png'),(23,'avatar.png');
+INSERT INTO `profile_picture` VALUES (6,'bfdc6d3c7f3a763b0f933b2501038f1f5969b5603599952430e3bf7a85076d74e99269606dfa852f0cc54fd24c89cdeac1e1c8bfab62a7941f45776a9a7a381a4a13e646cca0d99c7d19e2288a637d3b244ef97bdd31113b1428f05351883fc12b.JPG'),(7,'avatar.png'),(8,'avatar.png'),(9,'avatar.png'),(10,'avatar.png'),(11,'avatar.png'),(12,'avatar.png'),(13,'avatar.png'),(14,'avatar.png'),(15,'avatar.png'),(16,'avatar.png'),(17,'avatar.png'),(18,'avatar.png'),(19,'avatar.png'),(20,'avatar.png'),(21,'avatar.png'),(22,'avatar.png'),(23,'avatar.png');
 /*!40000 ALTER TABLE `profile_picture` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,15 +223,17 @@ CREATE TABLE `requests` (
   `approx_donation_date` date NOT NULL,
   `BG` enum('A+','A-','B+','B-','O+','O-','AB+','AB-') NOT NULL,
   `complication` varchar(500) DEFAULT NULL,
+  `requirements` varchar(500) DEFAULT NULL,
   `quantity` int NOT NULL,
   `organization_id` int NOT NULL,
   `org_address_details` varchar(500) DEFAULT NULL,
+  `posted_on` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `posted_by_idx` (`post_by`),
   KEY `organization_id_idx` (`organization_id`),
   CONSTRAINT `organization_id` FOREIGN KEY (`organization_id`) REFERENCES `organizations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `posted_by` FOREIGN KEY (`post_by`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -240,7 +242,7 @@ CREATE TABLE `requests` (
 
 LOCK TABLES `requests` WRITE;
 /*!40000 ALTER TABLE `requests` DISABLE KEYS */;
-INSERT INTO `requests` VALUES (2,6,'Minhaz','Minhaz Kamal','01867057600','2021-08-30','O+','Accident',2,1,''),(4,6,'Minhaz Kamal','Kamal','01521503910','2021-08-30','O+','Accident',2,20,'Near Mirpur-10 circle');
+INSERT INTO `requests` VALUES (2,6,'Minhaz','Minhaz Kamal','01867057600','2021-08-30','O+','Accident',NULL,2,1,'',NULL),(4,6,'Minhaz Kamal','Kamal','01521503910','2021-08-30','O+','Accident',NULL,2,20,'Near Mirpur-10 circle',NULL),(6,6,'Minhaz Kamal','Kinjol','01521503910','2021-09-30','O+','Accident','Not Vaccinated',2,1,'','2021-09-28 15:04:50');
 /*!40000 ALTER TABLE `requests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -301,7 +303,7 @@ CREATE TABLE `user_address` (
 
 LOCK TABLES `user_address` WRITE;
 /*!40000 ALTER TABLE `user_address` DISABLE KEYS */;
-INSERT INTO `user_address` VALUES (6,'7C','311, West Shewrapara, Mirpur',3,1,519,'1216',23.7911459,90.3736772),(7,'Chowdhury Vila','Enam Road',2,43,566,'4203',22.342895,91.829046),(8,'Khan Villa','Highway Road',2,43,561,'4205',22.303201,91.789352),(9,'King Villa','King Road',2,43,567,'4100',22.364765,91.803119),(10,'Bokhsi House','Bokhs Road',2,43,564,'4002',22.303201,91.789352),(11,'Doctor House','Medical Road',2,43,569,'4500',22.375772,91.827392),(12,'brothers villa','College Road',2,43,570,'4302',22.2544,91.7948),(13,'Cumilla Vila','Cumilla House',2,43,560,'4322',22.393836,91.865371),(14,'Bokhsi Vila','Bokhsi Road',2,43,565,'4731',22.303201,91.789352),(15,'Dhanshiri','Apon Road',2,43,568,'4800',22.358732,91.775428),(16,'Shadhinota','Mujib Road',3,1,511,'2000',23.7931,90.3861),(17,'Chowdhury Vila','Khan Road',3,1,525,'1000',23.827398,90.364473),(18,'Apon Nibash','Hospital Road',3,1,544,'1200',23.709226,90.40739),(19,'Bokhsi House','Bokhs Road',3,1,508,'1500',23.7917,90.4167),(20,'Poushi','School Road',3,1,533,'1200',23.736484,90.397323),(21,'Artboard','Choumuhuni Road',3,1,505,'1100',23.744806,90.373922),(22,'46','Road-2, Shekhertek',3,1,520,'',23.760178,90.355229);
+INSERT INTO `user_address` VALUES (6,'7C','311, West Shewrapara, Mirpur',3,1,519,'1216',23.773184,90.4003584),(7,'Chowdhury Vila','Enam Road',2,43,566,'4203',22.342895,91.829046),(8,'Khan Villa','Highway Road',2,43,561,'4205',22.303201,91.789352),(9,'King Villa','King Road',2,43,567,'4100',22.364765,91.803119),(10,'Bokhsi House','Bokhs Road',2,43,564,'4002',22.303201,91.789352),(11,'Doctor House','Medical Road',2,43,569,'4500',22.375772,91.827392),(12,'brothers villa','College Road',2,43,570,'4302',22.2544,91.7948),(13,'Cumilla Vila','Cumilla House',2,43,560,'4322',22.393836,91.865371),(14,'Bokhsi Vila','Bokhsi Road',2,43,565,'4731',22.303201,91.789352),(15,'Dhanshiri','Apon Road',2,43,568,'4800',22.358732,91.775428),(16,'Shadhinota','Mujib Road',3,1,511,'2000',23.7931,90.3861),(17,'Chowdhury Vila','Khan Road',3,1,525,'1000',23.827398,90.364473),(18,'Apon Nibash','Hospital Road',3,1,544,'1200',23.709226,90.40739),(19,'Bokhsi House','Bokhs Road',3,1,508,'1500',23.7917,90.4167),(20,'Poushi','School Road',3,1,533,'1200',23.736484,90.397323),(21,'Artboard','Choumuhuni Road',3,1,505,'1100',23.744806,90.373922),(22,'46','Road-2, Shekhertek',3,1,520,'',23.760178,90.355229);
 /*!40000 ALTER TABLE `user_address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -318,6 +320,7 @@ CREATE TABLE `user_profile` (
   `dob` date NOT NULL,
   `BG` enum('A+','A-','B+','B-','O+','O-','AB+','AB-') NOT NULL,
   `gender` enum('Male','Female','Others') NOT NULL,
+  `profession` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `user_profile_id` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -329,7 +332,7 @@ CREATE TABLE `user_profile` (
 
 LOCK TABLES `user_profile` WRITE;
 /*!40000 ALTER TABLE `user_profile` DISABLE KEYS */;
-INSERT INTO `user_profile` VALUES (6,'01867057600','2000-11-30','O+','Male'),(7,'01766173531','1999-07-06','B+','Male'),(8,'01479651234','1997-08-02','A+','Male'),(9,'01697586413','2000-11-30','AB+','Male'),(10,'01477986458','1973-05-29','O+','Male'),(11,'01697586413','1998-07-17','B+','Male'),(12,'01677894537','1999-07-10','A+','Male'),(13,'01677894537','1996-07-09','AB+','Male'),(14,'01677894537','1999-07-04','B+','Male'),(15,'01477986458','1993-08-15','AB+','Male'),(16,'01477986458','1996-08-15','O+','Male'),(17,'01479651234','1995-07-04','AB+','Male'),(18,'01477986458','1995-06-28','A+','Male'),(19,'01697586413','1994-07-17','A+','Male'),(20,'01677894537','1999-05-29','B+','Male'),(21,'01479651234','1991-06-29','O+','Male'),(22,'01638912345','2003-06-08','B+','Male');
+INSERT INTO `user_profile` VALUES (6,'01521503910','2000-11-30','O+','Male','Student Intern'),(7,'01766173531','1999-07-06','B+','Male',NULL),(8,'01479651234','1997-08-02','A+','Male',NULL),(9,'01697586413','2000-11-30','AB+','Male',NULL),(10,'01477986458','1973-05-29','O+','Male',NULL),(11,'01697586413','1998-07-17','B+','Male',NULL),(12,'01677894537','1999-07-10','A+','Male',NULL),(13,'01677894537','1996-07-09','AB+','Male',NULL),(14,'01677894537','1999-07-04','B+','Male',NULL),(15,'01477986458','1993-08-15','AB+','Male',NULL),(16,'01477986458','1996-08-15','O+','Male',NULL),(17,'01479651234','1995-07-04','AB+','Male',NULL),(18,'01477986458','1995-06-28','A+','Male',NULL),(19,'01697586413','1994-07-17','A+','Male',NULL),(20,'01677894537','1999-05-29','B+','Male',NULL),(21,'01479651234','1991-06-29','O+','Male',NULL),(22,'01638912345','2003-06-08','B+','Male',NULL);
 /*!40000 ALTER TABLE `user_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -376,4 +379,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-18 19:51:45
+-- Dump completed on 2021-10-05 16:02:43
