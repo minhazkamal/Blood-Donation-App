@@ -62,7 +62,7 @@ function checkFileType(req, file, cb) {
     ) { // check file type to be png, jpeg, or jpg
         cb(null, true);
     }
-    else cb(new Error("File format of Back side should be PNG,JPG,JPEG"), false);
+    else cb(new Error("File format should be PNG,JPG,JPEG"), false);
 }
 
 const validator = function (req, res, next) {
@@ -73,9 +73,6 @@ const validator = function (req, res, next) {
                 res.render('updateProfile', { alert: [{ msg: err.message }] });
             }
             else {
-                let FILE;
-                if (typeof req.file === 'undefined') FILE = 'avatar.png';
-                else FILE = req.file.filename;
                 db.getuserid(req.session.email)
                     .then(result => {
                         if (result.length > 0) {
@@ -84,7 +81,12 @@ const validator = function (req, res, next) {
                                 .then(result => {
                                     // console.log(req.files.front_side[0].filename);
                                     try {
-                                        // console.log(result);
+                                        let FILE;
+                                        if (result[0].profile_picture !== 'avatar.png') FILE = result[0].profile_picture;
+                                        else if (typeof req.file === 'undefined') FILE = 'avatar.png';
+                                        else FILE = req.file.filename;
+
+                                        // console.log(FILE);
                                         if (result.length > 0) {
                                             if (FILE === 'avatar.png' && result[0].profile_picture !== 'avatar.png') {
                                                 fs.unlink('./profile/' + result[0].profile_picture, (err) => {
@@ -201,8 +203,12 @@ router.get('/', function (req, res) {
                                 upazilla: '',
                                 zipcode: '',
                                 house: '',
-                                street: ''
+                                street: '',
+                                imgLink: '',
+                                imgName: '',
+                                profession: ''
                             }
+                            // console.log(user);
                             req.session.temp_user = user;
                             req.session.div_results = div_result;
                             // console.log(req.session.temp_user, req.session.div_results);
@@ -210,32 +216,39 @@ router.get('/', function (req, res) {
                                 res.render('updateProfile.ejs', { user, divisions: div_result });
                             }
                             else {
-                                db.getProfile(result[0].id)
-                                    .then(result => {
-                                        user.contact = result[0].contact;
-                                        result[0].dob.setTime(result[0].dob.getTime() - result[0].dob.getTimezoneOffset() * 60 * 1000);
-                                        user.dob = result[0].dob.toISOString();
-                                        user.dob = (user.dob.substring(0, 10));
-                                        user.gender = result[0].gender;
-                                        user.bg = result[0].BG;
-                                        db.getuserid(req.session.email)
+                                db.getProfilePic(result[0].id)
+                                    .then(result1 => {
+                                        user.imgName = result1[0].profile_picture;
+                                        user.imgLink = '/profile/' + result1[0].profile_picture;
+                                        db.getProfile(result[0].id)
                                             .then(result => {
-                                                user.f_name = result[0].first_name;
-                                                user.l_name = result[0].last_name;
-                                                db.getUserAddress(req.session.email)
+                                                user.contact = result[0].contact;
+                                                result[0].dob.setTime(result[0].dob.getTime() - result[0].dob.getTimezoneOffset() * 60 * 1000);
+                                                user.dob = result[0].dob.toISOString();
+                                                user.dob = (user.dob.substring(0, 10));
+                                                user.gender = result[0].gender;
+                                                user.bg = result[0].BG;
+                                                user.profession = result[0].profession;
+                                                db.getuserid(req.session.email)
                                                     .then(result => {
-                                                        user.house = result[0].house;
-                                                        user.street = result[0].street;
-                                                        user.division = result[0].division;
-                                                        user.district = result[0].district;
-                                                        user.upazilla = result[0].upazilla;
-                                                        user.zipcode = result[0].zipcode;
-                                                        // console.log(user);
-                                                        req.session.temp_user = user;
-                                                        res.render('updateProfile.ejs', { user, divisions: div_result });
+                                                        user.f_name = result[0].first_name;
+                                                        user.l_name = result[0].last_name;
+                                                        db.getUserAddress(req.session.email)
+                                                            .then(result => {
+                                                                user.house = result[0].house;
+                                                                user.street = result[0].street;
+                                                                user.division = result[0].division;
+                                                                user.district = result[0].district;
+                                                                user.upazilla = result[0].upazilla;
+                                                                user.zipcode = result[0].zipcode;
+                                                                // console.log(user);
+                                                                req.session.temp_user = user;
+                                                                res.render('updateProfile.ejs', { user, divisions: div_result });
+                                                            })
                                                     })
                                             })
                                     })
+
                             }
                         })
                 }
@@ -280,10 +293,11 @@ router.post('/', validator, [
                 upazilla: req.body.upazilla,
                 zipcode: req.body.zipcode,
                 house: req.body.house,
-                street: req.body.street
+                street: req.body.street,
+                profession: req.body.profession
             }
             req.session.temp_user = post_user;
-            // console.log(req.session.temp_user);
+            console.log(req.session.temp_user);
             res.render('updateProfile', { alert, user: req.session.temp_user, divisions: req.session.div_results });
         }
         else {
@@ -304,7 +318,8 @@ router.post('/', validator, [
                             contact: req.body.contact,
                             dob: temp_dob,
                             bg: req.body.blood_group,
-                            gender: req.body.gender
+                            gender: req.body.gender,
+                            profession: req.body.profession
                         }
 
                         var address = {
@@ -357,9 +372,9 @@ router.post('/', validator, [
                                                                             db.updateUsers(req.session.user_id, req.body.fname, req.body.lname, 'yes', 'yes')
                                                                                 .then(result => {
                                                                                     db.insertActiveStatus(req.session.user_id, 'no')
-                                                                                    .then(result => {
-                                                                                        res.redirect('/dashboard');
-                                                                                    })
+                                                                                        .then(result => {
+                                                                                            res.redirect('/dashboard');
+                                                                                        })
                                                                                     // res.send("<h1>Dashboard</h1><br><span>Under Progress....</span>");
                                                                                     // console.log('insertion successfull');
                                                                                 })
