@@ -5,11 +5,11 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="shortcut icon" type="image/x-icon" href="img/Logo-01.png">
+	<link rel="shortcut icon" type="image/x-icon" href="/img/Logo-01.png">
 	<title>View Request - G L E A M</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -27,11 +27,11 @@
 	<%- include ("./partials/navbar.ejs") %>
 		<div class="container">
 			<form method="Post">
+				<fieldset id="form-fields">
 				<div class="row gutters" style="padding-bottom: 5rem;">
 					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
 						<section style="margin-top:2rem;">
-							<h2 style="margin-bottom: 0 !important;">Post Your New Request In Our <div class="brandname" style="font-weight: 600;"> G L E A M </div>
-								Community.
+							<h2 style="margin-bottom: 0 !important;">Details of your Request
 							</h2>
 
 						</section>
@@ -56,20 +56,51 @@
 
 						</div>
 
+						<div style="display: none;" id="user">
+							<input id="user_type" type="text" value="<%= user.type %>">
+							<input id="user_request_id" type="text" value="<%= user.request_id %>">
+							<input id="user_post_by" type="text" value="<%= user.post_by %>">
+							<input id="user_patient" type="text" value="<%= user.patient %>">
+							<input id="user_cp" type="text" value="<%= user.cp %>">
+							<input id="user_contact" type="text" value="<%= user.contact %>">
+							<input id="user_approx_donation" type="text" value="<%= user.approx_donation %>">
+							<input id="user_bg" type="text" value="<%= user.bg %>">
+							<input id="user_complications" type="text" value="<%= user.complication %>">
+							<input id="user_requirements" type="text" value="<%= user.requirements %>">
+							<input id="user_quantity" type="text" value="<%= user.quantity %>">
+							<input id="user_org_id" type="text" value="<%= user.org_id %>">
+							<input id="user_org_details" type="text" value="<%= user.org_details %>">
+							<input id="user_posted_on" type="text" value="<%= user.posted_on %>">
+							<input id="user_is_updateable" type="text" value="<%= user.is_updateable %>">
+						</div>
+
 						
 						<hr>
 						<div>
-							<label for="self-request" style="font-size: 1em; font-style: italic;"> Do you want to request for
-								yourself?</label><br>
-							<input type="checkbox" id="self-request" name="self_request" value="yes"
-								style="padding: 1em;" onclick="selfRequest()">
+							<div>
+								<h6 class="mb-2">Request Number</h6>
+								<input type="text" id="request_number" name="request_number" value="<%= user.request_id %>"
+									style="padding: 1em;">
+							</div>
+
+							<div>
+								<h6 class="mb-2">Posted By</h6>
+								<input type="text" id="posted_by" name="posted_by" value="<%= user.post_by %>"
+									style="padding: 1em;">
+							</div>
+
+							<div>
+								<h6 class="mb-2">Posted On</h6>
+								<input type="date" id="posted_on" name="posted_on" value="<%= user.posted_on %>"
+									style="padding: 1em;">
+							</div>
 						</div>
 
-
-
+						<hr>
+						<h6 class="mb-2">Donation Details</h6>
 						<div class="row gutters">
 							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-								<h6 class="mb-2">Donation Details</h6>
+								
 								<h6 class="mb-2">Patient Name</h6>
 								<div class="input-container fname">
 									<input id="pt_name" name="pt_name" placeholder="Patient's Name" value="" type="text"
@@ -215,7 +246,11 @@
 												tabindex="-1" "
 											aria-hidden=" true">
 												<option disabled selected value="">Division</option>
-												
+												<% divisions.forEach((division)=> { %>
+													<option value="<%= division.id %>">
+														<%=division.name %>
+													</option>
+													<% }) %>
 
 											</select>
 										</div>
@@ -259,14 +294,14 @@
 						</div>
 						<div class="row gutters">
 							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-								<div class="text-center">
-									<button type="reset" class="btn1" style>Clear</button>
-									<button type="submit" class="btn2" style>Submit</button>
+								<div class="text-center" id="is-updateable">
+									<a href="/request/update/<%= user.request_id %>"><span class="btn1">Update</span></a>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				</fieldset>
 			</form>
 		</div>
 		<%- include ("./partials/footer.ejs") %>
@@ -324,6 +359,48 @@
 							$('#basic_upazilla').val($('#user_org_upazilla').val());
 						}
 
+					}
+
+					if ($("#user_type").val() === 'view') {
+						if ($("#user_self_check").val() == 'yes') $("#self-request").attr('checked', true);
+						else $("#self-request").attr('checked', false);
+
+						$("#cp_name").val($("#user_cp").val());
+						$("#contact").val($("#user_contact").val());
+						$("#basic_bg").val($("#user_bg").val());
+						$("#pt_name").val($("#user_patient").val());
+						$("#quantity").val($("#user_quantity").val());
+						$("#complication").val($("#user_complications").val());
+						$("#requirements").val($("#user_requirements").val());
+						$("#orgAddressDetails").val($("#user_org_details").val());
+						$("#org-name").val($("#user_org_name").val());
+						$("#street").val($("#user_org_street").val());
+						$("#approx_donation").val($("#user_approx_donation").val());
+						// console.log($("#user_approx_donation").val());
+
+						$("#longitude").val($("#user_lon").val());
+						$("#latitude").val($("#user_lat").val());
+
+						$('#org_drop_down').select2('val', $("#user_org_id").val());
+						toggleOrgAddress();
+						// $('#org_drop_down').trigger('select2:select');
+						if ($("#user_org").val() == '0') {
+							$(".org-details").show();
+
+							if ($("#user_current_location").val() == 'yes') $("#current-location").attr('checked', true);
+							else $("#current-location").attr('checked', false);
+
+							$('#basic_division').val($('#user_org_division').val());
+							district();
+							$('#basic_district').val($('#user_org_district').val());
+							upazilla();
+							$('#basic_upazilla').val($('#user_org_upazilla').val());
+						}
+
+						if ($("#user_is_updateable").val() == 'no') {
+							$("#is-updateable").hide();
+						}
+						document.getElementById('form-fields').disabled = true;
 					}
 				});
 
@@ -403,7 +480,7 @@
 				function toggleOrgAddress() {
 					// console.log($('#org_drop_down').select2('data'));
 					var selected_value = $('#org_drop_down').select2('data');
-					console.log(selected_value[0].id);
+					// console.log(selected_value[0].id);
 					if (selected_value[0].id === '0') {
 						$(".org-details").show();
 						document.getElementById("basic_division").required = true;
@@ -431,7 +508,7 @@
 							url: '/address/get-org-details',
 							async: false,
 							success: function (data) {
-								//console.log(data);
+								// console.log(data);
 								$('#org-name').val(data[0].name);
 								$('#street').val(data[0].details);
 							}
@@ -521,10 +598,10 @@
 			<!-- <link rel="stylesheet" type="text/css" href="css/bvselect.css"> -->
 			<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
-			<link rel="stylesheet" type="text/css" href="css/newRequest.css">
-			<script src="assets/js/jquery-3.2.1.min.js"></script>
-			<script src="assets/js/popper.min.js"></script>
-			<script src="assets/js/bootstrap.min.js"></script>
+			<link rel="stylesheet" type="text/css" href="/css/newRequest.css">
+			<script src="/assets/js/jquery-3.2.1.min.js"></script>
+			<script src="/assets/js/popper.min.js"></script>
+			<script src="/assets/js/bootstrap.min.js"></script>
 			<!-- <script src="js/bvselect.js"></script> -->
 			<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 				integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

@@ -43,6 +43,7 @@ var donor = require('./controllers/showDonor');
 var newRequest = require('./controllers/newRequest');
 var dashboard = require('./controllers/dashboard');
 var myProfile = require('./controllers/myProfile');
+var viewRequest = require('./controllers/viewRequest');
 
 
 // view engine
@@ -95,6 +96,8 @@ app.use('/show-donor', donor);
 app.use('/new-request', newRequest);
 app.use('/dashboard', dashboard);
 app.use('/my-profile', myProfile);
+app.use('/request/view', viewRequest);
+
 
 //localhost:3940/new-request
 // app.get('/new-request', function(req,res){

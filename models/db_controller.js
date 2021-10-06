@@ -77,6 +77,24 @@ module.exports.getuserid = function (email){
     })
     //console.log(query);
 }
+
+module.exports.getuserinfobyid = function (id){
+    var query = "SELECT * from `users` where `id` = ?";
+    // db.query(query,[email], (err, res) => {
+    //     if(err) throw err;
+    //     else{
+    //         console.log(res[0].id);
+    //         return res[0].id;
+    //     }
+    // })
+    return new Promise((resolve, reject) => {
+        db.query(query, [id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+    //console.log(query);
+}
+
 module.exports.direct_query = (q, data) => {
     return new Promise((resolve, reject) => {
         db.query(q, data, (err, res) => {
@@ -559,6 +577,14 @@ module.exports.getRequestByPoster = (email) => {
         r.BG as bg,
         r.quantity as quantity
         FROM requests r INNER JOIN organizations o ON r.organization_id = o.id WHERE r.post_by = (SELECT id FROM users WHERE email = ?) ORDER BY date DESC`, [email], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.getAllFromRequests = (request_id) => {
+    return new Promise((resolve, reject) => {
+        db.query("SELECT * FROM requests WHERE id = ?", [request_id], (err, res) => {
             err ? reject(err) : resolve(res)
         })
     })
