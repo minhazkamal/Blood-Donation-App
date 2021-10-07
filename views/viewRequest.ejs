@@ -295,7 +295,13 @@
 						<div class="row gutters">
 							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 								<div class="text-center" id="is-updateable">
-									<a href="/request/update/<%= user.request_id %>"><span class="btn1">Update</span></a>
+									<a href="/request/update/<%= user.encrypted_requestId %>"><span class="btn1">Update</span></a>
+									<% if(user.resolved == 'yes') { %>
+										<a href="/request/resolve/<%= user.encrypted_requestId %>" class="tag_disabled"><span class="btn2">Resolved</span></a>	
+									<% } else { %>
+										<a href="/request/resolve/<%= user.encrypted_requestId %>"><span class="btn2">Resolve</span></a>
+									<% } %> 
+									
 								</div>
 							</div>
 						</div>
@@ -381,7 +387,9 @@
 						$("#longitude").val($("#user_lon").val());
 						$("#latitude").val($("#user_lat").val());
 
-						$('#org_drop_down').select2('val', $("#user_org_id").val());
+						$('#org_drop_down').val($("#user_org_id").val()).trigger('change');
+						// $('#org_drop_down').select2('val', $("#user_org_id").val());
+						// console.log($("#user_org_id").val());
 						toggleOrgAddress();
 						// $('#org_drop_down').trigger('select2:select');
 						if ($("#user_org").val() == '0') {
@@ -401,6 +409,7 @@
 							$("#is-updateable").hide();
 						}
 						document.getElementById('form-fields').disabled = true;
+						$('#org_drop_down').prop("disabled", true);
 					}
 				});
 
@@ -462,7 +471,7 @@
 						url: '/new-request/all-org',
 						async: false,
 						success: function (data) {
-							//console.log(data);
+							// console.log(data);
 							org = data;
 						}
 					});
@@ -478,9 +487,9 @@
 				}
 
 				function toggleOrgAddress() {
-					// console.log($('#org_drop_down').select2('data'));
+					console.log($('#org_drop_down').select2('data'));
 					var selected_value = $('#org_drop_down').select2('data');
-					// console.log(selected_value[0].id);
+					console.log(selected_value[0].id);
 					if (selected_value[0].id === '0') {
 						$(".org-details").show();
 						document.getElementById("basic_division").required = true;
