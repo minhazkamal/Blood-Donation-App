@@ -97,7 +97,7 @@
                                     <div class="card h-100">
                                         <div class="card-body">
                                             <h4>Eligibility Score</h4>
-                                            <h1 class="eligibility-score" id="elg-score">8</h1>
+                                            <h1 class="eligibility-score" id="elg-score">0</h1>
                                             <h6 class="text">out of 10</h6>
                                         </div>
                                     </div>
@@ -117,7 +117,7 @@
                                         <div class="card-body">
                                             <h4>Requested</h4>
                                             <h6 class="text">for</h6>
-                                            <h1 class="no-of-requests" id="requests-count">5</h1>
+                                            <h1 class="no-of-requests" id="requests-count">0</h1>
                                             <h6 class="text">bag(s)</h6>
                                         </div>
                                     </div>
@@ -398,7 +398,7 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Donee's Name</th>
+                                            <th scope="col">Patient's Name</th>
                                             <th scope="col">Location</th>
                                             <th scope="col">Date of Donation</th>
                                             <th scope="col">Blood Group</th>
@@ -410,7 +410,7 @@
                                     <tbody>
                                         <% if(typeof request !='undefined' ) { %>
                                             <% request.forEach(function(req) { %>
-                                            <tr>
+                                            <tr aria-disabled="true">
                                                 <th scope="row"><%= req.serialID %></th>
                                                 <td><%= req.patient %></td>
                                                 <td><%= req.location %></td>
@@ -418,7 +418,11 @@
                                                 <td><%= req.bg %></td>
                                                 <td><%= req.quantity %></td>
                                                 <td><a href="/request/view/<%= req.id %>">View</a></td>
+                                                <% if(req.resolved == 'yes') { %>
+                                                    <td><a href="/request/resolve/<%= req.id %>" class="tag_disabled">Resolved</a></td>
+                                                <% } else { %>
                                                 <td><a href="/request/resolve/<%= req.id %>">Resolve</a></td>
+                                                <% } %>   
                                             </tr>
                                             <% }) %>
                                         <% } %>
@@ -477,7 +481,8 @@
 
             <script>
                 function animateValue(id, start, end, duration) {
-                    if (start === end) return;
+                    console.log(start, end);
+                    if (start == end) return;
                     var range = end - start;
                     var current = start;
                     var increment = end > start ? 1 : -1;
