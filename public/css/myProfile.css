@@ -266,3 +266,8 @@ h4, h1 {
     background: #d34e76;
     cursor: pointer;
 }
+
+a.tag_disabled {
+    pointer-events: none;
+    cursor: default;
+  }
