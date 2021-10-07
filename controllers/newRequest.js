@@ -126,6 +126,7 @@ router.post('/', [
         req.session.temp_user.cp = req.body.cp_name;
         req.session.temp_user.cp_contact = req.body.cp_contact;
         req.session.temp_user.pt_bg = req.body.blood_group;
+        console.log(req.body.blood_group);
         req.session.temp_user.patient = req.body.pt_name;
         req.session.temp_user.quantity = req.body.quantity;
         req.session.temp_user.org_details = req.body.orgAddressDetails;
@@ -216,7 +217,7 @@ router.post('/', [
                                     req.session.temp_user.org = insert_id;
                                     db.setNewRequest(req.session.temp_user)
                                         .then(result => {
-                                            res.send("Request FEED");
+                                            res.redirect('/my-profile?tab=request');
                                         })
                                 })
 
@@ -227,7 +228,7 @@ router.post('/', [
             else {
                 db.setNewRequest(req.session.temp_user)
                     .then(result => {
-                        res.send("Request FEED");
+                        res.redirect('/my-profile?tab=request');
                     })
             }
         }
