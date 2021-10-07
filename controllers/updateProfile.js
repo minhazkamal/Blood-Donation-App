@@ -81,13 +81,15 @@ const validator = function (req, res, next) {
                                 .then(result => {
                                     // console.log(req.files.front_side[0].filename);
                                     try {
-                                        let FILE;
-                                        if (result[0].profile_picture !== 'avatar.png') FILE = result[0].profile_picture;
-                                        else if (typeof req.file === 'undefined') FILE = 'avatar.png';
-                                        else FILE = req.file.filename;
-
                                         // console.log(FILE);
                                         if (result.length > 0) {
+                                            let FILE;
+                                            if (typeof req.file === 'undefined') {
+                                                if(result[0].profile_picture !== 'avatar.png' && result[0].profile_picture) FILE = result[0].profile_picture;
+                                                else FILE = 'avatar.png';
+                                            }
+                                            else FILE = req.file.filename;
+
                                             if (FILE === 'avatar.png' && result[0].profile_picture !== 'avatar.png') {
                                                 fs.unlink('./profile/' + result[0].profile_picture, (err) => {
                                                     if (err) throw err;
@@ -107,6 +109,7 @@ const validator = function (req, res, next) {
                                                 })
                                         }
                                         else {
+                                            let FILE = req.file.filename;
                                             // console.log(req.file);
                                             // console.log(req.files);
                                             db.setProfilePic(FILE, id)
