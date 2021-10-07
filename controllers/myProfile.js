@@ -54,7 +54,7 @@ function calculateEligibilityScore(report) {
 router.get('/', function (req, res) {
     var tab = req.query.tab;
     // console.log(tab);
-    req.session.email = 'minhaz.kamal9900@gmail.com';
+    // req.session.email = 'minhaz.kamal9900@gmail.com';
     let user = {
         fullname: '',
         contact: '',
@@ -96,11 +96,13 @@ router.get('/', function (req, res) {
                                 user.address += result2[0].upazilla + ', ' + result2[0].district + ', ' + result2[0].division
                                 db.countBloodRequests(req.session.email)
                                     .then(result3 => {
-                                        user.requests_count = result3[0].total_requests;
+                                        if(result3) user.requests_count = result3[0].total_requests;
+                                        else user.requests_count = 0;
+                                        // user.requests_count = result3[0].total_requests;
                                         db.getEligibilityReport(req.session.email)
                                         .then(result4 => {
-                                            user.eligibility_score = calculateEligibilityScore(result4);
-
+                                            if(result4.length>0) user.eligibility_score = calculateEligibilityScore(result4);
+                                            else user.eligibility_score = 0;
                                             db.getRequestByPoster(req.session.email)
                                             .then(result5 => {
                                                 var request = [];
@@ -115,7 +117,8 @@ router.get('/', function (req, res) {
                                                         location: result5[i].orgname +', '+ result5[i].orgdetails,
                                                         date: mysql2JsLocal(result5[i].date),
                                                         bg: result5[i].bg,
-                                                        quantity: result5[i].quantity
+                                                        quantity: result5[i].quantity,
+                                                        resolved: result5[i].resolved
                                                     }
 
                                                     request.push(eachrequest);
