@@ -164,6 +164,17 @@ module.exports.resetPassword = (password, id) => {
     })
 }
 
+module.exports.resetPasswordByEmail = (password, email) => {
+    return new Promise((resolve, reject) => {
+        bcrypt.hash(password, null, null, (error, hash) => {
+            password = hash
+            db.query('UPDATE users SET password = ? WHERE email = ?', [password, email], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
+        })
+    })
+}
+
 module.exports.credentialCheck = function(user){
         var query =  "SELECT `password`, `provider` from `users` where `email`=?";
         // db.query(query,[user.email], function(err, result, fields){
@@ -198,6 +209,30 @@ module.exports.oldPassCheck = function(password, id){
     // })
     return new Promise((resolve, reject) => {
         db.query(query, [id], (err, res) => {
+            if(err) throw err;
+        if(res[0].password !== null && res[0].provider === 'self') {
+            bcrypt.compare(password, res[0].password, (err, result) => {
+
+                // console.log(result);
+                err ? reject(err) : resolve(result)
+            });
+        }
+        else{
+            err ? reject(err) : resolve('undefined')
+        }
+    })
+})
+}
+
+module.exports.oldPassCheckByEmail = function(password, email){
+    var query =  "SELECT `password`, `provider` from `users` WHERE email = ?";
+    // db.query(query,[user.email], function(err, result, fields){
+    //     if(err) throw err;
+    //     if(user.password === result[0].password) return true;
+    //     else return false; 
+    // })
+    return new Promise((resolve, reject) => {
+        db.query(query, [email], (err, res) => {
             if(err) throw err;
         if(res[0].password !== null && res[0].provider === 'self') {
             bcrypt.compare(password, res[0].password, (err, result) => {
@@ -296,7 +331,7 @@ module.exports.updateUsers = (id, f_name, l_name, nid_verified, profile_build) =
 
 module.exports.setUserProfile = (profile) => {
     return new Promise((resolve, reject) => {
-        db.query("INSERT INTO user_profile VALUES (?, ?, ?, ?, ?)", [profile.id, profile.contact, profile.dob, profile.bg, profile.gender, profile.profession], (err, res) => {
+        db.query("INSERT INTO user_profile VALUES (?, ?, ?, ?, ?, ?)", [profile.id, profile.contact, profile.dob, profile.bg, profile.gender, profile.profession], (err, res) => {
             err ? reject(err) : resolve(res)
         })
     })
@@ -473,7 +508,7 @@ module.exports.getLocationNamesByIds = (address) => {
 module.exports.setNewRequest = (request) => {
     return new Promise((resolve, reject) => {
         db.query("INSERT INTO `requests`(`post_by`,`patient`,`contact_person`,`contact`,`approx_donation_date`, `BG`, `complication`, `requirements`, `quantity`, `organization_id`, `org_address_details`, `posted_on`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
-                                        [request.id, request.patient, request.cp, request.cp_contact, request.approx_date, request.bg, request.complication, request.requirements, request.quantity, request.org, request.org_details, request.posted_on], (err, res) => {
+                                        [request.id, request.patient, request.cp, request.cp_contact, request.approx_date, request.pt_bg, request.complication, request.requirements, request.quantity, request.org, request.org_details, request.posted_on], (err, res) => {
             err ? reject(err) : resolve(res)
         })
     })
@@ -575,7 +610,8 @@ module.exports.getRequestByPoster = (email) => {
         o.details as orgdetails,
         r.approx_donation_date as date,
         r.BG as bg,
-        r.quantity as quantity
+        r.quantity as quantity,
+        r.resolved as resolved
         FROM requests r INNER JOIN organizations o ON r.organization_id = o.id WHERE r.post_by = (SELECT id FROM users WHERE email = ?) ORDER BY date DESC`, [email], (err, res) => {
             err ? reject(err) : resolve(res)
         })
@@ -585,6 +621,14 @@ module.exports.getRequestByPoster = (email) => {
 module.exports.getAllFromRequests = (request_id) => {
     return new Promise((resolve, reject) => {
         db.query("SELECT * FROM requests WHERE id = ?", [request_id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.resolveRequestById = (request_id) => {
+    return new Promise((resolve, reject) => {
+        db.query("UPDATE requests SET resolved='yes' WHERE id = ?", [request_id], (err, res) => {
             err ? reject(err) : resolve(res)
         })
     })
