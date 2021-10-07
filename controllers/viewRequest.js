@@ -66,7 +66,7 @@ const validateDonation = (value, { req }) => {
 
 function mysql2JsDate(str) {
     var g = str;
-    //console.log(g);
+    // console.log(g);
     return new Date(g.getTime() - (g.getTimezoneOffset() * 60000));
 }
 
@@ -103,6 +103,8 @@ router.get('/:encrypted_id', function (req, res) {
                             org_details: result[0].org_address_details,
                             posted_on: mysql2JsLocal(result[0].posted_on),
                             is_updateable: 'no',
+                            resolved: result[0].resolved,
+                            encrypted_requestId: cryptr.encrypt(result[0].id)
                         }
                         req.session.temp_user = user;
                         req.session.div_results = div_result;
@@ -111,8 +113,8 @@ router.get('/:encrypted_id', function (req, res) {
                             // console.log(result2);
                             // console.log(req.session.email);
                             if(result2[0].email == req.session.email) {
-                                user.is_updateable = 'yes';
-                                user.post_by = result2[0].first_name + result2[0].last_name;
+                                if(user.resolved == 'no') user.is_updateable = 'yes';
+                                user.post_by = result2[0].first_name + ' ' + result2[0].last_name;
                             }
                             res.render('viewRequest.ejs', { user, divisions: div_result });
                         })
