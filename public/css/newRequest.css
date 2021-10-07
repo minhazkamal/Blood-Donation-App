@@ -408,3 +408,8 @@ form input[type="text"]::selection {
 .address-details {
     min-height: 7rem;
 }
+
+a.tag_disabled {
+    pointer-events: none;
+    cursor: default;
+  }
