@@ -44,6 +44,8 @@ var newRequest = require('./controllers/newRequest');
 var dashboard = require('./controllers/dashboard');
 var myProfile = require('./controllers/myProfile');
 var viewRequest = require('./controllers/viewRequest');
+var resolveRequest = require('./controllers/requestResolve');
+var changePassword = require('./controllers/changePassword');
 
 
 // view engine
@@ -97,6 +99,8 @@ app.use('/new-request', newRequest);
 app.use('/dashboard', dashboard);
 app.use('/my-profile', myProfile);
 app.use('/request/view', viewRequest);
+app.use('/request/resolve', resolveRequest);
+app.use('/change-password', changePassword);
 
 
 //localhost:3940/new-request
@@ -157,9 +161,9 @@ app.get('/view-profile', function(req,res){
     res.render('viewProfile.ejs');
 });
 
-app.get('/view-request', function(req,res){
-    res.render('viewRequest.ejs');
-});
+// app.get('/change-password', function(req,res){
+//     res.render('changePassword.ejs');
+// });
 
 //localhost:3940/dashboard
 // app.get('/dashboard', function(req,res){
