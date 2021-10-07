@@ -102,7 +102,7 @@ body('password').custom((value, {req}) => {
     return db.oldPassCheck(value, id)
     .then(result => {
         if(result == true) {
-            return Promise.reject('You can\'t use your old password');        
+            return Promise.reject('Your enterd password is violating the rule. Please change it.');        
         }
         else if(result === 'undefined') {
             return Promise.reject('User doesn\'t exist');
