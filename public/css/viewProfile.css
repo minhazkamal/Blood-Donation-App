@@ -1,9 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+:root{
+    font-size: 100%;
+    font-size: 16px;
+    line-height: 1.5;
+    --primary-pink: #b9375e;
+    --primary-blue: #2f6690;
+}
+
 body{
     margin-top:20px;
+    font-family:'Montserrat', sans-serif;
     color: #1a202c;
     text-align: left;
-    background-color: #e2e8f0;    
+    background-image: url(/img/waveKYC.png);
+    background-size: cover;
+    background-repeat: no-repeat; 
 }
+
 .main-body {
     padding: 15px;
 }
