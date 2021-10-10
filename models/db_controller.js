@@ -105,7 +105,7 @@ module.exports.getuserid = function (email){
 }
 
 module.exports.getuserinfobyid = function (id){
-    var query = "SELECT * from `users` where `id` = ?";
+    var query = "SELECT * from users NATURAL JOIN user_address NATURAL JOIN user_profile where users.id = ?";
     // db.query(query,[email], (err, res) => {
     //     if(err) throw err;
     //     else{

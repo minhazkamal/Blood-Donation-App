@@ -48,6 +48,7 @@ var resolveRequest = require('./controllers/requestResolve');
 var changePassword = require('./controllers/changePassword');
 var contactUs = require('./controllers/contactUs');
 var requestFeed = require('./controllers/requestFeed');
+var viewProfile = require('./controllers/viewProfile');
 
 
 // view engine
@@ -105,6 +106,7 @@ app.use('/request/resolve', resolveRequest);
 app.use('/change-password', changePassword);
 app.use('/contact-us', contactUs);
 app.use('/request-feed', requestFeed);
+app.use('/view-profile', viewProfile);
 
 
 //localhost:3940/new-request
@@ -161,9 +163,9 @@ app.post('/org-input', function(req,res){
 //     res.render('requestFeed.ejs');
 // });
 
-app.get('/view-profile', function(req,res){
-    res.render('viewProfile.ejs');
-});
+// app.get('/view-profile', function(req,res){
+//     res.render('viewProfile.ejs');
+// });
 
 // app.get('/change-password', function(req,res){
 //     res.render('changePassword.ejs');

@@ -17,6 +17,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="assets/css/style.css">  -->
     <script src="https://kit.fontawesome.com/af332973a8.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/myProfile.css">
     <link rel="stylesheet" type="text/css" href="/css/viewProfile.css">
 
     <!-- FOR NAVBAR -->
@@ -45,17 +46,21 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                                <img src="<%= user.img %>" alt="Admin"
                                     class="rounded-circle" width="250">
                                 <div class="mt-3">
-                                    <h4>Anas Jawad</h4>
-                                    <p class="font-weight-bold text-danger mb-1">AB (+ve)</p>
+                                    <h4><%= user.fullname %></h4>
+                                    <p class="font-weight-bold text-danger mb-1"><%= user.bg %></p>
                                     <!-- <p class="text-muted text-laert font-size-sm">Bio Here...</p> -->
                                     <!-- <button class="btn btn-primary">Follow</button>
                                     <button class="btn btn-outline-primary">Message</button> -->
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div style="display: none;" id="profile">
+                        <input id="requests_counting" type="text" value="<%= user.requests_count %>">
+                        <input id="eligibility_counting" type="text" value="<%= user.eligibility_score %>">
                     </div>
                     <!-- <div class="card mt-3">
                         <ul class="list-group list-group-flush">
@@ -127,29 +132,29 @@
                                 </div> -->
                                 <div class="col-sm-4 mb-3">
                                     <div class="card h-100">
-                                        <div class="card-body2">
+                                        <div class="card-body">
                                             <h4>Eligibility Score</h4>
-                                            <h1 class="eligibility-score">8</h1>
+                                            <h1 class="eligibility-score" id="elg-score">0</h1>
                                             <h6 class="text">out of 10</h6>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 mb-3">
                                     <div class="card h-100">
-                                        <div class="card-body2">
-                                            <h4>Responded</h4>
-                                            <h6 class="text">to</h6>
-                                            <h1 class="no-of-responds">50</h1>
-                                            <h6 class="text">requests</h6>
+                                        <div class="card-body">
+                                            <h4>Donated</h4>
+                                            <h6 class="text">about</h6>
+                                            <h1 class="no-of-responds" id="responds-count">50</h1>
+                                            <h6 class="text">times</h6>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 mb-3">
                                     <div class="card h-100">
-                                        <div class="card-body2">
+                                        <div class="card-body">
                                             <h4>Requested</h4>
                                             <h6 class="text">for</h6>
-                                            <h1 class="no-of-requests">5</h1>
+                                            <h1 class="no-of-requests" id="requests-count">0</h1>
                                             <h6 class="text">bag(s)</h6>
                                         </div>
                                     </div>
@@ -160,16 +165,17 @@
                                     <h6 class="mb-0">Full Name</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    Anas Jawad
+                                    <%= user.fullname %>
+                                    <!-- Anas Jawad -->
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Age</h6>
+                                    <h6 class="mb-0">Date of Birth</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    26 yrs
+                                    <%= user.dob %>
                                 </div>
                             </div>
                             <hr>
@@ -178,7 +184,8 @@
                                     <h6 class="mb-0">Gender</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    Male
+                                    <%= user.gender %>
+                                    <!-- Male -->
                                 </div>
                             </div>
                             <hr>
@@ -187,7 +194,8 @@
                                     <h6 class="mb-0">Email</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    anas@iut-dhaka.edu
+                                    <%= user.email %>
+                                    <!-- anas@iut-dhaka.edu -->
                                 </div>
                             </div>
                             <hr>
@@ -205,7 +213,8 @@
                                     <h6 class="mb-0">Address</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    House #3, OR Nizam Road, Kotwali, Chattogram Chattogram
+                                    <%= user.address %>
+                                    <!-- House #3, OR Nizam Road, Kotwali, Chattogram Chattogram -->
                                 </div>
                             </div>
                             <hr>
@@ -290,6 +299,28 @@
     </div>
 
     <%- include ("./partials/footer.ejs") %>
+    <script>
+        function animateValue(id, start, end, duration) {
+            console.log(start, end);
+            if (start == end) return;
+            var range = end - start;
+            var current = start;
+            var increment = end > start ? 1 : -1;
+            var stepTime = Math.abs(Math.floor(duration / range));
+            var obj = document.getElementById(id);
+            var timer = setInterval(function () {
+                current += increment;
+                obj.innerHTML = current;
+                if (current == end) {
+                    clearInterval(timer);
+                }
+            }, stepTime);
+        }
+
+        animateValue("elg-score", 0, $("#eligibility_counting").val(), 500);
+        animateValue("responds-count", 0, 50, 500);
+        animateValue("requests-count", 0, $("#requests_counting").val(), 500);
+    </script>
 </body>
 
 </html>

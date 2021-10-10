@@ -33,8 +33,8 @@ function loadPostIntoFeed(postsArray) {
         html+= `<div class="complications">Complications:</div>`
         html+= `</div>`
         html+= `<div class="btn">`
-        html+= `<a href="/link" target="blank"><span class="view-profile-btn">View Details</span></a>`
-        html+= `<button class="respond-btn" type="submit">Respond</button>`
+        html+= `<a href="/request/view" target="blank"><span class="view-profile-btn">View Details</span></a>`
+        html+= `<a href="/request/respond"><span class="respond-btn">Respond</span></a>`
         html+= `</div>`
         html+= `</div>`
         html+= `</div>`
