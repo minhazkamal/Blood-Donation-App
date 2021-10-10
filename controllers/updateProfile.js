@@ -109,7 +109,9 @@ const validator = function (req, res, next) {
                                                 })
                                         }
                                         else {
-                                            let FILE = req.file.filename;
+                                            let FILE;
+                                            if (typeof req.file === 'undefined') FILE = 'avatar.png';
+                                            else FILE = req.file.filename;
                                             // console.log(req.file);
                                             // console.log(req.files);
                                             db.setProfilePic(FILE, id)

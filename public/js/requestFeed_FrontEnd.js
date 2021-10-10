@@ -16,25 +16,26 @@ function loadPostIntoFeed(postsArray) {
         html+=`<div class="row">`
         html+= `<div class="card-02">`
         html+= `<div class="profile-card">`
-        html+= `<a href="/profile/view" target="blank">`
+        html+= `<a href="/view-profile/${post.post_by_id}" target="blank">`
         html+= `<div class="profile">`
-        html+= `<img src="/profile/avatar.png" alt="" style="height: 25%; width: 25%; border-radius: 50%;">`
-        html+= `<div class="name">ABCD XYZ</div>`
-        html+= `<div class="blood-group">A+</div>`
-        html+= `<div class="blood-required">2 bag(s)</div>`
-        html+= `<div class="blood-required">Approx. Donation Date: </div>`
+        html+= `<img src="/profile/${post.profile_photo}" alt="" style="height: 25%; width: 25%; border-radius: 50%;">`
+        html+= `<div class="name">${post.pt_name}</div>`
+        html+= `<div class="blood-group">${post.bg}</div>`
+        html+= `<div class="blood-required">${post.quantity} bag(s)</div>`
+        html+= `<div class="blood-required" style="text-align: center;">Approx. Donation Date: ${post.approx_date}</div>`
+        html+= `<div class="timeline">Posted By: ${post.posted_by_name}</div>`
         html+= `</div>`
         html+= `</a>`
         html+= `</div>` 
         html+= `<div class="info">`
-        html+= `<div class="place">Contact:</div>`
-        html+= `<div class="place">Place:</div>`
-        html+= `<div class="add-requirements">Additional Requirements:</div>`
-        html+= `<div class="complications">Complications:</div>`
+        html+= `<div class="place">Contact: ${post.contact}</div>`
+        html+= `<div class="place">Place: ${post.place}</div>`
+        html+= `<div class="add-requirements">Additional Requirements: ${post.requirement}</div>`
+        html+= `<div class="complications">Complications: ${post.complication}</div>`
         html+= `</div>`
         html+= `<div class="btn">`
-        html+= `<a href="/request/view" target="blank"><span class="view-profile-btn">View Details</span></a>`
-        html+= `<a href="/request/respond"><span class="respond-btn">Respond</span></a>`
+        html+= `<a href="/request/view/${post.request_id}" target="blank"><span class="view-profile-btn">View Details</span></a>`
+        html+= `<a href="/request/respond?to=${post.request_id}&from=${post.responder_id}"><span class="respond-btn">Respond</span></a>`
         html+= `</div>`
         html+= `</div>`
         html+= `</div>`

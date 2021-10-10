@@ -19,7 +19,7 @@ router.use(bodyParser.json());
 
 function mysql2JsDate(str) {
     var g = str;
-    //console.log(g);
+    // console.log(g);
     return new Date(g.getTime() - (g.getTimezoneOffset() * 60000));
 }
 
@@ -52,12 +52,19 @@ function calculateEligibilityScore(report) {
 }
 
 router.get('/', function (req, res) {
-    db.getDivisions()
+    if(req.session.email)
+    {
+        db.getDivisions()
         .then(results => {
             let div_result = results;
             // console.log(results);
             res.render('requestFeed.ejs', { divisions: div_result });
         })
+    }
+    else {
+        res.render('message.ejs', { alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type: 'verification' });
+    }
+    
 });
 
 router.get('/list', function (req, res) {
@@ -69,6 +76,7 @@ router.get('/list', function (req, res) {
             var myId = result[0].id;
             db.getRequestsByOffset(offset)
                 .then(result => {
+                    console.log(result);
                     var request = [];
                     for (var i = 0; i < result.length; i++) {
                         var each_request = {
@@ -81,7 +89,7 @@ router.get('/list', function (req, res) {
                             place: result[i].orgname + ', ' + result[i].orgdetails,
                             requirement: result[i].requirement,
                             complication: result[i].complication,
-                            approx_date: result[i].approx_donation_date,
+                            approx_date: mysql2JsLocal(result[i].approx_date),
                             responder_id: myId,
                             posted_by_name: result[i].first_name + ' ' + result[i].last_name,
                             profile_photo: result[i].photo
@@ -91,7 +99,7 @@ router.get('/list', function (req, res) {
                     }
 
                     // console.log(request);
-                    res.json(result);
+                    res.json(request);
                 })
         })
     }

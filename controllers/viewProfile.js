@@ -69,13 +69,13 @@ router.get('/:encrypted_id', function (req, res) {
         donated: '',
         img: '',
     }
-    req.session.email='minhazkamal@iut-dhaka.edu';
+    //req.session.email='minhazkamal@iut-dhaka.edu';
     if (req.session.email) {
         db.getuserinfobyid(id)
             .then(result => {
                 user.fullname = result[0].first_name + ' ' + result[0].last_name;
                 user.contact = '+88 ' + result[0].contact;
-                user.email = 'minhaz.kamal9900@gmail.com',//result[0].email;
+                user.email = result[0].email;
                 user.dob = mysql2JsLocal(result[0].dob);
                 user.bg = result[0].BG;
                 user.gender = result[0].gender;
