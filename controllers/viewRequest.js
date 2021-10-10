@@ -79,7 +79,7 @@ function mysql2JsLocal(str) {
 
 router.get('/:encrypted_id', function (req, res) {
     // req.session.email = 'minhaz.kamal9900@gmail.com';
-    let {encrypted_id} = req.params;
+    let { encrypted_id } = req.params;
     let id = cryptr.decrypt(encrypted_id);
     if (req.session.email) {
         db.getDivisions()
@@ -91,6 +91,7 @@ router.get('/:encrypted_id', function (req, res) {
                             type: 'view',
                             request_id: result[0].id,
                             post_by: result[0].post_by,
+                            post_by_id: result[0].post_by,
                             patient: result[0].patient,
                             cp: result[0].contact_person,
                             contact: result[0].contact,
@@ -104,20 +105,21 @@ router.get('/:encrypted_id', function (req, res) {
                             posted_on: mysql2JsLocal(result[0].posted_on),
                             is_updateable: 'no',
                             resolved: result[0].resolved,
-                            encrypted_requestId: cryptr.encrypt(result[0].id)
+                            encrypted_requestId: cryptr.encrypt(result[0].id),
+                            is_update_attempted: 'no'
                         }
                         req.session.temp_user = user;
                         req.session.div_results = div_result;
                         db.getuserinfobyid(result[0].post_by)
-                        .then(result2 => {
-                            // console.log(result2);
-                            // console.log(req.session.email);
-                            if(result2[0].email == req.session.email) {
-                                if(user.resolved == 'no') user.is_updateable = 'yes';
-                                user.post_by = result2[0].first_name + ' ' + result2[0].last_name;
-                            }
-                            res.render('viewRequest.ejs', { user, divisions: div_result });
-                        })
+                            .then(result2 => {
+                                // console.log(result2);
+                                // console.log(req.session.email);
+                                if (result2[0].email == req.session.email) {
+                                    if (user.resolved == 'no') user.is_updateable = 'yes';
+                                    user.post_by = result2[0].first_name + ' ' + result2[0].last_name;
+                                }
+                                res.render('viewRequest.ejs', { user, divisions: div_result });
+                            })
                     })
             })
     }
@@ -127,7 +129,7 @@ router.get('/:encrypted_id', function (req, res) {
 });
 
 
-router.post('/', [
+router.post('/:encrypted_id', [
     check('approx_donation', 'Date of Birth is Empty').notEmpty(),
     check('approx_donation').custom(validateDonation),
     check('blood_group', 'Blood Group field is empty').notEmpty(),
@@ -136,6 +138,9 @@ router.post('/', [
     // check('upazilla', 'Upazilla field is empty').notEmpty(),
 ],
     function (req, res) {
+        let { encrypted_id } = req.params;
+        let id = cryptr.decrypt(encrypted_id);
+
         let errors = validationResult(req)
 
         req.session.temp_user.cp = req.body.cp_name;
@@ -146,9 +151,10 @@ router.post('/', [
         req.session.temp_user.org_details = req.body.orgAddressDetails;
         if (req.body.self_request == 'yes') req.session.temp_user.self_check = req.body.self_request;
         else req.session.temp_user.self_check = 'no';
-        req.session.temp_user.org = req.body.org;
+        req.session.temp_user.org_id = req.body.org;
         req.session.temp_user.complication = req.body.complication;
         req.session.temp_user.requirements = req.body.requirements;
+        req.session.temp_user.is_update_attempted = 'yes';
 
         if (req.body.org == '0') {
             if (req.body.current_location == 'yes') {
@@ -180,8 +186,8 @@ router.post('/', [
             const alert = errors.array();
 
             req.session.temp_user.type = 'error';
-
-            res.render('newRequest', { user: req.session.temp_user, alert, divisions: req.session.div_results });
+            console.log(req.session.temp_user, id);
+            res.render(`viewRequest`, { user: req.session.temp_user, alert, divisions: req.session.div_results });
         }
         else {
             let donation_date = new Date(req.body.approx_donation);
@@ -213,6 +219,7 @@ router.post('/', [
 
             req.session.temp_user.posted_on = posted_on.toISOString().slice(0, 19).replace('T', ' ');
 
+            // console.log(req.session.temp_user);
             if (req.body.org == '0') {
                 db.getLocationNamesByIds(address)
                     .then(result => {
@@ -229,9 +236,9 @@ router.post('/', [
 
                                 db.setOrgInput(organization, function (insert_id) {
                                     req.session.temp_user.org = insert_id;
-                                    db.setNewRequest(req.session.temp_user)
+                                    db.updateRequestById(req.session.temp_user, id)
                                         .then(result => {
-                                            res.send("Request FEED");
+                                            res.redirect('/my-profile?tab=request');
                                         })
                                 })
 
@@ -240,9 +247,9 @@ router.post('/', [
                     })
             }
             else {
-                db.setNewRequest(req.session.temp_user)
+                db.updateRequestById(req.session.temp_user, id)
                     .then(result => {
-                        res.send("Request FEED");
+                        res.redirect('/my-profile?tab=request');
                     })
             }
         }

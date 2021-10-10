@@ -72,6 +72,7 @@
 							<input id="user_org_details" type="text" value="<%= user.org_details %>">
 							<input id="user_posted_on" type="text" value="<%= user.posted_on %>">
 							<input id="user_is_updateable" type="text" value="<%= user.is_updateable %>">
+							<input id="user_update_attempted" type="text" value="<%= user.is_update_attempted %>">
 						</div>
 
 						
@@ -80,19 +81,19 @@
 							<div>
 								<h6 class="mb-2">Request Number</h6>
 								<input type="text" id="request_number" name="request_number" value="<%= user.request_id %>"
-									style="padding: 1em;">
+									style="padding: 1em;" readonly>
 							</div>
 
 							<div>
 								<h6 class="mb-2">Posted By</h6>
 								<input type="text" id="posted_by" name="posted_by" value="<%= user.post_by %>"
-									style="padding: 1em;">
+									style="padding: 1em;" readonly>
 							</div>
 
 							<div>
 								<h6 class="mb-2">Posted On</h6>
 								<input type="date" id="posted_on" name="posted_on" value="<%= user.posted_on %>"
-									style="padding: 1em;">
+									style="padding: 1em;" readonly>
 							</div>
 						</div>
 
@@ -104,7 +105,7 @@
 								<h6 class="mb-2">Patient Name</h6>
 								<div class="input-container fname">
 									<input id="pt_name" name="pt_name" placeholder="Patient's Name" value="" type="text"
-										required>
+										required readonly>
 								</div>
 								<div class="input-container lname">
 									<h6 class="mb-2">Contact Person</h6>
@@ -143,7 +144,7 @@
 								<h6 class="mb-2">Blood Group
 								</h6>
 								<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
-											aria-hidden=" true" required>
+											aria-hidden=" true">
 									<option disabled selected value="">Blood Group</option>
 									<option value="A+">A+</option>
 									<option value="A-">A-</option>
@@ -292,22 +293,32 @@
 							<input id="latitude" name="lat" placeholder="Organization" type="text" value="">
 							<input id="longitude" name="lon" placeholder="House" type="text" value="">
 						</div>
+					</fieldset>
 						<div class="row gutters">
 							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 								<div class="text-center" id="is-updateable">
-									<a href="/request/update/<%= user.encrypted_requestId %>"><span class="btn1">Update</span></a>
-									<% if(user.resolved == 'yes') { %>
-										<a href="/request/resolve/<%= user.encrypted_requestId %>" class="tag_disabled"><span class="btn2">Resolved</span></a>	
+									<% if(user.is_update_attempted == 'no') { %>
+										<!-- <a href="/request/update/<%= user.encrypted_requestId %>"><span class="btn1">Update</span></a> -->
+										<button class="btn1" onclick="Update()" type="button" id="update-button">Update</button>
+										<!-- <button type="submit" style="display: none;" id="save-button"><span class="btn2">Save</span></a> -->
+										<% if(user.resolved == 'yes') { %>
+											<a href="/request/resolve/<%= user.encrypted_requestId %>" class="tag_disabled"><span class="btn2">Resolved</span></a>	
+											<% } else { %>
+											<a href="/request/resolve/<%= user.encrypted_requestId %>"><span class="btn2">Resolve</span></a>
+										<% } %> 
 									<% } else { %>
-										<a href="/request/resolve/<%= user.encrypted_requestId %>"><span class="btn2">Resolve</span></a>
-									<% } %> 
+										<button type="submit" id="save-button" class="btn2">Save</button>
+									<% } %>	
 									
+								</div>
+								<div class="text-center" id="update-attempted" style="display: none;">
+									<button type="submit" id="save-button" class="btn2">Save</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				</fieldset>
+				
 			</form>
 		</div>
 		<%- include ("./partials/footer.ejs") %>
@@ -338,8 +349,8 @@
 						else $("#self-request").attr('checked', false);
 
 						$("#cp_name").val($("#user_cp").val());
-						$("#contact").val($("#user_cp_contact").val());
-						$("#basic_bg").val($("#user_pt_bg").val());
+						$("#contact").val($("#user_contact").val());
+						$("#basic_bg").val($("#user_bg").val()).change();
 						$("#pt_name").val($("#user_patient").val());
 						$("#quantity").val($("#user_quantity").val());
 						$("#complication").val($("#user_complications").val());
@@ -347,11 +358,15 @@
 						$("#orgAddressDetails").val($("#user_org_details").val());
 						$("#org-name").val($("#user_org_name").val());
 						$("#street").val($("#user_org_street").val());
+						$("#approx_donation").val($("#user_approx_donation").val());
 
 						$("#longitude").val($("#user_lon").val());
 						$("#latitude").val($("#user_lat").val());
 
-						$('#org_drop_down').select2('val', $("#user_org").val());
+						$('#org_drop_down').val($("#user_org_id").val()).trigger('change');
+						toggleOrgAddress();
+
+						$('#org_drop_down').select2('val', $("#user_org_id").val());
 						if ($("#user_org").val() == '0') {
 							$(".org-details").show();
 
@@ -373,7 +388,7 @@
 
 						$("#cp_name").val($("#user_cp").val());
 						$("#contact").val($("#user_contact").val());
-						$("#basic_bg").val($("#user_bg").val());
+						$("#basic_bg").val($("#user_bg").val()).change();
 						$("#pt_name").val($("#user_patient").val());
 						$("#quantity").val($("#user_quantity").val());
 						$("#complication").val($("#user_complications").val());
@@ -411,6 +426,11 @@
 						document.getElementById('form-fields').disabled = true;
 						$('#org_drop_down').prop("disabled", true);
 					}
+
+					if($("#user_update_attempted").val() == 'yes') {
+						// console.log("yes");
+						Update();
+					}
 				});
 
 				function noResultsButtonClicked() {
@@ -420,6 +440,14 @@
 					$('#org_drop_down').select2('close');
 					// $(".org-details").show();
 					// alert('You clicked the "No Result Found" button.');
+				}
+
+				function Update() {
+					$("#is-updateable").hide();
+					$("#update-attempted").show();
+					document.getElementById('form-fields').disabled = false;
+					$('#org_drop_down').prop("disabled", false);
+					$('#basic_bg option:not(:selected)').attr('disabled', true);
 				}
 
 				function district() {
@@ -487,9 +515,9 @@
 				}
 
 				function toggleOrgAddress() {
-					console.log($('#org_drop_down').select2('data'));
+					// console.log($('#org_drop_down').select2('data'));
 					var selected_value = $('#org_drop_down').select2('data');
-					console.log(selected_value[0].id);
+					//console.log(selected_value[0].id);
 					if (selected_value[0].id === '0') {
 						$(".org-details").show();
 						document.getElementById("basic_division").required = true;

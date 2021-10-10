@@ -449,7 +449,7 @@ module.exports.setOrgInput = (org, callback) => {
 
 module.exports.getOrgInfo = () => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT * from organizations`, (err, res) => {
+        db.query(`SELECT * from organizations ORDER BY name ASC`, (err, res) => {
             err ? reject(err) : resolve(res)
         })
     })
@@ -509,6 +509,15 @@ module.exports.setNewRequest = (request) => {
     return new Promise((resolve, reject) => {
         db.query("INSERT INTO `requests`(`post_by`,`patient`,`contact_person`,`contact`,`approx_donation_date`, `BG`, `complication`, `requirements`, `quantity`, `organization_id`, `org_address_details`, `posted_on`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
                                         [request.id, request.patient, request.cp, request.cp_contact, request.approx_date, request.pt_bg, request.complication, request.requirements, request.quantity, request.org, request.org_details, request.posted_on], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.updateRequestById = (request, id) => {
+    return new Promise((resolve, reject) => {
+        db.query("UPDATE `requests` SET `post_by`=?, `patient`=?, `contact_person`=?, `contact`=?, `approx_donation_date`=?, `BG`=?, `complication`=?, `requirements`=?, `quantity`=?, `organization_id`=?, `org_address_details`=?, `posted_on`=? WHERE `id`=?", 
+                                        [request.post_by_id, request.patient, request.cp, request.cp_contact, request.approx_date, request.pt_bg, request.complication, request.requirements, request.quantity, request.org_id, request.org_details, request.posted_on, id], (err, res) => {
             err ? reject(err) : resolve(res)
         })
     })
