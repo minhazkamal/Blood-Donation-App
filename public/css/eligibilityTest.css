@@ -252,6 +252,9 @@ h3 {
     flex: 100%;
     max-width: 100%;
   }
+  .card.is-clicked {
+    height: 480px;
+  }
 }
 
 .form-right {
