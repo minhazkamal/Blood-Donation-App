@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" type="image/x-icon" href="img/Logo-01.png">
+	<title>New Request - G L E A M</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+	<!-- jQuery -->
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+
+	<!-- Select2 CSS -->
+	<!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> -->
+
+	<!-- Select2 JS -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script> -->
+</head>
+
+<body>
+	<%- include ("./partials/navbar.ejs") %>
+		<div class="container">
+			<form method="Post">
+				<div class="row gutters" style="padding-bottom: 5rem;">
+					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+						<section style="margin-top:2rem;">
+							<h2 style="margin-bottom: 0 !important;">Post Your New Request In Our <div class="brandname" style="font-weight: 600;"> G L E A M </div>
+								Community.
+							</h2>
+
+						</section>
+
+						<!-- Profile Picture Upload -->
+						<div class="account-settings">
+							<div class="user-profile">
+
+							</div>
+
+							<!-- Alert Message -->
+							<% if(typeof alert !='undefined' ) { %>
+								<% alert.forEach(function(error) { %>
+									<div class="alert alert-warning alert-dismissible fade show" role="alert">
+										<%= error.msg %>
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+												<span aria-hidden="true">×</span>
+											</button>
+									</div>
+									<% }) %>
+										<% } %>
+
+						</div>
+
+						<div style="display: none;" id="user">
+                            <% if(typeof user !='undefined' ) { %>
+							<input id="user_type" type="text" value="<%= user.type %>">
+							<input id="user_name" type="text" value="<%= user.name %>">
+							<input id="user_cp" type="text" value="<%= user.cp %>">
+							<input id="user_cp_contact" type="text" value="<%= user.cp_contact %>">
+							<input id="user_pt_bg" type="text" value="<%= user.pt_bg %>">
+							<input id="user_bg" type="text" value="<%= user.bg %>">
+							<input id="user_contact" type="text" value="<%= user.contact %>">
+							<input id="user_org_division" type="text" value="<%= user.division %>">
+							<input id="user_org_district" type="text" value="<%= user.district %>">
+							<input id="user_org_upazilla" type="text" value="<%= user.upazilla %>">
+							<input id="user_org_name" type="text" value="<%= user.house %>">
+							<input id="user_org_street" type="text" value="<%= user.street %>">
+							<input id="user_patient" type="text" value="<%= user.patient %>">
+							<input id="user_quantity" type="text" value="<%= user.quantity %>">
+							<input id="user_complications" type="text" value="<%= user.complication %>">
+							<input id="user_org_details" type="text" value="<%= user.org_details %>">
+							<input id="user_org" type="text" value="<%= user.org %>">
+							<input id="user_self_check" type="text" value="<%= user.self_check %>">
+							<input id="user_current_location" type="text" value="<%= user.org_location %>">
+							<input id="user_lat" type="text" value="<%= user.lat %>">
+							<input id="user_lon" type="text" value="<%= user.lon %>">
+							<input id="user_requirements" type="text" value="<%= user.requirements %>">
+                            <% } %>
+						</div>
+
+						<hr>
+						<div>
+							<input type="checkbox" id="self-request" name="self_request" value="yes"
+								style="padding: 1em;" onclick="selfRequest()">
+							<label for="self-request" style="font-size: 1em; font-style: italic;"> Do you want to request for
+								yourself?</label><br>
+						</div>
+
+
+
+						<div class="row gutters">
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<h6 class="mb-2">Donation Details</h6>
+								<div class="input-container fname">
+									<input id="pt_name" name="pt_name" placeholder="Patient's Name" value="" type="text"
+										required>
+								</div>
+								<div class="input-container lname">
+									<input id="cp_name" name="cp_name" placeholder="Emergency Contact Person" value=""
+										type="text" required>
+								</div>
+								<div class="input-container lname">
+									<input id="contact" name="cp_contact" placeholder="Emergency Contact Number (+88)"
+										title="Please give a valid phone number (018xxxxxxxx)"
+										pattern="[0]{1}[1]{1}[3-9]{1}[0-9]{8}" maxlength="11" minlength="11" type="tel"
+										required>
+								</div>
+								<div class="input-container lname">
+									<textarea name="complication" id="complication" cols="67" rows="7"
+										placeholder="Complications (if any)" value="" style="resize: none;"></textarea>
+									<!-- <input id="complication" name="complication"
+										placeholder="Complications or Specific Requirements (if any)" value=""
+										type="textarea"> -->
+								</div>
+
+							</div>
+
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<h6 class="mb-2">Approximate Date of Donation</h6>
+								<div class="row">
+									<div class="col-md-12 mb-4" style="margin-bottom: 0.25 !important; ">
+										<div class="input-container lname">
+											<input id="approx_donation" name="approx_donation" type="date"
+												style="margin-bottom: 0;" required>
+										</div>
+									</div>
+
+								</div>
+								<h6 class="mb-2">Blood Group
+								</h6>
+								<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
+											aria-hidden=" true" required>
+									<option disabled selected value="">Blood Group</option>
+									<option value="A+">A+</option>
+									<option value="A-">A-</option>
+									<option value="B+">B+</option>
+									<option value="B-">B-</option>
+									<option value="O+">O+</option>
+									<option value="O-">O-</option>
+									<option value="AB+">AB+</option>
+									<option value="AB-">AB-</option>
+								</select>
+								<div class="row">
+									<div class="col-md-6 mb-4">
+										<!-- 
+										<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
+											aria-hidden=" true" disabled>
+											<option value="" selected>
+											</option>
+										</select>
+											<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
+											aria-hidden=" true" required>
+												<option disabled selected>Blood Group</option>
+												<option value="A+">A+</option>
+												<option value="A-">A-</option>
+												<option value="B+">B+</option>
+												<option value="B-">B-</option>
+												<option value="O+">O+</option>
+												<option value="O-">O-</option>
+												<option value="AB+">AB+</option>
+												<option value="AB-">AB-</option>
+											</select>
+										-->
+									</div>
+
+								</div>
+								<h6 class="mb-2">Quantity <span class="font-italic font-weight-normal">(bag/s)</span>
+								</h6>
+								<div class="row">
+									<div class="col-md-6 mb-6" style="margin: 0 !important;">
+										<div class="input-container lname">
+											<input id="quantity" name="quantity" placeholder="Example: 3" maxlength="1"
+												pattern="[1-9]" type="text" required>
+										</div>
+									</div>
+									<div class="add-requirements">
+										<textarea name="requirements" id="requirements" cols="40" rows="4" style="padding-left: 15px; resize: none;"
+										placeholder="Additional Requirements (if any)" value=""></textarea>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<hr class="hr1" style="margin-top: 0; margin-bottom: 1rem;">
+						<div class="row gutters">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<h6 class="mt-3 mb-2 ">Organization Address</h6>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div id="org-dropdown" class="row">
+									<div class="col-md-12 mb-4">
+										<div class="input-container lname">
+											<select name="org" class="form-control" id="org_drop_down" tabindex="-1" "
+											aria-hidden=" true" required>
+												<option disabled selected value="">Select an organization</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<!-- <div class="input-container lname">
+								<input id="house" name="house" placeholder="Name" type="text" required>
+								</div>
+								<div class="input-container lname">
+									<input id="street" name="street" placeholder="Street (Optional)" type="text">
+								</div> -->
+								<div class="org-details">
+									<input type="checkbox" id="current-location" name="current_location" value="yes"
+										onclick="fetchAddress()">
+									<label for="current-location"> Are you in the location right now? </label><br>
+								</div>
+								<div class="row">
+									<div class="col-md-12 mb-4">
+										<div class="input-container lname">
+											<input id="org-name" name="organization_name" style="margin-bottom: 0;"
+												placeholder="Name" type="text" disabled>
+											<div id='listings' class='listings'></div>
+										</div>
+									</div>
+
+									<div class="col-md-12 mb-4">
+										<div class="input-container lname">
+											<input id="street" name="street" placeholder="Street (Optional)" type="text"
+												disabled>
+										</div>
+									</div>
+								</div>
+								<div class="org-details">
+									<div class="row">
+										<div class="col-md-4 mb-4">
+											<select name="division" class="form-control" id="basic_division"
+												tabindex="-1" "
+											aria-hidden=" true">
+												<option disabled selected value="">Division</option>
+                                                <% if(typeof divisions !='undefined' ) { %>
+                                                <% divisions.forEach((division)=> { %>
+													<option value="<%= division.id %>">
+														<%=division.name %>
+													</option>
+												<% }) %>
+                                                <% } %>
+											</select>
+										</div>
+
+										<div class="col-md-4 mb-4">
+											<select name="district" class="form-control" id="basic_district"
+												tabindex="-1" "
+											aria-hidden=" true">
+												<option disabled selected value="">District</option>
+
+											</select>
+										</div>
+
+										<div class="col-md-4 mb-4">
+											<select name="upazilla" class="form-control" id="basic_upazilla"
+												tabindex="-1" "
+											aria-hidden=" true">
+												<option disabled selected value="">Upazilla</option>
+
+											</select>
+										</div>
+									</div>
+								</div>
+
+
+
+
+							</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="input-container lname">
+									<!-- <input name="house" placeholder="Address details" type="textarea"
+									rows="3" required> -->
+									<textarea name="orgAddressDetails" placeholder="Details about organization (if any)"
+										id="orgAddressDetails" cols="1" rows="7"></textarea>
+								</div>
+							</div>
+						</div>
+						<div id="output" style="display: none;">
+							<input id="latitude" name="lat" placeholder="Organization" type="text" value="">
+							<input id="longitude" name="lon" placeholder="House" type="text" value="">
+						</div>
+						<div class="row gutters">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<div class="text-center">
+									<button type="reset" class="btn1" style>Clear</button>
+									<button type="submit" class="btn2" style>Submit</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<%- include ("./partials/footer.ejs") %>
+
+			<script>
+				$(document).ready(function () {
+					getAllOrg();
+					$(".org-details").hide();
+					addOrgtoDropDown(org);
+					$("#org_drop_down").select2({
+						"language": {
+							"noResults": function () {
+								return '<button id="no-results-btn" onclick="noResultsButtonClicked()">Others</a>';
+							}
+						},
+						escapeMarkup: function (markup) {
+							return markup;
+						}
+					});
+
+					if ($("#user_type").val() === 'first') {
+						$("#cp_name").val($("#user_name").val());
+						$("#contact").val($("#user_cp_contact").val());
+					}
+
+					if ($("#user_type").val() === 'error') {
+						if ($("#user_self_check").val() == 'yes') $("#self-request").attr('checked', true);
+						else $("#self-request").attr('checked', false);
+
+						$("#cp_name").val($("#user_cp").val());
+						$("#contact").val($("#user_cp_contact").val());
+						$("#basic_bg").val($("#user_pt_bg").val());
+						$("#pt_name").val($("#user_patient").val());
+						$("#quantity").val($("#user_quantity").val());
+						$("#complication").val($("#user_complications").val());
+						$("#requirements").val($("#user_requirements").val());
+						$("#orgAddressDetails").val($("#user_org_details").val());
+						$("#org-name").val($("#user_org_name").val());
+						$("#street").val($("#user_org_street").val());
+
+						$("#longitude").val($("#user_lon").val());
+						$("#latitude").val($("#user_lat").val());
+
+						$('#org_drop_down').select2('val', $("#user_org").val());
+						if ($("#user_org").val() == '0') {
+							$(".org-details").show();
+
+							if ($("#user_current_location").val() == 'yes') $("#current-location").attr('checked', true);
+							else $("#current-location").attr('checked', false);
+
+							$('#basic_division').val($('#user_org_division').val());
+							district();
+							$('#basic_district').val($('#user_org_district').val());
+							upazilla();
+							$('#basic_upazilla').val($('#user_org_upazilla').val());
+						}
+
+					}
+				});
+
+				function noResultsButtonClicked() {
+					// $('#org_drop_down').select2('data', {id: 0, text: 'Others'});
+					$('#org_drop_down').select2('val', '0');
+					$('#org_drop_down').trigger('select2:select');
+					$('#org_drop_down').select2('close');
+					// $(".org-details").show();
+					// alert('You clicked the "No Result Found" button.');
+				}
+
+				function district() {
+					var div_id = $('#basic_division').val();
+					// console.log(div_id);
+
+					$.ajax({
+						type: 'GET',
+						data: { division_id: div_id },
+						url: '/address/districts',
+						async: false,
+						success: function (data) {
+							//console.log(data);
+							$('#basic_district').empty();
+							$('#basic_district').append('<option disabled selected value="">District</option>');
+							$.each(data, function (index, district) {
+								$('#basic_district').append("<option value = '" + district.id + "' >" + district.name + " </option>");
+							});
+						}
+					});
+				}
+
+				function upazilla() {
+					var dist_id = $('#basic_district').val();
+					// console.log(dist_id);
+
+					$.ajax({
+						type: 'GET',
+						data: { district_id: dist_id },
+						url: '/address/upazillas',
+						async: false,
+						success: function (data) {
+							// console.log(data);
+							$('#basic_upazilla').empty();
+							$('#basic_upazilla').append('<option disabled selected value="">Upazilla</option>');
+							$.each(data, function (index, upazilla) {
+								$('#basic_upazilla').append("<option value = '" + upazilla.id + "' >" + upazilla.name + " </option>");
+							});
+						}
+					});
+				}
+
+				var org;
+
+				function getAllOrg() {
+					$.ajax({
+						type: 'GET',
+						data: '',
+						url: '/new-request/all-org',
+						async: false,
+						success: function (data) {
+							//console.log(data);
+							org = data;
+						}
+					});
+				}
+
+				function addOrgtoDropDown(data) {
+					$('#org_drop_down').empty();
+					$('#org_drop_down').append('<option disabled selected value="">Select an organization</option>');
+					$.each(data, function (index, organization) {
+						$('#org_drop_down').append("<option value = '" + organization.id + "' >" + organization.name + " </option>");
+					});
+					$('#org_drop_down').append("<option value = '0'>Others</option>");
+				}
+
+				function toggleOrgAddress() {
+					// console.log($('#org_drop_down').select2('data'));
+					var selected_value = $('#org_drop_down').select2('data');
+					console.log(selected_value[0].id);
+					if (selected_value[0].id === '0') {
+						$(".org-details").show();
+						document.getElementById("basic_division").required = true;
+						document.getElementById("basic_district").required = true;
+						document.getElementById("basic_upazilla").required = true;
+						document.getElementById("org-name").required = true;
+						document.getElementById("org-name").disabled = false;
+						document.getElementById("street").disabled = false;
+					}
+					else {
+						$(".org-details").hide();
+						document.getElementById("basic_division").required = false;
+						document.getElementById("basic_district").required = false;
+						document.getElementById("basic_upazilla").required = false;
+						document.getElementById("org-name").required = false;
+						document.getElementById('current-location').checked = false;
+						$("#latitude").val('');
+						$("#longitude").val('');
+						$("#basic_division").val("");
+						$('#basic_district').val("");
+						$('#basic_upazilla').val("");
+						$.ajax({
+							type: 'GET',
+							data: { id: selected_value[0].id },
+							url: '/address/get-org-details',
+							async: false,
+							success: function (data) {
+								//console.log(data);
+								$('#org-name').val(data[0].name);
+								$('#street').val(data[0].details);
+							}
+						});
+					}
+				}
+
+				function selfRequest() {
+					var checkBox = document.getElementById('self-request');
+					if (checkBox.checked == true) {
+						$("#pt_name").val($("#user_name").val())
+						$("#cp_name").val("");
+						$("#contact").val("");
+						$("#basic_bg").val($("#user_bg").val());
+					}
+					else {
+						$("#cp_name").val($("#user_name").val());
+						$("#contact").val($("#user_contact").val());
+						$("#basic_bg").val("");
+						$("#pt_name").val("");
+					}
+				}
+
+				function fetchAddress() {
+					var checkBox = document.getElementById('current-location');
+					if (checkBox.checked == true) {
+						if (navigator.geolocation) {
+							navigator.geolocation.getCurrentPosition(function (position) {
+								console.log(position);
+								$("#longitude").val(position.coords.latitude);
+								$("#latitude").val(position.coords.longitude);
+								$.ajax({
+									type: 'GET',
+									data: { latitude: position.coords.latitude, longitude: position.coords.longitude },
+									url: '/map-box/reverse',
+									success: function (data) {
+										console.log(data);
+										$("#basic_division").val(data.division);
+										district();
+									}
+								});
+								$.ajax({
+									type: 'GET',
+									data: { latitude: position.coords.latitude, longitude: position.coords.longitude },
+									url: '/map-box/reverse',
+									success: function (data) {
+										// console.log(data);
+										if (data.district !== null) {
+											$('#basic_district').val(data.district);
+											upazilla();
+										}
+									}
+								});
+								$.ajax({
+									type: 'GET',
+									data: { latitude: position.coords.latitude, longitude: position.coords.longitude },
+									url: '/map-box/reverse',
+									success: function (data) {
+										// console.log(data);
+										if (data.upazilla !== null) $('#basic_upazilla').val(data.upazilla);
+									}
+								});
+							});
+						}
+					}
+					else {
+						$("#latitude").val('');
+						$("#longitude").val('');
+						$("#basic_division").val("");
+						$('#basic_district').val("");
+						$('#basic_upazilla').val("");
+					}
+				}
+
+				$(function () {
+					$('#org_drop_down').on('select2:select', toggleOrgAddress);
+				});
+
+				$(function () {
+					$('#basic_division').on("change", district);
+				});
+
+				$(function () {
+					$('#basic_district').on("change", upazilla);
+				});
+			</script>
+			<!-- <link rel="stylesheet" type="text/css" href="css/bvselect.css"> -->
+			<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
+			<link rel="stylesheet" type="text/css" href="css/newRequest.css">
+			<script src="assets/js/jquery-3.2.1.min.js"></script>
+			<script src="assets/js/popper.min.js"></script>
+			<script src="assets/js/bootstrap.min.js"></script>
+			<!-- <script src="js/bvselect.js"></script> -->
+			<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+				integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+				crossorigin="anonymous"></script>
+			<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+				crossorigin="anonymous"></script>
+
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+
+</body>
+
+</html>

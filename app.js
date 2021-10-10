@@ -165,8 +165,8 @@ app.get('/view-profile', function(req,res){
 //     res.render('changePassword.ejs');
 // });
 
-//localhost:3940/dashboard
-// app.get('/dashboard', function(req,res){
-//     res.render('dashboard.ejs');
-// });
+// localhost:3940/add-new-donation
+app.get('/add-new-donation', function(req,res){
+    res.render('addNewDonation.ejs');
+});
 
