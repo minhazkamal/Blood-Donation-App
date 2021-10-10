@@ -10,7 +10,7 @@ body {
     background-size: cover;
     font-family: 'Montserrat',sans-serif;
     padding-bottom: 40px;
-    background: url(/img/waveUpdateProfile.png);
+    background: url(/img/waveUpdateProfile.png) no-repeat;
 
 }
 
