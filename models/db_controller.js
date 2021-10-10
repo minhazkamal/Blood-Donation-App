@@ -61,6 +61,32 @@ module.exports.signup = function(user,callback) {
     }
 }
 
+module.exports.contactUs = function(user,callback) {
+
+        var query =  "INSERT INTO `contact_us`(`name`,`email`,`phone`,`message`,`time`) VALUES (?, ?, ?, ?, ?)";
+        bcrypt.hash(user.password, null, null, (error, hash) => {
+            user.password = hash
+            db.query(query,[user.name, user.email, user.phone, user.message, user.time], function(err, result, fields){
+                if(err) throw err;
+                else{
+                    //  console.log(result.insertId);
+                    //  console.log(user.f_name);
+                    callback(result.insertId);
+                 }
+                
+            })
+        })
+        // db.query(query,[user.f_name, user.l_name, user.email, user.password, user.joined, user.provider], function(err, result, fields){
+        //         if(err) throw err;
+        //         else{
+        //             // console.log(result.insertId);
+        //             // console.log(user.f_name);
+        //             callback(result.insertId, user.f_name);
+        //         }
+                
+        //     })
+}
+
 module.exports.getuserid = function (email){
     var query = "SELECT * from `users` where `email` = ?";
     // db.query(query,[email], (err, res) => {

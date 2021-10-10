@@ -46,6 +46,7 @@ var myProfile = require('./controllers/myProfile');
 var viewRequest = require('./controllers/viewRequest');
 var resolveRequest = require('./controllers/requestResolve');
 var changePassword = require('./controllers/changePassword');
+var contactUs = require('./controllers/contactUs');
 
 
 // view engine
@@ -101,6 +102,7 @@ app.use('/my-profile', myProfile);
 app.use('/request/view', viewRequest);
 app.use('/request/resolve', resolveRequest);
 app.use('/change-password', changePassword);
+app.use('/contact-us', contactUs);
 
 
 //localhost:3940/new-request
@@ -169,4 +171,8 @@ app.get('/view-profile', function(req,res){
 app.get('/add-new-donation', function(req,res){
     res.render('addNewDonation.ejs');
 });
+
+// app.get('/contact-us', function(req,res){
+//     res.render('contactUs.ejs');
+// });
 
