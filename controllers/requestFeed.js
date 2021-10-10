@@ -76,7 +76,7 @@ router.get('/list', function (req, res) {
             var myId = result[0].id;
             db.getRequestsByOffset(offset)
                 .then(result => {
-                    console.log(result);
+                    // console.log(result);
                     var request = [];
                     for (var i = 0; i < result.length; i++) {
                         var each_request = {
