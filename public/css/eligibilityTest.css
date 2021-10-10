@@ -94,6 +94,10 @@ body {
   transition-delay: 0.2s;
 }
 
+.card.is-clicked .contentarrow{
+  transform: rotate(180deg);
+}
+
 h2 {
   text-align: center;
   font-family: 'Montserrat', sans-serif;
@@ -247,6 +251,9 @@ h3 {
   .form-left {
     flex: 100%;
     max-width: 100%;
+  }
+  .card.is-clicked {
+    height: 480px;
   }
 }
 
