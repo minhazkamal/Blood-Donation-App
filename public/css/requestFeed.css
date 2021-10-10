@@ -48,6 +48,7 @@ img {
   justify-content: center;
   flex-wrap: wrap;
   margin-bottom: 2em;
+  padding-left: 10%;
 }
 
 .row-filter {

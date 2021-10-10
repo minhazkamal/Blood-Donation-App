@@ -62,7 +62,7 @@ router.get('/', function (req, res) {
 
 router.get('/list', function (req, res) {
     const offset = req.query.offset;
-    req.session.email = 'minhaz.kamal9900@gmail.com';
+    // req.session.email = 'minhaz.kamal9900@gmail.com';
     if(req.session.email) {
     db.getuserid(req.session.email)
         .then(result => {

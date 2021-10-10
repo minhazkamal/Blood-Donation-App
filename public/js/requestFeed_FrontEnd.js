@@ -16,13 +16,13 @@ function loadPostIntoFeed(postsArray) {
         html+=`<div class="row">`
         html+= `<div class="card-02">`
         html+= `<div class="profile-card">`
-        html+= `<a href="/profile/view">`
+        html+= `<a href="/profile/view" target="blank">`
         html+= `<div class="profile">`
         html+= `<img src="/profile/avatar.png" alt="" style="height: 25%; width: 25%; border-radius: 50%;">`
         html+= `<div class="name">ABCD XYZ</div>`
         html+= `<div class="blood-group">A+</div>`
         html+= `<div class="blood-required">2 bag(s)</div>`
-        html+= `<div class="timeline">Posted some minutes ago</div>`
+        html+= `<div class="blood-required">Approx. Donation Date: </div>`
         html+= `</div>`
         html+= `</a>`
         html+= `</div>` 
@@ -33,7 +33,7 @@ function loadPostIntoFeed(postsArray) {
         html+= `<div class="complications">Complications:</div>`
         html+= `</div>`
         html+= `<div class="btn">`
-        html+= `<button class="view-profile-btn" type="submit">View Details</button>`
+        html+= `<a href="/link" target="blank"><span class="view-profile-btn">View Details</span></a>`
         html+= `<button class="respond-btn" type="submit">Respond</button>`
         html+= `</div>`
         html+= `</div>`
