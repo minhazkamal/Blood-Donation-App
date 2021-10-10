@@ -48,7 +48,7 @@ body {
 .card {
   position: relative;
   max-width: 300px;
-  height: 180px;
+  height: 100px;
   margin: 30px 20px;
   padding: 20px 15px;
   display: flex;
@@ -403,6 +403,9 @@ input[type="date"] {
     z-index: -1;
     display: flex;
     flex-wrap: wrap;
+  }
+  .donationIntervals{
+    font-size: x-large;
   }
 }
 
