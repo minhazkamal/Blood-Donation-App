@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="css/requestFeed.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-	<script src="https://kit.fontawesome.com/af332973a8.js" crossorigin="anonymous"></script>
+	<!-- <script src="https://kit.fontawesome.com/af332973a8.js" crossorigin="anonymous"></script> -->
 </head>
 
 <body>
@@ -58,10 +58,12 @@
 						<div class="col-md-12 mb-4">
 							<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
 										aria-hidden=" true" required>
-								<option disabled selected value="">District</option>
-								<option value="Male">Male</option>
-								<option value="Female">Female</option>
-								<option value="Others">Others</option>
+								<option disabled selected value="">Division</option>
+								<% divisions.forEach((division)=> { %>
+									<option value="<%= division.id %>">
+										<%=division.name %>
+									</option>
+								<% }) %>
 							</select>
 						</div>
 					</div>
@@ -70,12 +72,9 @@
 							<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
 										aria-hidden=" true" required>
 								<option disabled selected value="">District</option>
-								<option value="Male">Male</option>
-								<option value="Female">Female</option>
-								<option value="Others">Others</option>
+								
 							</select>
 						</div>
-
 					</div>
 					<div class="btn-01">
 						<button class="reset-btn" type="submit">Reset</button>
@@ -91,10 +90,11 @@
 
 			<div class="left-col">
 
-				<div class="row">
+				<!-- <div class="row">
 					<div class="card-02">
 						<div class="profile-card">
-							<div class="profile"><i class="far fa-user-circle fa-7x"></i>
+							<div class="profile">
+								<img src="/profile/avatar.png" alt="" style="height: 25%; width: 25%; border-radius: 50%;">
 								<div class="name">ABCD XYZ</div>
 								<div class="blood-group">A+</div>
 								<div class="blood-required">2 bag(s)</div>
@@ -115,63 +115,11 @@
 
 					</div>
 
-				</div>
+				</div> -->
 
 
 
-				<div class="row">
-					<div class="card-02">
-						<div class="profile-card">
-							<div class="profile"><i class="far fa-user-circle fa-7x"></i>
-								<div class="name">ABCD XYZ</div>
-								<div class="blood-group">A+</div>
-								<div class="blood-required">2 bag(s)</div>
-								<div class="timeline">Posted some minutes ago</div>
-							</div>
-						</div>
-
-
-						<div class="info">
-							<div class="place">Place:</div>
-							<div class="add-requirements">Additional Requirements:</div>
-							<div class="complications">Complications:</div>
-						</div>
-						<div class="btn">
-							<button class="view-profile-btn" type="submit">View Profile</button>
-							<button class="respond-btn" type="submit">Respond</button>
-						</div>
-
-					</div>
-
-				</div>
-
-				<div class="row">
-					<div class="card-02">
-						<div class="profile-card">
-							<div class="profile"><i class="far fa-user-circle fa-7x"></i>
-								<div class="name">ABCD XYZ</div>
-								<div class="blood-group">A+</div>
-								<div class="blood-required">2 bag(s)</div>
-								<div class="timeline">Posted some minutes ago</div>
-							</div>
-						</div>
-
-
-						<div class="info">
-							<div class="place">Place:</div>
-							<div class="add-requirements">Additional Requirements:</div>
-							<div class="complications">Complications:</div>
-						</div>
-						<div class="btn">
-							<button class="view-profile-btn" type="submit">View Profile</button>
-							<button class="respond-btn" type="submit">Respond</button>
-						</div>
-
-					</div>
-
-				</div>
-
-				<div class="row">
+				<!-- <div class="row">
 					<div class="card-02">
 						<div class="profile-card">
 							<div class="profile"><i class="far fa-user-circle fa-7x"></i>
@@ -379,6 +327,31 @@
 
 				</div>
 
+				<div class="row">
+					<div class="card-02">
+						<div class="profile-card">
+							<div class="profile"><i class="far fa-user-circle fa-7x"></i>
+								<div class="name">ABCD XYZ</div>
+								<div class="blood-group">A+</div>
+								<div class="blood-required">2 bag(s)</div>
+								<div class="timeline">Posted some minutes ago</div>
+							</div>
+						</div>
+
+
+						<div class="info">
+							<div class="place">Place:</div>
+							<div class="add-requirements">Additional Requirements:</div>
+							<div class="complications">Complications:</div>
+						</div>
+						<div class="btn">
+							<button class="view-profile-btn" type="submit">View Profile</button>
+							<button class="respond-btn" type="submit">Respond</button>
+						</div>
+
+					</div>
+
+				</div>
 
 				<div class="row">
 					<div class="card-02">
@@ -432,6 +405,33 @@
 					</div>
 
 				</div>
+
+
+				<div class="row">
+					<div class="card-02">
+						<div class="profile-card">
+							<div class="profile"><i class="far fa-user-circle fa-7x"></i>
+								<div class="name">ABCD XYZ</div>
+								<div class="blood-group">A+</div>
+								<div class="blood-required">2 bag(s)</div>
+								<div class="timeline">Posted some minutes ago</div>
+							</div>
+						</div>
+
+
+						<div class="info">
+							<div class="place">Place:</div>
+							<div class="add-requirements">Additional Requirements:</div>
+							<div class="complications">Complications:</div>
+						</div>
+						<div class="btn">
+							<button class="view-profile-btn" type="submit">View Profile</button>
+							<button class="respond-btn" type="submit">Respond</button>
+						</div>
+
+					</div>
+
+				</div> -->
 			</div>
 
 
@@ -462,10 +462,12 @@
 						<div class="col-md-12 mb-4">
 							<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
 											aria-hidden=" true" required>
-								<option disabled selected value="">District</option>
-								<option value="Male">Male</option>
-								<option value="Female">Female</option>
-								<option value="Others">Others</option>
+								<option disabled selected value="">Division</option>
+								<% divisions.forEach((division)=> { %>
+									<option value="<%= division.id %>">
+										<%=division.name %>
+									</option>
+								<% }) %>
 							</select>
 						</div>
 					</div>
@@ -474,9 +476,7 @@
 							<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
 											aria-hidden=" true" required>
 								<option disabled selected value="">District</option>
-								<option value="Male">Male</option>
-								<option value="Female">Female</option>
-								<option value="Others">Others</option>
+								
 							</select>
 						</div>
 
@@ -572,6 +572,7 @@
 		</script>
 
 
+		<script src="js/requestFeed_FrontEnd.js"></script>
 		<script src="assets/js/jquery-3.2.1.min.js"></script>
 		<script src="assets/js/popper.min.js"></script>
 		<script src="assets/js/bootstrap.min.js"></script>

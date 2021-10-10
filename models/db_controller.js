@@ -668,3 +668,30 @@ module.exports.resolveRequestById = (request_id) => {
         })
     })
 }
+
+module.exports.getRequestsByOffset = (offset) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * FROM (SELECT 
+        r.id as id,
+        r.post_by as post_by,
+        r.patient as patient,
+        r.contact as contact,
+        r.BG as BG,
+        r.quantity as quantity,
+        o.name as orgname,
+        o.details as orgdetails,
+        r.approx_donation_date as approx_date,
+        r.requirements as requirement,
+        r.complication as complication,
+        u.first_name as first_name,
+        u.last_name as last_name,
+        upp.profile_picture as photo
+        FROM requests r INNER JOIN organizations o ON r.organization_id = o.id 
+        INNER JOIN users u ON r.post_by = u.id
+        INNER JOIN profile_picture upp ON r.post_by = upp.id
+        WHERE r.resolved='no') as feed_table 
+        LIMIT 2 OFFSET ${offset}`, (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}

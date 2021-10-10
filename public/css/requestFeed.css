@@ -112,6 +112,7 @@ img {
   margin-left: 5px;
   flex-direction: column;
   position: relative;
+  padding-top: 10%;
 }
 
 .name {
