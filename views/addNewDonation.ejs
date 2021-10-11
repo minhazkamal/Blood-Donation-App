@@ -90,19 +90,24 @@
 							<label for="self-request" style="font-size: 1em; font-style: italic;">Add Donations from My Responses</label><br>
 						</div>
 
-
-
-						<div class="row gutters">
-							<div class="col-12">
-								<h6 class="mb-2">Donation Details</h6>
+						<h6 class="mb-2" style="display: block;">Donation Details</h6>
+						<div class="row">
+							<div class="col-6">
 								<div class="input-container fname">
 									<input id="pt_name" name="pt_name" placeholder="Patient's Name" value="" type="text"
 										required>
 								</div>
+							</div>
+							<div class="col-6">
 								<div class="input-container lname">
 									<input id="cp_name" name="cp_name" placeholder="Emergency Contact Person" value=""
 										type="text" required>
 								</div>
+							</div>
+						</div>
+
+						<div class="row gutters">
+							<div class="col-12">
 								<div class="input-container lname">
 									<input id="contact" name="cp_contact" placeholder="Emergency Contact Number (+88)"
 										title="Please give a valid phone number (018xxxxxxxx)"
@@ -110,7 +115,7 @@
 										required>
 								</div>
 								<div class="input-container lname">
-									<textarea name="complication" id="complication" cols="67" rows="7"
+									<textarea name="complication" id="complication" cols="67" rows="3"
 										placeholder="Complications (if any)" value="" style="resize: none;"></textarea>
 									<!-- <input id="complication" name="complication"
 										placeholder="Complications or Specific Requirements (if any)" value=""
