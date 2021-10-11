@@ -113,14 +113,17 @@ header.sticky .menu-item .sub-menu {
   color: #fff;
   font-size: 1em;
   text-decoration: none;
-  padding: 15px 15px;
+
+  /* padding: 10px 20px; */
+  padding-left: 9px;
+  padding-right: 9px;
 }
 
 .menu-item .sub-menu .sub-item button {
   color: #fff;
   font-size: 1em;
   text-decoration: none;
-  padding: 15px 15px;
+  /* padding: 15px 15px; */
 }
 
 .menu-item .sub-menu .sub-item:hover {
@@ -166,6 +169,12 @@ header.sticky .menu-item .sub-menu {
 
 .menu-btn {
   display: none;
+}
+
+.rounded-circle{
+  width: 40px;
+  height: 40px;
+  background-color: #fff !important;
 }
 
 @media (max-width: 1060px) {
