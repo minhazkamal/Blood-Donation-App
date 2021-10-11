@@ -19,7 +19,7 @@ function loadPostIntoFeed(postsArray) {
         html+= `<a href="/view-profile/${post.post_by_id}" target="blank">`
         html+= `<div class="profile">`
         html+= `<img src="/profile/${post.profile_photo}" alt="" style="height: 25%; width: 25%; border-radius: 50%;">`
-        html+= `<div><div class="name">Patient: </div><span class="pt_name">${post.pt_name}</span></div>`
+        html+= `<div class="pt_div"><div class="name">Patient: </div><span class="pt_name">${post.pt_name}</span></div>`
         html+= `<div class="blood-group">${post.bg}</div>`
         html+= `<div class="blood-required">${post.quantity} bag(s)</div>`
         html+= `<div class="blood-required" style="text-align: center;">Date: ${post.approx_date}</div>`
