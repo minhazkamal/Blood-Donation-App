@@ -85,7 +85,7 @@ html, body {
   position: relative;
   flex: 1;
   max-width: 940px;
-  height: 300px;
+  height: 270px;
   margin: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -118,7 +118,7 @@ html, body {
 
 .name {
   font-size: medium;
-  font-weight: 500;
+  font-weight: 700;
   font-family: 'Montserrat', sans-serif;
   color: rgba(0, 0, 0, 0.7);
   text-align: center;
@@ -143,6 +143,7 @@ html, body {
   text-align: center;
   text-decoration: none;
   display: inline-block;
+  margin-top: 5px;
   
   cursor: pointer;
   border-radius: 16px;
@@ -326,11 +327,12 @@ i.fa-user-circle {
     margin-top: 180px;
   }
   .card-02 {
-    max-width: 600px;
+    max-width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin-right: 2em;
   }
   .profile {
     /* z-index: 2; */
@@ -364,7 +366,7 @@ i.fa-user-circle {
     align-items: center;
     justify-content: center;
     width: 80%;
-    transform: translateY(2em);
+    transform: translateY(5em);
     height: 100%;
   }
   .info {
