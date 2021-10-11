@@ -26,10 +26,10 @@ router.get('/', function(req,res){
                 if(result[0].provider !== 'self') {
                     is_changable = 'no';
                     req.session.is_password_changable = is_changable;
-                    res.render('changePassword.ejs', {is_changable});
+                    res.render('changePassword.ejs', {is_changable, navbar: req.session.navbar_info});
                 }
                 else {
-                    res.render('changePassword.ejs', {is_changable});
+                    res.render('changePassword.ejs', {is_changable, navbar: req.session.navbar_info});
                 }
             })
     }
@@ -111,7 +111,7 @@ body('password').custom((value, {req}) => {
     if (!errors.isEmpty()) {
         //console.log(errors);
         const alert = errors.array();
-        res.render('changePassword', {alert, is_changable: req.session.is_password_changable});
+        res.render('changePassword', {alert, is_changable: req.session.is_password_changable, navbar: req.session.navbar_info});
     }
     else
     {
