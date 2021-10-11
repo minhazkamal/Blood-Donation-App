@@ -28,9 +28,10 @@
 		<div class="container">
 			<form method="Post">
 				<div class="row gutters" style="padding-bottom: 5rem;">
-					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+					<div class="col-12">
 						<section style="margin-top:2rem;">
-							<h2 style="margin-bottom: 0 !important;">Add you donation in<div class="brandname" style="font-weight: 600;"> G L E A M </div>
+							<h2 style="margin-bottom: 0 !important;">Add you donation in<div class="brandname"
+									style="font-weight: 600;"> G L E A M </div>
 								App
 							</h2>
 
@@ -58,37 +59,40 @@
 
 						<div style="display: none;" id="user">
 							<% if(typeof user !='undefined' ) { %>
-							<input id="user_type" type="text" value="<%= user.type %>">
-							<input id="user_name" type="text" value="<%= user.name %>">
-							<input id="user_cp" type="text" value="<%= user.cp %>">
-							<input id="user_cp_contact" type="text" value="<%= user.cp_contact %>">
-							<input id="user_pt_bg" type="text" value="<%= user.pt_bg %>">
-							<input id="user_bg" type="text" value="<%= user.bg %>">
-							<input id="user_contact" type="text" value="<%= user.contact %>">
-							<input id="user_org_division" type="text" value="<%= user.division %>">
-							<input id="user_org_district" type="text" value="<%= user.district %>">
-							<input id="user_org_upazilla" type="text" value="<%= user.upazilla %>">
-							<input id="user_org_name" type="text" value="<%= user.house %>">
-							<input id="user_org_street" type="text" value="<%= user.street %>">
-							<input id="user_patient" type="text" value="<%= user.patient %>">
-							<input id="user_quantity" type="text" value="<%= user.quantity %>">
-							<input id="user_complications" type="text" value="<%= user.complication %>">
-							<input id="user_org_details" type="text" value="<%= user.org_details %>">
-							<input id="user_org" type="text" value="<%= user.org %>">
-							<input id="user_self_check" type="text" value="<%= user.self_check %>">
-							<input id="user_current_location" type="text" value="<%= user.org_location %>">
-							<input id="user_lat" type="text" value="<%= user.lat %>">
-							<input id="user_lon" type="text" value="<%= user.lon %>">
-							<input id="user_requirements" type="text" value="<%= user.requirements %>">
-							<% } %>
+								<input id="user_type" type="text" value="<%= user.type %>">
+								<input id="user_name" type="text" value="<%= user.name %>">
+								<input id="user_cp" type="text" value="<%= user.cp %>">
+								<input id="user_cp_contact" type="text" value="<%= user.cp_contact %>">
+								<input id="user_pt_bg" type="text" value="<%= user.pt_bg %>">
+								<input id="user_bg" type="text" value="<%= user.bg %>">
+								<input id="user_contact" type="text" value="<%= user.contact %>">
+								<input id="user_org_division" type="text" value="<%= user.division %>">
+								<input id="user_org_district" type="text" value="<%= user.district %>">
+								<input id="user_org_upazilla" type="text" value="<%= user.upazilla %>">
+								<input id="user_org_name" type="text" value="<%= user.house %>">
+								<input id="user_org_street" type="text" value="<%= user.street %>">
+								<input id="user_patient" type="text" value="<%= user.patient %>">
+								<input id="user_quantity" type="text" value="<%= user.quantity %>">
+								<input id="user_complications" type="text" value="<%= user.complication %>">
+								<input id="user_org_details" type="text" value="<%= user.org_details %>">
+								<input id="user_org" type="text" value="<%= user.org %>">
+								<input id="user_self_check" type="text" value="<%= user.self_check %>">
+								<input id="user_current_location" type="text" value="<%= user.org_location %>">
+								<input id="user_lat" type="text" value="<%= user.lat %>">
+								<input id="user_lon" type="text" value="<%= user.lon %>">
+								<input id="user_requirements" type="text" value="<%= user.requirements %>">
+								<% } %>
 						</div>
 
 						<hr>
 						<div>
 							<input type="checkbox" id="self-request" name="self_request" value="yes"
 								style="padding: 1em;" onclick="selfRequest()">
-							<label for="self-request" style="font-size: 1em; font-style: italic;">Add Donations from My Responses</label><br>
+							<label for="self-request" style="font-size: 1em; font-style: italic;">Add Donations from My
+								Responses</label><br>
 						</div>
+
+
 
 						<h6 class="mb-2" style="display: block;">Donation Details</h6>
 						<div class="row">
@@ -186,7 +190,7 @@
 												tabindex="-1" "
 											aria-hidden=" true">
 												<option disabled selected value="">Division</option>
-												
+
 
 											</select>
 										</div>
@@ -211,7 +215,7 @@
 									</div>
 								</div>
 
-								
+
 
 
 							</div>
@@ -229,43 +233,64 @@
 							<input id="longitude" name="lon" placeholder="House" type="text" value="">
 						</div>
 
-						<div class="table-responsive-sm">
-                                <table class="table">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Donee's Name</th>
-                                            <th scope="col">Location</th>
-											<th scope="col">Date</th>
-                                            <th scope="col">Select</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark Zuckerberg</td>
-                                            <td>Square Hospitals,Dhaka</td>
-											<td><input type="date"></td>
-                                            <td><div class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" id="customCheck1">
-												<label class="custom-control-label" for="customCheck1">Add</label>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-						
-						<div class="row gutters">
-							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-								<div class="text-center">
-									<button type="reset" class="btn1" style>Clear</button>
-									<button type="submit" class="btn2" style>Submit</button>
-								</div>
-							</div>
+					</div>
+				</div>
+				<div class="row gutters">
+					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+						<div class="text-center">
+							<button type="reset" class="btn1" style>Clear</button>
+							<button type="submit" class="btn2" style>Submit</button>
 						</div>
 					</div>
 				</div>
 			</form>
 		</div>
+
+
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Donee</th>
+						<th scope="col">Location</th>
+						<th scope="col">Date</th>
+						<th scope="col">Selection</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">1</th>
+						<td>Mark</td>
+						<td>Swuare Hosplitals, Dhaka</td>
+						<td><input type="date" name="" id=""></td>
+						<td>
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="customCheck1">
+								<label class="custom-control-label" for="customCheck1">Check this custom
+									checkbox</label>
+							</div>
+						</td>
+
+					</tr>
+					<tr>
+						<th scope="row">2</th>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>@fat</td>
+
+					</tr>
+					<tr>
+						<th scope="row">3</th>
+						<td colspan="2">Larry the Bird</td>
+						<td>@twitter</td>
+						<td>@twitter</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
 		<%- include ("./partials/footer.ejs") %>
 
 			<script>
