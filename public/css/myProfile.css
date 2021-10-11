@@ -6,14 +6,14 @@ body {
     height: 100vh;
     color: #1a202c;
     text-align: left;
-    background-color: transparent; 
+    background-color: transparent;
     font-family: 'Montserrat', sans-serif;
     background-image: url(/img/waveKYC.png);
     background-size: cover;
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
 }
 
-.container{
+.container {
     margin-top: 7rem;
 }
 
@@ -43,6 +43,26 @@ body {
     padding: 1rem;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
     /* position:fixed; */
+}
+
+.card-body-add-request {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+}
+
+.card-body-add-donation {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+}
+
+#add-request-card {
+    background-color: transparent;
+}
+
+#add-donation-card {
+    background-color: transparent;
 }
 
 .tabcontent {
@@ -197,8 +217,9 @@ h4, h1 {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-  }
-  .reset-btn {
+}
+
+.reset-btn {
     margin-right: 15px;
     background: #ef233c;
     color: white;
@@ -210,14 +231,14 @@ h4, h1 {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     transition: 0.3s;
-  }
-  
-  .reset-btn:hover {
+}
+
+.reset-btn:hover {
     background: #d90429;
     cursor: pointer;
-  }
-  
-  .apply-btn {
+}
+
+.apply-btn {
     margin-right: 15px;
     background: rgba(0, 0, 0, 0.7);
     color: white;
@@ -229,14 +250,14 @@ h4, h1 {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     transition: 0.3s;
-  }
-  
-  .apply-btn:hover {
+}
+
+.apply-btn:hover {
     background: rgba(0, 0, 0, 0.9);
     cursor: pointer;
-  }
+}
 
-  .add-donation-btn{
+.add-donation-btn {
     display: block;
     width: 100%;
     background: #b9375e;
@@ -253,7 +274,7 @@ h4, h1 {
     margin-right: 1rem;
 }
 
-.add-link{
+.add-link {
     color: white;
     text-align: center;
     display: flex;
@@ -261,12 +282,12 @@ h4, h1 {
     text-decoration: none;
 }
 
-.add-link:hover{
+.add-link:hover {
     color: white;
     text-decoration: none;
 }
 
-.add-donation-btn:hover{
+.add-donation-btn:hover {
     background: #d34e76;
     cursor: pointer;
 }
@@ -274,4 +295,4 @@ h4, h1 {
 a.tag_disabled {
     pointer-events: none;
     cursor: default;
-  }
+}
