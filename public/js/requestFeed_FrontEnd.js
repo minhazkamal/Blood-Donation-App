@@ -35,7 +35,7 @@ function loadPostIntoFeed(postsArray) {
         html+= `</div>`
         html+= `<div class="btn">`
         html+= `<a href="/request/view/${post.request_id}" target="blank"><span class="view-profile-btn">View Details</span></a>`
-        html+= `<a href="/request/respond?to=${post.request_id}&from=${post.responder_id}"><span class="respond-btn">Respond</span></a>`
+        if(post.responder != 'self') html+= `<a href="/request/respond?to=${post.request_id}&from=${post.responder_id}"><span class="respond-btn">Respond</span></a>`
         html+= `</div>`
         html+= `</div>`
         html+= `</div>`
