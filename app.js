@@ -180,3 +180,7 @@ app.get('/add-new-donation', function(req,res){
 //     res.render('contactUs.ejs');
 // });
 
+app.get('/test-page', function(req,res){
+    res.render('test.ejs');
+});
+
