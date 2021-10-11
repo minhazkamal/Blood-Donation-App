@@ -3,94 +3,98 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
 
 <header>
-    <a href="#" class="logo">GLEAM</a>
-    <div class="navigation">
-      <ul class="menu">
-        <div class="close-btn"></div>
-        <li class="menu-item"><a href="/dashboard">Dashboard</a></li>
-        <li class="menu-item">
+  <a href="#" class="logo">GLEAM</a>
+  <div class="navigation">
+    <ul class="menu">
+      <div class="close-btn"></div>
+      <li class="menu-item"><a href="/dashboard">Search Organization</a></li>
+      <li class="menu-item"><a href="/dashboard">Contact Us</a></li>
+
+      <!-- <li class="menu-item">
           <a class="sub-btn" id="sub-button" href="#">Search <i class="fas fa-angle-down"></i></a>
-          <!-- <button class="sub-btn">Dropdown <i class="fas fa-angle-down"></i></button> -->
+          <button class="sub-btn">Dropdown <i class="fas fa-angle-down"></i></button>
           <ul class="sub-menu" id="sub-list" style="padding-left: 0;">
             <li class="sub-item"><a href="/search-donor">Search Donor</a></li>
             <li class="sub-item"><a href="/search-org">Search Organization</a></li>
-            <!-- <li class="sub-item"><a href="#">Sub Item 03</a></li> -->
+            <li class="sub-item"><a href="#">Sub Item 03</a></li>
           </ul>
-        </li>
-        <li class="menu-item">
+        </li> -->
+      <!-- <li class="menu-item">
           <a class="sub-btn" id="sub-button" href="#">Request for Blood <i class="fas fa-angle-down"></i></a>
-          <!-- <button class="sub-btn">Dropdown <i class="fas fa-angle-down"></i></button> -->
+          <button class="sub-btn">Dropdown <i class="fas fa-angle-down"></i></button>
           <ul class="sub-menu" id="sub-list" style="padding-left: 0;">
             <li class="sub-item"><a href="/new-request">Add New Request</a></li>
             <li class="sub-item"><a href="/request-feed">Request Feed</a></li>
             <li class="sub-item"><a href="/my-profile?tab=request">My Requests</a></li>
-            <!-- <li class="sub-item"><a href="#">Sub Item 03</a></li> -->
+            <li class="sub-item"><a href="#">Sub Item 03</a></li>
           </ul>
-        </li>
-        <li class="menu-item"><a href="/dashboard">Notifications</a></li>
-        <li class="menu-item">
-          <a class="sub-btn" href="#">Username <img src="<%= user.img %>" alt="User" class="rounded-circle" width="40"> <i class="fas fa-angle-down"></i></a>
-          <!-- <button class="sub-btn">With Sub-dropdown <i class="fas fa-angle-down"></i></button> -->
+        </li> -->
+      
+        <div class="signup-btn-navbar"><a href="/new-donation" class="add-link">Sign Up</a></div>
+
+
+      <!-- <li class="menu-item">
+          
           <ul class="sub-menu" style="padding-left: 0;">
             <li class="sub-item"><a href="#">My Profile</a></li>
             <li class="sub-item"><a href="#">Change Password</a></li>
             <li class="sub-item"><a href="#">Sign Out</a></li>
-            <!-- <li class="sub-item"><a href="#">Sub Item 04</a></li> -->
-            <!-- <li class="sub-item more">
+            <li class="sub-item"><a href="#">Sub Item 04</a></li>
+            <li class="sub-item more">
               <a class="more-btn" href="#">More Items <i class="fas fa-angle-right"></i></a>
               <ul class="more-menu" style="padding-left: 0;">
                 <li class="more-item"><a href="#">More Item 01</a></li>
                 <li class="more-item"><a href="#">More Item 02</a></li>
               </ul>
-            </li> -->
+            </li>
           </ul>
-        </li>
-        <!-- <li class="menu-item"><a href="#">Services</a></li>
+        </li> -->
+      <!-- <li class="menu-item"><a href="#">Services</a></li>
         <li class="menu-item"><a href="#">About</a></li>
         <li class="menu-item"><a href="#">Contact</a></li> -->
-      </ul>
-    </div>
-    <div class="menu-btn"></div>
+    </ul>
+  </div>
+  <div class="menu-btn"></div>
 </header>
 
 <script type="text/javascript">
-    // jquery for toggle dropdown menus
-    $(document).ready(function () {
-      //toggle sub-menus
-      $(".sub-btn").click(function () {
-        $(this).next(".sub-menu").slideToggle();
-      });
-
-      //toggle more-menus
-      $(".more-btn").click(function () {
-        $(this).next(".more-menu").slideToggle();
-      });
+  // jquery for toggle dropdown menus
+  $(document).ready(function () {
+    //toggle sub-menus
+    $(".sub-btn").click(function () {
+      $(this).next(".sub-menu").slideToggle();
     });
 
-    //javascript for the responsive navigation menu
-    var menu = document.querySelector(".menu");
-    var menuBtn = document.querySelector(".menu-btn");
-    var closeBtn = document.querySelector(".close-btn");
-
-    menuBtn.addEventListener("click", () => {
-      menu.classList.add("active");
+    //toggle more-menus
+    $(".more-btn").click(function () {
+      $(this).next(".more-menu").slideToggle();
     });
+  });
 
-    closeBtn.addEventListener("click", () => {
-      menu.classList.remove("active");
-    });
+  //javascript for the responsive navigation menu
+  var menu = document.querySelector(".menu");
+  var menuBtn = document.querySelector(".menu-btn");
+  var closeBtn = document.querySelector(".close-btn");
 
-    //javascript for the navigation bar effects on scroll
-    window.addEventListener("scroll", function () {
-      var header = document.querySelector("header");
-      header.classList.toggle("sticky", window.scrollY > 0);
-    });
-  </script>
+  menuBtn.addEventListener("click", () => {
+    menu.classList.add("active");
+  });
 
-  <script>
-    window.addEventListener('scroll', function () {
-      let header = document.querySelector('header');
+  closeBtn.addEventListener("click", () => {
+    menu.classList.remove("active");
+  });
 
-      header.classList.toggle('scrolled', window.scrollY > 0);
-    })
-  </script>
+  //javascript for the navigation bar effects on scroll
+  window.addEventListener("scroll", function () {
+    var header = document.querySelector("header");
+    header.classList.toggle("sticky", window.scrollY > 0);
+  });
+</script>
+
+<script>
+  window.addEventListener('scroll', function () {
+    let header = document.querySelector('header');
+
+    header.classList.toggle('scrolled', window.scrollY > 0);
+  })
+</script>
