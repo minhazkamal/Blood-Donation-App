@@ -122,6 +122,12 @@ html, body {
   font-family: 'Montserrat', sans-serif;
   color: rgba(0, 0, 0, 0.7);
   text-align: center;
+  display: inline;
+}
+
+.pt_name {
+  color:rgb(0, 0, 0);
+  font-family: 'Montserrat', sans-serif;
 }
 
 .blood-group {
