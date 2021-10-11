@@ -40,6 +40,7 @@ body {
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
     border-radius: 50%;
+    border: 1px solid #999;
     /* border-style: solid; */
 }
 input[type="text"],input[type="email"],input[type="tel"],input[type="date"]{
