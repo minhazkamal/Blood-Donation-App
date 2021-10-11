@@ -104,7 +104,7 @@ html, body {
   /* z-index: 2; */
   background: #ffc3cc;
   width: 270px;
-  height: 250px;
+  height: 270px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -117,24 +117,35 @@ html, body {
 }
 
 .name {
-  font-size: large;
+  font-size: medium;
   font-weight: 500;
   font-family: 'Montserrat', sans-serif;
   color: rgba(0, 0, 0, 0.7);
+  text-align: center;
 }
 
 .blood-group {
-  font-size: x-large;
+  font-size: large;
   font-weight: 500;
   font-family: 'Montserrat', sans-serif;
   color: rgba(0, 0, 0, 0.7);
 }
 
 .blood-required {
-  font-size: large;
+  font-size: 1.2em;
   font-weight: 500;
   font-family: 'Montserrat', sans-serif;
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(17, 14, 184, 0.7);
+}
+.timeline{
+  background-color: aliceblue;;
+  padding: 2px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  
+  cursor: pointer;
+  border-radius: 16px;
 }
 
 i.fa-user-circle {
