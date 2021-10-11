@@ -17,29 +17,14 @@ router.use(bodyParser.json());
 
 //var user_id;
 
-router.get('/:encrypted_id', function(req,res){
-    //console.log('Email Verification');
-    let {encrypted_id} = req.params;
-    let id = cryptr.decrypt(encrypted_id);
-    //console.log(id);
-    db.isEmailVerified([id])
-    .then(result => {
-        //console.log(result);
-        if(result[0].email_verified == "yes") res.render('message.ejs', {alert_type: 'warning', message: `Email is already verified`, type:'verification'});
-        else {
-            //console.log('Email Verification');
-            db.verify_email([id], function (err, result, fields) {
-                if(err) throw err;
-                else
-                {
-                    //req.session.name = 'Hello' + id;
-                    //console.log(req.session.name);
-                    //user_id = id;
-                    res.render('message.ejs', {alert_type: 'success', message: `Your email is verified`, type:'verification'});
-                }
-            })
-        }
-    });
+router.get('/', function(req,res){
+    if(req.session.email) {
+        delete req.session;
+        res.redirect('/login');
+    }
+    else {
+        res.render('message.ejs', { alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type: 'verification' });
+    }
 });
 
 // router.post('/:id', function(req,res){
