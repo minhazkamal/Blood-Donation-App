@@ -89,8 +89,8 @@ const validator = function (req, res, next) {
                                                 else FILE = 'avatar.png';
                                             }
                                             else FILE = req.file.filename;
-
-                                            if (FILE === 'avatar.png' && result[0].profile_picture !== 'avatar.png') {
+                                            // console.log(FILE);
+                                            if (typeof req.file !== 'undefined' && result[0].profile_picture !== 'avatar.png') {
                                                 fs.unlink('./profile/' + result[0].profile_picture, (err) => {
                                                     if (err) throw err;
                                                 });

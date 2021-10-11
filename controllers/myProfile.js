@@ -67,7 +67,8 @@ router.get('/', function (req, res) {
         requests_count: '',
         donated: '',
         img: '',
-        editLink: ''
+        editLink: '',
+        profession: '',
     }
     if (req.session.email) {
         db.getUserAllInfo(req.session.email)
@@ -81,6 +82,7 @@ router.get('/', function (req, res) {
                 user.address = result[0].house + ', ' + result[0].street + ', ';
                 // user.editLink = '/edit/'+result[0].id;
                 user.editLink = '/profile-update';
+                user.profession = result[0].profession;
 
                 let address = {
                     division: result[0].division,

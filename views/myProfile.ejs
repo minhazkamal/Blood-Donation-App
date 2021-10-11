@@ -161,7 +161,7 @@
                                             <h6 class="mb-0">Profession</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <%= user.email %>
+                                            <%= user.profession %>
                                                 <!-- abcd@gmail.com -->
                                         </div>
                                     </div>
@@ -420,22 +420,36 @@
                                     <tbody>
                                         <% if(typeof request !='undefined' ) { %>
                                             <% request.forEach(function(req) { %>
-                                            <tr aria-disabled="true">
-                                                <th scope="row"><%= req.serialID %></th>
-                                                <td><%= req.patient %></td>
-                                                <td><%= req.location %></td>
-                                                <td><%= req.date %></td>
-                                                <td><%= req.bg %></td>
-                                                <td><%= req.quantity %></td>
-                                                <td><a href="/request/view/<%= req.id %>">View</a></td>
-                                                <% if(req.resolved == 'yes') { %>
-                                                    <td><a href="/request/resolve/<%= req.id %>" class="tag_disabled">Resolved</a></td>
-                                                <% } else { %>
-                                                <td><a href="/request/resolve/<%= req.id %>">Resolve</a></td>
-                                                <% } %>   
-                                            </tr>
-                                            <% }) %>
-                                        <% } %>
+                                                <tr aria-disabled="true">
+                                                    <th scope="row">
+                                                        <%= req.serialID %>
+                                                    </th>
+                                                    <td>
+                                                        <%= req.patient %>
+                                                    </td>
+                                                    <td>
+                                                        <%= req.location %>
+                                                    </td>
+                                                    <td>
+                                                        <%= req.date %>
+                                                    </td>
+                                                    <td>
+                                                        <%= req.bg %>
+                                                    </td>
+                                                    <td>
+                                                        <%= req.quantity %>
+                                                    </td>
+                                                    <td><a href="/request/view/<%= req.id %>">View</a></td>
+                                                    <% if(req.resolved=='yes' ) { %>
+                                                        <td><a href="/request/resolve/<%= req.id %>"
+                                                                class="tag_disabled">Resolved</a></td>
+                                                        <% } else { %>
+                                                            <td><a href="/request/resolve/<%= req.id %>"
+                                                                    onclick="return(YNconfirm());">Resolve</a></td>
+                                                            <% } %>
+                                                </tr>
+                                                <% }) %>
+                                                    <% } %>
                                                         <!-- <tr>
                                             <th scope="row">1</th>
                                             <td>George Bush Bush</td>
@@ -483,13 +497,21 @@
                 }
 
                 // Get the element with id="defaultOpen" and click on it
-                
+
                 if ($("#opening_tab").val() == 'donation') document.getElementById("donationsContent").click();
                 else if ($("#opening_tab").val() == 'request') document.getElementById("requestsContent").click();
                 else document.getElementById("generalContent").click();
             </script>
 
             <script>
+                function YNconfirm() {
+                    if (window.confirm('Do you want to resolve the rquest?')) {
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+
                 function animateValue(id, start, end, duration) {
                     console.log(start, end);
                     if (start == end) return;
