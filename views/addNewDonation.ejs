@@ -119,9 +119,6 @@
 										type="textarea"> -->
 							</div>
 
-						</div>
-
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<h6 class="mb-2">Date of Donation</h6>
 							<div class="row">
 								<div class="col-md-12 mb-4" style="margin-bottom: 0.25 !important; ">
@@ -132,62 +129,10 @@
 								</div>
 
 							</div>
-							<h6 class="mb-2">Blood Group
-							</h6>
-							<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
-											aria-hidden=" true" required>
-								<option disabled selected value="">Blood Group</option>
-								<option value="A+">A+</option>
-								<option value="A-">A-</option>
-								<option value="B+">B+</option>
-								<option value="B-">B-</option>
-								<option value="O+">O+</option>
-								<option value="O-">O-</option>
-								<option value="AB+">AB+</option>
-								<option value="AB-">AB-</option>
-							</select>
-							<div class="row">
-								<div class="col-md-6 mb-4">
-									<!-- 
-										<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
-											aria-hidden=" true" disabled>
-											<option value="" selected>
-											</option>
-										</select>
-											<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
-											aria-hidden=" true" required>
-												<option disabled selected>Blood Group</option>
-												<option value="A+">A+</option>
-												<option value="A-">A-</option>
-												<option value="B+">B+</option>
-												<option value="B-">B-</option>
-												<option value="O+">O+</option>
-												<option value="O-">O-</option>
-												<option value="AB+">AB+</option>
-												<option value="AB-">AB-</option>
-											</select>
-										-->
-								</div>
 
-							</div>
-							<h6 class="mb-2">Quantity <span class="font-italic font-weight-normal">(bag/s)</span>
-							</h6>
-							<div class="row">
-								<div class="col-md-6 mb-6" style="margin: 0 !important;">
-									<div class="input-container lname">
-										<input id="quantity" name="quantity" placeholder="Example: 3" maxlength="1"
-											pattern="[1-9]" type="text" required>
-									</div>
-								</div>
-								<div class="add-requirements">
-									<textarea name="requirements" id="requirements" cols="40" rows="4"
-										style="padding-left: 15px; resize: none;"
-										placeholder="Additional Requirements (if any)" value=""></textarea>
-								</div>
-							</div>
 						</div>
-
 					</div>
+
 					<hr class="hr1" style="margin-top: 0; margin-bottom: 1rem;">
 					<div class="row gutters">
 						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -290,8 +235,8 @@
 										<th scope="col">#</th>
 										<th scope="col">Donee's Name</th>
 										<th scope="col">Location</th>
-										<th scope="col">Date of Donation</th>
-										<th scope="col">Quantity(bag/s)</th>
+										<!-- <th scope="col">Date of Donation</th> -->
+										<!-- <th scope="col">Quantity(bag/s)</th> -->
 										<th scope="col">Select</th>
 									</tr>
 								</thead>
@@ -300,48 +245,54 @@
 										<th scope="row">1</th>
 										<td>Mark Zuckerberg</td>
 										<td>Square Hospitals,Dhaka</td>
-										<td>09/13/2021</td>
-										<td>8</td>
-										<td><div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="Check1">
-											<label class="custom-control-label" for="Check1">Add</label>
-										  </div></td>
+										<!-- <td>09/13/2021</td> -->
+										<!-- <td>8</td> -->
+										<td>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="Check1">
+												<label class="custom-control-label" for="Check1">Add</label>
+											</div>
+										</td>
 									</tr>
 									<tr>
 										<th scope="row">2</th>
 										<td>Mark</td>
 										<td>Square Hospitals,Dhaka</td>
-										<td>09/13/2021</td>
-										<td>8</td>
-										<td><div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="Check2">
-											<label class="custom-control-label" for="Check2">Add</label>
-										  </div></td>
+										<!-- <td>09/13/2021</td> -->
+										<!-- <td>8</td> -->
+										<td>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="Check2">
+												<label class="custom-control-label" for="Check2">Add</label>
+											</div>
+										</td>
 									</tr>
 									<tr>
 										<th scope="row">3</th>
 										<td>bill</td>
 										<td>Square Hospitals,Dhaka</td>
-										<td>09/13/2021</td>
-										<td>2</td>
-										<td><div class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" id="Check3">
-											<label class="custom-control-label" for="Check3">Add</label>
-										  </div></td>
+										<!-- <td>09/13/2021</td> -->
+										<!-- <td>2</td> -->
+										<td>
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="Check3">
+												<label class="custom-control-label" for="Check3">Add</label>
+											</div>
+										</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
-					
-					<div class="row gutters" >
+
+					<div class="row gutters">
 						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 							<div class="text-center">
 								<button type="reset" class="btn1" style>Clear</button>
 								<button type="submit" class="btn2" style>Submit</button>
 							</div>
 						</div>
-					
+
 					</div>
 				</div>
 			</div>

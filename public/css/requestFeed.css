@@ -36,7 +36,7 @@ html, body {
   font-family: 'Montserrat', sans-serif;
 }
 
-img {
+.feedimg {
   opacity: 0.8;
   object-fit: fill;
   height: 100%;
