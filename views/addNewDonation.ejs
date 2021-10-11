@@ -282,7 +282,7 @@
 						<input id="latitude" name="lat" placeholder="Organization" type="text" value="">
 						<input id="longitude" name="lon" placeholder="House" type="text" value="">
 					</div>
-					<div class="row" style="background-color: red;">
+					<div class="row mb-4">
 						<div class="table-responsive">
 							<table class="table table-hover">
 								<thead class="thead-dark">
@@ -292,6 +292,7 @@
 										<th scope="col">Location</th>
 										<th scope="col">Date of Donation</th>
 										<th scope="col">Quantity(bag/s)</th>
+										<th scope="col">Select</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -301,6 +302,10 @@
 										<td>Square Hospitals,Dhaka</td>
 										<td>09/13/2021</td>
 										<td>8</td>
+										<td><div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" id="Check1">
+											<label class="custom-control-label" for="Check1">Add</label>
+										  </div></td>
 									</tr>
 									<tr>
 										<th scope="row">2</th>
@@ -308,26 +313,35 @@
 										<td>Square Hospitals,Dhaka</td>
 										<td>09/13/2021</td>
 										<td>8</td>
+										<td><div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" id="Check2">
+											<label class="custom-control-label" for="Check2">Add</label>
+										  </div></td>
 									</tr>
 									<tr>
 										<th scope="row">3</th>
-										<td>Mark</td>
+										<td>bill</td>
 										<td>Square Hospitals,Dhaka</td>
 										<td>09/13/2021</td>
-										<td>8</td>
+										<td>2</td>
+										<td><div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" id="Check3">
+											<label class="custom-control-label" for="Check3">Add</label>
+										  </div></td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
-					</div>
-					<div class="row gutters" style="background-color: blueviolet;">
+					
+					<div class="row gutters" >
 						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 							<div class="text-center">
 								<button type="reset" class="btn1" style>Clear</button>
 								<button type="submit" class="btn2" style>Submit</button>
 							</div>
 						</div>
+					
 					</div>
 				</div>
 			</div>
