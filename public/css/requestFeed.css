@@ -118,28 +118,38 @@ html, body {
 
 .name {
   font-size: medium;
-  font-weight: 700;
+  font-weight: 400;
   font-family: 'Montserrat', sans-serif;
-  color: rgba(0, 0, 0, 0.7);
+  color: rgb(97, 97, 97);
   text-align: center;
   display: inline;
 }
 
-.pt_name {
-  color:rgb(0, 0, 0);
+span.pt_name {
+  font-size: medium;
+  font-weight: 700;
+  color:rgb(54, 54, 54);
   font-family: 'Montserrat', sans-serif;
+  text-align: center;
+}
+
+.pt_div{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  /* align-items: center; */
 }
 
 .blood-group {
   font-size: large;
-  font-weight: 500;
+  font-weight: 600;
   font-family: 'Montserrat', sans-serif;
-  color: rgba(0, 0, 0, 0.7);
+  color: rgb(148, 13, 13);
 }
 
 .blood-required {
-  font-size: 1.2em;
-  font-weight: 500;
+  font-size: 1.1em;
+  font-weight: 600;
   font-family: 'Montserrat', sans-serif;
   color: rgba(17, 14, 184, 0.7);
 }
