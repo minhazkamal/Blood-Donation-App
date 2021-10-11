@@ -318,9 +318,11 @@ hr{
 .blobUpdateProf{
     position: absolute;
     z-index: -1;
-    width: 15rem;
-    height: 17rem;
-    left: 27.25rem;
+    width: 30rem;
+    height: 30rem;
+    left: 25rem;
+    top: -8em;
+    transform: rotate(45deg);
 }
 
 @media screen and (max-width:1200px) {
@@ -387,19 +389,22 @@ hr{
     .blobUpdateProf{
         position: absolute;
         z-index: -1;
-        width: 15rem;
-        height: 16rem;
-        left: 3.5rem;
-    }
+        width: 30rem;
+        height: 30rem;
+        right: 50rem;
+        top: -9em;
+        
 }
 
 @media screen and (max-width:375px) {
     .blobUpdateProf{
         position: absolute;
         z-index: -1;
-        width: 15rem;
-        height: 16rem;
-        left: 3.25rem;
+        width: 25rem;
+        height: 30rem;
+        left: 2rem;
+        
+    }
     }
     body{
         background: cover;
@@ -414,6 +419,7 @@ hr{
         width: 15rem;
         height: 16rem;
         left: 2.5rem;
+        
     }
     body{
         background: cover;
