@@ -413,3 +413,14 @@ a.tag_disabled {
     pointer-events: none;
     cursor: default;
   }
+
+
+
+/* #####################CSS for add new donation#####################  */
+
+.table-responsive{
+    max-width: 90%;
+    margin: 0 auto;
+    /* font-size: 1rem; */
+}
+
