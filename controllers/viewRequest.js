@@ -118,7 +118,7 @@ router.get('/:encrypted_id', function (req, res) {
                                     if (user.resolved == 'no') user.is_updateable = 'yes';
                                     user.post_by = result2[0].first_name + ' ' + result2[0].last_name;
                                 }
-                                res.render('viewRequest.ejs', { user, divisions: div_result });
+                                res.render('viewRequest.ejs', { user, divisions: div_result, navbar: req.session.navbar_info });
                             })
                     })
             })
@@ -187,7 +187,7 @@ router.post('/:encrypted_id', [
 
             req.session.temp_user.type = 'error';
             console.log(req.session.temp_user, id);
-            res.render(`viewRequest`, { user: req.session.temp_user, alert, divisions: req.session.div_results });
+            res.render(`viewRequest`, { user: req.session.temp_user, alert, divisions: req.session.div_results, navbar: req.session.navbar_info });
         }
         else {
             let donation_date = new Date(req.body.approx_donation);

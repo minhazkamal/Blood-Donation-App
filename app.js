@@ -121,12 +121,12 @@ app.use('/view-profile', viewProfile);
 
 //localhost:3940/search-donor
 app.get('/search-donor', function(req,res){
-    res.render('searchDonor.ejs');
+    res.render('searchDonor.ejs', {navbar: req.session.navbar_info});
 });
 
 //localhost:3940//search-org
 app.get('/search-org', function(req,res){
-    res.render('searchOrg.ejs');
+    res.render('searchOrg.ejs', {navbar: req.session.navbar_info});
 });
 
 //localhost:3940/home

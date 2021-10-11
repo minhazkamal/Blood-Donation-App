@@ -695,3 +695,11 @@ module.exports.getRequestsByOffset = (offset) => {
         })
     })
 }
+
+module.exports.getNameAndPhoto = (email) => {
+    return new Promise((resolve, reject) => {
+        db.query("SELECT * FROM users NATURAL JOIN profile_picture WHERE users.id = (SELECT id FROM users WHERE email = ?)", [email], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}

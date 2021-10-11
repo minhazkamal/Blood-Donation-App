@@ -70,7 +70,7 @@ const validator = function (req, res, next) {
     try {
         upload(req, res, err => {
             if (err) {
-                res.render('updateProfile', { alert: [{ msg: err.message }] });
+                res.render('updateProfile', { alert: [{ msg: err.message }], navbar: req.session.navbar_info });
             }
             else {
                 db.getuserid(req.session.email)
@@ -218,7 +218,7 @@ router.get('/', function (req, res) {
                             req.session.div_results = div_result;
                             // console.log(req.session.temp_user, req.session.div_results);
                             if (result[0].profile_build === 'no') {
-                                res.render('updateProfile.ejs', { user, divisions: div_result });
+                                res.render('updateProfile.ejs', { user, divisions: div_result , navbar: req.session.navbar_info});
                             }
                             else {
                                 db.getProfilePic(result[0].id)
@@ -248,7 +248,7 @@ router.get('/', function (req, res) {
                                                                 user.zipcode = result[0].zipcode;
                                                                 // console.log(user);
                                                                 req.session.temp_user = user;
-                                                                res.render('updateProfile.ejs', { user, divisions: div_result });
+                                                                res.render('updateProfile.ejs', { user, divisions: div_result, navbar: req.session.navbar_info });
                                                             })
                                                     })
                                             })
@@ -303,7 +303,7 @@ router.post('/', validator, [
             }
             req.session.temp_user = post_user;
             console.log(req.session.temp_user);
-            res.render('updateProfile', { alert, user: req.session.temp_user, divisions: req.session.div_results });
+            res.render('updateProfile', { alert, user: req.session.temp_user, divisions: req.session.div_results, navbar: req.session.navbar_info });
         }
         else {
             // console.log(req.body);

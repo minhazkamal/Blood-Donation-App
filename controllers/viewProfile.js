@@ -108,7 +108,7 @@ router.get('/:encrypted_id/', function (req, res) {
                                             if(result4.length>0) user.eligibility_score = calculateEligibilityScore(result4);
                                             else user.eligibility_score = 0;
                                         
-                                            res.render('viewProfile.ejs', { user });
+                                            res.render('viewProfile.ejs', { user, navbar: req.session.navbar_info });
                                             // console.log(user);
                                             // res.render('myProfile.ejs', { user, tab });
                                         })                                        

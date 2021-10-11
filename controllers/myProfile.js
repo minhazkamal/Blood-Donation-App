@@ -126,7 +126,7 @@ router.get('/', function (req, res) {
                                                     // console.log(request);
                                                 }
 
-                                                res.render('myProfile.ejs', { user, tab, request });
+                                                res.render('myProfile.ejs', { user, tab, request, navbar: req.session.navbar_info });
                                             })
                                             // console.log(user);
                                             // res.render('myProfile.ejs', { user, tab });

@@ -101,7 +101,7 @@ router.get('/', function (req, res) {
                         }
                         req.session.temp_user = user;
                         req.session.div_results = div_result;
-                        res.render('newRequest.ejs', { user, divisions: div_result });
+                        res.render('newRequest.ejs', { user, divisions: div_result, navbar: req.session.navbar_info });
 
                     })
             })
@@ -167,7 +167,7 @@ router.post('/', [
 
             req.session.temp_user.type = 'error';
 
-            res.render('newRequest', { user: req.session.temp_user, alert, divisions: req.session.div_results });
+            res.render('newRequest', { user: req.session.temp_user, alert, divisions: req.session.div_results, navbar: req.session.navbar_info });
         }
         else {
             let donation_date = new Date(req.body.approx_donation);

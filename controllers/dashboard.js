@@ -16,6 +16,11 @@ router.get('/', function(req,res){
     // req.session.email = 'minhaz.kamal9900@gmail.com';
     if(req.session.email)
     {
+        var navbar_info = {
+            name: '',
+            photo: ''
+        }
+
         var user_status = {
             eligibility: '',
             active: '',
@@ -29,7 +34,14 @@ router.get('/', function(req,res){
             .then(result => {
                 user_status.active = result[0].status;
                 req.session.temp_user_status = user_status;
-                res.render('dashboard', {user_status});
+                db.getNameAndPhoto(req.session.email)
+                .then(result => {
+                    navbar_info.name = result[0].first_name;
+                    navbar_info.photo = result[0].profile_picture;
+
+                    req.session.navbar_info = navbar_info;
+                    res.render('dashboard', {user_status, navbar: req.session.navbar_info});
+                })  
             })
         })
     }

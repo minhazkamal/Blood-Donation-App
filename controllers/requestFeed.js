@@ -58,7 +58,7 @@ router.get('/', function (req, res) {
         .then(results => {
             let div_result = results;
             // console.log(results);
-            res.render('requestFeed.ejs', { divisions: div_result });
+            res.render('requestFeed.ejs', { divisions: div_result, navbar: req.session.navbar_info });
         })
     }
     else {
