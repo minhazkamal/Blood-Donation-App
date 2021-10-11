@@ -16,14 +16,16 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 	<!-- <script src="https://kit.fontawesome.com/af332973a8.js" crossorigin="anonymous"></script> -->
 
-	  <!-- fontawesome 5 webkit from abdullah -->
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css"> 
+	<!-- fontawesome 5 webkit from abdullah -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
 <body>
 
 
 	<%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo}) %>
+
+
 
 		<div class="upper-container">
 			<img src="img/requestFeedimg.jpg" alt="Snow" class="feedimg" style="width:100%;">
@@ -33,9 +35,22 @@
 			<a href="/new-request"><span class="post-btn">New Request</span></a>
 		</div>
 
-		<div class="popup">
-			<div class="popup__container">
-				<button type="button" class="close-button"></button>
+		<div class="main_box">
+			<input type="checkbox" id="check">
+			<div class="btn_one">
+				<label for="check">
+					<i class="fas fa-filter fa-2x"></i>
+				</label>
+			</div>
+			<div class="sidebar_menu">
+			
+				<div class="btn_two">
+					<label for="check">
+						<i class="fas fa-times"></i>
+					</label>
+				</div>
+			
+
 				<div class="row-filter">
 					<div class="filter">
 						<h1>Add Filters</h1>
@@ -87,7 +102,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="popup-button"><i class="fas fa-filter fa-2x"></i></div>
+
+
 		<div class="main">
 
 
