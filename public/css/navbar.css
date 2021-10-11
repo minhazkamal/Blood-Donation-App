@@ -15,6 +15,7 @@ header {
   padding: 0 150px;
   transition: 2s;
   transition-timing-function: linear;
+  font-family: 'Montserrat',sans-serif;
 }
 
 .scrolled {

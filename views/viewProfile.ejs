@@ -39,30 +39,34 @@
 
     <%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo}) %>
 
-    <div class="container">
-        <div class="main-body">
-            <div class="row gutters-sm">
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex flex-column align-items-center text-center">
-                                <img src="<%= user.img %>" alt="Admin"
-                                    class="rounded-circle" width="250">
-                                <div class="mt-3">
-                                    <h4><%= user.fullname %></h4>
-                                    <p class="font-weight-bold text-danger mb-1"><%= user.bg %></p>
-                                    <!-- <p class="text-muted text-laert font-size-sm">Bio Here...</p> -->
-                                    <!-- <button class="btn btn-primary">Follow</button>
+        <div class="container">
+            <div class="main-body">
+                <div class="row gutters-sm">
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-column align-items-center text-center">
+                                    <img src="<%= user.img %>" alt="Admin" class="rounded-circle" width="250">
+                                    <div class="mt-3">
+                                        <h4>
+                                            <%= user.fullname %>
+                                        </h4>
+                                        <p class="text-danger mb-1" style="font-weight: 500; font-size: x-large;">
+                                            <%= user.bg %>
+                                                <!-- AB+ -->
+                                        </p>
+                                        <p class="text-muted text-alert font-size-sm" style="letter-spacing: 1px;">Profession</p>
+                                        <!-- <button class="btn btn-primary">Follow</button>
                                     <button class="btn btn-outline-primary">Message</button> -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div style="display: none;" id="profile">
-                        <input id="requests_counting" type="text" value="<%= user.requests_count %>">
-                        <input id="eligibility_counting" type="text" value="<%= user.eligibility_score %>">
-                    </div>
-                    <!-- <div class="card mt-3">
+                        <div style="display: none;" id="profile">
+                            <input id="requests_counting" type="text" value="<%= user.requests_count %>">
+                            <input id="eligibility_counting" type="text" value="<%= user.eligibility_score %>">
+                        </div>
+                        <!-- <div class="card mt-3">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -112,106 +116,125 @@
                             </li>
                         </ul>
                     </div> -->
-                </div>
-                <div class="col-md-8">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            
+                    </div>
+                    <div class="col-md-8">
 
-                            <div class="row gutters-sm">
-                                <!-- <div id="London" class="tabcontent"> -->
-                                <!-- <div class="col-sm-6 mb-3">
-                                    <div class="card h-100">
-                                        <div class="card-body">
-                                            <div id="myDIV">Active</div>
-                                            <div class="btn">
-                                                <button onclick="myFunction()" class="activate-button">Click Here</button>
+                        <div class="row gutters-sm">
+                            <div class="col-sm-4 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h4>Eligibility Score</h4>
+                                        <h1 class="eligibility-score" id="elg-score">0</h1>
+                                        <h6 class="text">out of 10</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h4>Donated</h4>
+                                        <h6 class="text">about</h6>
+                                        <h1 class="no-of-responds" id="responds-count">50</h1>
+                                        <h6 class="text">times</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h4>Requested</h4>
+                                        <h6 class="text">for</h6>
+                                        <h1 class="no-of-requests" id="requests-count">0</h1>
+                                        <h6 class="text">bag(s)</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Full Name</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <%= user.fullname %>
+                                            <!-- Anas Jawad -->
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Email Address</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <%= user.email %>
+                                            <!-- anas@iut-dhaka.edu -->
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Profession</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <%= user.profession %>
+                                            <!-- abcd@gmail.com -->
+                                    </div>
+                                </div>
+                                <hr>
+                                <% if(user.responder=='yes' ) { %>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Contact</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <%= user.contact %>
+                                                <!-- Anas Jawad -->
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <% } %>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Date of Birth</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <%= user.dob %>
                                             </div>
                                         </div>
-                                    </div>
-                                </div> -->
-                                <div class="col-sm-4 mb-3">
-                                    <div class="card h-100">
-                                        <div class="card-body">
-                                            <h4>Eligibility Score</h4>
-                                            <h1 class="eligibility-score" id="elg-score">0</h1>
-                                            <h6 class="text">out of 10</h6>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Age</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <%= user.dob %>
+                                                    <!-- 03/28/1999 -->
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 mb-3">
-                                    <div class="card h-100">
-                                        <div class="card-body">
-                                            <h4>Donated</h4>
-                                            <h6 class="text">about</h6>
-                                            <h1 class="no-of-responds" id="responds-count">50</h1>
-                                            <h6 class="text">times</h6>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Blood Group</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <%= user.bg %>
+                                                    <!-- AB+ -->
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 mb-3">
-                                    <div class="card h-100">
-                                        <div class="card-body">
-                                            <h4>Requested</h4>
-                                            <h6 class="text">for</h6>
-                                            <h1 class="no-of-requests" id="requests-count">0</h1>
-                                            <h6 class="text">bag(s)</h6>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Gender</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <%= user.gender %>
+                                                    <!-- Male -->
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Full Name</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <%= user.fullname %>
-                                    <!-- Anas Jawad -->
-                                </div>
-                            </div>
-                            <hr>
-                            <% if(user.responder == 'yes') { %>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Contact</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <%= user.contact %>
-                                    <!-- Anas Jawad -->
-                                </div>
-                            </div>
-                            <hr>
-                            <% } %>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Date of Birth</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <%= user.dob %>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Gender</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <%= user.gender %>
-                                    <!-- Male -->
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Email</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <%= user.email %>
-                                    <!-- anas@iut-dhaka.edu -->
-                                </div>
-                            </div>
-                            <hr>
-                            <!-- <div class="row">
+                                        <hr>
+                                       
+                                        <!-- <div class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Average Score</h6>
                                 </div>
@@ -220,26 +243,26 @@
                                 </div>
                             </div>
                             <hr> -->
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Address</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <%= user.address %>
-                                    <!-- House #3, OR Nizam Road, Kotwali, Chattogram Chattogram -->
-                                </div>
-                            </div>
-                            <hr>
-                            <!-- <div class="row">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Address</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <%= user.address %>
+                                                    <!-- House #3, OR Nizam Road, Kotwali, Chattogram Chattogram -->
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <!-- <div class="row">
                                 <div class="col-sm-12">
                                     <a class="btn btn-info " target="__blank"
                                         href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
                                 </div>
                             </div> -->
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- <div class="row gutters-sm">
+                        <!-- <div class="row gutters-sm">
                         <div class="col-sm-12 mb-3">
                             <div class="card h-100">
                                 <div class="card-body">
@@ -295,7 +318,7 @@
 
                         </div>
                     </div> -->
-                    <!-- 
+                        <!-- 
                     #################################
                     #########ENTER TABLE HERE########
                     ################################# -->
@@ -304,35 +327,35 @@
 
 
 
+                    </div>
                 </div>
+
             </div>
-
         </div>
-    </div>
 
-    <%- include ("./partials/footer.ejs") %>
-    <script>
-        function animateValue(id, start, end, duration) {
-            // console.log(start, end);
-            if (start == end) return;
-            var range = end - start;
-            var current = start;
-            var increment = end > start ? 1 : -1;
-            var stepTime = Math.abs(Math.floor(duration / range));
-            var obj = document.getElementById(id);
-            var timer = setInterval(function () {
-                current += increment;
-                obj.innerHTML = current;
-                if (current == end) {
-                    clearInterval(timer);
+        <%- include ("./partials/footer.ejs") %>
+            <script>
+                function animateValue(id, start, end, duration) {
+                    // console.log(start, end);
+                    if (start == end) return;
+                    var range = end - start;
+                    var current = start;
+                    var increment = end > start ? 1 : -1;
+                    var stepTime = Math.abs(Math.floor(duration / range));
+                    var obj = document.getElementById(id);
+                    var timer = setInterval(function () {
+                        current += increment;
+                        obj.innerHTML = current;
+                        if (current == end) {
+                            clearInterval(timer);
+                        }
+                    }, stepTime);
                 }
-            }, stepTime);
-        }
 
-        animateValue("elg-score", 0, $("#eligibility_counting").val(), 500);
-        animateValue("responds-count", 0, 50, 500);
-        animateValue("requests-count", 0, $("#requests_counting").val(), 500);
-    </script>
+                animateValue("elg-score", 0, $("#eligibility_counting").val(), 500);
+                animateValue("responds-count", 0, 50, 500);
+                animateValue("requests-count", 0, $("#requests_counting").val(), 500);
+            </script>
 </body>
 
 </html>
