@@ -51,14 +51,15 @@ function calculateEligibilityScore(report) {
     return Math.floor((total*10)/14);
 }
 
-router.get('/:encrypted_id', function (req, res) {
+router.get('/:encrypted_id/', function (req, res) {
+    var responder = req.query.respond;
     let { encrypted_id } = req.params;
     let id = cryptr.decrypt(encrypted_id);
     // console.log(id);
     // req.session.email = 'minhaz.kamal9900@gmail.com';
     let user = {
         fullname: '',
-        // contact: '',
+        contact: '',
         email: '',
         dob: '',
         bg: '',
@@ -68,7 +69,9 @@ router.get('/:encrypted_id', function (req, res) {
         requests_count: '',
         donated: '',
         img: '',
+        responder: 'no'
     }
+    if(responder) user.responder='yes';
     //req.session.email='minhazkamal@iut-dhaka.edu';
     if (req.session.email) {
         db.getuserinfobyid(id)
