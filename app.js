@@ -49,6 +49,7 @@ var changePassword = require('./controllers/changePassword');
 var contactUs = require('./controllers/contactUs');
 var requestFeed = require('./controllers/requestFeed');
 var viewProfile = require('./controllers/viewProfile');
+var signout = require('./controllers/signout');
 
 
 // view engine
@@ -107,6 +108,7 @@ app.use('/change-password', changePassword);
 app.use('/contact-us', contactUs);
 app.use('/request-feed', requestFeed);
 app.use('/view-profile', viewProfile);
+app.use('/signout', signout);
 
 
 //localhost:3940/new-request
@@ -173,7 +175,7 @@ app.post('/org-input', function(req,res){
 
 // localhost:3940/add-new-donation
 app.get('/add-new-donation', function(req,res){
-    res.render('addNewDonation.ejs');
+    res.render('addNewDonation.ejs', {navbar: req.session.navbar_info});
 });
 
 // app.get('/contact-us', function(req,res){
