@@ -74,6 +74,7 @@ router.get('/list', function (req, res) {
     db.getuserid(req.session.email)
         .then(result => {
             var myId = result[0].id;
+            
             db.getRequestsByOffset(offset)
                 .then(result => {
                     // console.log(result);
@@ -92,8 +93,11 @@ router.get('/list', function (req, res) {
                             approx_date: mysql2JsLocal(result[i].approx_date),
                             responder_id: myId,
                             posted_by_name: result[i].first_name + ' ' + result[i].last_name,
-                            profile_photo: result[i].photo
+                            profile_photo: result[i].photo,
+                            responder: 'others'
                         }
+
+                        if(result[i].post_by == myId) each_request.responder = 'self';
 
                         request.push(each_request);
                     }
