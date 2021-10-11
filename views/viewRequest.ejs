@@ -9,7 +9,7 @@
 	<title>View Request - G L E A M</title>
 	<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+	<!-- <link rel="stylesheet" type="text/css" href="/assets/css/style.css"> -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -77,20 +77,20 @@
 
 						
 						<hr>
-						<div>
-							<div>
+						<div class="row">
+							<div class="col-md-4">
 								<h6 class="mb-2">Request Number</h6>
 								<input type="text" id="request_number" name="request_number" value="<%= user.request_id %>"
 									style="padding: 1em;" readonly>
 							</div>
 
-							<div>
+							<div class="col-md-4">
 								<h6 class="mb-2">Posted By</h6>
 								<input type="text" id="posted_by" name="posted_by" value="<%= user.post_by %>"
 									style="padding: 1em;" readonly>
 							</div>
 
-							<div>
+							<div class="col-md-4">
 								<h6 class="mb-2">Posted On</h6>
 								<input type="date" id="posted_on" name="posted_on" value="<%= user.posted_on %>"
 									style="padding: 1em;" readonly>
