@@ -22,7 +22,7 @@ function loadPostIntoFeed(postsArray) {
         html+= `<div class="name">${post.pt_name}</div>`
         html+= `<div class="blood-group">${post.bg}</div>`
         html+= `<div class="blood-required">${post.quantity} bag(s)</div>`
-        html+= `<div class="blood-required" style="text-align: center;">Approx. Donation Date: ${post.approx_date}</div>`
+        html+= `<div class="blood-required" style="text-align: center;">Date: ${post.approx_date}</div>`
         html+= `<div class="timeline">Posted By: ${post.posted_by_name}</div>`
         html+= `</div>`
         html+= `</a>`
