@@ -35,7 +35,7 @@
 										style="font-weight: 600;"> G L E A M </div>
 									App
 								</h2>
-		
+
 							</section>
 
 							<!-- Profile Picture Upload -->
@@ -122,7 +122,8 @@
 										<div class="col-md-12 mb-4" style="margin-bottom: 0.25 !important; ">
 											<div class="input-container lname">
 												<input id="approx_donation" name="donation" type="date"
-													style="margin-bottom: 0;" min="<%= minDate %>" max="<%= maxDate %>" required>
+													style="margin-bottom: 0;" min="<%= minDate %>" max="<%= maxDate %>"
+													required>
 											</div>
 										</div>
 
@@ -258,23 +259,24 @@
 						}
 					});
 
-					if ($("#user_type").val() === 'first') {
-						$("#cp_name").val($("#user_name").val());
-						$("#contact").val($("#user_cp_contact").val());
-					}
+					// if ($("#user_type").val() === 'first') {
+					// 	$("#cp_name").val($("#user_name").val());
+					// 	$("#contact").val($("#user_cp_contact").val());
+					// }
 
 					if ($("#user_type").val() === 'error') {
 						if ($("#user_self_check").val() == 'yes') $("#self-request").attr('checked', true);
 						else $("#self-request").attr('checked', false);
 
-						$("#cp_name").val($("#user_cp").val());
-						$("#contact").val($("#user_cp_contact").val());
+						$("#pt_name").val($("#user_pt_name").val());
+						$("#cp_name").val($("#user_pt_cp").val());
+						$("#contact").val($("#user_pt_contact").val());
 						$("#basic_bg").val($("#user_pt_bg").val());
-						$("#pt_name").val($("#user_patient").val());
-						$("#quantity").val($("#user_quantity").val());
+						
+
 						$("#complication").val($("#user_complications").val());
-						$("#requirements").val($("#user_requirements").val());
-						$("#orgAddressDetails").val($("#user_org_details").val());
+					
+						
 						$("#org-name").val($("#user_org_name").val());
 						$("#street").val($("#user_org_street").val());
 
@@ -293,6 +295,8 @@
 							$('#basic_district').val($('#user_org_district').val());
 							upazilla();
 							$('#basic_upazilla').val($('#user_org_upazilla').val());
+							$("#org-name").attr('disabled', false);
+							$("#street").attr('disabled', false);
 						}
 
 					}
@@ -492,7 +496,7 @@
 				function enableDate(element) {
 					var checkbox = element;
 					// console.log(checkbox.checked);
-					if(checkbox.checked == true) $(element).closest("td").prev().find("input").prop("disabled", false);
+					if (checkbox.checked == true) $(element).closest("td").prev().find("input").prop("disabled", false);
 					else $(element).closest("td").prev().find("input").prop("disabled", true);
 				}
 

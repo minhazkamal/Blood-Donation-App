@@ -721,3 +721,11 @@ module.exports.setNewDonation = (donation) => {
         })
     })
 }
+
+module.exports.checkValidDonationDate = (date, email) => {
+    return new Promise((resolve, reject) => {
+        db.query("SELECT COUNT(*) as donate_count FROM donation WHERE donor_id = (SELECT id FROM users WHERE email = ?) AND donation_date BETWEEN DATE_ADD(?, INTERVAL -3 MONTH) AND DATE_ADD(?, INTERVAL 3 MONTH)", [email, date, date], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}

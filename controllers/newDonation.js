@@ -19,51 +19,19 @@ router.use(bodyParser.json());
 // router.use(multer().none());
 
 
-const validateDonation = (value, { req }) => {
+// const validateDonation = (value, { req }) => {
 
-    // console.log(value);
-    if (value != '') {
-
-        // const [year, month, day] = value.split('-');
-        let temp_donation = new Date(value);
-        // temp_donation.setTime(temp_donation.getTime() - temp_donation.getTimezoneOffset() * 60 * 1000);
-
-        var today = new Date();
-        // today.setTime(today.getTime() - today.getTimezoneOffset() * 60 * 1000);
-
-        var today_timePortion = (today.getTime() - today.getTimezoneOffset() * 60 * 1000) % (3600 * 1000 * 24);
-        var temp_donation_timePortion = (temp_donation.getTime() - temp_donation.getTimezoneOffset() * 60 * 1000) % (3600 * 1000 * 24);
+//     // let temp_donation = new Date(value);
+//     // console.log(temp_donation);
+//     // console.log(value);
+//     db.checkValidDonationDate(value, req.session.email)
+//     .then(result => {
+//         // console.log(result);
+//         if(result[0].donate_count > 0) return Promise.reject('Your given date is not valid. You can\'t donate within 3 months.');
+//     });
 
 
-        var temp_donation_dateonly = new Date(temp_donation - temp_donation_timePortion);
-        var today_dateonly = new Date(today - today_timePortion);
-
-        // console.log(temp_donation_dateonly);
-        // console.log(today_dateonly);
-
-        if (temp_donation_dateonly < today_dateonly) {
-            // console.log('YES!!!');
-            throw new Error('You can\'t set a previous date');
-        }
-
-        // var age = today.getFullYear() - year;
-        // var m = today.getMonth() - month;
-        // if (m < 0 || (m === 0 && today.getDate() < day)) {
-        //     age--;
-        // }
-        // if (age < 18) {
-        //     throw new Error('Your age must be greater than 18');
-        // }
-    }
-    else throw new Error('Approx Donation Date is empty');
-
-    // }
-    // else
-    // {
-    //     throw new Error('Date of Birth is not valid');
-    // }
-    return true;
-}
+// }
 
 function mysql2JsDate(str) {
     var g = str;
@@ -131,6 +99,8 @@ router.get('/', function (req, res) {
                                 lon: '',
                             }
                             req.session.temp_user = user;
+                            req.session.temp_user.minDate = minDate;
+                            req.session.temp_user.maxDate = maxDate;
                             req.session.div_results = div_result;
                             res.render('addNewDonation.ejs', { navbar: req.session.navbar_info, divisions: div_result, minDate, maxDate });
 
@@ -145,11 +115,18 @@ router.get('/', function (req, res) {
 
 
 router.post('/', [
-    check('donation').custom(validateDonation),
+    // check('donation').custom(validateDonation)
     // check('division', 'Division field is empty').notEmpty(),
     // check('district', 'District field is empty').notEmpty(),
     // check('upazilla', 'Upazilla field is empty').notEmpty(),
-],
+    body('donation').custom((value, { req }) => {
+        return db.direct_query("SELECT COUNT(*) as donate_count FROM donation WHERE donor_id = (SELECT id FROM users WHERE email = ?) AND donation_date BETWEEN DATE_ADD(?, INTERVAL -3 MONTH) AND DATE_ADD(?, INTERVAL 3 MONTH)", [req.session.email, value, value])
+            .then(value => {
+                if (value[0].donate_count > 0) {
+                    return Promise.reject('Your given date is not valid. You can\'t donate within 3 months.');
+                }
+            });
+    })],
     function (req, res) {
         let errors = validationResult(req)
 
@@ -193,7 +170,7 @@ router.post('/', [
 
             req.session.temp_user.type = 'error';
 
-            res.render('addNewDonation', { user: req.session.temp_user, alert, divisions: req.session.div_results, navbar: req.session.navbar_info });
+            res.render('addNewDonation', { user: req.session.temp_user, alert, divisions: req.session.div_results, navbar: req.session.navbar_info, minDate: req.session.temp_user.minDate, maxDate: req.session.temp_user.maxDate });
         }
         else {
             // console.log(req.body);
@@ -235,14 +212,15 @@ router.post('/', [
 
                                 // console.log(organization);
 
-                                
-                                        db.setOrgInput(organization, function (insert_id) {
-                                            req.session.temp_user.org = insert_id;
-                                            db.setNewDonation(req.session.temp_user)
-                                                .then(result => {
-                                                    res.redirect('/my-profile?tab=request');
-                                                })
+
+                                db.setOrgInput(organization, function (insert_id) {
+                                    // console.log(req.session.temp_user);
+                                    req.session.temp_user.org = insert_id;
+                                    db.setNewDonation(req.session.temp_user)
+                                        .then(result => {
+                                            res.redirect('/my-profile?tab=donation');
                                         })
+                                })
 
                             })
 
@@ -250,19 +228,19 @@ router.post('/', [
             }
             else {
                 // console.log(req.session.email);
-                        
-                        db.setNewDonation(req.session.temp_user)
-                            .then(result => {
-                                res.redirect('/my-profile?tab=request');
-                            })
+
+                db.setNewDonation(req.session.temp_user)
+                    .then(result => {
+                        res.redirect('/my-profile?tab=donation');
+                    })
 
             }
         }
 
         // console.log("Hello");
         // console.log(req.body.latitude);
-        delete req.session.temp_user;
-        delete req.session.div_results;
+        // delete req.session.temp_user;
+        // delete req.session.div_results;
     });
 
 
