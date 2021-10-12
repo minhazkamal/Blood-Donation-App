@@ -437,6 +437,12 @@ i.fa-user-circle {
   background-color: rgba(97, 95, 95, 0.123);
   cursor: pointer;
 }
+.popup-button:hover{
+  padding: 15px;
+  right: -0.5%;
+  transition: 0.5s;
+  transition-property: right,padding;
+}
 .popup {
   z-index: 999;
   position: fixed;
