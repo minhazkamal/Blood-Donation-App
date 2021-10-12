@@ -139,7 +139,29 @@ router.get('/', function (req, res) {
                                                                 if (result6.length > 0) user.donated = result6[0].total_donation;
                                                                 else user.donated = 0;
 
-                                                                res.render('myProfile.ejs', { user, tab, request, navbar: req.session.navbar_info });
+                                                                db.getDonationByDonor(req.session.email)
+                                                                    .then(result7 => {
+                                                                        var donation = [];
+
+                                                                        for (var i = 0; i < result7.length; i++) {
+                                                                            // console.log(i);
+                                                                            var eachdonation = {
+                                                                                donation_id: cryptr.encrypt(result7[i].donation_id),
+                                                                                serialID: i + 1,
+                                                                                patient: result7[i].patient,
+                                                                                location: result7[i].orgname + ', ' + result7[i].orgdetails,
+                                                                                date: mysql2JsLocal(result7[i].date),
+                                                                            }
+
+                                                                            donation.push(eachdonation);
+                                                                            // console.log(eachrequest);
+                                                                            // console.log(request);
+                                                                        }
+
+                                                                        res.render('myProfile.ejs', { user, tab, request, navbar: req.session.navbar_info, donation });
+                                                                    })
+
+                                                                
                                                             })
                                                     })
                                                 // console.log(user);

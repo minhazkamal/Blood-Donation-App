@@ -222,7 +222,8 @@
                                 <div class="col-sm-12 mb-3">
                                     <div class="card h-100" id="add-donation-card">
                                         <div class="card-body-add-donation">
-                                            <span class="add-donation-btn"><a href="/add-new-donation" class="add-link">Add
+                                            <span class="add-donation-btn"><a href="/add-new-donation"
+                                                    class="add-link">Add
                                                     Donation</a></span>
                                         </div>
                                     </div>
@@ -296,21 +297,33 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Donee's Name</th>
+                                            <th scope="col">Patient's Name</th>
                                             <th scope="col">Location</th>
                                             <th scope="col">Date of Donation</th>
-                                            <th scope="col">Quantity(bag/s)</th>
+                                            <th scope="col">View</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark Zuckerberg</td>
-                                            <td>Square Hospitals,Dhaka</td>
-                                            <td>09/13/2021</td>
-                                            <td>8</td>
-                                        </tr>
-                                        <tr>
+                                        <% if(typeof donation !='undefined' ) { %>
+                                            <% donation.forEach(function(d) { %>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <%= d.serialID %>
+                                                    </th>
+                                                    <td>
+                                                        <%= d.patient %>
+                                                    </td>
+                                                    <td>
+                                                        <%= d.location %>
+                                                    </td>
+                                                    <td>
+                                                        <%= d.date %>
+                                                    </td>
+                                                    <td><a href="/view/donation/<%= d.donation_id %>">View</a></td>
+                                                </tr>
+                                                <% }) %>
+                                                    <% } %>
+                                                        <!-- <tr>
                                             <th scope="row">2</th>
                                             <td>Mark</td>
                                             <td>Square Hospitals,Dhaka</td>
@@ -323,7 +336,7 @@
                                             <td>Square Hospitals,Dhaka</td>
                                             <td>09/13/2021</td>
                                             <td>8</td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -485,7 +498,7 @@
                                             <th scope="col">Location</th>
                                             <th scope="col">View</th>
                                             <th scope="col">Add</th>
-                    
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -495,7 +508,7 @@
                                             <td>Swuare Hosplitals, Dhaka</td>
                                             <td><a href="#">View</a></td>
                                             <td><a href="#">Add</a></td>
-                    
+
                                         </tr>
                                         <tr>
                                             <th scope="row">2</th>
@@ -503,7 +516,7 @@
                                             <td>Swuare Hosplitals, Dhaka</td>
                                             <td><a href="#">View</a></td>
                                             <td><a href="#">Add</a></td>
-                    
+
                                         </tr>
                                         <tr>
                                             <th scope="row">3</th>

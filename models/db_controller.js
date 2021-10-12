@@ -737,3 +737,17 @@ module.exports.countTotalDonation = (email) => {
         })
     })
 }
+
+module.exports.getDonationByDonor = (email) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT 
+        d.pt_name as patient,
+        o.name as orgname,
+        o.details as orgdetails,
+        d.donation_date as date,
+        d.id as donation_id
+        FROM donation d INNER JOIN organizations o ON d.org_id = o.id WHERE d.donor_id = (SELECT id FROM users WHERE email = ?) ORDER BY date DESC`, [email], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
