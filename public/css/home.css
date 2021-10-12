@@ -93,64 +93,18 @@
         overflow: hidden;
         transition: all 0.3s linear;
       }
-      .sidebar_menu .logo{
-        position: absolute;
-        width: 100%;
-        height: 60px;
-        box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.5);
-      }
-      .sidebar_menu .logo a{
-        color: #999;
-        font-size: 25px;
-        font-weight: 500;
-        position: absolute;
-        left: 50px;
-        line-height: 60px;
-        text-decoration: none;
-      }
+
+
       .sidebar_menu .menu{
         position: absolute;
         top: 80px;
         width:100%;
       }
-      .sidebar_menu .menu li{
-        margin-top: 6px;
-        padding: 14px 20px;
-      }
-      .sidebar_menu .menu i{
-        color: #999;
-        font-size: 20px;
-        padding-right: 8px;
-      }
-      .sidebar_menu .menu a{
-        color: #999;
-        font-size: 20px;
-        text-decoration: none;
-      }
-      .sidebar_menu .menu li:hover{
-        border-left: 1px solid #999;
-        box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
-      }
-      .sidebar_menu .social_media{
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 20px;
-        list-style: none;
-        cursor: pointer;
-      }
-      .sidebar_menu .social_media i{
-        text-decoration: none;
-        padding: 0 5px;
-        color: #999;
-        opacity: 0.6;
-        font-size: 20px;
-      }
-      .sidebar_menu .social_media i:hover{
-        opacity: 1;
-        transition: all 0.2s linear;
-        transform: scale(1.01);
-      }
+
+    
+
+ 
+     
       #check{
         display: none;
       }
@@ -174,12 +128,7 @@
         opacity: 0;
         transition: all 0.3s linear;
       }
-      .btn_one i:hover{
-        font-size: 29px;
-      }
-      .btn_two i:hover{
-        font-size: 24px;
-      }
+   
       #check:checked ~ .sidebar_menu{
         left: 0;
       }
