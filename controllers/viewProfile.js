@@ -51,6 +51,13 @@ function calculateEligibilityScore(report) {
     return Math.floor((total*10)/14);
 }
 
+function calculate_age(dob) { 
+    var diff_ms = Date.now() - dob.getTime();
+    var age_dt = new Date(diff_ms); 
+  
+    return Math.abs(age_dt.getUTCFullYear() - 1970);
+}
+
 router.get('/:encrypted_id/', function (req, res) {
     var responder = req.query.respond;
     let { encrypted_id } = req.params;
@@ -69,7 +76,8 @@ router.get('/:encrypted_id/', function (req, res) {
         requests_count: '',
         donated: '',
         img: '',
-        responder: 'no'
+        responder: 'no',
+        age: ''
     }
     if(responder) user.responder='yes';
     //req.session.email='minhazkamal@iut-dhaka.edu';
@@ -83,6 +91,7 @@ router.get('/:encrypted_id/', function (req, res) {
                 user.bg = result[0].BG;
                 user.gender = result[0].gender;
                 user.address = result[0].house + ', ' + result[0].street + ', ';
+                user.age = calculate_age(result[0].dob);
                 // user.editLink = '/edit/'+result[0].id;
                 // user.editLink = '/profile-update';
 

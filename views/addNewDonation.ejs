@@ -26,280 +26,218 @@
 <body>
 	<%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo}) %>
 		<div class="container">
-			<form method="Post">
-				<div class="row gutters" style="padding-bottom: 5rem;">
-					<div class="col-12">
-						<section style="margin-top:2rem;">
-							<h2 style="margin-bottom: 0 !important;">Add you donation in<div class="brandname"
-									style="font-weight: 600;"> G L E A M </div>
-								App
-							</h2>
+			<div id="manual-response">
+				<form method="Post">
+					<div class="row gutters" style="padding-bottom: 5rem;">
+						<div class="col-12">
+							<section style="margin-top:2rem;">
+								<h2 style="margin-bottom: 0 !important;">Add your donation in<div class="brandname"
+										style="font-weight: 600;"> G L E A M </div>
+									App
+								</h2>
+		
+							</section>
 
-						</section>
+							<!-- Profile Picture Upload -->
+							<div class="account-settings">
+								<div class="user-profile">
 
-						<!-- Profile Picture Upload -->
-						<div class="account-settings">
-							<div class="user-profile">
+								</div>
+
+								<!-- Alert Message -->
+								<% if(typeof alert !='undefined' ) { %>
+									<% alert.forEach(function(error) { %>
+										<div class="alert alert-warning alert-dismissible fade show" role="alert">
+											<%= error.msg %>
+												<button type="button" class="close" data-dismiss="alert"
+													aria-label="Close">
+													<span aria-hidden="true">×</span>
+												</button>
+										</div>
+										<% }) %>
+											<% } %>
 
 							</div>
 
-							<!-- Alert Message -->
-							<% if(typeof alert !='undefined' ) { %>
-								<% alert.forEach(function(error) { %>
-									<div class="alert alert-warning alert-dismissible fade show" role="alert">
-										<%= error.msg %>
-											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-												<span aria-hidden="true">×</span>
-											</button>
+							<div style="display: none;" id="user">
+								<% if(typeof user !='undefined' ) { %>
+									<input id="user_type" type="text" value="<%= user.type %>">
+									<input id="user_pt_name" type="text" value="<%= user.pt_name %>">
+									<input id="user_pt_cp" type="text" value="<%= user.pt_cp %>">
+									<input id="user_pt_contact" type="text" value="<%= user.pt_contact %>">
+									<input id="user_org_division" type="text" value="<%= user.division %>">
+									<input id="user_org_district" type="text" value="<%= user.district %>">
+									<input id="user_org_upazilla" type="text" value="<%= user.upazilla %>">
+									<input id="user_org_name" type="text" value="<%= user.house %>">
+									<input id="user_org_street" type="text" value="<%= user.street %>">
+									<input id="user_complications" type="text" value="<%= user.complication %>">
+									<input id="user_org" type="text" value="<%= user.org %>">
+									<input id="user_self_check" type="text" value="<%= user.self_check %>">
+									<input id="user_current_location" type="text" value="<%= user.org_location %>">
+									<input id="user_lat" type="text" value="<%= user.lat %>">
+									<input id="user_lon" type="text" value="<%= user.lon %>">
+									<% } %>
+							</div>
+
+							<hr>
+
+
+
+							<h6 class="mb-2" style="display: block;">Donation Details</h6>
+							<div class="row">
+								<div class="col-6">
+									<div class="input-container fname">
+										<input id="pt_name" name="pt_name" placeholder="Patient's Name" value=""
+											type="text" required>
 									</div>
-									<% }) %>
-										<% } %>
-
-						</div>
-
-						<div style="display: none;" id="user">
-							<% if(typeof user !='undefined' ) { %>
-								<input id="user_type" type="text" value="<%= user.type %>">
-								<input id="user_name" type="text" value="<%= user.name %>">
-								<input id="user_cp" type="text" value="<%= user.cp %>">
-								<input id="user_cp_contact" type="text" value="<%= user.cp_contact %>">
-								<input id="user_pt_bg" type="text" value="<%= user.pt_bg %>">
-								<input id="user_bg" type="text" value="<%= user.bg %>">
-								<input id="user_contact" type="text" value="<%= user.contact %>">
-								<input id="user_org_division" type="text" value="<%= user.division %>">
-								<input id="user_org_district" type="text" value="<%= user.district %>">
-								<input id="user_org_upazilla" type="text" value="<%= user.upazilla %>">
-								<input id="user_org_name" type="text" value="<%= user.house %>">
-								<input id="user_org_street" type="text" value="<%= user.street %>">
-								<input id="user_patient" type="text" value="<%= user.patient %>">
-								<input id="user_quantity" type="text" value="<%= user.quantity %>">
-								<input id="user_complications" type="text" value="<%= user.complication %>">
-								<input id="user_org_details" type="text" value="<%= user.org_details %>">
-								<input id="user_org" type="text" value="<%= user.org %>">
-								<input id="user_self_check" type="text" value="<%= user.self_check %>">
-								<input id="user_current_location" type="text" value="<%= user.org_location %>">
-								<input id="user_lat" type="text" value="<%= user.lat %>">
-								<input id="user_lon" type="text" value="<%= user.lon %>">
-								<input id="user_requirements" type="text" value="<%= user.requirements %>">
-								<% } %>
-						</div>
-
-						<hr>
-						<div>
-							<input type="checkbox" id="self-request" name="self_request" value="yes"
-								style="padding: 1em;" onclick="selfRequest()">
-							<label for="self-request" style="font-size: 1em; font-style: italic;">Add Donations from My
-								Responses</label><br>
-						</div>
-
-
-
-						<h6 class="mb-2" style="display: block;">Donation Details</h6>
-						<div class="row">
-							<div class="col-6">
-								<div class="input-container fname">
-									<input id="pt_name" name="pt_name" placeholder="Patient's Name" value="" type="text"
-										required>
+								</div>
+								<div class="col-6">
+									<div class="input-container lname">
+										<input id="cp_name" name="cp_name" placeholder="Emergency Contact Person"
+											value="" type="text" required>
+									</div>
 								</div>
 							</div>
-							<div class="col-6">
-								<div class="input-container lname">
-									<input id="cp_name" name="cp_name" placeholder="Emergency Contact Person" value=""
-										type="text" required>
-								</div>
-							</div>
-						</div>
 
-						<div class="row gutters">
-							<div class="col-12">
-								<div class="input-container lname">
-									<input id="contact" name="cp_contact" placeholder="Emergency Contact Number (+88)"
-										title="Please give a valid phone number (018xxxxxxxx)"
-										pattern="[0]{1}[1]{1}[3-9]{1}[0-9]{8}" maxlength="11" minlength="11" type="tel"
-										required>
-								</div>
-								<div class="input-container lname">
-									<textarea name="complication" id="complication" cols="67" rows="3"
-										placeholder="Complications (if any)" value="" style="resize: none;"></textarea>
-									<!-- <input id="complication" name="complication"
+							<div class="row gutters">
+								<div class="col-12">
+									<div class="input-container lname">
+										<input id="contact" name="cp_contact"
+											placeholder="Emergency Contact Number (+88)"
+											title="Please give a valid phone number (018xxxxxxxx)"
+											pattern="[0]{1}[1]{1}[3-9]{1}[0-9]{8}" maxlength="11" minlength="11"
+											type="tel" required>
+									</div>
+									<div class="input-container lname">
+										<textarea name="complication" id="complication" cols="67" rows="3"
+											placeholder="Complications (if any)" value=""
+											style="resize: none;"></textarea>
+										<!-- <input id="complication" name="complication"
 										placeholder="Complications or Specific Requirements (if any)" value=""
 										type="textarea"> -->
-								</div>
+									</div>
 
-								<h6 class="mb-2">Date of Donation</h6>
-								<div class="row">
-									<div class="col-md-12 mb-4" style="margin-bottom: 0.25 !important; ">
-										<div class="input-container lname">
-											<input id="approx_donation" name="approx_donation" type="date"
-												style="margin-bottom: 0;" required>
+									<h6 class="mb-2">Date of Donation</h6>
+									<div class="row">
+										<div class="col-md-12 mb-4" style="margin-bottom: 0.25 !important; ">
+											<div class="input-container lname">
+												<input id="approx_donation" name="donation" type="date"
+													style="margin-bottom: 0;" min="<%= minDate %>" max="<%= maxDate %>" required>
+											</div>
 										</div>
+
 									</div>
 
 								</div>
 
 							</div>
-
-						</div>
-						<hr class="hr1" style="margin-top: 0; margin-bottom: 1rem;">
-						<div class="row gutters">
-							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-								<h6 class="mt-3 mb-2 ">Organization Address</h6>
-							</div>
-							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-								<div id="org-dropdown" class="row">
-									<div class="col-md-12 mb-4">
-										<div class="input-container lname">
-											<select name="org" class="form-control" id="org_drop_down" tabindex="-1" "
+							<hr class="hr1" style="margin-top: 0; margin-bottom: 1rem;">
+							<div class="row gutters">
+								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+									<h6 class="mt-3 mb-2 ">Organization Address</h6>
+								</div>
+								<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+									<div id="org-dropdown" class="row">
+										<div class="col-md-12 mb-4">
+											<div class="input-container lname">
+												<select name="org" class="form-control" id="org_drop_down" tabindex="-1" "
 											aria-hidden=" true" required>
-												<option disabled selected value="">Select an organization</option>
-											</select>
+													<option disabled selected value="">Select an organization</option>
+												</select>
+											</div>
 										</div>
 									</div>
-								</div>
-								<!-- <div class="input-container lname">
+									<!-- <div class="input-container lname">
 								<input id="house" name="house" placeholder="Name" type="text" required>
 								</div>
 								<div class="input-container lname">
 									<input id="street" name="street" placeholder="Street (Optional)" type="text">
 								</div> -->
-								<div class="org-details">
-									<input type="checkbox" id="current-location" name="current_location" value="yes"
-										onclick="fetchAddress()">
-									<label for="current-location"> Are you in the location right now? </label><br>
-								</div>
-								<div class="row">
-									<div class="col-md-12 mb-4">
-										<div class="input-container lname">
-											<input id="org-name" name="organization_name" style="margin-bottom: 0;"
-												placeholder="Name" type="text" disabled>
-											<div id='listings' class='listings'></div>
-										</div>
+									<div class="org-details">
+										<input type="checkbox" id="current-location" name="current_location" value="yes"
+											onclick="fetchAddress()">
+										<label for="current-location"> Are you in the location right now? </label><br>
 									</div>
-
-									<div class="col-md-12 mb-4">
-										<div class="input-container lname">
-											<input id="street" name="street" placeholder="Street (Optional)" type="text"
-												disabled>
-										</div>
-									</div>
-								</div>
-								<div class="org-details">
 									<div class="row">
-										<div class="col-md-4 mb-4">
-											<select name="division" class="form-control" id="basic_division"
-												tabindex="-1" "
-											aria-hidden=" true">
-												<option disabled selected value="">Division</option>
-
-
-											</select>
+										<div class="col-md-12 mb-4">
+											<div class="input-container lname">
+												<input id="org-name" name="organization_name" style="margin-bottom: 0;"
+													placeholder="Name" type="text" disabled>
+												<div id='listings' class='listings'></div>
+											</div>
 										</div>
 
-										<div class="col-md-4 mb-4">
-											<select name="district" class="form-control" id="basic_district"
-												tabindex="-1" "
-											aria-hidden=" true">
-												<option disabled selected value="">District</option>
-
-											</select>
-										</div>
-
-										<div class="col-md-4 mb-4">
-											<select name="upazilla" class="form-control" id="basic_upazilla"
-												tabindex="-1" "
-											aria-hidden=" true">
-												<option disabled selected value="">Upazilla</option>
-
-											</select>
+										<div class="col-md-12 mb-4">
+											<div class="input-container lname">
+												<input id="street" name="street" placeholder="Street (Optional)"
+													type="text" disabled>
+											</div>
 										</div>
 									</div>
+									<div class="org-details">
+										<div class="row">
+											<div class="col-md-4 mb-4">
+												<select name="division" class="form-control" id="basic_division"
+													tabindex="-1" "
+											aria-hidden=" true">
+													<option disabled selected value="">Division</option>
+													<% divisions.forEach((division)=> { %>
+														<option value="<%= division.id %>">
+															<%=division.name %>
+														</option>
+														<% }) %>
+
+												</select>
+											</div>
+
+											<div class="col-md-4 mb-4">
+												<select name="district" class="form-control" id="basic_district"
+													tabindex="-1" "
+											aria-hidden=" true">
+													<option disabled selected value="">District</option>
+
+												</select>
+											</div>
+
+											<div class="col-md-4 mb-4">
+												<select name="upazilla" class="form-control" id="basic_upazilla"
+													tabindex="-1" "
+											aria-hidden=" true">
+													<option disabled selected value="">Upazilla</option>
+
+												</select>
+											</div>
+										</div>
+									</div>
+
+
+
+
 								</div>
-
-
-
-
+								<!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+									<div class="input-container lname">
+										<textarea name="orgAddressDetails"
+											placeholder="Details about organization (if any)" id="orgAddressDetails"
+											cols="1" rows="7"></textarea>
+									</div>
+								</div> -->
 							</div>
-							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-								<div class="input-container lname">
-									<!-- <input name="house" placeholder="Address details" type="textarea"
-									rows="3" required> -->
-									<textarea name="orgAddressDetails" placeholder="Details about organization (if any)"
-										id="orgAddressDetails" cols="1" rows="7"></textarea>
-								</div>
+							<div id="output" style="display: none;">
+								<input id="latitude" name="lat" placeholder="Organization" type="text" value="">
+								<input id="longitude" name="lon" placeholder="House" type="text" value="">
 							</div>
-						</div>
-						<div id="output" style="display: none;">
-							<input id="latitude" name="lat" placeholder="Organization" type="text" value="">
-							<input id="longitude" name="lon" placeholder="House" type="text" value="">
-						</div>
-
-					</div>
-				</div>
-				<div class="row gutters">
-					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-						<div class="text-center">
-							<button type="reset" class="btn1" style>Clear</button>
-							<button type="submit" class="btn2" style>Submit</button>
 						</div>
 					</div>
-				</div>
-			</form>
-		</div>
-
-
-		<div class="table-responsive lead">
-			<table class="table table-hover">
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Donee</th>
-						<th scope="col">Location</th>
-						<th scope="col">Date</th>
-						<th scope="col">Selection</th>
-
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Mark Khan</td>
-						<td>Swuare Hosplitals, Dhaka</td>
-						<td><input type="date" name="" id=""></td>
-						<td>
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" id="customCheck1">
-								<label class="custom-control-label" for="customCheck1">Add</label>
+					<div class="row gutters">
+						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div class="text-center">
+								<button type="reset" class="btn1" style>Clear</button>
+								<button type="submit" class="btn2" style>Submit</button>
 							</div>
-						</td>
-
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Shark Talukdar</td>
-						<td>Square Hosplitals, Dhaka</td>
-						<td><input type="date" name="" id=""></td>
-						<td>
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" id="customCheck2">
-								<label class="custom-control-label" for="customCheck2">Add</label>
-							</div>
-						</td>
-
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>Bark Majumdar</td>
-						<td>United Hosplitals, Dhaka</td>
-						<td><input type="date" name="" id=""></td>
-						<td>
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" id="customCheck3">
-								<label class="custom-control-label" for="customCheck3">Add</label>
-							</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
 
 		<%- include ("./partials/footer.ejs") %>
@@ -358,6 +296,8 @@
 						}
 
 					}
+					selfRequest();
+
 				});
 
 				function noResultsButtonClicked() {
@@ -477,16 +417,12 @@
 				function selfRequest() {
 					var checkBox = document.getElementById('self-request');
 					if (checkBox.checked == true) {
-						$("#pt_name").val($("#user_name").val())
-						$("#cp_name").val("");
-						$("#contact").val("");
-						$("#basic_bg").val($("#user_bg").val());
+						$("#response-table").show();
+						$("#manual-response").hide();
 					}
 					else {
-						$("#cp_name").val($("#user_name").val());
-						$("#contact").val($("#user_contact").val());
-						$("#basic_bg").val("");
-						$("#pt_name").val("");
+						$("#response-table").hide();
+						$("#manual-response").show();
 					}
 				}
 
@@ -552,6 +488,15 @@
 				$(function () {
 					$('#basic_district').on("change", upazilla);
 				});
+
+				function enableDate(element) {
+					var checkbox = element;
+					// console.log(checkbox.checked);
+					if(checkbox.checked == true) $(element).closest("td").prev().find("input").prop("disabled", false);
+					else $(element).closest("td").prev().find("input").prop("disabled", true);
+				}
+
+
 			</script>
 			<!-- <link rel="stylesheet" type="text/css" href="css/bvselect.css"> -->
 			<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
