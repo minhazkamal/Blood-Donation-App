@@ -248,7 +248,11 @@
 </head>
 
 <body>
+    <% if(typeof navbar !='undefined' ) { %>
     <%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo}) %>
+    <% } else { %>
+    <%- include ("./partials/navbar2.ejs") %>
+    <% } %>    
         <div class="main-container">
             <div class='sidebar'>
                 <div class='heading'>
