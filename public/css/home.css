@@ -179,6 +179,7 @@ body {
 
 .client .imgBx img{
     max-width: 300px;
+    max-height: 200px;
     margin: 20px;
     margin-top: 0;
 }
@@ -189,6 +190,8 @@ body {
     align-items: center;
     flex-direction: column;
 }
+
+
 
 
 
