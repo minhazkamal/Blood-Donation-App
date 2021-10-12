@@ -51,6 +51,13 @@ function calculateEligibilityScore(report) {
     return Math.floor((total*10)/14);
 }
 
+function calculate_age(dob) { 
+    var diff_ms = Date.now() - dob.getTime();
+    var age_dt = new Date(diff_ms); 
+  
+    return Math.abs(age_dt.getUTCFullYear() - 1970);
+}
+
 router.get('/', function (req, res) {
     var tab = req.query.tab;
     // console.log(tab);
@@ -83,6 +90,7 @@ router.get('/', function (req, res) {
                 // user.editLink = '/edit/'+result[0].id;
                 user.editLink = '/profile-update';
                 user.profession = result[0].profession;
+                user.age = calculate_age(result[0].dob);
 
                 let address = {
                     division: result[0].division,

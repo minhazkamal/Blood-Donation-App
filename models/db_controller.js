@@ -703,3 +703,21 @@ module.exports.getNameAndPhoto = (email) => {
         })
     })
 }
+
+module.exports.getRequestById = (req_id) => {
+    return new Promise((resolve, reject) => {
+        db.query("SELECT * FROM requests WHERE id = ?", [req_id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.setNewDonation = (donation) => {
+    // console.log(donation);
+    return new Promise((resolve, reject) => {
+        db.query("INSERT INTO `donation`(`donor_id`,`pt_name`,`pt_contact`,`pt_contact_person`,`pt_complication`, `donation_date`, `org_id`) VALUES (?, ?, ?, ?, ?, ?, ?)", 
+                                        [donation.donor_id, donation.pt_name, donation.pt_contact, donation.pt_cp, donation.complication, donation.approx_date, donation.org], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}

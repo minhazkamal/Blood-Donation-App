@@ -50,6 +50,7 @@ var contactUs = require('./controllers/contactUs');
 var requestFeed = require('./controllers/requestFeed');
 var viewProfile = require('./controllers/viewProfile');
 var signout = require('./controllers/signout');
+var newDonation = require('./controllers/newDonation');
 
 
 // view engine
@@ -109,6 +110,7 @@ app.use('/contact-us', contactUs);
 app.use('/request-feed', requestFeed);
 app.use('/view-profile', viewProfile);
 app.use('/signout', signout);
+app.use('/add-new-donation', newDonation);
 
 
 //localhost:3940/new-request
@@ -174,9 +176,9 @@ app.post('/org-input', function(req,res){
 // });
 
 // localhost:3940/add-new-donation
-app.get('/add-new-donation', function(req,res){
-    res.render('addNewDonation.ejs', {navbar: req.session.navbar_info});
-});
+// app.get('/add-new-donation', function(req,res){
+//     res.render('addNewDonation.ejs', {navbar: req.session.navbar_info});
+// });
 
 // app.get('/contact-us', function(req,res){
 //     res.render('contactUs.ejs');
