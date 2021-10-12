@@ -118,6 +118,36 @@ INSERT INTO `divisions` VALUES (1,'Barisal'),(2,'Chittagong'),(3,'Dhaka'),(4,'Kh
 UNLOCK TABLES;
 
 --
+-- Table structure for table `donation`
+--
+
+DROP TABLE IF EXISTS `donation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `donation` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `donor_id` int NOT NULL,
+  `pt_name` varchar(250) DEFAULT NULL,
+  `pt_contact` varchar(11) DEFAULT NULL,
+  `pt_contact_person` varchar(250) DEFAULT NULL,
+  `pt_complication` varchar(500) DEFAULT NULL,
+  `donation_date` date NOT NULL,
+  `org_id` int NOT NULL,
+  PRIMARY KEY (`id`,`donor_id`,`donation_date`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `donation`
+--
+
+LOCK TABLES `donation` WRITE;
+/*!40000 ALTER TABLE `donation` DISABLE KEYS */;
+INSERT INTO `donation` VALUES (1,6,'Taiyaba Tabassum','01711824143','Ashrafee Jahan','','2018-11-30',10),(2,6,'Ashrafee Jahan','01712041041','Sikder Rashed Kamal','','2021-03-12',9),(3,6,'Sikder Rashed Kamal','01867057600','MINHAZ KAMAL','','2021-07-09',26),(4,6,'Sikder Rashed Kamal','01867057600','MINHAZ KAMAL','dengue','2021-10-12',20);
+/*!40000 ALTER TABLE `donation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `eligibility_report`
 --
 
@@ -197,7 +227,7 @@ CREATE TABLE `organizations` (
   `district` int NOT NULL,
   `upazilla` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -206,7 +236,7 @@ CREATE TABLE `organizations` (
 
 LOCK TABLES `organizations` WRITE;
 /*!40000 ALTER TABLE `organizations` DISABLE KEYS */;
-INSERT INTO `organizations` VALUES (1,'Dhaka Medical College Hospital','Secretariat Road, Shahbag, Dhaka, Dhaka','02-55165088',23.725869,90.396524,3,1,533),(2,'Sir Salimullah Medical College Hospitals','Mitford road, Chackbazar, Dhaka, Dhaka','01703636314',23.711423,90.401239,3,1,500),(3,'Square Hospitals','Bir Uttam Qazi Nuruzzaman Road, Tejgaon, Dhaka, Dhaka','02-8144400',23.752927,90.381731,3,1,538),(4,'Evercare Hospital Dhaka','Hospital Road, Vatara, Dhaka, Dhaka','10678',23.810054,90.43254,3,1,544),(5,'Mymensingh Medical College','Dhaka-Mymensingh Road, Mymensingh Sadar, Mymensingh, Mymensingh','01713332468',24.743187,90.409051,8,10,217),(6,'Chittagong Medical College','KBF Kader Road, Kotwali, Chittagong, Chittagong','031-630335',22.359414,91.830903,2,43,566),(7,'Evercare Hospital Chitagong','Kuwaish Road, Chandgaon, Chittagong, Chittagong','10678',22.401834,91.849365,2,43,560),(8,'Chittagong General Hospital','Anderkilla Road, Kotwali, Chittagong, Chittagong','01711468326',22.340604,91.837763,2,43,566),(9,'BIRDEM General Hospital','Kazi Nazrul Islam Ave, Shahbag, Dhaka, Dhaka','02-41060501',23.738799,90.396402,3,1,533),(10,'BSMMU Hospitals','Kazi Nazrul Islam Avenue, Shahbag, Dhaka, Dhaka','01866637482',23.739668,90.394563,3,1,533),(11,'United Hospital Ltd.','Hospital Road, Gulshan, Dhaka, Dhaka','',23.804578,90.415648,3,1,508),(12,'Parkview Hospital Ltd','Pachlaish Road, Panchlaish, Chittagong, Chittagong','01976022333',22.363095,91.835649,2,43,569),(13,'National Hospital Pvt Ltd','Mehedibag Road, Kotwali, Chittagong, Chittagong','031623753',22.35486,91.82491,2,43,566),(14,'Max Hospitals Ltd','Hussain Park Street, Kotwali, Chittagong, Chittagong','01713998199',22.355308,91.825237,2,43,566),(15,'Imperial Hospitals Ltd','Zakir Hussain Road, Kulshi, Chittagong, Chittagong','0961224724',22.359176,91.795598,2,43,567),(16,'Shaheed Tajuddin Ahmed Medical College Hospital ','Hospital Road, Gazipur Sadar-Joydebpur, Gazipur, Dhaka','',23.9992261,90.424614,3,3,159),(20,'Al Helal Specialized Hospital','Mirpur-10, Mirpur Model, Dhaka, Dhaka','',23.793702,90.362237,3,1,519);
+INSERT INTO `organizations` VALUES (1,'Dhaka Medical College Hospital','Secretariat Road, Shahbag, Dhaka, Dhaka','02-55165088',23.725869,90.396524,3,1,533),(2,'Sir Salimullah Medical College Hospitals','Mitford road, Chackbazar, Dhaka, Dhaka','01703636314',23.711423,90.401239,3,1,500),(3,'Square Hospitals','Bir Uttam Qazi Nuruzzaman Road, Tejgaon, Dhaka, Dhaka','02-8144400',23.752927,90.381731,3,1,538),(4,'Evercare Hospital Dhaka','Hospital Road, Vatara, Dhaka, Dhaka','10678',23.810054,90.43254,3,1,544),(5,'Mymensingh Medical College','Dhaka-Mymensingh Road, Mymensingh Sadar, Mymensingh, Mymensingh','01713332468',24.743187,90.409051,8,10,217),(6,'Chittagong Medical College','KBF Kader Road, Kotwali, Chittagong, Chittagong','031-630335',22.359414,91.830903,2,43,566),(7,'Evercare Hospital Chitagong','Kuwaish Road, Chandgaon, Chittagong, Chittagong','10678',22.401834,91.849365,2,43,560),(8,'Chittagong General Hospital','Anderkilla Road, Kotwali, Chittagong, Chittagong','01711468326',22.340604,91.837763,2,43,566),(9,'BIRDEM General Hospital','Kazi Nazrul Islam Ave, Shahbag, Dhaka, Dhaka','02-41060501',23.738799,90.396402,3,1,533),(10,'BSMMU Hospitals','Kazi Nazrul Islam Avenue, Shahbag, Dhaka, Dhaka','01866637482',23.739668,90.394563,3,1,533),(11,'United Hospital Ltd.','Hospital Road, Gulshan, Dhaka, Dhaka','',23.804578,90.415648,3,1,508),(12,'Parkview Hospital Ltd','Pachlaish Road, Panchlaish, Chittagong, Chittagong','01976022333',22.363095,91.835649,2,43,569),(13,'National Hospital Pvt Ltd','Mehedibag Road, Kotwali, Chittagong, Chittagong','031623753',22.35486,91.82491,2,43,566),(14,'Max Hospitals Ltd','Hussain Park Street, Kotwali, Chittagong, Chittagong','01713998199',22.355308,91.825237,2,43,566),(15,'Imperial Hospitals Ltd','Zakir Hussain Road, Kulshi, Chittagong, Chittagong','0961224724',22.359176,91.795598,2,43,567),(16,'Shaheed Tajuddin Ahmed Medical College Hospital ','Hospital Road, Gazipur Sadar-Joydebpur, Gazipur, Dhaka','',23.9992261,90.424614,3,3,159),(20,'Al Helal Specialized Hospital','Mirpur-10, Mirpur Model, Dhaka, Dhaka','',23.793702,90.362237,3,1,519),(26,'Popular Medical College','Shyamoli, Mohammadpur, Dhaka, Dhaka','',23.760178,90.355229,3,1,520);
 /*!40000 ALTER TABLE `organizations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -231,7 +261,7 @@ CREATE TABLE `profile_picture` (
 
 LOCK TABLES `profile_picture` WRITE;
 /*!40000 ALTER TABLE `profile_picture` DISABLE KEYS */;
-INSERT INTO `profile_picture` VALUES (6,'bfdc6d3c7f3a763b0f933b2501038f1f5969b5603599952430e3bf7a85076d74e99269606dfa852f0cc54fd24c89cdeac1e1c8bfab62a7941f45776a9a7a381a4a13e646cca0d99c7d19e2288a637d3b244ef97bdd31113b1428f05351883fc12b.JPG'),(7,'avatar.png'),(8,'avatar.png'),(9,'avatar.png'),(10,'avatar.png'),(11,'avatar.png'),(12,'avatar.png'),(13,'avatar.png'),(14,'avatar.png'),(15,'avatar.png'),(16,'avatar.png'),(17,'avatar.png'),(18,'avatar.png'),(19,'avatar.png'),(20,'avatar.png'),(21,'avatar.png'),(22,'avatar.png'),(23,'avatar.png'),(24,'14e4c20dc024fe6f23965f109e5f31ed8ab55f3eef024b71d1d1d4ef90241560c5353d77bf56dac5730e9d7b36f830d819c29dff244ce63518ef1e6e8d8c4a1dd111ae09e0e8e14ac8f2d05fe3aeaf5c731b3514ccbb66eb53c2d747d16d52886e93.JPG');
+INSERT INTO `profile_picture` VALUES (6,'3835bdd25396e63ec58f26d49beb66c9503cb826e55ccd8e50b54a09064ff3a9f3ea6229b417ec9ddb240333e48f7edfdab7a1832c8e25458a3aeebb5a45eab027e2af044074ce2ea6dd20a3842db5da3ef8363d47b77125ed888f77dae83795b7.JPG'),(7,'avatar.png'),(8,'avatar.png'),(9,'avatar.png'),(10,'avatar.png'),(11,'avatar.png'),(12,'avatar.png'),(13,'avatar.png'),(14,'avatar.png'),(15,'avatar.png'),(16,'avatar.png'),(17,'avatar.png'),(18,'avatar.png'),(19,'avatar.png'),(20,'avatar.png'),(21,'avatar.png'),(22,'avatar.png'),(23,'avatar.png'),(24,'14e4c20dc024fe6f23965f109e5f31ed8ab55f3eef024b71d1d1d4ef90241560c5353d77bf56dac5730e9d7b36f830d819c29dff244ce63518ef1e6e8d8c4a1dd111ae09e0e8e14ac8f2d05fe3aeaf5c731b3514ccbb66eb53c2d747d16d52886e93.JPG');
 /*!40000 ALTER TABLE `profile_picture` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -271,7 +301,7 @@ CREATE TABLE `requests` (
 
 LOCK TABLES `requests` WRITE;
 /*!40000 ALTER TABLE `requests` DISABLE KEYS */;
-INSERT INTO `requests` VALUES (2,6,'Minhaz','Minhaz Kamal','01867057600','2021-08-30','O+','Accident',NULL,2,1,'','2021-09-28 15:04:50','no'),(4,6,'Minhaz Kamal','Abdullah','01867057600','2021-10-11','O+','Accident','',2,10,'','2021-10-10 10:29:28','no'),(6,6,'Minhaz Kamal','Kinjol','01521503910','2021-09-30','O+','Accident','Not Vaccinated',2,1,'','2021-09-28 15:04:50','no'),(10,6,'Sikder Rashed Kamal','Minhaz Kamal','01867057600','2021-10-09','B+','Dengue Fever','Not Vaccinated within 28 days',3,2,'','2021-10-07 11:57:30','no');
+INSERT INTO `requests` VALUES (2,6,'Minhaz','Minhaz Kamal','01867057600','2021-08-30','O+','Accident',' ',2,1,'','2021-09-28 15:04:50','no'),(4,6,'Minhaz Kamal','Abdullah','01867057600','2021-10-11','O+','Accident','',2,10,'','2021-10-10 10:29:28','no'),(6,6,'Minhaz Kamal','Kinjol','01521503910','2021-09-30','O+','Accident','Not Vaccinated',2,1,'','2021-09-28 15:04:50','no'),(10,6,'Sikder Rashed Kamal','Minhaz Kamal','01867057600','2021-10-09','B+','Dengue Fever','Not Vaccinated within 28 days',3,2,'','2021-10-07 11:57:30','no');
 /*!40000 ALTER TABLE `requests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,7 +362,7 @@ CREATE TABLE `user_address` (
 
 LOCK TABLES `user_address` WRITE;
 /*!40000 ALTER TABLE `user_address` DISABLE KEYS */;
-INSERT INTO `user_address` VALUES (6,'7C','311, West Shewrapara, Mirpur',3,1,519,'1216',23.774741,90.3654296),(7,'Chowdhury Vila','Enam Road',2,43,566,'4203',22.342895,91.829046),(8,'Khan Villa','Highway Road',2,43,561,'4205',22.303201,91.789352),(9,'King Villa','King Road',2,43,567,'4100',22.364765,91.803119),(10,'Bokhsi House','Bokhs Road',2,43,564,'4002',22.303201,91.789352),(11,'Doctor House','Medical Road',2,43,569,'4500',22.375772,91.827392),(12,'brothers villa','College Road',2,43,570,'4302',22.2544,91.7948),(13,'Cumilla Vila','Cumilla House',2,43,560,'4322',22.393836,91.865371),(14,'Bokhsi Vila','Bokhsi Road',2,43,565,'4731',22.303201,91.789352),(15,'Dhanshiri','Apon Road',2,43,568,'4800',22.358732,91.775428),(16,'Shadhinota','Mujib Road',3,1,511,'2000',23.7931,90.3861),(17,'Chowdhury Vila','Khan Road',3,1,525,'1000',23.827398,90.364473),(18,'Apon Nibash','Hospital Road',3,1,544,'1200',23.709226,90.40739),(19,'Bokhsi House','Bokhs Road',3,1,508,'1500',23.7917,90.4167),(20,'Poushi','School Road',3,1,533,'1200',23.736484,90.397323),(21,'Artboard','Choumuhuni Road',3,1,505,'1100',23.744806,90.373922),(22,'46','Road-2, Shekhertek',3,1,520,'',23.760178,90.355229),(24,'7C','House#311, West Shewrapara, Mirpur',3,1,519,'1216',23.774741,90.3654296);
+INSERT INTO `user_address` VALUES (6,'7C','311, West Shewrapara, Mirpur',3,1,519,'1216',23.793702,90.362237),(7,'Chowdhury Vila','Enam Road',2,43,566,'4203',22.342895,91.829046),(8,'Khan Villa','Highway Road',2,43,561,'4205',22.303201,91.789352),(9,'King Villa','King Road',2,43,567,'4100',22.364765,91.803119),(10,'Bokhsi House','Bokhs Road',2,43,564,'4002',22.303201,91.789352),(11,'Doctor House','Medical Road',2,43,569,'4500',22.375772,91.827392),(12,'brothers villa','College Road',2,43,570,'4302',22.2544,91.7948),(13,'Cumilla Vila','Cumilla House',2,43,560,'4322',22.393836,91.865371),(14,'Bokhsi Vila','Bokhsi Road',2,43,565,'4731',22.303201,91.789352),(15,'Dhanshiri','Apon Road',2,43,568,'4800',22.358732,91.775428),(16,'Shadhinota','Mujib Road',3,1,511,'2000',23.7931,90.3861),(17,'Chowdhury Vila','Khan Road',3,1,525,'1000',23.827398,90.364473),(18,'Apon Nibash','Hospital Road',3,1,544,'1200',23.709226,90.40739),(19,'Bokhsi House','Bokhs Road',3,1,508,'1500',23.7917,90.4167),(20,'Poushi','School Road',3,1,533,'1200',23.736484,90.397323),(21,'Artboard','Choumuhuni Road',3,1,505,'1100',23.744806,90.373922),(22,'46','Road-2, Shekhertek',3,1,520,'',23.760178,90.355229),(24,'7C','House#311, West Shewrapara, Mirpur',3,1,519,'1216',23.774741,90.3654296);
 /*!40000 ALTER TABLE `user_address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -386,7 +416,7 @@ CREATE TABLE `users` (
   `provider` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -408,4 +438,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-10 14:24:29
+-- Dump completed on 2021-10-12 22:55:49
