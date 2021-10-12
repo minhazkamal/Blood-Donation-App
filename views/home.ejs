@@ -13,6 +13,10 @@
     <!-- font awosome v4 -->
     <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- STYLE SHEET for this page -->
     <link rel="stylesheet" type="text/css" href="/css/home.css">
     <!--[if lt IE 9]>
@@ -23,36 +27,106 @@
 </head>
 
 <body>
-    <%- include ("./partials/navbar2.ejs") %>
-    
+
+
+
+    <div class="main_box">
+        <input type="checkbox" id="check">
+        <div class="btn_one">
+            <label for="check" class="filter-icon">
+                <i class="fas fa-bars"></i>
+            </label>
+        </div>
+        <div class="sidebar_menu">
+            
+            <div class="btn_two">
+                <label for="check" class="cross-icon">
+                    <i class="fas fa-times"></i>
+                </label>
+            </div>
+            <div class="menu">
+            	<div class="row-filter">
+					<div class="filter">
+						<h1>Add Filters</h1>
+					</div>
+					<br>
+					<div class="row-filter">
+						<div class="col-md-12 mb-4">
+							<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
+												aria-hidden=" true" required>
+								<option disabled selected value="">Blood Group</option>
+								<option value="A+">A+</option>
+								<option value="A-">A-</option>
+								<option value="B+">B+</option>
+								<option value="B-">B-</option>
+								<option value="O+">O+</option>
+								<option value="O-">O-</option>
+								<option value="AB+">AB+</option>
+								<option value="AB-">AB-</option>
+							</select>
+						</div>
+					</div>
+					<div class="row-filter">
+						<div class="col-md-12 mb-4">
+							<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
+											aria-hidden=" true" required>
+								<option disabled selected value="">Division</option>
+								<% divisions.forEach((division)=> { %>
+									<option value="<%= division.id %>">
+										<%=division.name %>
+									</option>
+									<% }) %>
+							</select>
+						</div>
+					</div>
+					<div class="row-filter">
+						<div class="col-md-12 mb-4">
+							<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
+											aria-hidden=" true" required>
+								<option disabled selected value="">District</option>
+
+							</select>
+						</div>
+
+					</div>
+					<div class="btn-01">
+						<button class="reset-btn" type="submit">Reset</button>
+						<button class="apply-btn" type="submit">Apply</button>
+					</div>
+
+				</div>
+            </div>
+
+        </div>
+    </div>
 
 
 
     <script>
         $(document).ready(function () {
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(function (position) {
-					console.log(position);
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    console.log(position);
                     var latitude = position.coords.latitude;
                     var longitude = position.coords.longitude;
                     $.ajax({
-					type: 'GET',
-					data: { latitude, longitude },
-					url: '/mapbox',
-					success: function (data) {
-						console.log(data);
-						// $('#basic_district').empty();
-						// $('#basic_district').append("<option disabled selected>District</option>");
-						// $.each(data, function (index, district) {
-						// 	$('#basic_district').append("<option value = '" + district.id + "' >" + district.name + " </option>");
-						// });
-					}
-				});
+                        type: 'GET',
+                        data: { latitude, longitude },
+                        url: '/mapbox',
+                        success: function (data) {
+                            console.log(data);
+                            // $('#basic_district').empty();
+                            // $('#basic_district').append("<option disabled selected>District</option>");
+                            // $.each(data, function (index, district) {
+                            // 	$('#basic_district').append("<option value = '" + district.id + "' >" + district.name + " </option>");
+                            // });
+                        }
+                    });
 
 
-				});
-			}
-		});
+                });
+            }
+        });
     </script>
 
 
