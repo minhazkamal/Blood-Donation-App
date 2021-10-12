@@ -27,7 +27,17 @@
             <!-- <li class="sub-item"><a href="#">Sub Item 03</a></li> -->
           </ul>
         </li>
-        <li class="menu-item"><a href="/dashboard">Notifications</a></li>
+        <li class="menu-item">
+          <a class="sub-btn" id="sub-button" href="#">Notification <span class="badge badge-danger">2</span></a>
+          <!-- <button class="sub-btn">Dropdown <i class="fas fa-angle-down"></i></button> -->
+          <ul class="sub-menu" id="sub-list" style="padding-left: 0;">
+            <li class="sub-item"><a href="#"><i class="fas fa-bell"></i> Minhaz Kamal Responded</a></li>
+            <li class="sub-item"><a href="#"><i class="fas fa-bell"></i> Fairuz Shaiara Responded</a></li>
+            <li class="sub-item"><a href="#"><i class="fas fa-bell"></i> Sartaj Ekram Responded</a></li>
+            
+          </ul>
+        </li>
+        <!-- <li class="menu-item"><a href="/dashboard">Notifications </a></li> -->
         <li class="menu-item">
           <a class="sub-btn" href="#"><%= typeof name != 'undefined' ? name : 'Username' %> <img src="/profile/<%= typeof photo != 'undefined' ? photo : 'avatar.png' %>" alt="User" class="navbar-rounded-circle"  > <i class="fas fa-angle-down"></i></a>
           <!-- <button class="sub-btn">With Sub-dropdown <i class="fas fa-angle-down"></i></button> -->
