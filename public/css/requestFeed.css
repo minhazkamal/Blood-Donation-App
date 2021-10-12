@@ -289,26 +289,7 @@ i.fa-user-circle {
   border-color: black !important;
 }
 
-/* .pagination {
-    display: flex;
-    justify-content: center;
-}
 
-.pagination a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-}
-
-.pagination a.active {
-    background-color: #0a98f7;
-    color: white;
-}
-
-.pagination a:hover:not(.active) {
-    background-color: #ddd;
-} */
 
 .upper-container .post-btn {
   width: 25%;
@@ -416,7 +397,7 @@ i.fa-user-circle {
 /* ///////////////////////////// */
 
 .main {
-  transform: translateY(-20em);
+  /* transform: translateY(-20em); */
   width: 100%;
   display: grid;
   grid-template-columns: 80% 20%;
@@ -435,17 +416,79 @@ i.fa-user-circle {
   position: -webkit-sticky;
   position: sticky;
   overflow-y: hidden;
-  top: 50%;
+  top: 10%;
   margin-right: 3em;
 }
 
 .popup {
   opacity: 0;
 }
-
-.popup-button{
-  visibility: hidden;
+.popup-button {
+  visibility: visible;
+  z-index: 1;
+  position: fixed;
+  top: 40%;
+  right: -1%;
+  width: fit-content;
+  padding: 10px;
+  color: rgba(42, 111, 151, 1);
+  border: 3px solid rgba(42, 111, 151, 1);
+  border-radius: 50% 0 0 50%;
+  background-color: rgba(97, 95, 95, 0.123);
+  cursor: pointer;
 }
+.popup {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  background-color: rgba(0, 0, 0, .5);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 300ms, opacity 500ms;
+  justify-content: center;
+  align-items: center;
+}
+.popup_opened {
+  z-index: 999;
+  visibility: visible;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup__container {
+  background-color: #fff;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  text-align: center;
+  margin: auto;
+  margin-right: 1em;
+  margin-left: 1em;
+  position: relative;
+  padding: 15px;
+}
+.close-button {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  border: 0;
+  background: url(/img/cancel.svg) center center / 100% 100% no-repeat;
+  width: 20px;
+  height: 20px;
+  fill: #000;
+  padding: 0;
+  cursor: pointer;
+  display: block;
+}
+
+/* .popup-button{
+  visibility: hidden;
+} */
 
 @media (max-width: 1100px) {
   .main {
@@ -474,63 +517,7 @@ i.fa-user-circle {
   .popup{
     visibility: visible;
   }
-  .popup-button {
-    visibility: visible;
-    z-index: 1;
-    position: fixed;
-    top: 40%;
-    right: -1%;
-    width: fit-content;
-    padding: 10px;
-    color: rgba(42, 111, 151, 1);
-    border: 3px solid rgba(42, 111, 151, 1);
-    border-radius: 50% 0 0 50%;
-    background-color: rgba(97, 95, 95, 0.123);
-    cursor: pointer;
-  }
-  .popup {
-    z-index: 999;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    display: flex;
-    background-color: rgba(0, 0, 0, .5);
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 300ms, opacity 500ms;
-  }
-  .popup_opened {
-    z-index: 999;
-    visibility: visible;
-    opacity: 1;
-  }
-  .popup__container {
-    background-color: #fff;
-    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-    border-radius: 15px;
-    text-align: center;
-    margin: auto;
-    margin-right: 1em;
-    margin-left: 1em;
-    position: relative;
-    padding: 15px;
-  }
-  .close-button {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    border: 0;
-    background: url(/img/cancel.svg) center center / 100% 100% no-repeat;
-    width: 20px;
-    height: 20px;
-    fill: #000;
-    padding: 0;
-    cursor: pointer;
-    display: block;
-  }
+  
   .upper-container {
     height: 30%;
   }
