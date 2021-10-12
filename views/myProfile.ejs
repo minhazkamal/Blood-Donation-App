@@ -70,6 +70,8 @@
                                     onclick="openContent(event, 'donations')">My Donations</button>
                                 <button class="tablinks" id="requestsContent"
                                     onclick="openContent(event, 'requests')">My Requests</button>
+                                <button class="tablinks" id="responsesContent"
+                                    onclick="openContent(event, 'responses')">My Reponses</button>
                             </div>
 
 
@@ -78,7 +80,7 @@
                     </div>
                     <div class="col-md-8">
                         <div id="general" class="tabcontent">
-                           <div class="row gutters-sm">                               
+                            <div class="row gutters-sm">
                                 <div class="col-sm-4 mb-3">
                                     <div class="card h-100">
                                         <div class="card-body">
@@ -471,6 +473,10 @@
                                 </table>
                             </div>
                         </div>
+
+                        <div id="responses" class="tabcontent">
+                            hello world
+                        </div>
                     </div>
                 </div>
 
@@ -496,6 +502,7 @@
 
                 if ($("#opening_tab").val() == 'donation') document.getElementById("donationsContent").click();
                 else if ($("#opening_tab").val() == 'request') document.getElementById("requestsContent").click();
+                else if ($("#opening_tab").val() == 'response') document.getElementById("responsesContent").click();
                 else document.getElementById("generalContent").click();
             </script>
 
