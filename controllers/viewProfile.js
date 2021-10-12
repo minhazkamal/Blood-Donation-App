@@ -77,7 +77,8 @@ router.get('/:encrypted_id/', function (req, res) {
         donated: '',
         img: '',
         responder: 'no',
-        age: ''
+        age: '',
+        profession: ''
     }
     if(responder) user.responder='yes';
     //req.session.email='minhazkamal@iut-dhaka.edu';
@@ -92,6 +93,7 @@ router.get('/:encrypted_id/', function (req, res) {
                 user.gender = result[0].gender;
                 user.address = result[0].house + ', ' + result[0].street + ', ';
                 user.age = calculate_age(result[0].dob);
+                user.profession = result[0].profession;
                 // user.editLink = '/edit/'+result[0].id;
                 // user.editLink = '/profile-update';
 
@@ -116,8 +118,16 @@ router.get('/:encrypted_id/', function (req, res) {
                                         .then(result4 => {
                                             if(result4.length>0) user.eligibility_score = calculateEligibilityScore(result4);
                                             else user.eligibility_score = 0;
+
+                                            db.countTotalDonation(user.email)
+                                            .then(result5 => {
+                                                if(result5) user.donated = result5[0].total_donation;
+                                                else user.donated = 0;
+
+                                                res.render('viewProfile.ejs', { user, navbar: req.session.navbar_info });
+                                            })
                                         
-                                            res.render('viewProfile.ejs', { user, navbar: req.session.navbar_info });
+                                            
                                             // console.log(user);
                                             // res.render('myProfile.ejs', { user, tab });
                                         })                                        

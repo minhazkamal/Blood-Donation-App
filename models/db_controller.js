@@ -729,3 +729,11 @@ module.exports.checkValidDonationDate = (date, email) => {
         })
     })
 }
+
+module.exports.countTotalDonation = (email) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT COUNT(*) as total_donation FROM donation WHERE donor_id = (SELECT id FROM users WHERE email = ?)`, [email], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}

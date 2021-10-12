@@ -65,6 +65,7 @@
                         <div style="display: none;" id="profile">
                             <input id="requests_counting" type="text" value="<%= user.requests_count %>">
                             <input id="eligibility_counting" type="text" value="<%= user.eligibility_score %>">
+                            <input id="donation_counting" type="text" value="<%= user.donated %>">
                         </div>
                         <!-- <div class="card mt-3">
                         <ul class="list-group list-group-flush">
@@ -134,7 +135,7 @@
                                     <div class="card-body">
                                         <h4>Donated</h4>
                                         <h6 class="text">about</h6>
-                                        <h1 class="no-of-responds" id="responds-count">50</h1>
+                                        <h1 class="no-of-responds" id="responds-count">0</h1>
                                         <h6 class="text">times</h6>
                                     </div>
                                 </div>
@@ -353,7 +354,7 @@
                 }
 
                 animateValue("elg-score", 0, $("#eligibility_counting").val(), 500);
-                animateValue("responds-count", 0, 50, 500);
+                animateValue("responds-count", 0, $("#donation_counting").val(), 500);
                 animateValue("requests-count", 0, $("#requests_counting").val(), 500);
             </script>
 </body>

@@ -30,7 +30,7 @@ function mysql2JsLocal(str) {
 }
 
 function yesORno(b) {
-    if (b=='yes') return 0;
+    if (b == 'yes') return 0;
     else return 1;
 }
 
@@ -48,13 +48,13 @@ function calculateEligibilityScore(report) {
     total += 2 - parseInt(report[0].drinking);
     total += 2 - parseInt(report[0].depression);
 
-    return Math.floor((total*10)/14);
+    return Math.floor((total * 10) / 14);
 }
 
-function calculate_age(dob) { 
+function calculate_age(dob) {
     var diff_ms = Date.now() - dob.getTime();
-    var age_dt = new Date(diff_ms); 
-  
+    var age_dt = new Date(diff_ms);
+
     return Math.abs(age_dt.getUTCFullYear() - 1970);
 }
 
@@ -106,41 +106,45 @@ router.get('/', function (req, res) {
                                 user.address += result2[0].upazilla + ', ' + result2[0].district + ', ' + result2[0].division
                                 db.countBloodRequests(req.session.email)
                                     .then(result3 => {
-                                        if(result3) user.requests_count = result3[0].total_requests;
+                                        if (result3) user.requests_count = result3[0].total_requests;
                                         else user.requests_count = 0;
                                         // user.requests_count = result3[0].total_requests;
                                         db.getEligibilityReport(req.session.email)
-                                        .then(result4 => {
-                                            if(result4.length>0) user.eligibility_score = calculateEligibilityScore(result4);
-                                            else user.eligibility_score = 0;
-                                            db.getRequestByPoster(req.session.email)
-                                            .then(result5 => {
-                                                var request = [];
+                                            .then(result4 => {
+                                                if (result4.length > 0) user.eligibility_score = calculateEligibilityScore(result4);
+                                                else user.eligibility_score = 0;
+                                                db.getRequestByPoster(req.session.email)
+                                                    .then(result5 => {
+                                                        var request = [];
 
-                                                for(var i=0; i<result5.length; i++)
-                                                {
-                                                    // console.log(i);
-                                                    var eachrequest = {
-                                                        id: cryptr.encrypt(result5[i].id),
-                                                        serialID: i+1,
-                                                        patient: result5[i].patient,
-                                                        location: result5[i].orgname +', '+ result5[i].orgdetails,
-                                                        date: mysql2JsLocal(result5[i].date),
-                                                        bg: result5[i].bg,
-                                                        quantity: result5[i].quantity,
-                                                        resolved: result5[i].resolved
-                                                    }
+                                                        for (var i = 0; i < result5.length; i++) {
+                                                            // console.log(i);
+                                                            var eachrequest = {
+                                                                id: cryptr.encrypt(result5[i].id),
+                                                                serialID: i + 1,
+                                                                patient: result5[i].patient,
+                                                                location: result5[i].orgname + ', ' + result5[i].orgdetails,
+                                                                date: mysql2JsLocal(result5[i].date),
+                                                                bg: result5[i].bg,
+                                                                quantity: result5[i].quantity,
+                                                                resolved: result5[i].resolved
+                                                            }
 
-                                                    request.push(eachrequest);
-                                                    // console.log(eachrequest);
-                                                    // console.log(request);
-                                                }
+                                                            request.push(eachrequest);
+                                                            // console.log(eachrequest);
+                                                            // console.log(request);
+                                                        }
+                                                        db.countTotalDonation(req.session.email)
+                                                            .then(result6 => {
+                                                                if (result6.length > 0) user.donated = result6[0].total_donation;
+                                                                else user.donated = 0;
 
-                                                res.render('myProfile.ejs', { user, tab, request, navbar: req.session.navbar_info });
+                                                                res.render('myProfile.ejs', { user, tab, request, navbar: req.session.navbar_info });
+                                                            })
+                                                    })
+                                                // console.log(user);
+                                                // res.render('myProfile.ejs', { user, tab });
                                             })
-                                            // console.log(user);
-                                            // res.render('myProfile.ejs', { user, tab });
-                                        })                                        
                                     })
 
                             })
