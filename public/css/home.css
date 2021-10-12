@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Montserrat',sans-serif;
 }
 
 html,
@@ -11,7 +14,7 @@ body {
 }
 
 body {
-  background: #eee;
+  background: #fff;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 14px;
   color: #000;
@@ -53,6 +56,140 @@ body {
   background-size: cover;
 }
 
+.banner{
+    position: relative;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner .content{
+    position: relative;
+    max-width: 750px;
+    text-align: center;
+}
+
+.banner .content h2{
+    font-size: 60px;
+}
+
+.banner .content p{
+    font-size: 18px;
+}
+
+.about{
+    position:relative;
+    width: 100%;
+    display: flex;
+}
+
+.about .contentBx{
+    padding: 100px;
+    width: 50%;
+}
+
+.heading{
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.text{
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+.about .videoBx{
+    width: 50%;
+    padding: 100px 0 100px 0;
+}
+
+.services
+{
+    /* padding: 100px; */
+    text-align: center;
+}
+.services .container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 60px;
+}
+.services .container .serviceBx{
+    position: relative;
+    width: 350px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.services .container .serviceBx .card{
+    font-family: 'Montserrat',sans-serif;
+    max-width: 300px;
+    max-height: 200px;
+    padding: 60px;
+    border: 0.5px solid #999;
+    box-shadow: 0px 0px 25px rgba(179, 179, 179, 0.15);
+    border-radius: 50%;
+    
+}
+
+.services .container .serviceBx .card-elg{
+    font-family: 'Montserrat',sans-serif;
+    background-color: #fff;
+    max-width: 300px;
+    max-height: 200px;
+    padding: 60px;
+    border: 0.5px solid #999;
+    box-shadow: 0px 0px 25px rgba(202, 201, 201, 0.15);
+    padding-left: 90px;
+    padding-right: 90px;
+    border-radius: 50%;
+}
+
+.services .container .serviceBx .card .noOfResponses {
+    color: rgb(201, 25, 25);
+}
+
+.services .container .serviceBx .card-elg .noOfUsers{
+    color: purple;
+}
+
+.services .container .serviceBx .card .noOfRequests{
+    color: royalblue;
+}
+
+.client{
+    padding: 100px;
+    text-align: center;
+}
+
+.client .imgBx{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.client .imgBx img{
+    max-width: 300px;
+    margin: 20px;
+    margin-top: 0;
+}
+
+.steps{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+}
+
 
 
 @media (max-width: 1100px){
@@ -67,5 +204,52 @@ body {
         height: auto;
         /* object-fit: cover; */
         background-size: cover;
+      }
+      .banner{
+          padding:50px;
+      }
+      .banner .content h2{
+          font-size: 36px;
+      }
+      .banner .content p{
+          font-size: 16px;
+      }
+      .about{
+          flex-direction: column;
+      }
+      .about .contentBx
+      {
+          width: 100%;
+          padding: 50px;
+          padding-bottom: 0px;
+          min-height: 400px;
+          text-align: center;
+      }
+    
+      .about .videoBx iframe{
+         width: 195%;
+          /* padding: 50px; */
+          min-height: 300px;
+          text-align: center;
+          margin-left: 2px;
+          margin-right: 1px;
+      }
+      .services{
+          padding: 50px;
+      }
+      .services .container{
+          justify-content: center;
+          margin-top: 20px;
+      }
+      .services .container .serviceBx{
+          
+          width: 300px;
+          height: 250px;
+      }
+      .client{
+          padding: 50px;
+      }
+      .client .imgBx{
+          justify-content: center;
       }
 }
