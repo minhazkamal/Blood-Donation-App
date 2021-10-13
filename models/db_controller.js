@@ -685,7 +685,7 @@ module.exports.resolveRequestById = (request_id) => {
     })
 }
 
-module.exports.getRequestsByOffset = (offset) => {
+module.exports.getRequestsByOffset = (offset, bg, div, dist) => {
     return new Promise((resolve, reject) => {
         db.query(`SELECT * FROM (SELECT 
         r.id as id,
@@ -705,7 +705,7 @@ module.exports.getRequestsByOffset = (offset) => {
         FROM requests r INNER JOIN organizations o ON r.organization_id = o.id 
         INNER JOIN users u ON r.post_by = u.id
         INNER JOIN profile_picture upp ON r.post_by = upp.id
-        WHERE r.resolved='no') as feed_table 
+        WHERE r.resolved='no' AND (r.BG LIKE '${bg}' AND o.division LIKE '${div}' AND o.district LIKE '${dist}')) as feed_table 
         LIMIT 2 OFFSET ${offset}`, (err, res) => {
             err ? reject(err) : resolve(res)
         })

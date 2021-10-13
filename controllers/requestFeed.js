@@ -69,13 +69,17 @@ router.get('/', function (req, res) {
 
 router.get('/list', function (req, res) {
     const offset = req.query.offset;
+    const bg = req.query.bg;
+    const div = req.query.div;
+    const dist = req.query.dist;
+    // console.log(offset, bg, div, dist);
     // req.session.email = 'minhaz.kamal9900@gmail.com';
     if(req.session.email) {
     db.getuserid(req.session.email)
         .then(result => {
             var myId = result[0].id;
             
-            db.getRequestsByOffset(offset)
+            db.getRequestsByOffset(offset, bg, div, dist)
                 .then(result => {
                     // console.log(result);
                     var request = [];

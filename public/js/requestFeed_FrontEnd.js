@@ -1,17 +1,37 @@
-function getPosts(offset) {
-    if(!offset) {
+var scrollLock = false;
+var bg, div, dist;
+
+function getPosts(offset, bg, div, dist) {
+    console.log(offset, bg, div, dist);
+    if(!offset || offset == 'undefined') {
         offset = 0;
     }
 
-    fetch('http://localhost:3940/request-feed/list?' + 'offset=' + offset)
+    if(!bg || bg == 'undefined') {
+        bg = '%';
+    }
+    else bg = encodeURIComponent(bg);
+
+    if(!div || div == 'undefined') {
+        div = '%';
+    }
+
+    if(!dist || dist == 'undefined') {
+        dist = '%';
+    }
+
+    fetch('http://localhost:3940/request-feed/list?' + 'offset=' + offset + '&bg=' + bg + '&div=' + div + '&dist=' + dist)
     .then(response => response.json())
     .then(data => loadPostIntoFeed(data));
 }
+
+getPosts(null, bg, div, dist);
 
 function loadPostIntoFeed(postsArray) {
     // console.log(postsArray);
     let html = "";
     postsArray.forEach(function (post, index) {
+        // console.log(post);
         // html needs to be added
         html+=`<div class="row">`
         html+= `<div class="card-02">`
@@ -45,10 +65,75 @@ function loadPostIntoFeed(postsArray) {
 }
 
 window.onscroll = function () {
-if(this.innerHeight + this.pageYOffset >= document.body.scrollHeight) {
-    let postsLength = document.querySelectorAll('.card-02').length;
-    getPosts(postsLength);
-}
+    if(!scrollLock) {
+        if(this.innerHeight + this.pageYOffset >= document.body.scrollHeight) {
+            let postsLength = document.querySelectorAll('.card-02').length;
+            getPosts(postsLength, bg, div, dist);
+        }
+    }
 }
 
-getPosts();
+function district() {
+    var div_id = $('#basic_division').val();
+    // console.log(div_id);
+
+    $.ajax({
+        type: 'GET',
+        data: { division_id: div_id },
+        url: '/address/districts',
+        async: false,
+        success: function (data) {
+            //console.log(data);
+            $('#basic_district').empty();
+            $('#basic_district').append('<option disabled selected value="">District</option>');
+            $.each(data, function (index, district) {
+                $('#basic_district').append("<option value = '" + district.id + "' >" + district.name + " </option>");
+            });
+        }
+    });
+}
+
+$(function () {
+    $('#basic_division').on("change", district);
+});
+
+function removeFilter() {
+    window.location.reload();
+}
+
+function applyFilter() {
+    popupToggle();
+    bg = document.getElementById('basic_bg').value;
+    div = document.getElementById('basic_division').value;
+    dist = document.getElementById('basic_district').value;
+
+    // if(!offset || offset == 'undefined') {
+    //     offset = 0;
+    // }
+
+    // if(!bg || bg == 'undefined') {
+    //     bg = '%';
+    // }
+    // else bg = encodeURIComponent(bg);
+
+    // if(!div || div == 'undefined') {
+    //     div = '%';
+    // }
+
+    // if(!dist || dist == 'undefined') {
+    //     dist = '%';
+    // }
+
+    document.getElementById('left-side').innerHTML = "";
+    getPosts(null, bg, div, dist);
+    
+    // fetch('http://localhost:3940/request-feed/list?' + 'offset=' + offset + '&bg=' + bg + '&div=' + div + '&dist=' + dist)
+    // .then(response => response.json())
+    // .then(data => {
+    //     // console.log(data);
+    //     loadPostIntoFeed(data)
+    //     scrollLock = true;
+    // });
+    // console.log(bg, div, dist);
+    // window.location.reload();
+}
