@@ -248,6 +248,7 @@
 </head>
 
 <body>
+    <div id="preloader"></div>
     <% if(typeof navbar !='undefined' ) { %>
     <%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo}) %>
     <% } else { %>
@@ -277,6 +278,13 @@
         </div>
 
         <%- include ("./partials/footer.ejs") %>
+        <script>
+            var loader = document.getElementById("preloader");
+
+            window.addEventListener("load", function(){
+                loader.style.display = "none";
+            })
+        </script>
 
 
             <!-- </script>
@@ -691,6 +699,8 @@
 
         //     buildLocationList(stores);
         // });
+
+        
             </script>
             <script src="assets/js/jquery-3.2.1.min.js"></script>
             <script src="assets/js/popper.min.js"></script>

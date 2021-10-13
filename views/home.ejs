@@ -30,6 +30,8 @@
 
 <body>
 
+    <div id="preloader"></div>
+
     <%- include ("./partials/navbar2.ejs") %>
         <!-- Swiper -->
         <div class="swiper mySwiper">
@@ -139,13 +141,13 @@
                         <img src="/img/eligibleDonorHome.png" alt="">
                     </div>
                 </div>
-                <div class="steps" data-aos="fade-up" data-aos-delay="800">
+                <div class="steps" data-aos="fade-up" data-aos-delay="600" data-aos-offset="150">
                     <h4>Step:5 Donate blood</h4>
                     <div class="stepsimg">
                         <img src="/img/donateBloodHome.png" alt="">
                     </div>
                 </div>
-                <div class="steps" data-aos="fade-up" data-aos-delay="1000">
+                <div class="steps" data-aos="fade-up" data-aos-delay="800" data-aos-offset="150">
                     <h4>Step:6 Add your donations</h4>
                     <div class="stepsimg">
                         <img src="/img/addDonationHome.png" alt="">
@@ -206,6 +208,14 @@
                         });
                     }
                 });
+            </script>
+
+            <script>
+                var loader = document.getElementById("preloader");
+
+                window.addEventListener("load", function(){
+                    loader.style.display = "none";
+                })
             </script>
 
             <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
