@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!-- STYLE SHEET for this page -->
     <link rel="stylesheet" type="text/css" href="/css/home.css">
     <!--[if lt IE 9]>
@@ -48,7 +49,7 @@
             <div class="swiper-pagination"></div>
         </div>
 
-        <div class="banner">
+        <div class="banner" data-aos="fade-right">
             <div class="content">
                 <h2>More than a Community</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim dignissimos hic eius corrupti accusamus
@@ -58,7 +59,7 @@
         </div>
 
         <section class="about">
-            <div class="contentBx">
+            <div class="contentBx" data-aos="fade-right">
                 <h2 class="heading">About Us</h2>
                 <p class="text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat quisquam deserunt
                     tempore ab
@@ -68,7 +69,7 @@
                     recusandae,
                     itaque minus atque fugit consectetur repellendus aliquam magnam.</p>
             </div>
-            <div class="videoBx">
+            <div class="videoBx" data-aos="fade-left">
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/p6-hVDcz3zQ"
                     title="YouTube video player" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -77,24 +78,25 @@
         </section>
 
         <section class="services">
-            <h2 class="heading">Our Services</h2>
-            <p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint rem iste reiciendis ratione?
+            <h2 class="heading" data-aos="fade-up">Our Services</h2>
+            <p class="text" data-aos="fade-up">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint rem iste
+                reiciendis ratione?
                 Ex voluptatem cum ad veniam ab repudiandae asperiores sed autem dolores perspiciatis rem, saepe, fugiat
                 et quidem.</p>
             <div class="container">
-                <div class="serviceBx">
+                <div class="serviceBx" data-aos="fade-up-right">
                     <div class="card-elg">
                         <h1 class="noOfUsers" id="elg-score">500</h1>
                         <h4>Users</h4>
                     </div>
                 </div>
-                <div class="serviceBx">
+                <div class="serviceBx" data-aos="fade-up">
                     <div class="card">
                         <h1 class="noOfResponses" id="elg-score">250</h1>
                         <h4>Responses</h4>
                     </div>
                 </div>
-                <div class="serviceBx">
+                <div class="serviceBx" data-aos="fade-up-left">
                     <div class="card">
                         <h1 class="noOfRequests" id="elg-score">1005</h1>
                         <h4>Requests</h4>
@@ -105,124 +107,125 @@
         </section>
 
         <section class="client">
-            <h2 class="heading">Our Client</h2>
-            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, consectetur. Quod omnis
+            <h2 class="heading" data-aos="fade-up">Our Client</h2>
+            <p class="text" data-aos="fade-up">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
+                consectetur. Quod omnis
                 laboriosam quae vel iusto at commodi cumque, nihil voluptatem officiis maxime, ipsa quibusdam
                 accusantium obcaecati molestiae velit. Quam! Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Nobis eum maxime voluptates hic facilis aut consectetur magni! Vel a debitis quod, qui optio laborum
                 explicabo ea iusto quae doloremque culpa.</p>
             <div class="imgBx">
-                <div class="steps">
+                <div class="steps" data-aos="fade-up">
                     <h4>Step:1 Create Account</h4>
                     <div class="stepsimg">
                         <img src="/img/signupHome.png" alt="">
                     </div>
-                    
                 </div>
-                <div class="steps">
+                <div class="steps" data-aos="fade-up" data-aos-delay="200">
                     <h4>Step:2 Build your Profile</h4>
                     <div class="stepsimg">
                         <img src="/img/updateprofileHome.png" alt="">
                     </div>
-                    
                 </div>
-                <div class="steps">
+                <div class="steps" data-aos="fade-up" data-aos-delay="400">
                     <h4>Step:3 Take the test</h4>
                     <div class="stepsimg">
                         <img src="/img/eligibilityHome.png" alt="">
                     </div>
-                    
                 </div>
-                <div class="steps">
+                <div class="steps" data-aos="fade-up" data-aos-delay="600">
                     <h4>Step:4 Become an eligible donor</h4>
                     <div class="stepsimg">
                         <img src="/img/eligibleDonorHome.png" alt="">
                     </div>
-                    
                 </div>
-                <div class="steps">
+                <div class="steps" data-aos="fade-up" data-aos-delay="800">
                     <h4>Step:5 Donate blood</h4>
                     <div class="stepsimg">
                         <img src="/img/donateBloodHome.png" alt="">
                     </div>
-                    
                 </div>
-                <div class="steps">
+                <div class="steps" data-aos="fade-up" data-aos-delay="1000">
                     <h4>Step:6 Add your donations</h4>
                     <div class="stepsimg">
                         <img src="/img/addDonationHome.png" alt="">
                     </div>
-                    
-                    
                 </div>
             </div>
         </section>
         <%- include ("./partials/footer.ejs") %>
-        <!-- Swiper JS -->
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+            <!-- Swiper JS -->
+            <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-        <!-- Initialize Swiper -->
-        <script>
-            var swiper = new Swiper(".mySwiper", {
-                spaceBetween: 30,
-                centeredSlides: true,
-                speed: 2000,
-                autoplay: {
+            <!-- Initialize Swiper -->
+            <script>
+                var swiper = new Swiper(".mySwiper", {
+                    spaceBetween: 30,
+                    centeredSlides: true,
+                    speed: 2000,
+                    autoplay: {
 
-                    delay: 5000,
-                    disableOnInteraction: false,
-                },
-                pagination: {
-                    el: ".swiper-pagination",
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    },
+                    pagination: {
+                        el: ".swiper-pagination",
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev",
 
-                },
-            });
-        </script>
+                    },
+                });
+            </script>
 
 
-        <script>
-            $(document).ready(function () {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function (position) {
-                        console.log(position);
-                        var latitude = position.coords.latitude;
-                        var longitude = position.coords.longitude;
-                        $.ajax({
-                            type: 'GET',
-                            data: { latitude, longitude },
-                            url: '/mapbox',
-                            success: function (data) {
-                                console.log(data);
-                                // $('#basic_district').empty();
-                                // $('#basic_district').append("<option disabled selected>District</option>");
-                                // $.each(data, function (index, district) {
-                                // 	$('#basic_district').append("<option value = '" + district.id + "' >" + district.name + " </option>");
-                                // });
-                            }
+            <script>
+                $(document).ready(function () {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function (position) {
+                            console.log(position);
+                            var latitude = position.coords.latitude;
+                            var longitude = position.coords.longitude;
+                            $.ajax({
+                                type: 'GET',
+                                data: { latitude, longitude },
+                                url: '/mapbox',
+                                success: function (data) {
+                                    console.log(data);
+                                    // $('#basic_district').empty();
+                                    // $('#basic_district').append("<option disabled selected>District</option>");
+                                    // $.each(data, function (index, district) {
+                                    // 	$('#basic_district').append("<option value = '" + district.id + "' >" + district.name + " </option>");
+                                    // });
+                                }
+                            });
+
+
                         });
+                    }
+                });
+            </script>
 
-
-                    });
-                }
-            });
-        </script>
-
-
-        <script src="assets/js/jquery-3.2.1.min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-            crossorigin="anonymous"></script>
+            <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+            <script>
+                AOS.init({
+                    offset: 300,
+                    duration: 1000
+                });
+            </script>
+            <script src="assets/js/jquery-3.2.1.min.js"></script>
+            <script src="assets/js/popper.min.js"></script>
+            <script src="assets/js/bootstrap.min.js"></script>
+            <script src="assets/js/skrollr.js"></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+                crossorigin="anonymous"></script>
 </body>
 
 </html>

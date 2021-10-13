@@ -4,12 +4,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    position: relative;
     font-family: 'Montserrat',sans-serif;
 }
 
 html,
 body {
-  position: relative;
+  /* position: relative; */
   height: 100%;
 }
 
@@ -209,6 +210,7 @@ body {
         background-size: cover;
       }
       .banner{
+          margin-top: 50px;
           padding:50px;
       }
       .banner .content h2{
