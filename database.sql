@@ -134,7 +134,7 @@ CREATE TABLE `donation` (
   `donation_date` date NOT NULL,
   `org_id` int NOT NULL,
   PRIMARY KEY (`id`,`donor_id`,`donation_date`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +143,7 @@ CREATE TABLE `donation` (
 
 LOCK TABLES `donation` WRITE;
 /*!40000 ALTER TABLE `donation` DISABLE KEYS */;
-INSERT INTO `donation` VALUES (1,6,'Taiyaba Tabassum','01711824143','Ashrafee Jahan','','2018-11-30',10),(2,6,'Ashrafee Jahan','01712041041','Sikder Rashed Kamal','','2021-03-12',9),(3,6,'Sikder Rashed Kamal','01867057600','MINHAZ KAMAL','','2021-07-09',26),(4,6,'Sikder Rashed Kamal','01867057600','MINHAZ KAMAL','dengue','2021-10-12',20);
+INSERT INTO `donation` VALUES (1,6,'Taiyaba Tabassum','01521503910','Ashrafee Jahan','','2018-11-30',4),(2,6,'Ashrafee Jahan','01712041041','Sikder Rashed Kamal','','2021-03-12',9),(3,6,'Sikder Rashed Kamal','01867057600','MINHAZ KAMAL','','2021-07-09',26),(4,6,'Sikder Rashed Kamal','01867057600','MINHAZ KAMAL','dengue','2021-10-12',20),(7,24,'Minhaz Kamal','01867057600','Abdullah','Accident','2021-10-11',10);
 /*!40000 ALTER TABLE `donation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -301,8 +301,38 @@ CREATE TABLE `requests` (
 
 LOCK TABLES `requests` WRITE;
 /*!40000 ALTER TABLE `requests` DISABLE KEYS */;
-INSERT INTO `requests` VALUES (2,6,'Minhaz','Minhaz Kamal','01867057600','2021-08-30','O+','Accident',' ',2,1,'','2021-09-28 15:04:50','no'),(4,6,'Minhaz Kamal','Abdullah','01867057600','2021-10-11','O+','Accident','',2,10,'','2021-10-10 10:29:28','no'),(6,6,'Minhaz Kamal','Kinjol','01521503910','2021-09-30','O+','Accident','Not Vaccinated',2,1,'','2021-09-28 15:04:50','no'),(10,6,'Sikder Rashed Kamal','Minhaz Kamal','01867057600','2021-10-09','B+','Dengue Fever','Not Vaccinated within 28 days',3,2,'','2021-10-07 11:57:30','no');
+INSERT INTO `requests` VALUES (2,6,'Minhaz','Minhaz Kamal','01867057600','2021-08-30','O+','Accident',' ',2,6,'','2021-09-28 15:04:50','no'),(4,6,'Minhaz Kamal','Abdullah','01867057600','2021-10-11','O+','Accident','',2,10,'','2021-10-10 10:29:28','no'),(6,6,'Minhaz Kamal','Kinjol','01521503910','2021-09-30','O+','Accident','Not Vaccinated',2,1,'','2021-09-28 15:04:50','no'),(10,6,'Sikder Rashed Kamal','Minhaz Kamal','01867057600','2021-10-09','B+','Dengue Fever','Not Vaccinated within 28 days',3,8,'','2021-10-07 11:57:30','no');
 /*!40000 ALTER TABLE `requests` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `respond_to_request`
+--
+
+DROP TABLE IF EXISTS `respond_to_request`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `respond_to_request` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `responder_id` int DEFAULT NULL,
+  `request_id` int DEFAULT NULL,
+  `resolved` enum('yes','no') DEFAULT 'no',
+  PRIMARY KEY (`id`),
+  KEY `request_id_fk_idx` (`request_id`),
+  KEY `responder_id_fk_idx` (`responder_id`),
+  CONSTRAINT `request_id_fk` FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`),
+  CONSTRAINT `responder_id_fk` FOREIGN KEY (`responder_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `respond_to_request`
+--
+
+LOCK TABLES `respond_to_request` WRITE;
+/*!40000 ALTER TABLE `respond_to_request` DISABLE KEYS */;
+INSERT INTO `respond_to_request` VALUES (3,24,2,'no'),(4,24,4,'yes'),(5,24,10,'no');
+/*!40000 ALTER TABLE `respond_to_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -438,4 +468,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-12 22:55:49
+-- Dump completed on 2021-10-13 16:58:55
