@@ -100,9 +100,10 @@ body {
 }
 
 .text{
-    font-size: 16px;
+    font-size: 1.3rem;
     font-weight: 300;
     letter-spacing: 1px;
+    color: rgb(49, 49, 49);
 }
 .about .videoBx{
     width: 50%;
@@ -113,6 +114,8 @@ body {
 {
     /* padding: 100px; */
     text-align: center;
+    width: 80%;
+    margin: 0 auto;
 }
 .services .container{
     width: 100%;
