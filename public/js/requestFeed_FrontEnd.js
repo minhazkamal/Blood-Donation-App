@@ -75,6 +75,7 @@ window.onscroll = function () {
 
 function district() {
     var div_id = $('#basic_division').val();
+    if(div_id == 'undefined') return;
     // console.log(div_id);
 
     $.ajax({
