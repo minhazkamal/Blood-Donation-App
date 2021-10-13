@@ -64,7 +64,7 @@ form input[type="text"] {
     display: block;
     position: relative;
     padding: 30px;
-    margin-top: 90px;
+    margin-top: 70px;
     /* margin-bottom: 50px; */
     padding-bottom: 100px;
     /* height of your footer */
@@ -81,7 +81,7 @@ form input[type="text"] {
     height: 100vh;
     width: 100%;
     position: fixed;
-    z-index:999;
+    z-index:1000;
     background: #fff url(/img/preloader.gif) no-repeat center center;
     background-size: 30%;
 }
