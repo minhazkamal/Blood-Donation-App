@@ -408,8 +408,8 @@ form input[type="text"]::selection {
 
 /* input:focus { 
     outline: none !important;
-    border-color: var(--primary-pink);
-    box-shadow: 0 0 10px var(--primary-pink);
+    border-color:var var(--primary-pink);
+    box-shadow: 0 0 10px (--primary-pink);
 } */
 /* textarea:focus { 
     outline: none !important;
@@ -425,3 +425,5 @@ a.tag_disabled {
     pointer-events: none;
     cursor: default;
   }
+
+ 

@@ -424,3 +424,8 @@ a.tag_disabled {
     /* font-size: 1rem; */
 }
 
+
+label{
+    color: var(--primary-pink);
+    font-weight: bold;
+}
