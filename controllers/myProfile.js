@@ -81,6 +81,7 @@ router.get('/', function (req, res) {
         db.getUserAllInfo(req.session.email)
             .then(result => {
                 let myId = result[0].id;
+                let myBG = result[0].BG;
                 user.fullname = result[0].first_name + ' ' + result[0].last_name;
                 user.contact = '+88 ' + result[0].contact;
                 user.email = req.session.email;
@@ -172,7 +173,8 @@ router.get('/', function (req, res) {
                                                                                         patient: result8[i].patient,
                                                                                         location: result8[i].orgname + ', ' + result8[i].orgdetails,
                                                                                         patient_bg: result8[i].bg,
-                                                                                        user_bg: result8[i].user_bg
+                                                                                        requester_bg: result8[i].user_bg,
+                                                                                        user_bg: myBG
                                                                                     }
 
                                                                                     response.push(eachresponse);
