@@ -55,7 +55,8 @@
                                             <%= user.bg %>
                                                 <!-- AB+ -->
                                         </p>
-                                        <p class="text-muted text-alert font-size-sm" style="letter-spacing: 1px;">Profession</p>
+                                        <p class="text-muted text-alert font-size-sm" style="letter-spacing: 1px;">
+                                            <%= user.profession %></p>
                                         <!-- <button class="btn btn-primary">Follow</button>
                                     <button class="btn btn-outline-primary">Message</button> -->
                                     </div>
@@ -121,15 +122,19 @@
                     <div class="col-md-8">
 
                         <div class="row gutters-sm">
+
                             <div class="col-sm-4 mb-3">
-                                <div class="card h-100">
-                                    <div class="card-body">
-                                        <h4>Eligibility Score</h4>
-                                        <h1 class="eligibility-score" id="elg-score">0</h1>
-                                        <h6 class="text">out of 10</h6>
+                                <a href="/view/eligibility-report/<%= user.id %>" style="color: #1a202c; text-decoration: none;">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h4>Eligibility Score</h4>
+                                            <h1 class="eligibility-score" id="elg-score">0</h1>
+                                            <h6 class="text">out of 10</h6>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
+
                             <div class="col-sm-4 mb-3">
                                 <div class="card h-100">
                                     <div class="card-body">
@@ -234,7 +239,7 @@
                                             </div>
                                         </div>
                                         <hr>
-                                       
+
                                         <!-- <div class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Average Score</h6>

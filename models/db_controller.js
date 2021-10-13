@@ -612,6 +612,14 @@ module.exports.getEligibilityReport = (email) => {
     })
 }
 
+module.exports.getEligibilityReportById = (id) => {
+    return new Promise((resolve, reject) => {
+        db.query("SELECT * FROM eligibility_report WHERE id = ?", [id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
 module.exports.getDOB = (email) => {
     return new Promise((resolve, reject) => {
         db.query("SELECT dob FROM user_profile WHERE id = (SELECT id FROM users WHERE email = ?)", [email], (err, res) => {

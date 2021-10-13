@@ -85,6 +85,7 @@ router.get('/:encrypted_id/', function (req, res) {
     if (req.session.email) {
         db.getuserinfobyid(id)
             .then(result => {
+                user.id = encrypted_id;
                 user.fullname = result[0].first_name + ' ' + result[0].last_name;
                 user.contact = '+88 ' + result[0].contact;
                 user.email = result[0].email;
