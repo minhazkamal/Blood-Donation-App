@@ -116,8 +116,8 @@ router.get('/:encrypted_id', function (req, res) {
                                 // console.log(req.session.email);
                                 if (result2[0].email == req.session.email) {
                                     if (user.resolved == 'no') user.is_updateable = 'yes';
-                                    user.post_by = result2[0].first_name + ' ' + result2[0].last_name;
                                 }
+                                user.post_by = result2[0].first_name + ' ' + result2[0].last_name;
                                 res.render('viewRequest.ejs', { user, divisions: div_result, navbar: req.session.navbar_info });
                             })
                     })
