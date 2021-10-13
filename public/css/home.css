@@ -130,14 +130,26 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+
+
 .services .container .serviceBx .card{
     font-family: 'Montserrat',sans-serif;
     max-width: 300px;
     max-height: 200px;
     padding: 60px;
-    border: 0.5px solid #999;
+    border: none;
+    border-bottom: 2px solid #999;
     box-shadow: 0px 0px 25px rgba(179, 179, 179, 0.15);
-    border-radius: 5%;
+    border-radius: 0%;
+    transition: .4s;
+    
+}
+
+.services .container .serviceBx .card:hover{
+    border-bottom: 3.5px solid rgb(114, 110, 110);   
+    transform: scale(1.05);
+    box-shadow: 0px 0px 25px rgba(243, 82, 82, 0.3);
     
 }
 
@@ -147,13 +159,20 @@ body {
     max-width: 300px;
     max-height: 200px;
     padding: 60px;
-    border: 0.5px solid #999;
+    border: none;
+    border-bottom: 2px solid #999;
     box-shadow: 0px 0px 25px rgba(202, 201, 201, 0.15);
     padding-left: 90px;
     padding-right: 90px;
-    border-radius: 5%;
+    border-radius: 0%;
+    transition: .4s;
 }
 
+.services .container .serviceBx .card-elg:hover{
+    border-bottom: 3.5px solid rgb(114, 110, 110);   
+    transform: scale(1.05);
+    box-shadow: 0px 0px 25px rgba(243, 82, 82, 0.3);
+}
 .services .container .serviceBx .card .noOfResponses {
     color: rgb(201, 25, 25);
 }
