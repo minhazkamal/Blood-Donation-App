@@ -5,11 +5,11 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="shortcut icon" type="image/x-icon" href="img/Logo-01.png">
-	<title>Add Donation - G L E A M</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="shortcut icon" type="image/x-icon" href="/img/Logo-01.png">
+	<title>View Donation - G L E A M</title>
+	<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -28,6 +28,7 @@
 		<div class="container">
 			<div id="manual-response">
 				<form method="Post">
+                    <fieldset id="form-fields">
 					<div class="row gutters" style="padding-bottom: 5rem;">
 						<div class="col-12">
 							<section style="margin-top:2rem;">
@@ -63,19 +64,11 @@
 								<% if(typeof user !='undefined' ) { %>
 									<input id="user_type" type="text" value="<%= user.type %>">
 									<input id="user_pt_name" type="text" value="<%= user.pt_name %>">
-									<input id="user_pt_cp" type="text" value="<%= user.pt_cp %>">
+									<input id="user_pt_cp" type="text" value="<%= user.pt_contact_person %>">
 									<input id="user_pt_contact" type="text" value="<%= user.pt_contact %>">
-									<input id="user_org_division" type="text" value="<%= user.division %>">
-									<input id="user_org_district" type="text" value="<%= user.district %>">
-									<input id="user_org_upazilla" type="text" value="<%= user.upazilla %>">
-									<input id="user_org_name" type="text" value="<%= user.house %>">
-									<input id="user_org_street" type="text" value="<%= user.street %>">
-									<input id="user_complications" type="text" value="<%= user.complication %>">
-									<input id="user_org" type="text" value="<%= user.org %>">
-									<input id="user_self_check" type="text" value="<%= user.self_check %>">
-									<input id="user_current_location" type="text" value="<%= user.org_location %>">
-									<input id="user_lat" type="text" value="<%= user.lat %>">
-									<input id="user_lon" type="text" value="<%= user.lon %>">
+									<input id="user_complications" type="text" value="<%= user.pt_complication %>">
+									<input id="user_org" type="text" value="<%= user.org_id %>">
+                                    <input id="user_donation_date" type="text" value="<%= user.donation_date %>">
 									<% } %>
 							</div>
 
@@ -122,8 +115,8 @@
 										<div class="col-md-12 mb-4" style="margin-bottom: 0.25 !important; ">
 											<div class="input-container lname">
 												<input id="approx_donation" name="donation" type="date"
-													style="margin-bottom: 0;" min="<%= minDate %>" max="<%= maxDate %>"
-													required>
+													style="margin-bottom: 0;"
+													required disabled>
 											</div>
 										</div>
 
@@ -229,14 +222,25 @@
 							</div>
 						</div>
 					</div>
+                </fieldset>
 					<div class="row gutters">
 						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-							<div class="text-center">
-								<button type="reset" class="btn1" style>Clear</button>
-								<button type="submit" class="btn2" style>Submit</button>
+                            <div class="text-center" id="is-updateable">
+                                <% if(user.is_update_attempted == 'no') { %>
+                                    <!-- <a href="/request/update/<%= user.encrypted_requestId %>"><span class="btn1">Update</span></a> -->
+                                    <button class="btn1" onclick="Update()" type="button" id="update-button">Update</button>
+                                    <!-- <button type="submit" style="display: none;" id="save-button"><span class="btn2">Save</span></a> -->
+                                <% } else { %>
+                                    <button type="submit" id="save-button" class="btn2">Save</button>
+                                <% } %>	
+                                
+                            </div>
+							<div class="text-center" id="update-attempted" style="display: none;">
+								<button type="submit" class="btn2" style>Save</button>
 							</div>
 						</div>
 					</div>
+                
 				</form>
 			</div>
 		</div>
@@ -283,8 +287,7 @@
 						$("#longitude").val($("#user_lon").val());
 						$("#latitude").val($("#user_lat").val());
 
-						$('#org_drop_down').val($("#user_org").val()).trigger('change');
-						//$('#org_drop_down').select2('val', $("#user_org").val());
+						$('#org_drop_down').select2('val', $("#user_org").val());
 						if ($("#user_org").val() == '0') {
 							$(".org-details").show();
 
@@ -301,7 +304,38 @@
 						}
 
 					}
-					selfRequest();
+
+                    if ($("#user_type").val() === 'view') {
+
+						$("#pt_name").val($("#user_pt_name").val());
+						$("#cp_name").val($("#user_pt_cp").val());
+						$("#contact").val($("#user_pt_contact").val());
+						$("#complication").val($("#user_complications").val());
+                        $("#approx_donation").val($("#user_donation_date").val());
+                        //console.log($("#user_org").val());
+
+                        $('#org_drop_down').val($("#user_org").val()).trigger('change');
+						//$('#org_drop_down').select2('val', $("#user_org").val());
+                        //console.log($('#org_drop_down').val());
+                        toggleOrgAddress();
+						if ($("#user_org").val() == '0') {
+							$(".org-details").show();
+
+							if ($("#user_current_location").val() == 'yes') $("#current-location").attr('checked', true);
+							else $("#current-location").attr('checked', false);
+
+							$('#basic_division').val($('#user_org_division').val());
+							district();
+							$('#basic_district').val($('#user_org_district').val());
+							upazilla();
+							$('#basic_upazilla').val($('#user_org_upazilla').val());
+							$("#org-name").attr('disabled', false);
+							$("#street").attr('disabled', false);
+						}
+
+                        $('#form-fields').prop('disabled', true);
+                        $('#org_drop_down').prop("disabled", true);
+					}
 
 				});
 
@@ -369,6 +403,14 @@
 					});
 				}
 
+                function Update() {
+					$("#is-updateable").hide();
+					$("#update-attempted").show();
+					document.getElementById('form-fields').disabled = false;
+					$('#org_drop_down').prop("disabled", false);
+					$('#approx_date').attr('disabled', true);
+				}
+
 				function addOrgtoDropDown(data) {
 					$('#org_drop_down').empty();
 					$('#org_drop_down').append('<option disabled selected value="">Select an organization</option>');
@@ -390,6 +432,8 @@
 						document.getElementById("org-name").required = true;
 						document.getElementById("org-name").disabled = false;
 						document.getElementById("street").disabled = false;
+                        document.getElementById('org-name').value = '';
+                        document.getElementById('street').value = '';
 					}
 					else {
 						$(".org-details").hide();
@@ -419,17 +463,6 @@
 					}
 				}
 
-				function selfRequest() {
-					var checkBox = document.getElementById('self-request');
-					if (checkBox.checked == true) {
-						$("#response-table").show();
-						$("#manual-response").hide();
-					}
-					else {
-						$("#response-table").hide();
-						$("#manual-response").show();
-					}
-				}
 
 				function fetchAddress() {
 					var checkBox = document.getElementById('current-location');
@@ -506,10 +539,10 @@
 			<!-- <link rel="stylesheet" type="text/css" href="css/bvselect.css"> -->
 			<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
-			<link rel="stylesheet" type="text/css" href="css/newRequest.css">
-			<script src="assets/js/jquery-3.2.1.min.js"></script>
-			<script src="assets/js/popper.min.js"></script>
-			<script src="assets/js/bootstrap.min.js"></script>
+			<link rel="stylesheet" type="text/css" href="/css/newRequest.css">
+			<script src="/assets/js/jquery-3.2.1.min.js"></script>
+			<script src="/assets/js/popper.min.js"></script>
+			<script src="/assets/js/bootstrap.min.js"></script>
 			<!-- <script src="js/bvselect.js"></script> -->
 			<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 				integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

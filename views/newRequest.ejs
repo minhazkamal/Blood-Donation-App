@@ -333,7 +333,8 @@
 						$("#longitude").val($("#user_lon").val());
 						$("#latitude").val($("#user_lat").val());
 
-						$('#org_drop_down').select2('val', $("#user_org").val());
+						$('#org_drop_down').val($("#user_org").val()).trigger('change');
+						//$('#org_drop_down').select2('val', $("#user_org").val());
 						if ($("#user_org").val() == '0') {
 							$(".org-details").show();
 

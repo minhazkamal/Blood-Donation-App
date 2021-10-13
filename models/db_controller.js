@@ -669,6 +669,14 @@ module.exports.getAllFromRequests = (request_id) => {
     })
 }
 
+module.exports.getAllFromDonation = (donation_id) => {
+    return new Promise((resolve, reject) => {
+        db.query("SELECT * FROM donation WHERE id = ?", [donation_id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
 module.exports.resolveRequestById = (request_id) => {
     return new Promise((resolve, reject) => {
         db.query("UPDATE requests SET resolved='yes' WHERE id = ?", [request_id], (err, res) => {
@@ -755,6 +763,16 @@ module.exports.getDonationByDonor = (email) => {
         d.donation_date as date,
         d.id as donation_id
         FROM donation d INNER JOIN organizations o ON d.org_id = o.id WHERE d.donor_id = (SELECT id FROM users WHERE email = ?) ORDER BY date DESC`, [email], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.updateDonation = (donation, id) => {
+    // console.log(donation);
+    return new Promise((resolve, reject) => {
+        db.query("UPDATE `donation` SET `pt_name`=?, `pt_contact`=?, `pt_contact_person`=?, `pt_complication`=?, `org_id`=? WHERE id = ?", 
+                                        [donation.pt_name, donation.pt_contact, donation.pt_contact_person, donation.complication, donation.org, id], (err, res) => {
             err ? reject(err) : resolve(res)
         })
     })

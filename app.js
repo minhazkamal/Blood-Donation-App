@@ -52,6 +52,7 @@ var viewProfile = require('./controllers/viewProfile');
 var signout = require('./controllers/signout');
 var newDonation = require('./controllers/newDonation');
 var eligibilityReport = require('./controllers/eligibilityReport');
+var viewDonation = require('./controllers/viewDonation');
 
 
 // view engine
@@ -113,6 +114,7 @@ app.use('/view-profile', viewProfile);
 app.use('/signout', signout);
 app.use('/add-new-donation', newDonation);
 app.use('/view/eligibility-report', eligibilityReport);
+app.use('/view/donation', viewDonation);
 
 //localhost:3940/new-request
 // app.get('/new-request', function(req,res){
