@@ -22,7 +22,7 @@
 </head>
 
 <body>
-
+    <div id="preloader"></div>
     <div class="container py-5">
 
         <!-- For demo purpose -->
@@ -97,6 +97,14 @@
         
         <button class="signup-btn" type="submit">Submit</button>
     </form>
+
+    <script>
+        var loader = document.getElementById("preloader");
+
+        window.addEventListener("load", function(){
+            loader.style.display = "none";
+        })
+    </script>
 
     <script>
     /*  ==========================================

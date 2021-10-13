@@ -9,7 +9,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 </head>
 <body>
-
+    <div id="preloader"></div>
     <h1>Organization Input</h1>
     <form action="#" method="POST">
         
@@ -65,6 +65,14 @@
         <input type="text" name="latitude" id=""> <br><hr>
         <button type="submit">Submit</button>
     </form>
+
+    <script>
+        var loader = document.getElementById("preloader");
+
+        window.addEventListener("load", function(){
+            loader.style.display = "none";
+        })
+    </script>
 
     <script>
         function district(){

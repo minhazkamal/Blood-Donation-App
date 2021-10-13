@@ -3,6 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
 
 <header>
+  <div id="preloader"></div>
     <a href="#" class="logo">GLEAM</a>
     <div class="navigation">
       <ul class="menu">
@@ -104,3 +105,11 @@
       header.classList.toggle('scrolled', window.scrollY > 0);
     })
   </script>
+
+<script>
+  var loader = document.getElementById("preloader");
+
+  window.addEventListener("load", function () {
+      loader.style.display = "none";
+  })
+</script>

@@ -21,7 +21,7 @@
 </head>
 
 <body>
-
+    <div id="preloader"></div>
     <div class="split-screen">
         <div class="left">
             <section class="copy">
@@ -131,6 +131,14 @@
 
 
     </div>
+
+    <script>
+        var loader = document.getElementById("preloader");
+
+        window.addEventListener("load", function(){
+            loader.style.display = "none";
+        })
+    </script>
 
     <script>
         function toggleEyeButtonForPassword() {

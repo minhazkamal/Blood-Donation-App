@@ -9,6 +9,7 @@
     </style>
 </head>
 <body>
+    <div id="preloader"></div>
 <div class="container">
 
     <div class="page-header text-center">
@@ -35,5 +36,12 @@
     </div>
 
 </div>
+<script>
+    var loader = document.getElementById("preloader");
+
+    window.addEventListener("load", function(){
+        loader.style.display = "none";
+    })
+</script>
 </body>
 </html>

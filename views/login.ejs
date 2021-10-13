@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="/css/login.css" >
 </head>
 <body>
+    <div id="preloader"></div>
     <div class="split-screen">
         <div class="left">
             <form method="POST">
@@ -91,6 +92,14 @@
         
 
     </div>
+    <script>
+        var loader = document.getElementById("preloader");
+
+        window.addEventListener("load", function(){
+            loader.style.display = "none";
+        })
+    </script>
+    
     <script>
         function toggleEyeButtonForPassword(){
             var input = document.getElementById("password");

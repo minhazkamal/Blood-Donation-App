@@ -22,7 +22,7 @@
 
 <body>
 
-
+	<div id="preloader"></div>
 	<%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo}) %>
 
 		<div class="upper-container">
@@ -163,6 +163,14 @@
 				</div>
 			</div>
 		</div>
+		
+		<script>
+            var loader = document.getElementById("preloader");
+
+            window.addEventListener("load", function(){
+                loader.style.display = "none";
+            })
+        </script>
 
 		<script>
 			const callButton = document.querySelector('.popup-button');
@@ -184,10 +192,7 @@
 			popup.addEventListener('click', closeOnBlack);
 		</script>
 
-		<script>
-			
-		</script>
-
+	
 
 		<script src="js/requestFeed_FrontEnd.js"></script>
 		<script src="assets/js/jquery-3.2.1.min.js"></script>

@@ -3364,6 +3364,15 @@
 	bottom: 0px;
 }
 
+#preloader{
+	height: 100vh;
+	width: 100%;
+	position: fixed;
+	z-index: 1000;
+	background: #fff url(/img/preloader.gif) no-repeat center center;
+	background-size: 15%;
+  }
+
 
 
 

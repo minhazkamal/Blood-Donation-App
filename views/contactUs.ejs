@@ -26,7 +26,7 @@
 </head>
 <body>
 
-
+	<div id="preloader"></div>
 	<div class="container-contact100">
 
 		<div class="wrap-contact100">
@@ -71,6 +71,13 @@
 
 
 	<div id="dropDownSelect1"></div>
+	<script>
+		var loader = document.getElementById("preloader");
+
+		window.addEventListener("load", function(){
+			loader.style.display = "none";
+		})
+	</script>
 
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>

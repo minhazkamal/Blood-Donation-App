@@ -18,6 +18,7 @@
 </head>
 
 <body>
+    <div id="preloader"></div>
     <div class="main-wrapper  account-wrapper">
         <div class="account-page">
             <div class="account-center">
@@ -37,6 +38,14 @@
             </div>
         </div>
     </div>
+    <script>
+        var loader = document.getElementById("preloader");
+
+        window.addEventListener("load", function(){
+            loader.style.display = "none";
+        })
+    </script>
+    
     <script type="text/javascript">
         function countdown() {
         var i = document.getElementById('counter');

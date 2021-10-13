@@ -31,6 +31,7 @@
 </head>
 
 <body>
+    <div id="preloader"></div>
     <%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo}) %>
         <div class="container">
             <div class="main-body">
@@ -545,6 +546,14 @@
             </div>
         </div>
         <%- include ("./partials/footer.ejs") %>
+        <script>
+            var loader = document.getElementById("preloader");
+
+            window.addEventListener("load", function(){
+                loader.style.display = "none";
+            })
+        </script>
+        
             <script>
                 function openContent(evt, tabName) {
                     var i, tabcontent, tablinks;

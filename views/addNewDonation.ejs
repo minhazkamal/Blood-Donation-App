@@ -24,6 +24,7 @@
 </head>
 
 <body>
+	<div id="preloader"></div>
 	<%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo}) %>
 		<div class="container">
 			<div id="manual-response">
@@ -245,6 +246,13 @@
 		</div>
 
 		<%- include ("./partials/footer.ejs") %>
+		<script>
+            var loader = document.getElementById("preloader");
+
+            window.addEventListener("load", function(){
+                loader.style.display = "none";
+            })
+        </script>
 
 			<script>
 				$(document).ready(function () {
