@@ -510,7 +510,7 @@
                                                     <td><%= res.location %></td>
                                                     <td><a href="/request/view/<%= res.request_id %>">View</a></td>
                                                     <% if(res.patient_bg == res.user_bg ) { %>
-                                                        <td><a href="/request/add_to_donation/<%= res.request_id %>">Add</a></td>
+                                                        <td><a href="/add-new-donation?eri=<%= res.request_id %>">Add</a></td>
                                                         <% } else { %>
                                                             <td><a href="/request/add_to_donation/<%= res.request_id %>"
                                                                 class="tag_disabled">You can't add</a></td>

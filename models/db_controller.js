@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 var util = require('util');
 var bcrypt = require('bcrypt-nodejs');
+const { request } = require('express');
 
 // con == db
 var db = mysql.createConnection({
@@ -809,7 +810,17 @@ module.exports.getRequestByResponder = (responder_id) => {
         r.quantity as quantity,
         r.resolved as resolved
         FROM requests r INNER JOIN organizations o ON r.organization_id = o.id
-        INNER JOIN user_profile up ON r.post_by = up.id WHERE r.id IN (SELECT request_id FROM respond_to_request WHERE responder_id = ?) ORDER BY date DESC`, [responder_id], (err, res) => {
+        INNER JOIN user_profile up ON r.post_by = up.id WHERE r.id IN (SELECT request_id FROM respond_to_request WHERE responder_id = ? AND resolved='no') ORDER BY date DESC`, [responder_id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.updateResolveOfRespondToRequest = (request_id, responder_email) => {
+    // console.log(donation);
+    return new Promise((resolve, reject) => {
+        db.query("UPDATE `respond_to_request` SET `resolved`='yes' WHERE request_id = ? AND responder_id=(SELECT id FROM users WHERE email=?)", 
+                                        [request_id, responder_email], (err, res) => {
             err ? reject(err) : resolve(res)
         })
     })

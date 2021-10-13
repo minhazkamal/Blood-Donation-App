@@ -65,9 +65,33 @@ router.get('/', function (req, res) {
                         .then(result => {
                             const minDate = minDateCalculation(result[0].dob);
                             const maxDate = maxDateCalculation(new Date());
+                            let myId = result[0].id;
                             db.getRequestById(req_id)
                                 .then(result => {
-                                    console.log(result);
+                                    // console.log(result);
+                                    let user = {
+                                        type: 'error',
+                                        donor_id: myId,
+                                        pt_name: result[0].patient,
+                                        pt_cp: result[0].contact_person,
+                                        pt_contact: result[0].contact,
+                                        division: '',
+                                        district: '',
+                                        upazilla: '',
+                                        house: '',
+                                        street: '',
+                                        complication: result[0].complication,
+                                        org: result[0].organization_id,
+                                        self_check: '',
+                                        org_location: '',
+                                        lat: '',
+                                        lon: '',
+                                    }
+                                    req.session.temp_user = user;
+                                    req.session.temp_user.minDate = minDate;
+                                    req.session.temp_user.maxDate = maxDate;
+                                    req.session.div_results = div_result;
+                                    res.render('addNewDonation.ejs', { navbar: req.session.navbar_info, divisions: div_result, minDate, maxDate, user });
                                 })
                         })
                 })
@@ -128,6 +152,8 @@ router.post('/', [
             });
     })],
     function (req, res) {
+        var encrypted_req_id = req.query.eri;
+        var request_id = cryptr.decrypt(encrypted_req_id);
         let errors = validationResult(req)
 
         req.session.temp_user.pt_cp = req.body.cp_name;
@@ -218,6 +244,14 @@ router.post('/', [
                                     req.session.temp_user.org = insert_id;
                                     db.setNewDonation(req.session.temp_user)
                                         .then(result => {
+                                            if(encrypted_req_id) {
+                                                db.updateResolveOfRespondToRequest(request_id, req.session.email)
+                                                .then(result => {
+
+                                                })
+                                            }
+                                        })
+                                        .then(result => {
                                             res.redirect('/my-profile?tab=donation');
                                         })
                                 })
@@ -230,6 +264,14 @@ router.post('/', [
                 // console.log(req.session.email);
 
                 db.setNewDonation(req.session.temp_user)
+                    .then(result => {
+                        if(encrypted_req_id) {
+                            db.updateResolveOfRespondToRequest(request_id, req.session.email)
+                            .then(result => {
+
+                            })
+                        }
+                    })
                     .then(result => {
                         res.redirect('/my-profile?tab=donation');
                     })
