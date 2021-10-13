@@ -80,6 +80,8 @@ router.get('/', function (req, res) {
     if (req.session.email) {
         db.getUserAllInfo(req.session.email)
             .then(result => {
+                let myId = result[0].id;
+                let myBG = result[0].BG;
                 user.fullname = result[0].first_name + ' ' + result[0].last_name;
                 user.contact = '+88 ' + result[0].contact;
                 user.email = req.session.email;
@@ -158,10 +160,34 @@ router.get('/', function (req, res) {
                                                                             // console.log(request);
                                                                         }
 
-                                                                        res.render('myProfile.ejs', { user, tab, request, navbar: req.session.navbar_info, donation });
+                                                                        db.getRequestByResponder(myId)
+                                                                            .then(result8 => {
+                                                                                // console.log(result8);
+                                                                                var response = [];
+
+                                                                                for (var i = 0; i < result8.length; i++) {
+                                                                                    // console.log(i);
+                                                                                    var eachresponse = {
+                                                                                        request_id: cryptr.encrypt(result8[i].id),
+                                                                                        serialID: i + 1,
+                                                                                        patient: result8[i].patient,
+                                                                                        location: result8[i].orgname + ', ' + result8[i].orgdetails,
+                                                                                        patient_bg: result8[i].bg,
+                                                                                        requester_bg: result8[i].user_bg,
+                                                                                        user_bg: myBG
+                                                                                    }
+
+                                                                                    response.push(eachresponse);
+                                                                                    // console.log(eachrequest);
+                                                                                    // console.log(request);
+                                                                                }
+                                                                                // console.log(response);
+                                                                                res.render('myProfile.ejs', { user, tab, request, navbar: req.session.navbar_info, donation, response });
+                                                                            })
+
                                                                     })
 
-                                                                
+
                                                             })
                                                     })
                                                 // console.log(user);

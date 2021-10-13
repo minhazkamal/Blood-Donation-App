@@ -72,7 +72,7 @@
                                 <button class="tablinks" id="requestsContent"
                                     onclick="openContent(event, 'requests')">My Requests</button>
                                 <button class="tablinks" id="responsesContent"
-                                    onclick="openContent(event, 'responses')">My Reponses</button>
+                                    onclick="openContent(event, 'responses')">My Responses</button>
                             </div>
 
 
@@ -322,7 +322,7 @@
                                                     <td><a href="/view/donation/<%= d.donation_id %>">View</a></td>
                                                 </tr>
                                                 <% }) %>
-                                                <% } %>
+                                                    <% } %>
                                                         <!-- <tr>
                                             <th scope="row">2</th>
                                             <td>Mark</td>
@@ -494,37 +494,47 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Donee</th>
+                                            <th scope="col">Patient</th>
                                             <th scope="col">Location</th>
-                                            <th scope="col">View</th>
+                                            <th scope="col">View Request</th>
                                             <th scope="col">Add</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark Khan</td>
-                                            <td>Swuare Hosplitals, Dhaka</td>
-                                            <td><a href="#">View</a></td>
-                                            <td><a href="#">Add</a></td>
+                                        <% if(typeof response !='undefined' ) { %>
+                                            <% response.forEach(function(res) { %>
+                                                <tr>
+                                                    <th scope="row"><%= res.serialID %></th>
+                                                    <td><%= res.patient %></td>
+                                                    <td><%= res.location %></td>
+                                                    <td><a href="/request/view/<%= res.request_id %>">View</a></td>
+                                                    <% if(res.patient_bg == res.user_bg ) { %>
+                                                        <td><a href="/add-new-donation?eri=<%= res.request_id %>">Add</a></td>
+                                                        <% } else { %>
+                                                            <td><a href="/request/add_to_donation/<%= res.request_id %>"
+                                                                class="tag_disabled">You can't add</a></td>
+                                                            <% } %>
+                                                    <!-- <td><a href="#">Add</a></td> -->
 
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Mark Khan</td>
-                                            <td>Swuare Hosplitals, Dhaka</td>
-                                            <td><a href="#">View</a></td>
-                                            <td><a href="#">Add</a></td>
+                                                </tr>
+                                                <% }) %>
+                                                <% } %>
+                                                        <!-- <tr>
+                                                            <th scope="row">2</th>
+                                                            <td>Mark Khan</td>
+                                                            <td>Swuare Hosplitals, Dhaka</td>
+                                                            <td><a href="#">View</a></td>
+                                                            <td><a href="#">Add</a></td>
 
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Mark Khan</td>
-                                            <td>Swuare Hosplitals, Dhaka</td>
-                                            <td><a href="#">View</a></td>
-                                            <td><a href="#">Add</a></td>
-                                        </tr>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">3</th>
+                                                            <td>Mark Khan</td>
+                                                            <td>Swuare Hosplitals, Dhaka</td>
+                                                            <td><a href="#">View</a></td>
+                                                            <td><a href="#">Add</a></td>
+                                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -560,7 +570,7 @@
 
             <script>
                 function YNconfirm() {
-                    if (window.confirm('Do you want to resolve the rquest?')) {
+                    if (window.confirm('Do you want to resolve the request?')) {
                         return true;
                     }
                     else
