@@ -685,7 +685,7 @@ module.exports.resolveRequestById = (request_id) => {
     })
 }
 
-module.exports.getRequestsByOffset = (offset, bg, div, dist) => {
+module.exports.getRequestsByOffset = (offset, bg, div, dist, id) => {
     return new Promise((resolve, reject) => {
         db.query(`SELECT * FROM (SELECT 
         r.id as id,
@@ -705,7 +705,7 @@ module.exports.getRequestsByOffset = (offset, bg, div, dist) => {
         FROM requests r INNER JOIN organizations o ON r.organization_id = o.id 
         INNER JOIN users u ON r.post_by = u.id
         INNER JOIN profile_picture upp ON r.post_by = upp.id
-        WHERE r.resolved='no' AND (r.BG LIKE '${bg}' AND o.division LIKE '${div}' AND o.district LIKE '${dist}')) as feed_table 
+        WHERE r.id NOT IN (SELECT request_id FROM respond_to_request WHERE responder_id=${id}) AND r.resolved='no' AND (r.BG LIKE '${bg}' AND o.division LIKE '${div}' AND o.district LIKE '${dist}')) as feed_table 
         LIMIT 2 OFFSET ${offset}`, (err, res) => {
             err ? reject(err) : resolve(res)
         })
@@ -773,6 +773,43 @@ module.exports.updateDonation = (donation, id) => {
     return new Promise((resolve, reject) => {
         db.query("UPDATE `donation` SET `pt_name`=?, `pt_contact`=?, `pt_contact_person`=?, `pt_complication`=?, `org_id`=? WHERE id = ?", 
                                         [donation.pt_name, donation.pt_contact, donation.pt_contact_person, donation.complication, donation.org, id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.newRespondToRequest = (request_id, responder_id) => {
+    // console.log(donation);
+    return new Promise((resolve, reject) => {
+        db.query("INSERT INTO `respond_to_request`(`request_id`,`responder_id`) VALUES (?, ?)", 
+                                        [request_id, responder_id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.getPosterByRequest_ID = (req_id) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * from users NATURAL JOIN user_address NATURAL JOIN user_profile WHERE users.id = (SELECT post_by FROM requests WHERE id=?)`, [req_id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.getRequestByResponder = (responder_id) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT 
+        r.id as id,
+        r.patient as patient,
+        o.name as orgname,
+        o.details as orgdetails,
+        r.approx_donation_date as date,
+        r.BG as bg,
+        up.BG as user_bg,
+        r.quantity as quantity,
+        r.resolved as resolved
+        FROM requests r INNER JOIN organizations o ON r.organization_id = o.id
+        INNER JOIN user_profile up ON r.post_by = up.id WHERE r.id IN (SELECT request_id FROM respond_to_request WHERE responder_id = ?) ORDER BY date DESC`, [responder_id], (err, res) => {
             err ? reject(err) : resolve(res)
         })
     })

@@ -79,7 +79,7 @@ router.get('/list', function (req, res) {
         .then(result => {
             var myId = result[0].id;
             
-            db.getRequestsByOffset(offset, bg, div, dist)
+            db.getRequestsByOffset(offset, bg, div, dist, myId)
                 .then(result => {
                     // console.log(result);
                     var request = [];
@@ -95,7 +95,7 @@ router.get('/list', function (req, res) {
                             requirement: result[i].requirement,
                             complication: result[i].complication,
                             approx_date: mysql2JsLocal(result[i].approx_date),
-                            responder_id: myId,
+                            responder_id: cryptr.encrypt(myId),
                             posted_by_name: result[i].first_name + ' ' + result[i].last_name,
                             profile_photo: result[i].photo,
                             responder: 'others'
