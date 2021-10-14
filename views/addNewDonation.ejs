@@ -246,13 +246,13 @@
 		</div>
 
 		<%- include ("./partials/footer.ejs") %>
-		<script>
-            var loader = document.getElementById("preloader");
+			<script>
+				var loader = document.getElementById("preloader");
 
-            window.addEventListener("load", function(){
-                loader.style.display = "none";
-            })
-        </script>
+				window.addEventListener("load", function () {
+					loader.style.display = "none";
+				})
+			</script>
 
 			<script>
 				$(document).ready(function () {
@@ -283,11 +283,11 @@
 						$("#cp_name").val($("#user_pt_cp").val());
 						$("#contact").val($("#user_pt_contact").val());
 						$("#basic_bg").val($("#user_pt_bg").val());
-						
+
 
 						$("#complication").val($("#user_complications").val());
-					
-						
+
+
 						$("#org-name").val($("#user_org_name").val());
 						$("#street").val($("#user_org_street").val());
 
