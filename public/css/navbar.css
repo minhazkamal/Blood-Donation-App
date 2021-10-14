@@ -91,6 +91,8 @@ header .navigation .menu {
   max-height: 350px;
   overflow: scroll;
   overflow-x: hidden;
+  font-size: 0.9em;
+  width: 400px;
 }
 
 ::-webkit-scrollbar {
