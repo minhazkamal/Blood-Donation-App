@@ -87,6 +87,31 @@ header .navigation .menu {
   transition-property: transform, opacity;
 }
 
+.notif{
+  max-height: 350px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 3px;
+  border-left: 0;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 1em;
+  
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b363880;
+  border-radius: 0;
+  border-radius: 1em;
+} 
+
 header.sticky .menu-item .sub-menu {
   top: 60px;
 }

@@ -9,6 +9,7 @@
   box-sizing: border-box;
 }
 
+
 html {
   width: 100%;
 }
@@ -828,3 +829,22 @@ footer p {
   background: #fff url(/img/preloader.gif) no-repeat center center;
   background-size: 15%;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 3px;
+  border-left: 0;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 1em;
+  
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b363880;
+  border-radius: 0;
+  border-radius: 1em;
+} 
