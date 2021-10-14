@@ -242,8 +242,8 @@ router.post('/', [
 
         // console.log("Hello");
         // console.log(req.body.latitude);
-        delete req.session.temp_user;
-        delete req.session.div_results;
+        // delete req.session.temp_user;
+        // delete req.session.div_results;
     });
 
 
