@@ -913,6 +913,7 @@ module.exports.NotificationUpdateDynamically = (req, res) => {
     return new Promise((resolve, reject) => {
         countNotificationByEmail(req.session.email)
             .then(result => {
+                // console.log(result);
                 req.session.navbar_info.notification_count = result[0].notification_count;
 
 

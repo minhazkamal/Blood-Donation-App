@@ -119,6 +119,12 @@ const validator = function (req, res, next) {
         else {
           db.getuserid(req.session.email)
             .then(result => {
+              let navbar_info = {
+                name: result[0].first_name,
+                photo: 'avatar.png',
+                notification_count: ''
+              }
+              req.session.navbar_info = navbar_info;
               if (result.length > 0) {
                 let id = result[0].id;
                 db.getNID(result[0].id)
