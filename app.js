@@ -78,7 +78,9 @@ app.use(session({
     //duration: 30 * 60 * 1000,
     //activeDuration: 5 * 60 * 1000,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    rolling: true,
+    cookie: {maxAge: 1000*60*60*10}
 }));
 
 
