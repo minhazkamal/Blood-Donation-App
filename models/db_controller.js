@@ -92,7 +92,7 @@ module.exports.contactUs = function (user, callback) {
 }
 
 module.exports.getuserid = function (email) {
-    var query = "SELECT * from `users` where `email` = ?";
+    var query = "SELECT * from `users` NATURAL JOIN `user_profile` NATURAL JOIN `user_address` NATURAL JOIN `eligibility_report` where `email` = ?";
     // db.query(query,[email], (err, res) => {
     //     if(err) throw err;
     //     else{

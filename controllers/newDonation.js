@@ -65,6 +65,7 @@ router.get('/', function (req, res) {
                         .then(result => {
                             const minDate = minDateCalculation(result[0].dob);
                             const maxDate = maxDateCalculation(new Date());
+                            req.session.eligibility_report = result[0].eligibility_test;
                             let myId = result[0].id;
                             db.getRequestById(req_id)
                                 .then(result => {
@@ -92,10 +93,10 @@ router.get('/', function (req, res) {
                                     req.session.temp_user.maxDate = maxDate;
                                     req.session.div_results = div_result;
                                     db.NotificationUpdateDynamically(req, res)
-                                .then(result => {
-                                    res.render('addNewDonation.ejs', { navbar: req.session.navbar_info, divisions: div_result, minDate, maxDate, user, notifications: req.session.notifications });
-                                })
-                                    
+                                        .then(result => {
+                                            res.render('addNewDonation.ejs', { navbar: req.session.navbar_info, divisions: div_result, minDate, maxDate, user, notifications: req.session.notifications });
+                                        })
+
                                 })
                         })
                 })
@@ -108,6 +109,7 @@ router.get('/', function (req, res) {
                         .then(result => {
                             const minDate = minDateCalculation(result[0].dob);
                             const maxDate = maxDateCalculation(new Date());
+                            req.session.eligibility_report = result[0].eligibility_test;
                             let user = {
                                 type: 'first',
                                 donor_id: result[0].id,
@@ -134,7 +136,7 @@ router.get('/', function (req, res) {
                                 .then(result => {
                                     res.render('addNewDonation.ejs', { navbar: req.session.navbar_info, divisions: div_result, minDate, maxDate, notifications: req.session.notifications });
                                 })
-                            
+
 
                         })
                 })
@@ -161,7 +163,7 @@ router.post('/', [
     })],
     function (req, res) {
         var encrypted_req_id = req.query.eri;
-        var request_id = cryptr.decrypt(encrypted_req_id);
+        if (req.query.eri) var request_id = cryptr.decrypt(encrypted_req_id);
         let errors = validationResult(req)
 
         req.session.temp_user.pt_cp = req.body.cp_name;
@@ -197,17 +199,29 @@ router.post('/', [
 
         req.session.temp_user.house = req.body.organization_name;
         req.session.temp_user.street = req.body.street;
-
+        // console.log(req.session.eligibility_report);
         if (!errors.isEmpty()) {
             //console.log(errors);
             const alert = errors.array();
 
             req.session.temp_user.type = 'error';
             db.NotificationUpdateDynamically(req, res)
-                                .then(result => {
-                                    res.render('addNewDonation', { user: req.session.temp_user, alert, divisions: req.session.div_results, navbar: req.session.navbar_info, minDate: req.session.temp_user.minDate, maxDate: req.session.temp_user.maxDate, notifications: req.session.notifications });
-                                })
-            
+                .then(result => {
+                    res.render('addNewDonation', { user: req.session.temp_user, alert, divisions: req.session.div_results, navbar: req.session.navbar_info, minDate: req.session.temp_user.minDate, maxDate: req.session.temp_user.maxDate, notifications: req.session.notifications });
+                })
+
+        }
+        else if(req.session.eligibility_report == 'no') {
+
+            let errors = {msg: 'You have to perform eligibility test to add your donation'}
+            const alert = [];
+            alert.push(errors);
+
+            req.session.temp_user.type = 'error';
+            db.NotificationUpdateDynamically(req, res)
+                .then(result => {
+                    res.render('addNewDonation', { user: req.session.temp_user, alert, divisions: req.session.div_results, navbar: req.session.navbar_info, minDate: req.session.temp_user.minDate, maxDate: req.session.temp_user.maxDate, notifications: req.session.notifications });
+                })
         }
         else {
             // console.log(req.body);
@@ -255,11 +269,11 @@ router.post('/', [
                                     req.session.temp_user.org = insert_id;
                                     db.setNewDonation(req.session.temp_user)
                                         .then(result => {
-                                            if(encrypted_req_id) {
+                                            if (encrypted_req_id) {
                                                 db.updateResolveOfRespondToRequest(request_id, req.session.email)
-                                                .then(result => {
+                                                    .then(result => {
 
-                                                })
+                                                    })
                                             }
                                         })
                                         .then(result => {
@@ -276,11 +290,11 @@ router.post('/', [
 
                 db.setNewDonation(req.session.temp_user)
                     .then(result => {
-                        if(encrypted_req_id) {
+                        if (encrypted_req_id) {
                             db.updateResolveOfRespondToRequest(request_id, req.session.email)
-                            .then(result => {
+                                .then(result => {
 
-                            })
+                                })
                         }
                     })
                     .then(result => {

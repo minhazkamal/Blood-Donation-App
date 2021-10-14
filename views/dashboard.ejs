@@ -143,6 +143,7 @@
                         else $("#active_status").attr('checked', false);
                     }
                     else {
+                        if($("#user_eligibility").val() === 'not_eligible') document.getElementById('warning-message').innerHTML=`* You can't be active within 3 months of your last donation`;
                         $("#active_status").attr('checked', false);
                         $("#active_status").attr('disabled', true);
                         $("#warning-message").show();

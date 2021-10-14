@@ -19,6 +19,7 @@ router.use(bodyParser.json());
 
 router.get('/', function(req,res){
     if(req.session.email) {
+        req.session.destroy();
         delete req.session;
         res.redirect('/login');
     }

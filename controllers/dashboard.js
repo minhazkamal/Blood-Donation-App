@@ -13,6 +13,13 @@ var cryptr = new Cryptr(process.env.SECURITY_KEY);
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
+function monthDiff(d1, d2) {
+    var months;
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    months -= d1.getMonth();
+    months += d2.getMonth();
+    return months <= 0 ? 0 : months;
+}
 
 router.get('/', function (req, res) {
     // req.session.email = 'minhaz.kamal9900@gmail.com';
@@ -31,7 +38,8 @@ router.get('/', function (req, res) {
         db.getuserid(req.session.email)
             .then(result => {
                 user_status.name = result[0].first_name;
-                user_status.eligibility = result[0].eligibility_test;
+                if(monthDiff(new Date(), result[0].last_donation)>=3) user_status.eligibility = result[0].eligibility_test;
+                else user_status.eligibility = 'not_eligible';
                 db.getActiveStatusById(result[0].id)
                     .then(result => {
                         user_status.active = result[0].status;
