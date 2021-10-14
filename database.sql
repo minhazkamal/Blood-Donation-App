@@ -210,6 +210,32 @@ INSERT INTO `nid` VALUES (6,'f837a6f4369555646c943f616b7cecd097dc43e6e334c78c50e
 UNLOCK TABLES;
 
 --
+-- Table structure for table `notifications`
+--
+
+DROP TABLE IF EXISTS `notifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `notifications` (
+  `notification_id` int NOT NULL AUTO_INCREMENT,
+  `notifications_for` int DEFAULT NULL,
+  `profile_of` int DEFAULT NULL,
+  `resolved` enum('yes','no') DEFAULT 'no',
+  PRIMARY KEY (`notification_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notifications`
+--
+
+LOCK TABLES `notifications` WRITE;
+/*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
+INSERT INTO `notifications` VALUES (1,6,8,'yes');
+/*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `organizations`
 --
 
@@ -322,7 +348,7 @@ CREATE TABLE `respond_to_request` (
   KEY `responder_id_fk_idx` (`responder_id`),
   CONSTRAINT `request_id_fk` FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`),
   CONSTRAINT `responder_id_fk` FOREIGN KEY (`responder_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -331,7 +357,7 @@ CREATE TABLE `respond_to_request` (
 
 LOCK TABLES `respond_to_request` WRITE;
 /*!40000 ALTER TABLE `respond_to_request` DISABLE KEYS */;
-INSERT INTO `respond_to_request` VALUES (3,24,2,'no'),(4,24,4,'yes'),(5,24,10,'no');
+INSERT INTO `respond_to_request` VALUES (3,24,2,'no'),(4,24,4,'yes'),(5,24,10,'no'),(7,8,2,'no');
 /*!40000 ALTER TABLE `respond_to_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -468,4 +494,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-13 16:58:55
+-- Dump completed on 2021-10-14 12:39:48
