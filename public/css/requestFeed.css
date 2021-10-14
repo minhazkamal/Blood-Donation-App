@@ -24,8 +24,17 @@ html, body {
 .upper-container {
   position: relative;
   text-align: center;
-  color: white;
+  color: rgb(0, 0, 0);
   height: 80%;
+}
+
+.blobEligibility1{
+  width: 2000px;
+  height: 2000px;
+  top: -500px;
+  left: 40px;
+  position: absolute;
+  z-index: -1;
 }
 
 .centered {
@@ -527,6 +536,28 @@ i.fa-user-circle {
   .upper-container {
     height: 30%;
   }
+
+  
+/* .blobEligibility1{
+  width: 450px;
+  height: 450px;
+  top: -120px;
+  left: -80px;
+  position: absolute;
+  z-index: -1;
+} */
+
+.blobEligibility1{
+  display: none;
+}
+
+.centered{
+  font-size: 0.7em;
+}
+.post-btn{
+   height: 40px;
+   text-align: center;
+}
 
 }
 
