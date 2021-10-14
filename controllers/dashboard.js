@@ -52,6 +52,7 @@ router.get('/', function (req, res) {
                                 req.session.temp_user_status = user_status;
                                 db.getNameAndPhoto(req.session.email)
                                     .then(result => {
+                                        console.log(result);
                                         navbar_info.name = result[0].first_name;
                                         navbar_info.photo = result[0].profile_picture;
                                         req.session.navbar_info = navbar_info;
