@@ -182,7 +182,11 @@ router.get('/', function (req, res) {
                                                                                     // console.log(request);
                                                                                 }
                                                                                 // console.log(response);
-                                                                                res.render('myProfile.ejs', { user, tab, request, navbar: req.session.navbar_info, donation, response });
+                                                                                db.NotificationUpdateDynamically(req, res)
+                                                                                    .then(result => {
+                                                                                        res.render('myProfile.ejs', { user, tab, request, navbar: req.session.navbar_info, donation, response, notifications: req.session.notifications });
+                                                                                    })
+
                                                                             })
 
                                                                     })

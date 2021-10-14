@@ -97,8 +97,11 @@ router.get('/:encrypted_id', function (req, res) {
 
                         req.session.temp_user = user;
                         req.session.div_results = div_result;
-
-                        res.render('viewDonation.ejs', { user, divisions: div_result, navbar: req.session.navbar_info });
+                        db.NotificationUpdateDynamically(req, res)
+                                .then(result => {
+                                    res.render('viewDonation.ejs', { user, divisions: div_result, navbar: req.session.navbar_info, notifications: req.session.notifications });
+                                })
+                        
                     })
             })
 
@@ -168,8 +171,11 @@ router.post('/:encrypted_id', [
             const alert = errors.array();
 
             req.session.temp_user.type = 'error';
-
-            res.render('viewDonation', { user: req.session.temp_user, alert, divisions: req.session.div_results, navbar: req.session.navbar_info });
+            db.NotificationUpdateDynamically(req, res)
+                                .then(result => {
+                                    res.render('viewDonation', { user: req.session.temp_user, alert, divisions: req.session.div_results, navbar: req.session.navbar_info, notifications: req.session.notifications });
+                                })
+            
         }
         else {
             // console.log(req.body);

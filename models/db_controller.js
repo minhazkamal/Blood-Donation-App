@@ -1,9 +1,12 @@
-var mysql =require('mysql');
+var mysql = require('mysql');
 var express = require('express');
 var router = express.Router();
 var util = require('util');
 var bcrypt = require('bcrypt-nodejs');
 const { request } = require('express');
+var Cryptr = require('cryptr');
+var cryptr = new Cryptr(process.env.SECURITY_KEY);
+
 
 // con == db
 var db = mysql.createConnection({
@@ -14,40 +17,40 @@ var db = mysql.createConnection({
     charset: "utf8mb4"
 });
 
-db.connect(function(err){
-    if(err){
+db.connect(function (err) {
+    if (err) {
         throw err;
         console.log('you are connected');
 
     }
 });
 
-module.exports.signup = function(user,callback) {
+module.exports.signup = function (user, callback) {
 
-    if(user.provider === "google" || user.provider === "facebook") {
-        var query =  "INSERT INTO `users`(`first_name`,`last_name`,`email`,`email_verified`,`joined`,`provider`) VALUES (?, ?, ?, ?, ?, ?)";
-        db.query(query,[user.f_name, user.l_name, user.email, 'yes', user.joined, user.provider], function(err, result, fields){
-            if(err) throw err;
-            else{
+    if (user.provider === "google" || user.provider === "facebook") {
+        var query = "INSERT INTO `users`(`first_name`,`last_name`,`email`,`email_verified`,`joined`,`provider`) VALUES (?, ?, ?, ?, ?, ?)";
+        db.query(query, [user.f_name, user.l_name, user.email, 'yes', user.joined, user.provider], function (err, result, fields) {
+            if (err) throw err;
+            else {
                 // console.log(result.insertId);
                 // console.log(user.f_name);
                 callback(result.insertId, user.f_name);
             }
-                
+
         })
     }
     else {
-        var query =  "INSERT INTO `users`(`first_name`,`last_name`,`email`,`password`,`joined`,`provider`) VALUES (?, ?, ?, ?, ?, ?)";
+        var query = "INSERT INTO `users`(`first_name`,`last_name`,`email`,`password`,`joined`,`provider`) VALUES (?, ?, ?, ?, ?, ?)";
         bcrypt.hash(user.password, null, null, (error, hash) => {
             user.password = hash
-            db.query(query,[user.f_name, user.l_name, user.email, user.password, user.joined, user.provider], function(err, result, fields){
-                if(err) throw err;
-                else{
+            db.query(query, [user.f_name, user.l_name, user.email, user.password, user.joined, user.provider], function (err, result, fields) {
+                if (err) throw err;
+                else {
                     //  console.log(result.insertId);
                     //  console.log(user.f_name);
                     callback(result.insertId, user.f_name);
-                 }
-                
+                }
+
             })
         })
         // db.query(query,[user.f_name, user.l_name, user.email, user.password, user.joined, user.provider], function(err, result, fields){
@@ -57,38 +60,38 @@ module.exports.signup = function(user,callback) {
         //             // console.log(user.f_name);
         //             callback(result.insertId, user.f_name);
         //         }
-                
+
         //     })
     }
 }
 
-module.exports.contactUs = function(user,callback) {
+module.exports.contactUs = function (user, callback) {
 
-        var query =  "INSERT INTO `contact_us`(`name`,`email`,`phone`,`message`,`time`) VALUES (?, ?, ?, ?, ?)";
-        bcrypt.hash(user.password, null, null, (error, hash) => {
-            user.password = hash
-            db.query(query,[user.name, user.email, user.phone, user.message, user.time], function(err, result, fields){
-                if(err) throw err;
-                else{
-                    //  console.log(result.insertId);
-                    //  console.log(user.f_name);
-                    callback(result.insertId);
-                 }
-                
-            })
+    var query = "INSERT INTO `contact_us`(`name`,`email`,`phone`,`message`,`time`) VALUES (?, ?, ?, ?, ?)";
+    bcrypt.hash(user.password, null, null, (error, hash) => {
+        user.password = hash
+        db.query(query, [user.name, user.email, user.phone, user.message, user.time], function (err, result, fields) {
+            if (err) throw err;
+            else {
+                //  console.log(result.insertId);
+                //  console.log(user.f_name);
+                callback(result.insertId);
+            }
+
         })
-        // db.query(query,[user.f_name, user.l_name, user.email, user.password, user.joined, user.provider], function(err, result, fields){
-        //         if(err) throw err;
-        //         else{
-        //             // console.log(result.insertId);
-        //             // console.log(user.f_name);
-        //             callback(result.insertId, user.f_name);
-        //         }
-                
-        //     })
+    })
+    // db.query(query,[user.f_name, user.l_name, user.email, user.password, user.joined, user.provider], function(err, result, fields){
+    //         if(err) throw err;
+    //         else{
+    //             // console.log(result.insertId);
+    //             // console.log(user.f_name);
+    //             callback(result.insertId, user.f_name);
+    //         }
+
+    //     })
 }
 
-module.exports.getuserid = function (email){
+module.exports.getuserid = function (email) {
     var query = "SELECT * from `users` where `email` = ?";
     // db.query(query,[email], (err, res) => {
     //     if(err) throw err;
@@ -105,7 +108,7 @@ module.exports.getuserid = function (email){
     //console.log(query);
 }
 
-module.exports.getuserinfobyid = function (id){
+module.exports.getuserinfobyid = function (id) {
     var query = "SELECT * from users NATURAL JOIN user_address NATURAL JOIN user_profile where users.id = ?";
     // db.query(query,[email], (err, res) => {
     //     if(err) throw err;
@@ -159,10 +162,10 @@ module.exports.isEmailVerified = function (id) {
     //console.log(query);
 }
 
-module.exports.verify_email = function (id,callback) {
+module.exports.verify_email = function (id, callback) {
     var query = "UPDATE `users`SET `email_verified`='yes' where `id` = ?";
-    db.query(query,[id],callback, (err, res) => {
-        err ? reject(err) : resolve (res)
+    db.query(query, [id], callback, (err, res) => {
+        err ? reject(err) : resolve(res)
     })
     //console.log(query);
 }
@@ -202,24 +205,24 @@ module.exports.resetPasswordByEmail = (password, email) => {
     })
 }
 
-module.exports.credentialCheck = function(user){
-        var query =  "SELECT `password`, `provider` from `users` where `email`=?";
-        // db.query(query,[user.email], function(err, result, fields){
-        //     if(err) throw err;
-        //     if(user.password === result[0].password) return true;
-        //     else return false; 
-        // })
-        return new Promise((resolve, reject) => {
-            db.query(query, [user.email], (err, res) => {
-                if(err) throw err;
-            if(res[0].provider === 'self') {
+module.exports.credentialCheck = function (user) {
+    var query = "SELECT `password`, `provider` from `users` where `email`=?";
+    // db.query(query,[user.email], function(err, result, fields){
+    //     if(err) throw err;
+    //     if(user.password === result[0].password) return true;
+    //     else return false; 
+    // })
+    return new Promise((resolve, reject) => {
+        db.query(query, [user.email], (err, res) => {
+            if (err) throw err;
+            if (res[0].provider === 'self') {
                 bcrypt.compare(user.password, res[0].password, (err, result) => {
 
                     // console.log(result);
                     err ? reject(err) : resolve(result)
                 });
             }
-            else{
+            else {
                 err ? reject(err) : resolve(false)
             }
         })
@@ -227,8 +230,8 @@ module.exports.credentialCheck = function(user){
 }
 
 
-module.exports.oldPassCheck = function(password, id){
-    var query =  "SELECT `password`, `provider` from `users` where `id`=?";
+module.exports.oldPassCheck = function (password, id) {
+    var query = "SELECT `password`, `provider` from `users` where `id`=?";
     // db.query(query,[user.email], function(err, result, fields){
     //     if(err) throw err;
     //     if(user.password === result[0].password) return true;
@@ -236,23 +239,23 @@ module.exports.oldPassCheck = function(password, id){
     // })
     return new Promise((resolve, reject) => {
         db.query(query, [id], (err, res) => {
-            if(err) throw err;
-        if(res[0].password !== null && res[0].provider === 'self') {
-            bcrypt.compare(password, res[0].password, (err, result) => {
+            if (err) throw err;
+            if (res[0].password !== null && res[0].provider === 'self') {
+                bcrypt.compare(password, res[0].password, (err, result) => {
 
-                // console.log(result);
-                err ? reject(err) : resolve(result)
-            });
-        }
-        else{
-            err ? reject(err) : resolve('undefined')
-        }
+                    // console.log(result);
+                    err ? reject(err) : resolve(result)
+                });
+            }
+            else {
+                err ? reject(err) : resolve('undefined')
+            }
+        })
     })
-})
 }
 
-module.exports.oldPassCheckByEmail = function(password, email){
-    var query =  "SELECT `password`, `provider` from `users` WHERE email = ?";
+module.exports.oldPassCheckByEmail = function (password, email) {
+    var query = "SELECT `password`, `provider` from `users` WHERE email = ?";
     // db.query(query,[user.email], function(err, result, fields){
     //     if(err) throw err;
     //     if(user.password === result[0].password) return true;
@@ -260,67 +263,67 @@ module.exports.oldPassCheckByEmail = function(password, email){
     // })
     return new Promise((resolve, reject) => {
         db.query(query, [email], (err, res) => {
-            if(err) throw err;
-        if(res[0].password !== null && res[0].provider === 'self') {
-            bcrypt.compare(password, res[0].password, (err, result) => {
+            if (err) throw err;
+            if (res[0].password !== null && res[0].provider === 'self') {
+                bcrypt.compare(password, res[0].password, (err, result) => {
 
-                // console.log(result);
-                err ? reject(err) : resolve(result)
-            });
-        }
-        else{
-            err ? reject(err) : resolve('undefined')
-        }
+                    // console.log(result);
+                    err ? reject(err) : resolve(result)
+                });
+            }
+            else {
+                err ? reject(err) : resolve('undefined')
+            }
+        })
     })
-})
 }
 
 
 module.exports.getNID = (id) => {
     return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM nid WHERE id = ?', [id], (err, res) => {
-                err ? reject(err) : resolve(res)
-            })
+        db.query('SELECT * FROM nid WHERE id = ?', [id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
     })
 }
 
 module.exports.setNID = (front, back, id) => {
     return new Promise((resolve, reject) => {
-            db.query('INSERT INTO nid VALUES (?, ?, ?)', [id, front, back], (err, res) => {
-                err ? reject(err) : resolve(res)
-            })
+        db.query('INSERT INTO nid VALUES (?, ?, ?)', [id, front, back], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
     })
 }
 
 module.exports.updateNID = (front, back, id) => {
     return new Promise((resolve, reject) => {
-            db.query('UPDATE nid SET front = ?, back = ? WHERE id = ?', [front, back, id], (err, res) => {
-                err ? reject(err) : resolve(res)
-            })
+        db.query('UPDATE nid SET front = ?, back = ? WHERE id = ?', [front, back, id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
     })
 }
 
 module.exports.getProfilePic = (id) => {
     return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM profile_picture WHERE id = ?', [id], (err, res) => {
-                err ? reject(err) : resolve(res)
-            })
+        db.query('SELECT * FROM profile_picture WHERE id = ?', [id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
     })
 }
 
 module.exports.setProfilePic = (pic, id) => {
     return new Promise((resolve, reject) => {
-            db.query('INSERT INTO profile_picture VALUES (?, ?)', [id, pic], (err, res) => {
-                err ? reject(err) : resolve(res)
-            })
+        db.query('INSERT INTO profile_picture VALUES (?, ?)', [id, pic], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
     })
 }
 
 module.exports.updateProfilePic = (pic, id) => {
     return new Promise((resolve, reject) => {
-            db.query('UPDATE profile_picture SET profile_picture = ? WHERE id = ?', [pic, id], (err, res) => {
-                err ? reject(err) : resolve(res)
-            })
+        db.query('UPDATE profile_picture SET profile_picture = ? WHERE id = ?', [pic, id], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
     })
 }
 
@@ -456,22 +459,22 @@ module.exports.getUpazillaName = (id) => {
 module.exports.setOrgInput = (org, callback) => {
     let details = org.street;
     db.query(`SELECT * from upazillas WHERE id=${org.upazilla}`, (err, res) => {
-        details += ", "+res[0].name;
+        details += ", " + res[0].name;
         // console.log(details);
         db.query(`SELECT * from districts WHERE id=${org.district}`, (err, res) => {
-            details += ", "+res[0].name;
+            details += ", " + res[0].name;
             // console.log(details);
             db.query(`SELECT * from divisions WHERE id=${org.division}`, (err, res) => {
-                details += ", "+res[0].name;
+                details += ", " + res[0].name;
                 // console.log(details);
-                    db.query("INSERT INTO `organizations`(`name`,`details`,`contact`,`lon`,`lat`, `division`, `district`, `upazilla`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [org.name, details, org.mobile, org.longitude, org.latitude, org.division, org.district, org.upazilla], (err, res) => {
-                        if(err) throw err;
-                        callback(res.insertId);
-                    })
+                db.query("INSERT INTO `organizations`(`name`,`details`,`contact`,`lon`,`lat`, `division`, `district`, `upazilla`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [org.name, details, org.mobile, org.longitude, org.latitude, org.division, org.district, org.upazilla], (err, res) => {
+                    if (err) throw err;
+                    callback(res.insertId);
+                })
             })
         })
     })
-    
+
 }
 
 module.exports.getOrgInfo = () => {
@@ -534,19 +537,19 @@ module.exports.getLocationNamesByIds = (address) => {
 
 module.exports.setNewRequest = (request) => {
     return new Promise((resolve, reject) => {
-        db.query("INSERT INTO `requests`(`post_by`,`patient`,`contact_person`,`contact`,`approx_donation_date`, `BG`, `complication`, `requirements`, `quantity`, `organization_id`, `org_address_details`, `posted_on`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
-                                        [request.id, request.patient, request.cp, request.cp_contact, request.approx_date, request.pt_bg, request.complication, request.requirements, request.quantity, request.org, request.org_details, request.posted_on], (err, res) => {
-            err ? reject(err) : resolve(res)
-        })
+        db.query("INSERT INTO `requests`(`post_by`,`patient`,`contact_person`,`contact`,`approx_donation_date`, `BG`, `complication`, `requirements`, `quantity`, `organization_id`, `org_address_details`, `posted_on`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            [request.id, request.patient, request.cp, request.cp_contact, request.approx_date, request.pt_bg, request.complication, request.requirements, request.quantity, request.org, request.org_details, request.posted_on], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
     })
 }
 
 module.exports.updateRequestById = (request, id) => {
     return new Promise((resolve, reject) => {
-        db.query("UPDATE `requests` SET `post_by`=?, `patient`=?, `contact_person`=?, `contact`=?, `approx_donation_date`=?, `BG`=?, `complication`=?, `requirements`=?, `quantity`=?, `organization_id`=?, `org_address_details`=?, `posted_on`=? WHERE `id`=?", 
-                                        [request.post_by_id, request.patient, request.cp, request.cp_contact, request.approx_date, request.pt_bg, request.complication, request.requirements, request.quantity, request.org_id, request.org_details, request.posted_on, id], (err, res) => {
-            err ? reject(err) : resolve(res)
-        })
+        db.query("UPDATE `requests` SET `post_by`=?, `patient`=?, `contact_person`=?, `contact`=?, `approx_donation_date`=?, `BG`=?, `complication`=?, `requirements`=?, `quantity`=?, `organization_id`=?, `org_address_details`=?, `posted_on`=? WHERE `id`=?",
+            [request.post_by_id, request.patient, request.cp, request.cp_contact, request.approx_date, request.pt_bg, request.complication, request.requirements, request.quantity, request.org_id, request.org_details, request.posted_on, id], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
     })
 }
 
@@ -583,26 +586,26 @@ module.exports.updateActiveStatus = (email, value) => {
 }
 
 module.exports.setEligibilityReport = (elg, flag) => {
-    if(flag == 'no') {
+    if (flag == 'no') {
         return new Promise((resolve, reject) => {
-            db.query(`INSERT INTO eligibility_report VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
-            [elg.id, elg.asthma, elg.high_bp, elg.cancer, elg.diabetes, elg.heart_disease, elg.hepatitis, elg.anemia, 
+            db.query(`INSERT INTO eligibility_report VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                [elg.id, elg.asthma, elg.high_bp, elg.cancer, elg.diabetes, elg.heart_disease, elg.hepatitis, elg.anemia,
                 elg.tuberculosis, elg.smoke, elg.drinking, elg.depression, elg.last_donation], (err, res) => {
-                err ? reject(err) : resolve(res)
-            })
+                    err ? reject(err) : resolve(res)
+                })
         })
     }
     else {
         return new Promise((resolve, reject) => {
             db.query(`UPDATE eligibility_report SET asthma = ?, high_bp = ?, cancer = ?, diabetes = ?, heart_disease = ?, 
-            hepatitis = ?, anemia = ?, tuberculosis = ?, smoke = ?, drinking = ?, depression = ?, last_donation = ? WHERE id = ?`, 
-            [elg.asthma, elg.high_bp, elg.cancer, elg.diabetes, elg.heart_disease, elg.hepatitis, elg.anemia, 
+            hepatitis = ?, anemia = ?, tuberculosis = ?, smoke = ?, drinking = ?, depression = ?, last_donation = ? WHERE id = ?`,
+                [elg.asthma, elg.high_bp, elg.cancer, elg.diabetes, elg.heart_disease, elg.hepatitis, elg.anemia,
                 elg.tuberculosis, elg.smoke, elg.drinking, elg.depression, elg.last_donation, elg.id], (err, res) => {
-                err ? reject(err) : resolve(res)
-            })
+                    err ? reject(err) : resolve(res)
+                })
         })
     }
-    
+
 }
 
 module.exports.getEligibilityReport = (email) => {
@@ -732,10 +735,10 @@ module.exports.getRequestById = (req_id) => {
 module.exports.setNewDonation = (donation) => {
     // console.log(donation);
     return new Promise((resolve, reject) => {
-        db.query("INSERT INTO `donation`(`donor_id`,`pt_name`,`pt_contact`,`pt_contact_person`,`pt_complication`, `donation_date`, `org_id`) VALUES (?, ?, ?, ?, ?, ?, ?)", 
-                                        [donation.donor_id, donation.pt_name, donation.pt_contact, donation.pt_cp, donation.complication, donation.approx_date, donation.org], (err, res) => {
-            err ? reject(err) : resolve(res)
-        })
+        db.query("INSERT INTO `donation`(`donor_id`,`pt_name`,`pt_contact`,`pt_contact_person`,`pt_complication`, `donation_date`, `org_id`) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [donation.donor_id, donation.pt_name, donation.pt_contact, donation.pt_cp, donation.complication, donation.approx_date, donation.org], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
     })
 }
 
@@ -772,20 +775,20 @@ module.exports.getDonationByDonor = (email) => {
 module.exports.updateDonation = (donation, id) => {
     // console.log(donation);
     return new Promise((resolve, reject) => {
-        db.query("UPDATE `donation` SET `pt_name`=?, `pt_contact`=?, `pt_contact_person`=?, `pt_complication`=?, `org_id`=? WHERE id = ?", 
-                                        [donation.pt_name, donation.pt_contact, donation.pt_contact_person, donation.complication, donation.org, id], (err, res) => {
-            err ? reject(err) : resolve(res)
-        })
+        db.query("UPDATE `donation` SET `pt_name`=?, `pt_contact`=?, `pt_contact_person`=?, `pt_complication`=?, `org_id`=? WHERE id = ?",
+            [donation.pt_name, donation.pt_contact, donation.pt_contact_person, donation.complication, donation.org, id], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
     })
 }
 
 module.exports.newRespondToRequest = (request_id, responder_id) => {
     // console.log(donation);
     return new Promise((resolve, reject) => {
-        db.query("INSERT INTO `respond_to_request`(`request_id`,`responder_id`) VALUES (?, ?)", 
-                                        [request_id, responder_id], (err, res) => {
-            err ? reject(err) : resolve(res)
-        })
+        db.query("INSERT INTO `respond_to_request`(`request_id`,`responder_id`) VALUES (?, ?)",
+            [request_id, responder_id], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
     })
 }
 
@@ -819,9 +822,99 @@ module.exports.getRequestByResponder = (responder_id) => {
 module.exports.updateResolveOfRespondToRequest = (request_id, responder_email) => {
     // console.log(donation);
     return new Promise((resolve, reject) => {
-        db.query("UPDATE `respond_to_request` SET `resolved`='yes' WHERE request_id = ? AND responder_id=(SELECT id FROM users WHERE email=?)", 
-                                        [request_id, responder_email], (err, res) => {
-            err ? reject(err) : resolve(res)
-        })
+        db.query("UPDATE `respond_to_request` SET `resolved`='yes' WHERE request_id = ? AND responder_id=(SELECT id FROM users WHERE email=?)",
+            [request_id, responder_email], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
     })
+}
+
+module.exports.newNotification = (notifications_for, profile_of) => {
+    // console.log(donation);
+    return new Promise((resolve, reject) => {
+        db.query("INSERT INTO `notifications`(`notifications_for`,`profile_of`) VALUES (?, ?)",
+            [notifications_for, profile_of], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
+    })
+}
+
+function countNotificationByEmail(email) {
+    // console.log(donation);
+    return new Promise((resolve, reject) => {
+        db.query("SELECT COUNT(*) as notification_count FROM notifications WHERE notifications_for = (SELECT id FROM users WHERE email=?) AND resolved='no'",
+            [email], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
+    })
+}
+
+module.exports.countNotificationByEmail;
+
+
+function getNotificationByUsersEmail(email) {
+    // console.log(donation);
+    return new Promise((resolve, reject) => {
+        db.query("SELECT * FROM notifications INNER JOIN users on notifications.profile_of = users.id WHERE notifications_for = (SELECT id FROM users WHERE email=?) ORDER BY resolved ASC",
+            [email], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
+    })
+}
+
+module.exports.getNotificationByUsersEmail;
+
+module.exports.updateResolvedStatusInNotifactionByUserInfo = (notifications_for, profile_of) => {
+    // console.log(donation);
+    return new Promise((resolve, reject) => {
+        db.query("UPDATE notifications SET resolved='yes' WHERE notifications_for = ? AND profile_of = ?",
+            [notifications_for, profile_of], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
+    })
+}
+
+module.exports.updateResolvedStatusInNotifactionByNotificationID = (notification_id) => {
+    // console.log(donation);
+    return new Promise((resolve, reject) => {
+        db.query("UPDATE notifications SET resolved='yes' WHERE notification_id=?",
+            [notification_id], (err, res) => {
+                err ? reject(err) : resolve(res)
+            })
+    })
+}
+
+module.exports.NotificationUpdateDynamically = (req, res) => {
+    return new Promise((resolve, reject) => {
+        countNotificationByEmail(req.session.email)
+            .then(result => {
+                req.session.navbar_info.notification_count = result[0].notification_count;
+
+
+                getNotificationByUsersEmail(req.session.email)
+                    .then(result => {
+                        // console.log(result);
+
+                        var notification = [];
+
+                        for (var i = 0; i < result.length; i++) {
+                            // console.log(i);
+                            var eachnotification = {
+                                profile_of: cryptr.encrypt(result[i].profile_of),
+                                name: result[i].first_name + ' ' + result[i].last_name,
+                                resolved: result[i].resolved,
+                                notification_id: cryptr.encrypt(result[i].notification_id)
+                            }
+
+                            notification.push(eachnotification);
+                        }
+                        req.session.notifications = notification;
+                        resolve('yes');
+                        // console.log(req.session.notifications);
+                        // res.render('dashboard', { user_status, navbar: req.session.navbar_info, notifications: req.session.notifications });
+                    })
+
+            })
+    })
+
 }

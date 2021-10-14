@@ -29,13 +29,27 @@
           </ul>
         </li>
         <li class="menu-item">
-          <a class="sub-btn" id="sub-button" href="#">Notification <span class="badge badge-danger">2</span></a>
+          <a class="sub-btn" id="sub-button" href="#">Notification 
+            <% if(typeof notification_count != 'undefined' && notification_count != '0') { %>
+            <span class="badge badge-danger"><%= notification_count %></span>
+            <% } %>
+          </a>
           <!-- <button class="sub-btn">Dropdown <i class="fas fa-angle-down"></i></button> -->
           <ul class="sub-menu" id="sub-list" style="padding-left: 0;">
-            <li class="sub-item"><a href="#"><i class="fas fa-bell"></i> Minhaz Kamal Responded</a></li>
-            <li class="sub-item"><a href="#"><i class="fas fa-bell-slash"></i> Fairuz Shaiara Responded</a></li>
-            <li class="sub-item"><a href="#"><i class="fas fa-bell-slash"></i> Sartaj Ekram Responded</a></li>
+            <% if(typeof notifications != 'undefined' ) { %>
+            <% notifications.forEach(function(notif) { %>
+              <li class="sub-item">
+                <% if(notif.resolved == 'no') { %>
+                  <a href="/notification-resolve?profileOf=<%= notif.profile_of %>&notificationID=<%= notif.notification_id %>"><i class="fas fa-bell"></i> <%= notif.name %> responded to one of your requests</a>
+                  <% } else { %>
+                    <a href="/notification-resolve?profileOf=<%= notif.profile_of %>&notificationID=<%= notif.notification_id %>"><i class="fas fa-bell-slash"></i> <%= notif.name %> responded to one of your requests</a>
+                    <% } %>   
+              </li>
+              <% }) %>
+            <% } %>
             
+            <!-- <li class="sub-item"><a href="#"><i class="fas fa-bell-slash"></i> Fairuz Shaiara Responded</a></li>
+            <li class="sub-item"><a href="#"><i class="fas fa-bell-slash"></i> Sartaj Ekram Responded</a></li>  -->
           </ul>
         </li>
         <!-- <li class="menu-item"><a href="/dashboard">Notifications </a></li> -->

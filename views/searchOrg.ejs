@@ -250,7 +250,7 @@
 <body>
     <div id="preloader"></div>
     <% if(typeof navbar !='undefined' ) { %>
-    <%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo}) %>
+        <%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo, notification_count: navbar.notification_count, notifiactions: notifications}) %>
     <% } else { %>
     <%- include ("./partials/navbar2.ejs") %>
     <% } %>    

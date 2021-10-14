@@ -64,7 +64,11 @@ router.get('/', function (req, res) {
 
                                     // console.log(eligibility_parameters);
                                     req.session.temp_eligibility = eligibility_parameters;
-                                    res.render('eligibilityTest.ejs', { user: eligibility_parameters, navbar: req.session.navbar_info });
+                                    db.NotificationUpdateDynamically(req, res)
+                                .then(result => {
+                                    res.render('eligibilityTest.ejs', { user: eligibility_parameters, navbar: req.session.navbar_info, notifications: req.session.notifications });
+                                })
+                                    
                                 })
                         }
                         else {
@@ -72,7 +76,11 @@ router.get('/', function (req, res) {
                             req.session.temp_eligibility = eligibility_parameters;
 
                             // console.log(eligibility_parameters);
-                            res.render('eligibilityTest.ejs', { user: eligibility_parameters, navbar: req.session.navbar_info });
+                            db.NotificationUpdateDynamically(req, res)
+                                .then(result => {
+                                    res.render('eligibilityTest.ejs', { user: eligibility_parameters, navbar: req.session.navbar_info, notifications: req.session.notifications });
+                                })
+                            
                         }
                     })
             })

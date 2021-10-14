@@ -17,7 +17,7 @@
 
 <body>
 	<div id="preloader"></div>
-	<%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo}) %>
+	<%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo, notification_count: navbar.notification_count, notifiactions: notifications}) %>
 		<div class="container">
 			<form method="Post" enctype="multipart/form-data">
 				<div class="row gutters" style="padding-bottom: 5rem;">

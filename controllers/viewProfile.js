@@ -124,8 +124,11 @@ router.get('/:encrypted_id/', function (req, res) {
                                             .then(result5 => {
                                                 if(result5) user.donated = result5[0].total_donation;
                                                 else user.donated = 0;
-
-                                                res.render('viewProfile.ejs', { user, navbar: req.session.navbar_info });
+                                                db.NotificationUpdateDynamically(req, res)
+                                .then(result => {
+                                    res.render('viewProfile.ejs', { user, navbar: req.session.navbar_info, notifications: req.session.notifications });
+                                })
+                                                
                                             })
                                         
                                             

@@ -23,7 +23,7 @@
 <body>
 
 	<div id="preloader"></div>
-	<%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo}) %>
+	<%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo, notification_count: navbar.notification_count, notifiactions: notifications}) %>
 
 		<div class="upper-container">
 			<img src="img/requestFeedimg.jpg" alt="Snow" class="feedimg" style="width:100%;">

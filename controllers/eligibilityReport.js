@@ -68,7 +68,11 @@ router.get('/:encrypted_id', function (req, res) {
 
                             // console.log(eligibility_parameters);
                             req.session.temp_eligibility = eligibility_parameters;
-                            res.render('eligibilityReport.ejs', { user: eligibility_parameters, navbar: req.session.navbar_info });
+                            db.NotificationUpdateDynamically(req, res)
+                                .then(result => {
+                                    res.render('eligibilityReport.ejs', { user: eligibility_parameters, navbar: req.session.navbar_info, notifications: req.session.notifications });
+                                })
+                            
                         })
                 }
                 else {
@@ -76,7 +80,11 @@ router.get('/:encrypted_id', function (req, res) {
                     req.session.temp_eligibility = eligibility_parameters;
 
                     // console.log(eligibility_parameters);
-                    res.render('eligibilityReport.ejs', { user: eligibility_parameters, navbar: req.session.navbar_info });
+                    db.NotificationUpdateDynamically(req, res)
+                                .then(result => {
+                                    res.render('eligibilityReport.ejs', { user: eligibility_parameters, navbar: req.session.navbar_info, notifications: req.session.notifications });
+                                })
+                   
                 }
             })
     }

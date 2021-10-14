@@ -91,7 +91,11 @@ router.get('/', function (req, res) {
                                     req.session.temp_user.minDate = minDate;
                                     req.session.temp_user.maxDate = maxDate;
                                     req.session.div_results = div_result;
-                                    res.render('addNewDonation.ejs', { navbar: req.session.navbar_info, divisions: div_result, minDate, maxDate, user });
+                                    db.NotificationUpdateDynamically(req, res)
+                                .then(result => {
+                                    res.render('addNewDonation.ejs', { navbar: req.session.navbar_info, divisions: div_result, minDate, maxDate, user, notifications: req.session.notifications });
+                                })
+                                    
                                 })
                         })
                 })
@@ -126,7 +130,11 @@ router.get('/', function (req, res) {
                             req.session.temp_user.minDate = minDate;
                             req.session.temp_user.maxDate = maxDate;
                             req.session.div_results = div_result;
-                            res.render('addNewDonation.ejs', { navbar: req.session.navbar_info, divisions: div_result, minDate, maxDate });
+                            db.NotificationUpdateDynamically(req, res)
+                                .then(result => {
+                                    res.render('addNewDonation.ejs', { navbar: req.session.navbar_info, divisions: div_result, minDate, maxDate, notifications: req.session.notifications });
+                                })
+                            
 
                         })
                 })
@@ -195,8 +203,11 @@ router.post('/', [
             const alert = errors.array();
 
             req.session.temp_user.type = 'error';
-
-            res.render('addNewDonation', { user: req.session.temp_user, alert, divisions: req.session.div_results, navbar: req.session.navbar_info, minDate: req.session.temp_user.minDate, maxDate: req.session.temp_user.maxDate });
+            db.NotificationUpdateDynamically(req, res)
+                                .then(result => {
+                                    res.render('addNewDonation', { user: req.session.temp_user, alert, divisions: req.session.div_results, navbar: req.session.navbar_info, minDate: req.session.temp_user.minDate, maxDate: req.session.temp_user.maxDate, notifications: req.session.notifications });
+                                })
+            
         }
         else {
             // console.log(req.body);

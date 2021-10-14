@@ -1,21 +1,21 @@
 require('dotenv').config()
 
 // modules
-var express = require ('express');
-var session = require ('express-session');
-var cookie = require ('cookie-parser');
-var path = require ('path');
-var ejs= require ('ejs');
+var express = require('express');
+var session = require('express-session');
+var cookie = require('cookie-parser');
+var path = require('path');
+var ejs = require('ejs');
 var multer = require('multer');
-var path = require ('path');
-var async = require ('async');
-var nodmailer = require ('nodemailer');
-var crypto = require ('crypto');
-var cryptr = require ('cryptr');
-var expressValidator = require ('express-validator');
+var path = require('path');
+var async = require('async');
+var nodmailer = require('nodemailer');
+var crypto = require('crypto');
+var cryptr = require('cryptr');
+var expressValidator = require('express-validator');
 var sweetalert = require('sweetalert2');
 var port = process.env.PORT;
-var bodyParser = require ('body-parser');
+var bodyParser = require('body-parser');
 var hl = require('handy-log');
 var app = express();
 var passport = require('passport');
@@ -24,15 +24,15 @@ var box = require('./models/mapbox');
 var db = require('./models/db_controller');
 
 // file modules
-var landing = require ('./controllers/landing');
-var signup = require ('./controllers/signup');
+var landing = require('./controllers/landing');
+var signup = require('./controllers/signup');
 var signup_google = require('./controllers/signup_google');
 var login_google = require('./controllers/login_google');
 var signup_facebook = require('./controllers/signup_facebook');
 var login_facebook = require('./controllers/login_facebook');
 var verification = require('./controllers/verification');
 var profile_update = require('./controllers/updateProfile');
-var login = require ('./controllers/login');
+var login = require('./controllers/login');
 var eligibilityTest = require('./controllers/eligibilityTest');
 var resetPassword = require('./controllers/resetPassword');
 var KYC = require('./controllers/KYC');
@@ -54,6 +54,7 @@ var newDonation = require('./controllers/newDonation');
 var eligibilityReport = require('./controllers/eligibilityReport');
 var viewDonation = require('./controllers/viewDonation');
 var respondTOrequest = require('./controllers/respondTOrequest');
+var notificationResolve = require('./controllers/notificationResolve');
 
 
 // view engine
@@ -67,7 +68,7 @@ app.use(passport.session());
 app.use(express.static('./public'));
 app.use('/profile', express.static('profile'));
 // app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //app.use(expressValidator());
 app.use(cookie());
@@ -81,12 +82,12 @@ app.use(session({
 }));
 
 
-var server =app.listen(port , function(){
+var server = app.listen(port, function () {
 
     hl.rainbow('App Running');
 });
 
-app.use ('/', landing);
+app.use('/', landing);
 app.use('/signup', signup);
 app.use('/activate', verification);
 app.use('/profile-update', profile_update);
@@ -117,6 +118,7 @@ app.use('/add-new-donation', newDonation);
 app.use('/view/eligibility-report', eligibilityReport);
 app.use('/view/donation', viewDonation);
 app.use('/request/respond', respondTOrequest);
+app.use('/notification-resolve', notificationResolve);
 
 //localhost:3940/new-request
 // app.get('/new-request', function(req,res){
@@ -129,21 +131,29 @@ app.use('/request/respond', respondTOrequest);
 // });
 
 //localhost:3940/search-donor
-app.get('/search-donor', function(req,res){
-    res.render('searchDonor.ejs', {navbar: req.session.navbar_info});
+app.get('/search-donor', function (req, res) {
+    db.NotificationUpdateDynamically(req, res)
+        .then(result => {
+            res.render('searchDonor.ejs', { navbar: req.session.navbar_info, notifications: req.session.notifications });
+        })
+
 });
 
 //localhost:3940//search-org
-app.get('/search-org', function(req,res){
-    res.render('searchOrg.ejs', {navbar: req.session.navbar_info});
+app.get('/search-org', function (req, res) {
+    db.NotificationUpdateDynamically(req, res)
+        .then(result => {
+            res.render('searchOrg.ejs', { navbar: req.session.navbar_info, notifications: req.session.notifications });
+        })
+
 });
 
 //localhost:3940/home
-app.get('/home', function(req,res){
+app.get('/home', function (req, res) {
     res.render('home.ejs');
 });
 
-app.get('/mapbox', function(req, res){
+app.get('/mapbox', function (req, res) {
     // console.log(req.query);
     // box.reverseGeocoder(req.query.latitude, req.query.longitude);
     // box.reverseGeocoder(23.21271883828553, 89.79110255783338);
@@ -151,20 +161,20 @@ app.get('/mapbox', function(req, res){
 
 
 //localhost:3940/org-input
-app.get('/org-input', function(req,res){
+app.get('/org-input', function (req, res) {
     db.getDivisions()
-            .then(result => {
-                if (result.length > 0) {
-                    let div_result = result;
-                    res.render('orgInput.ejs', {divisions: div_result});
-                }
-            })
+        .then(result => {
+            if (result.length > 0) {
+                let div_result = result;
+                res.render('orgInput.ejs', { divisions: div_result });
+            }
+        })
 });
 
-app.post('/org-input', function(req,res){
+app.post('/org-input', function (req, res) {
     // console.log(req.body);
-    db.setOrgInput(req.body, function(insert_id){
-        res.send("Hospital with ID: "+insert_id+" insertion successfull");
+    db.setOrgInput(req.body, function (insert_id) {
+        res.send("Hospital with ID: " + insert_id + " insertion successfull");
     })
 });
 
@@ -189,7 +199,7 @@ app.post('/org-input', function(req,res){
 //     res.render('contactUs.ejs');
 // });
 
-app.get('/test-page', function(req,res){
+app.get('/test-page', function (req, res) {
     res.render('test.ejs');
 });
 
