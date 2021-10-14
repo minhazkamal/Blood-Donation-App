@@ -24,7 +24,7 @@ router.get('/details', function (req, res) {
                     db.getAllUpazilla()
                         .then(result => {
                             var upazilla = result;
-                            db.getUserAllInfoExceptMine(req.session.email)
+                            db.getUserAllInfoExceptMineWhoAreActive(req.session.email)
                                 .then(result => {
                                     // console.log(div);
                                     // console.log(dist);

@@ -91,8 +91,25 @@ module.exports.contactUs = function (user, callback) {
     //     })
 }
 
-module.exports.getuserid = function (email) {
+module.exports.getuseridwithEligibilityReport = function (email) {
     var query = "SELECT * from `users` NATURAL JOIN `user_profile` NATURAL JOIN `user_address` NATURAL JOIN `eligibility_report` where `email` = ?";
+    // db.query(query,[email], (err, res) => {
+    //     if(err) throw err;
+    //     else{
+    //         console.log(res[0].id);
+    //         return res[0].id;
+    //     }
+    // })
+    return new Promise((resolve, reject) => {
+        db.query(query, [email], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+    //console.log(query);
+}
+
+module.exports.getuserid = function (email) {
+    var query = "SELECT * from `users` where `email` = ?";
     // db.query(query,[email], (err, res) => {
     //     if(err) throw err;
     //     else{
@@ -496,6 +513,14 @@ module.exports.getUserAllInfo = (email) => {
 module.exports.getUserAllInfoExceptMine = (email) => {
     return new Promise((resolve, reject) => {
         db.query(`SELECT * from users NATURAL JOIN user_address NATURAL JOIN user_profile WHERE users.email != ?`, [email], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
+
+module.exports.getUserAllInfoExceptMineWhoAreActive = (email) => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * from users NATURAL JOIN user_address NATURAL JOIN user_profile NATURAL JOIN active_status WHERE users.email != ? AND active_status.status='yes'`, [email], (err, res) => {
             err ? reject(err) : resolve(res)
         })
     })

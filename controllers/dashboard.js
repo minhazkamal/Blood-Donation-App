@@ -37,53 +37,62 @@ router.get('/', function (req, res) {
         }
         db.getuserid(req.session.email)
             .then(result => {
+                // console.log(result);
+                const uid = result[0].id;
                 user_status.name = result[0].first_name;
-                if(monthDiff(new Date(), result[0].last_donation)>=3) user_status.eligibility = result[0].eligibility_test;
-                else user_status.eligibility = 'not_eligible';
-                db.getActiveStatusById(result[0].id)
+                user_status.eligibility = result[0].eligibility_test;
+                db.getEligibilityReport(req.session.email)
                     .then(result => {
-                        user_status.active = result[0].status;
-                        req.session.temp_user_status = user_status;
-                        db.getNameAndPhoto(req.session.email)
+                        if (result.length > 0 && result[0].last_donation != null) {
+                            if (monthDiff(new Date(), result[0].last_donation) < 3) user_status.eligibility = 'not_eligible';
+                        }
+                        db.getActiveStatusById(uid)
                             .then(result => {
-                                navbar_info.name = result[0].first_name;
-                                navbar_info.photo = result[0].profile_picture;
-                                req.session.navbar_info = navbar_info;
-                                db.NotificationUpdateDynamically(req, res)
-                                .then(result => {
-                                    res.render('dashboard', { user_status, navbar: req.session.navbar_info, notifications: req.session.notifications });
-                                })
-                                // db.countNotificationByEmail(req.session.email)
-                                //     .then(result => {
-                                //         navbar_info.notification_count = result[0].notification_count;
+                                user_status.active = result[0].status;
+                                req.session.temp_user_status = user_status;
+                                db.getNameAndPhoto(req.session.email)
+                                    .then(result => {
+                                        navbar_info.name = result[0].first_name;
+                                        navbar_info.photo = result[0].profile_picture;
+                                        req.session.navbar_info = navbar_info;
+                                        db.NotificationUpdateDynamically(req, res)
+                                            .then(result => {
+                                                res.render('dashboard', { user_status, navbar: req.session.navbar_info, notifications: req.session.notifications });
+                                            })
+                                        // db.countNotificationByEmail(req.session.email)
+                                        //     .then(result => {
+                                        //         navbar_info.notification_count = result[0].notification_count;
 
-                                //         req.session.navbar_info = navbar_info;
-                                //         db.getNotificationByUsersEmail(req.session.email)
-                                //             .then(result => {
-                                //                 // console.log(result);
+                                        //         req.session.navbar_info = navbar_info;
+                                        //         db.getNotificationByUsersEmail(req.session.email)
+                                        //             .then(result => {
+                                        //                 // console.log(result);
 
-                                //                 var notification = [];
+                                        //                 var notification = [];
 
-                                //                 for (var i = 0; i < result.length; i++) {
-                                //                     // console.log(i);
-                                //                     var eachnotification = {
-                                //                         profile_of: cryptr.encrypt(result[i].profile_of),
-                                //                         name: result[i].first_name + ' ' + result[i].last_name,
-                                //                         resolved: result[i].resolved,
-                                //                         notification_id: cryptr.encrypt(result[i].notification_id)
-                                //                     }
+                                        //                 for (var i = 0; i < result.length; i++) {
+                                        //                     // console.log(i);
+                                        //                     var eachnotification = {
+                                        //                         profile_of: cryptr.encrypt(result[i].profile_of),
+                                        //                         name: result[i].first_name + ' ' + result[i].last_name,
+                                        //                         resolved: result[i].resolved,
+                                        //                         notification_id: cryptr.encrypt(result[i].notification_id)
+                                        //                     }
 
-                                //                     notification.push(eachnotification);
-                                //                 }
-                                //                 req.session.notifications = notification;
-                                //                 // console.log(req.session.notifications);
-                                //                 res.render('dashboard', { user_status, navbar: req.session.navbar_info, notifications: req.session.notifications });
-                                //             })
+                                        //                     notification.push(eachnotification);
+                                        //                 }
+                                        //                 req.session.notifications = notification;
+                                        //                 // console.log(req.session.notifications);
+                                        //                 res.render('dashboard', { user_status, navbar: req.session.navbar_info, notifications: req.session.notifications });
+                                        //             })
 
-                                //     })
+                                        //     })
 
+                                    })
                             })
                     })
+
+
             })
     }
     else {
