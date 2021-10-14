@@ -194,8 +194,9 @@ header.sticky .menu-item .sub-menu {
   letter-spacing: 0.5px;
   transition: 0.3s;
   font-size: 1rem;
-  height: 50px;
-  margin-top: 1em;
+  height: 40px;
+  margin-top: 0.75em;
+  text-align: center;
 
   /* margin-right: 1rem; */
 }
@@ -212,7 +213,7 @@ header.sticky .menu-item .sub-menu {
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  height: 50px;
+  height: 40px;
 }
 
 .add-link:hover {
