@@ -1,64 +1,61 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     position: relative;
-    font-family: 'Montserrat',sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
-html,
-body {
-  /* position: relative; */
-  height: 100%;
-  scroll-behavior: smooth;
+html, body {
+    /* position: relative; */
+    height: 100%;
+    scroll-behavior: smooth;
 }
 
 body {
-  background: #fff;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color: #000;
-  margin: 0;
-  padding: 0;
+    background: #fff;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
 }
 
 .swiper {
-  width: 100%;
-  height: 100%;
-  /* top: 5%; */
+    width: 100%;
+    height: 100%;
+    /* top: 5%; */
 }
 
 .swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-
-  /* Center slide text vertically */
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
 }
 
 .swiper-slide img {
-  display: block;
-  width: 100%;
-  height: auto;
-  /* object-fit: cover; */
-  background-size: cover;
+    display: block;
+    width: 100%;
+    height: auto;
+    /* object-fit: cover; */
+    background-size: cover;
 }
 
-.banner{
+.banner {
     position: relative;
     width: 100%;
     height: 50%;
@@ -67,57 +64,58 @@ body {
     align-items: center;
 }
 
-.banner .content{
+.banner .content {
     position: relative;
     max-width: 750px;
     text-align: center;
 }
 
-.banner .content h2{
+.banner .content h2 {
     font-size: 60px;
 }
 
-.banner .content p{
+.banner .content p {
     font-size: 18px;
 }
 
-.about{
-    position:relative;
+.about {
+    position: relative;
     width: 100%;
     display: flex;
 }
 
-.about .contentBx{
+.about .contentBx {
     padding: 100px;
     width: 50%;
 }
 
-.heading{
+.heading {
     font-size: 30px;
     font-weight: 600;
     letter-spacing: 1px;
     margin-bottom: 10px;
 }
 
-.text{
+.text {
     font-size: 1.3rem;
     font-weight: 300;
     letter-spacing: 1px;
     color: rgb(49, 49, 49);
 }
-.about .videoBx{
+
+.about .videoBx {
     width: 50%;
     padding: 100px 0 100px 0;
 }
 
-.services
-{
+.services {
     /* padding: 100px; */
     text-align: center;
     width: 80%;
     margin: 0 auto;
 }
-.services .container{
+
+.services .container {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -125,7 +123,8 @@ body {
     flex-wrap: wrap;
     margin-top: 60px;
 }
-.services .container .serviceBx{
+
+.services .container .serviceBx {
     position: relative;
     width: 350px;
     height: 300px;
@@ -134,10 +133,8 @@ body {
     align-items: center;
 }
 
-
-
-.services .container .serviceBx .card{
-    font-family: 'Montserrat',sans-serif;
+.services .container .serviceBx .card {
+    font-family: 'Montserrat', sans-serif;
     width: 300px;
     height: 200px;
     padding: 60px;
@@ -149,18 +146,16 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
-.services .container .serviceBx .card:hover{
-    border-bottom: 3.5px solid rgb(114, 110, 110);   
+.services .container .serviceBx .card:hover {
+    border-bottom: 3.5px solid rgb(114, 110, 110);
     transform: scale(1.05);
     box-shadow: 0px 0px 25px rgba(243, 82, 82, 0.3);
-    
 }
 
-.services .container .serviceBx .card-elg{
-    font-family: 'Montserrat',sans-serif;
+.services .container .serviceBx .card-elg {
+    font-family: 'Montserrat', sans-serif;
     background-color: #fff;
     max-width: 300px;
     max-height: 200px;
@@ -174,29 +169,30 @@ body {
     transition: .4s;
 }
 
-.services .container .serviceBx .card-elg:hover{
-    border-bottom: 3.5px solid rgb(114, 110, 110);   
+.services .container .serviceBx .card-elg:hover {
+    border-bottom: 3.5px solid rgb(114, 110, 110);
     transform: scale(1.05);
     box-shadow: 0px 0px 25px rgba(243, 82, 82, 0.3);
 }
+
 .services .container .serviceBx .card .noOfResponses {
     color: rgb(201, 25, 25);
 }
 
-.services .container .serviceBx .card-elg .noOfUsers{
+.services .container .serviceBx .card-elg .noOfUsers {
     color: purple;
 }
 
-.services .container .serviceBx .card .noOfRequests{
+.services .container .serviceBx .card .noOfRequests {
     color: royalblue;
 }
 
-.client{
+.client {
     padding: 100px;
     text-align: center;
 }
 
-.client .imgBx{
+.client .imgBx {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -204,88 +200,118 @@ body {
     margin-top: 40px;
 }
 
-.client .imgBx img{
+.client .imgBx img {
     max-width: 300px;
     max-height: 200px;
     margin: 20px;
     margin-top: 0;
 }
 
-.steps{
+.steps {
     display: flex;
     /* justify-content: center; */
     align-items: center;
     flex-direction: column;
 }
 
+.blobEligibility1 {
+    width: 600px;
+    height: 600px;
+    /* top: -100px; */
+    left: -100px;
+    position: absolute;
+    z-index: -1;
+}
 
+.blobEligibility2 {
+    width: 500px;
+    height: 500px;
+    top: -30px;
+    left: 750px;
+    position: absolute;
+    z-index: -1;
+    color: #da6b8c;
+    ;
+}
 
-
-
-@media (max-width: 1100px){
+@media (max-width: 1100px) {
     .swiper {
         width: 100%;
         height: 30%;
         top: 5%;
-      }
+    }
     .swiper-slide img {
         display: block;
         width: 100%;
         height: auto;
         /* object-fit: cover; */
         background-size: cover;
-      }
-      .banner{
-          margin-top: 50px;
-          padding:50px;
-      }
-      .banner .content h2{
-          font-size: 36px;
-      }
-      .banner .content p{
-          font-size: 16px;
-      }
-      .about{
-          flex-direction: column;
-      }
-      .about .contentBx
-      {
-          width: 100%;
-          padding: 50px;
-          padding-bottom: 0px;
-          min-height: 400px;
-          text-align: center;
-      }
-    
-      .about .videoBx iframe{
-         width: 195%;
-          /* padding: 50px; */
-          min-height: 300px;
-          text-align: center;
-          margin-left: 2px;
-          margin-right: 1px;
-      }
-      .services{
-          padding: 50px;
-      }
-      .services .container{
-          justify-content: center;
-          margin-top: 20px;
-      }
-      .services .container .serviceBx{
-          
-          width: 300px;
-          height: 250px;
-      }
-      .client{
-          padding: 50px;
-      }
-      .client .imgBx{
-          justify-content: center;
-      }
+    }
+    .banner {
+        margin-top: 50px;
+        padding: 50px;
+    }
+    .banner .content h2 {
+        font-size: 36px;
+    }
+    .banner .content p {
+        font-size: 16px;
+    }
+    .about {
+        flex-direction: column;
+    }
+    .about .contentBx {
+        width: 100%;
+        padding: 50px;
+        padding-bottom: 0px;
+        min-height: 400px;
+        text-align: center;
+    }
+    .about .videoBx iframe {
+        width: 195%;
+        /* padding: 50px; */
+        min-height: 300px;
+        text-align: center;
+        margin-left: 2px;
+        margin-right: 1px;
+    }
+    .services {
+        padding: 50px;
+    }
+    .services .container {
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .services .container .serviceBx {
+        width: 300px;
+        height: 250px;
+    }
+    .client {
+        padding: 50px;
+    }
+    .client .imgBx {
+        justify-content: center;
+    }
+    .blobEligibility1 {
+        width: 300px;
+        height: 300px;
+        top: 950px;   
+        position: absolute;
+        z-index: -1;
+    }
+    .blobEligibility2 {
+        width: 300px;
+        height: 300px;
+        top: 1000px;
+        left: 60px;
+        position: absolute;
+        z-index: -1;
+        color: #da6b8c;
+        ;
+    }
 }
 
-#preloader{
+#preloader {
     height: 100vh;
     width: 100%;
     position: fixed;
@@ -295,21 +321,19 @@ body {
 }
 
 ::-webkit-scrollbar {
-	width: 8px;
-	height: 3px;
-	border-left: 0;
-	background: rgba(255, 255, 255, 0);
-	border-radius: 1em;
-	
-  }
-  
-  ::-webkit-scrollbar-track {
-	background: none;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-	background: #3b363880;
-	border-radius: 0;
-	border-radius: 1em;
-  } 
-  
+    width: 8px;
+    height: 3px;
+    border-left: 0;
+    background: rgba(255, 255, 255, 0);
+    border-radius: 1em;
+}
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3b363880;
+    border-radius: 0;
+    border-radius: 1em;
+}
