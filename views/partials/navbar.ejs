@@ -40,46 +40,13 @@
             <% notifications.forEach(function(notif) { %>
               <li class="sub-item">
                 <% if(notif.resolved == 'no') { %>
-                  <a href="/notification-resolve?profileOf=<%= notif.profile_of %>&notificationID=<%= notif.notification_id %>"><i class="fas fa-bell"></i> <%= notif.name %> responded to one of your requests</a>
+                  <a href="/notification-resolve?profileOf=<%= notif.profile_of %>&notificationID=<%= notif.notification_id %>"><i class="fas fa-bell"></i> <%= notif.name %> responded to one of your requests.</a>
                   <% } else { %>
-                    <a href="/notification-resolve?profileOf=<%= notif.profile_of %>&notificationID=<%= notif.notification_id %>"><i class="fas fa-bell-slash"></i> <%= notif.name %> responded to one of your requests</a>
+                    <a href="/notification-resolve?profileOf=<%= notif.profile_of %>&notificationID=<%= notif.notification_id %>"><i class="fas fa-bell-slash"></i> <%= notif.name %> responded to one of your requests.</a>
                     <% } %>   
               </li>
-              <li>abc</li>
-              <li>deg</li>
-              <li>ghi</li>
-              <li>jkl</li>
-              <li>mno</li>
-              <li>abc</li>
-              <li>deg</li>
-              <li>ghi</li>
-              <li>jkl</li>
-              <li>mno</li>
-              <li>abc</li>
-              <li>deg</li>
-              <li>ghi</li>
-              <li>jkl</li>
-              <li>mno</li>
-              <li>abc</li>
-              <li>deg</li>
-              <li>ghi</li>
-              <li>jkl</li>
-              <li>mno</li>
-              <li>abc</li>
-              <li>deg</li>
-              <li>ghi</li>
-              <li>jkl</li>
-              <li>mno</li>
-              <li>abc</li>
-              <li>deg</li>
-              <li>ghi</li>
-              <li>jkl</li>
-              <li>mno</li>
-              <li>abc</li>
-              <li>deg</li>
-              <li>ghi</li>
-              <li>jkl</li>
-              <li>mno</li>
+         
+   
               <% }) %>
             <% } %>
             
