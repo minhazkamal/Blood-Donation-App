@@ -312,6 +312,7 @@ i.fa-user-circle {
 
 .upper-container .post-btn:hover {
   background-color: black;
+  transition: background-color 300ms;
 }
 
 @media (max-width:800px) {
