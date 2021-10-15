@@ -173,35 +173,13 @@ h6{
 .account-settings .about p {
     font-size: 0.825rem;
 }
-/* .form-control {
-    border: 1px solid #cfd1d8;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-    font-size: .825rem;
-    background: #ffffff00;
-    color: #2e323c;
-} */
+
 
 .btn dropdown-toggle{
     border: 1px solid black;
 }
 
-/* .card { */
-    /* background: rgba( 255, 255, 255, 1 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 16.0px );
-    -webkit-backdrop-filter: blur( 20.0px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    border: 1rem;
-    margin-bottom: 1rem; */
-     /* margin-top: 5rem;  */
 
-/* } */
 
 .btn1{
 
@@ -217,7 +195,7 @@ h6{
     transition: 0.3s;
     font-size: 0.875rem;
     margin-right: 1rem;
-    width: 25%;
+    width: 15%;
     display: inline;
 }
 
@@ -232,7 +210,7 @@ h6{
     color: white;
     font-weight: 500;
     border: none;
-    padding: 0.75rem;
+    padding: 0.8rem;
     border-radius: 8px;
     font-size: 0.8rem;
     text-transform: uppercase;
@@ -240,12 +218,18 @@ h6{
     transition: 0.3s;
     font-size: 0.875rem;
     display: inline;
-    width: 30%;
+    width: 40%;
 }
 
 .btn2:hover{
     background: #3a7ca5;
     cursor: pointer;
+}
+
+@media(max-width:800px) {
+    .btn1{
+        width: 35%;
+    }
 }
 
 .card-body{

@@ -252,8 +252,9 @@ h6{
     transition: 0.3s;
     font-size: 0.875rem;
     margin-right: 1rem;
-    width: 25%;
+    width: 35%;
     display: inline;
+    text-align: center;
 }
 
 .btn1:hover{
@@ -275,7 +276,7 @@ h6{
     transition: 0.3s;
     font-size: 0.875rem;
     display: inline;
-    width: 30%;
+    width: 35%;
 }
 
 .btn2:hover{
