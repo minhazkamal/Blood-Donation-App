@@ -355,19 +355,11 @@ i.fa-user-circle {
   .btn {
     width: 100%;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
     flex-direction: row;
     transform: translateY(-8em) !important;
   }
-  .btn:nth-of-type(odd) {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    flex-direction: row;
-    transform: translateY(-9em) !important;
-  }
+
   .btn-01 {
     width: 100%;
     display: flex;
@@ -480,7 +472,7 @@ i.fa-user-circle {
   /* visibility: hidden; */
   display: none;
   opacity: 0;
-  transition: visibility 300ms, opacity 500ms;
+  transition: display 300ms, opacity 500ms;
   justify-content: center;
   align-items: center;
 }
@@ -528,7 +520,6 @@ i.fa-user-circle {
     display: grid;
     grid-template-columns: 100% 0%;
     margin-top: 50px;
-    overflow-x: hidden !important;
   }
   .left-col {
     width: 100%;
@@ -539,9 +530,7 @@ i.fa-user-circle {
   .footer-container {
     display: none;
   }
-  /* .wrapper{
-        display: block;
-    } */
+
   .view-profile-btn {
     font-size: .83rem;
   }
@@ -551,14 +540,7 @@ i.fa-user-circle {
   .upper-container {
     height: 30%;
   }
-  /* .blobEligibility1{
-  width: 500px;
-  height: 450px;
-  top: -120px;
-  left: -80px;
-  position: absolute;
-  z-index: -1;
-} */
+
   .blobEligibility1 {
     display: none;
   }
