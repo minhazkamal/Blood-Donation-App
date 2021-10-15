@@ -210,6 +210,45 @@ header.sticky .menu-item .sub-menu {
   border: 1px solid #999;
 }
 
+.signin-btn-navbar {
+  /* display: block; */
+  /* width: 100%; */
+  display: inline-block;
+  background: #48cae4;
+  color: white;
+  font-weight: 500;
+  border: none;
+  padding: 0 2rem 0 2rem;
+  border-radius: 8px;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: 0.3s;
+  font-size: 1rem;
+  height: 40px;
+  margin-top: 0.75em;
+  text-align: center;
+  margin-right: 1em;
+}
+
+.signin-btn-navbar:hover {
+  background: #90e0ef;
+  cursor: pointer;
+}
+.signin {
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  height: 40px;
+}
+
+.signin:hover {
+  color: white;
+  text-decoration: none;
+}
 .signup-btn-navbar {
   /* display: block; */
   /* width: 100%; */
@@ -228,8 +267,6 @@ header.sticky .menu-item .sub-menu {
   height: 40px;
   margin-top: 0.75em;
   text-align: center;
-
-  /* margin-right: 1rem; */
 }
 
 .signup-btn-navbar:hover {
@@ -237,7 +274,7 @@ header.sticky .menu-item .sub-menu {
   cursor: pointer;
 }
 
-.add-link {
+.signup {
   color: white;
   text-align: center;
   display: flex;
@@ -247,7 +284,7 @@ header.sticky .menu-item .sub-menu {
   height: 40px;
 }
 
-.add-link:hover {
+.signup:hover {
   color: white;
   text-decoration: none;
 }
