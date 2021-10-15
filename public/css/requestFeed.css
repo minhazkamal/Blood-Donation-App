@@ -24,8 +24,18 @@ html, body {
 .upper-container {
   position: relative;
   text-align: center;
-  color: white;
+  color: rgb(0, 0, 0);
   height: 80%;
+  font-size: small;
+}
+
+.blobEligibility1{
+  width: 2000px;
+  height: 2000px;
+  top: -500px;
+  left: 40px;
+  position: absolute;
+  z-index: -1;
 }
 
 .centered {
@@ -103,7 +113,7 @@ html, body {
 .profile {
   /* z-index: 2; */
   background: #ffc3cc;
-  width: 270px;
+  width: 270px !important;
   height: 270px;
   display: flex;
   align-items: center;
@@ -177,8 +187,9 @@ i.fa-user-circle {
   justify-content: flex-end;
   align-items: center;
   flex-direction: row;
-  transform: translateY(7em);
+  transform: translateY(7em) !important;
 }
+
 
 .btn-01 {
   width: 100%;
@@ -346,10 +357,19 @@ i.fa-user-circle {
   .btn {
     width: 100%;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    justify-content: center;
-    margin-top: 0;
-    transform: translateY(-7em);
+    flex-direction: row;
+    transform: translateY(-8em) !important;
+  }
+  
+  .btn:nth-of-type(odd){
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: row;
+    transform: translateY(-9em) !important;
   }
   .btn-01 {
     width: 100%;
@@ -504,6 +524,7 @@ i.fa-user-circle {
     display: grid;
     grid-template-columns: 100% 0%;
     margin-top: 50px;
+    overflow-x: hidden !important;
   }
   .left-col {
     width: 100%;
@@ -527,6 +548,26 @@ i.fa-user-circle {
   .upper-container {
     height: 30%;
   }
+  /* .blobEligibility1{
+  width: 500px;
+  height: 450px;
+  top: -120px;
+  left: -80px;
+  position: absolute;
+  z-index: -1;
+} */
+
+.blobEligibility1{
+  display: none;
+}
+
+.centered{
+  font-size: 0.7em;
+}
+.post-btn{
+   height: 40px;
+   text-align: center;
+}
 
 }
 
