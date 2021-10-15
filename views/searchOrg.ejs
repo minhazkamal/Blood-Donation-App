@@ -488,7 +488,7 @@
 
                 const listingsE1 = document.getElementById('listings');
                 const resultE1 = document.getElementById('resultFound');
-                resultE1.style.background = 'linear-gradient(to bottom, #00ffff 0%, #0066ff 100%)';
+                resultE1.style.background = 'linear-gradient(82deg, rgba(1, 42, 74, 1) 20%, rgba(42, 111, 151, 1) 80%)';
                 /* Building The list of Locations */
                 function buildLocationList(data) {
                     // console.log("Hello");
@@ -497,6 +497,7 @@
                     const result_number = document.createElement('p');
                     result_number.style.textAlign = 'center';
                     result_number.style.fontWeight = 'bold';
+                    result_number.style.color = 'white';
                     // Clear any existing listings
                     listingsE1.innerHTML = '';
                     resultE1.innerHTML = '';
