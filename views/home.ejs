@@ -75,19 +75,19 @@
             <div class="container">
                 <div class="serviceBx" data-aos="fade-up-right">
                     <div class="card">
-                        <h2 class="noOfUsers" id="elg-score">500</h2>
+                        <h2 class="noOfUsers" id="user-count">500</h2>
                         <h4>Users <br> <i class="fas fa-user"></i></h4>
                     </div>
                 </div>
                 <div class="serviceBx" data-aos="fade-up">
                     <div class="card">
-                        <h2 class="noOfResponses" id="elg-score">250</h2>
+                        <h2 class="noOfResponses" id="organization-count">250</h2>
                         <h4>Organizations <i class="fas fa-hospital-o"></i></h4>
                     </div>
                 </div>
                 <div class="serviceBx" data-aos="fade-up-left">
                     <div class="card">
-                        <h2 class="noOfRequests" id="elg-score">1205</h2>
+                        <h2 class="noOfRequests" id="request-count">1205</h2>
                         <h4>Requests <br> <i class="fas fa-bullhorn"></i></h4>
                     </div>
                 </div>
@@ -211,28 +211,42 @@
 
             <script>
                 $(document).ready(function () {
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(function (position) {
-                            console.log(position);
-                            var latitude = position.coords.latitude;
-                            var longitude = position.coords.longitude;
-                            $.ajax({
-                                type: 'GET',
-                                data: { latitude, longitude },
-                                url: '/mapbox',
-                                success: function (data) {
-                                    console.log(data);
-                                    // $('#basic_district').empty();
-                                    // $('#basic_district').append("<option disabled selected>District</option>");
-                                    // $.each(data, function (index, district) {
-                                    // 	$('#basic_district').append("<option value = '" + district.id + "' >" + district.name + " </option>");
-                                    // });
-                                }
-                            });
+                    // if (navigator.geolocation) {
+                    //     navigator.geolocation.getCurrentPosition(function (position) {
+                    //         console.log(position);
+                    //         var latitude = position.coords.latitude;
+                    //         var longitude = position.coords.longitude;
+                    //         $.ajax({
+                    //             type: 'GET',
+                    //             data: { latitude, longitude },
+                    //             url: '/mapbox',
+                    //             success: function (data) {
+                    //                 console.log(data);
+                    //                 // $('#basic_district').empty();
+                    //                 // $('#basic_district').append("<option disabled selected>District</option>");
+                    //                 // $.each(data, function (index, district) {
+                    //                 // 	$('#basic_district').append("<option value = '" + district.id + "' >" + district.name + " </option>");
+                    //                 // });
+                    //             }
+                    //         });
 
 
-                        });
-                    }
+                    //     });
+                    // }
+                    $.ajax({
+                        type: 'GET',
+                        data: {},
+                        url: '/stats-for-home',
+                        success: function (data) {
+                            console.log(data);
+                            document.getElementById('user-count').innerHTML = data.user_count + '+';
+                            // $('#basic_district').empty();
+                            // $('#basic_district').append("<option disabled selected>District</option>");
+                            // $.each(data, function (index, district) {
+                            // 	$('#basic_district').append("<option value = '" + district.id + "' >" + district.name + " </option>");
+                            // });
+                        }
+                    });
                 });
             </script>
 
