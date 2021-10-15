@@ -944,3 +944,13 @@ module.exports.NotificationUpdateDynamically = (req, res) => {
     })
 
 }
+
+;
+
+module.exports.getStatsForHome = () => {
+    return new Promise((resolve, reject) => {
+        db.query(`SELECT * FROM (SELECT COUNT(*) as user_count FROM users) as uc, (SELECT COUNT(*) as request_count FROM requests) as rc, (SELECT COUNT(*) as organization_count FROM organizations) as oc`, [], (err, res) => {
+            err ? reject(err) : resolve(res)
+        })
+    })
+}
