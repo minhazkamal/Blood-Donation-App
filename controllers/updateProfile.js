@@ -224,7 +224,7 @@ router.get('/', function (req, res) {
                             if (result[0].profile_build === 'no') {
                                 db.NotificationUpdateDynamically(req, res)
                                 .then(result => {
-                                    res.render('updateProfile.ejs', { user, divisions: div_result , navbar: req.session.navbar_info, notifications: req.session.notifications});
+                                    res.render('updateProfile.ejs', { user, divisions: div_result , navbar: req.session.navbar_info, notifications: req.session.notifications, profile_build: 'no'});
                                 })
                                 
                             }
