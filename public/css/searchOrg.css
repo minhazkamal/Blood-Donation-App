@@ -19,6 +19,8 @@ html, body {
     font-family: 'Montserrat', sans-serif;
     background-image: url(/img/wavelogin.png);
     background-size: cover;
+    /* margin-bottom: 200px; */
+    padding-bottom: 5rem;
 }
 
 form input[type="text"] {
