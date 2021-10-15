@@ -153,9 +153,9 @@ app.get('/search-org', function (req, res) {
 });
 
 //localhost:3940/home
-app.get('/home', function (req, res) {
-    res.render('home.ejs');
-});
+// app.get('/home', function (req, res) {
+//     res.render('home.ejs');
+// });
 
 app.get('/mapbox', function (req, res) {
     // console.log(req.query);
