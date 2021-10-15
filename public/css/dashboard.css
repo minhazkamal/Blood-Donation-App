@@ -118,6 +118,7 @@ h4 {
 
 .lead {
   font-size: 2rem;
+  text-align: center;
 }
 
 hr {
@@ -216,7 +217,7 @@ input:checked+.slider:before {
 @media (max-width:800px) {
   .card-01 {
     flex: 100%;
-    max-width: 600px;
+    width: 600px;
   }
   .card-02 {
     flex: 100%;
@@ -225,6 +226,12 @@ input:checked+.slider:before {
   .card-03 {
     flex: 100%;
     max-width: 600px;
+  }
+  .toggle{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
