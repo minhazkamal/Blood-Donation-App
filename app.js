@@ -145,11 +145,15 @@ app.get('/search-donor', function (req, res) {
 
 //localhost:3940//search-org
 app.get('/search-org', function (req, res) {
-    db.NotificationUpdateDynamically(req, res)
+    if(req.query.forall == 'yes') {
+        res.render('searchOrg.ejs');
+    }
+    else {
+        db.NotificationUpdateDynamically(req, res)
         .then(result => {
             res.render('searchOrg.ejs', { navbar: req.session.navbar_info, notifications: req.session.notifications });
         })
-
+    }
 });
 
 //localhost:3940/home
