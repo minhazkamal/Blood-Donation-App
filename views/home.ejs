@@ -240,6 +240,7 @@
                         success: function (data) {
                             console.log(data);
                             document.getElementById('user-count').innerHTML = data.user_count + '+';
+                            document.getElementById('organization-count').innerHTML = data.organization_count + '+';
                             // $('#basic_district').empty();
                             // $('#basic_district').append("<option disabled selected>District</option>");
                             // $.each(data, function (index, district) {
