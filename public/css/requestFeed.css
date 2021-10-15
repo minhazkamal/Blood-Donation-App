@@ -349,7 +349,7 @@ i.fa-user-circle {
   .btn {
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     flex-direction: row;
     transform: translateY(-8em) !important;
@@ -357,7 +357,7 @@ i.fa-user-circle {
   .btn:nth-of-type(odd) {
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     flex-direction: row;
     transform: translateY(-9em) !important;
