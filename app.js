@@ -55,6 +55,7 @@ var eligibilityReport = require('./controllers/eligibilityReport');
 var viewDonation = require('./controllers/viewDonation');
 var respondTOrequest = require('./controllers/respondTOrequest');
 var notificationResolve = require('./controllers/notificationResolve');
+var statsForHome = require('./controllers/stats');
 
 
 // view engine
@@ -121,6 +122,7 @@ app.use('/view/eligibility-report', eligibilityReport);
 app.use('/view/donation', viewDonation);
 app.use('/request/respond', respondTOrequest);
 app.use('/notification-resolve', notificationResolve);
+app.use('/stats-for-home', statsForHome);
 
 //localhost:3940/new-request
 // app.get('/new-request', function(req,res){
