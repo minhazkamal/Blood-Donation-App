@@ -16,7 +16,7 @@ router.get('/', function(req,res){
     .then(result => {
 
         // console.log(org);
-        res.json(result);
+        res.json(result[0]);
     })
 });
 
