@@ -430,6 +430,40 @@ label{
     font-weight: bold;
 }
 
+/* CSS for checkmark */
+
+.checkmark{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 1px solid #c4c4c4;
+    border-radius: 4px;
+    top: -2px;
+    left: 0;
+}
+
+.checkmark:after{
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked~ .checkmark:after{
+    display: block;
+}
+
+.checkbox-container .checkmark:after{
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    width: 6px;
+    height: 12px;
+    left: 6px;
+    top: 2px;
+    transform: rotate(45deg);
+}
+
+
 #preloader{
     height: 100vh;
     width: 100%;
