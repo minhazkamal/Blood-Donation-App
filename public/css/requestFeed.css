@@ -410,8 +410,11 @@ i.fa-user-circle {
     -ms-transform: translate(-50%, -50%);
     font-size: 1em;
   }
-
-
+  .btn {
+    display: flex !important;
+    align-content: center !important;
+    justify-content: center !important;
+  }
 }
 
 /* ///////////////////////////// */
@@ -516,8 +519,6 @@ i.fa-user-circle {
   cursor: pointer;
   display: block;
 }
-
-
 
 @media (max-width: 1100px) {
   .main {
