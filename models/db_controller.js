@@ -734,7 +734,7 @@ module.exports.getRequestsByOffset = (offset, bg, div, dist, id) => {
         FROM requests r INNER JOIN organizations o ON r.organization_id = o.id 
         INNER JOIN users u ON r.post_by = u.id
         INNER JOIN profile_picture upp ON r.post_by = upp.id
-        WHERE r.id NOT IN (SELECT request_id FROM respond_to_request WHERE responder_id=${id}) AND r.resolved='no' AND (r.BG LIKE '${bg}' AND o.division LIKE '${div}' AND o.district LIKE '${dist}')) as feed_table 
+        WHERE r.id NOT IN (SELECT request_id FROM respond_to_request WHERE responder_id=${id}) AND r.resolved='no' AND (r.BG LIKE '${bg}' AND o.division LIKE '${div}' AND o.district LIKE '${dist}')) as feed_table ORDER BY approx_date ASC, id ASC 
         LIMIT 2 OFFSET ${offset}`, (err, res) => {
             err ? reject(err) : resolve(res)
         })
