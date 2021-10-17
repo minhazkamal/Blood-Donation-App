@@ -1,6 +1,6 @@
 # G L E A M
 ## A Blood Donation App
-![Status](https://img.shields.io/badge/Status-Finished-green)
+![Status](https://img.shields.io/badge/Status-Pending-orange)
 ![IDE](https://img.shields.io/badge/IDE-VSCode-blue)
 ![License](https://img.shields.io/badge/license-MIT-orange.svg)
 ![UI](https://img.shields.io/badge/UI-EJS-brightgreen)
@@ -73,6 +73,18 @@ localhost:<YOUR_PORT_NUMBER>
 [Chowdhury Mohammad Abdullah](https://www.linkedin.com/in/chowdhury-mohammad-abdullah-a48473188/)
 
 [Fairuz Shaiara](https://www.linkedin.com/in/fairuz-shaiara-1195861b1)
+
+## Features
+* **Sign Up and log in:** The product facilitates Sign up/ in with google authentication and Facebook authentication. Keeping in mind users might not want to link their emails and social accounts due to privacy concerns, the manual approach is also designed. Here some standards are also maintained for password security (i.e. mandatory combination criteria for the password, minimum length, and encrypted storage of passwords) 
+* **KYC:** There is a dummy KYC (Know Your Customer) in the product. In the future, integrating API will make it fully functional. This will increase the integrity of the system.
+* **Update profile:** Updating the profile with necessary information. Personal information is somewhat manually provided. For address, the system will fetch GPS data and autofill the respective fields.
+* **Eligibility test:** For safety and assessment purposes, an eligibility test is given where information about comorbidities and lifestyles is recorded. Also, it records if any past donation had taken place within a 2 months time frame to warn the donor.
+* **Search Donor:** Our registered active donors will be visible in a list. Also, their location will be shown on a map. This gives more situational awareness to our users. The list will be sorted according to the distance of Donors. So in case of need, a user can search for donors here and approach them if needed.
+* **Search Organization:** This feature will be open for even unregistered users. It is due to 2 reasons. The first reason is to make the system useful to more groups of people. The second reason is, if someone gets any help from this feature, he/ she might be interested in using the full product. Like search donors, here also a map will be present and a list will be generated based on the distance. 
+* **Post a Request for blood:** When a user needs blood, he/ she can post a request for it which will then be shown on a feed. Now from this feed, other users (active and eligible) can respond to a particular request. The author of the request will receive appropriate notification. 
+* **Respond:** As mentioned earlier, responding will send a notification containing the contact details of the responder via email.
+* **Request feed:** The feed is where the previous two functionalities take place.
+* **Keeping track of Donation:** Users can add their responded donations and also donations that took part without responses to their profile.
 
 
 ## Contributing
