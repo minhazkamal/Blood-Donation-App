@@ -5,122 +5,114 @@
 
 
 <header>
-  
-    <a href="#" class="logo"><i class="fas fa-tint" style="color: rgb(184, 18, 18);"></i> GLEAM</a>
-    <div class="navigation">
-      <ul class="menu">
-        <div class="close-btn"></div>
-        <li class="menu-item"><a href="/dashboard">Dashboard</a></li>
-        <li class="menu-item">
-          <a class="sub-btn" id="sub-button" href="#">Search <i class="fas fa-angle-down"></i></a>
-          <!-- <button class="sub-btn">Dropdown <i class="fas fa-angle-down"></i></button> -->
-          <ul class="sub-menu nav-profile" id="sub-list" style="padding-left: 0;">
-            <li class="sub-item"><a href="/search-donor">Search Donor</a></li>
-            <li class="sub-item"><a href="/search-org">Search Organization</a></li>
-            <!-- <li class="sub-item"><a href="#">Sub Item 03</a></li> -->
-          </ul>
-        </li>
-        <li class="menu-item">
-          <a class="sub-btn" id="sub-button" href="#">Request for Blood <i class="fas fa-angle-down"></i></a>
-          <!-- <button class="sub-btn">Dropdown <i class="fas fa-angle-down"></i></button> -->
-          <ul class="sub-menu nav-profile" id="sub-list" style="padding-left: 0;">
-            <li class="sub-item"><a href="/new-request">Add New Request</a></li>
-            <li class="sub-item"><a href="/request-feed">Request Feed</a></li>
-            <li class="sub-item"><a href="/my-profile?tab=request">My Requests</a></li>
-            <!-- <li class="sub-item"><a href="#">Sub Item 03</a></li> -->
-          </ul>
-        </li>
-        <li class="menu-item">
-          <a class="sub-btn" id="sub-button" href="#">Notification 
-            <% if(typeof notification_count != 'undefined' && notification_count != '0') { %>
-            <span class="badge badge-danger"><%= notification_count %></span>
+
+  <a href="#" class="logo"><i class="fas fa-tint" style="color: rgb(184, 18, 18);"></i> GLEAM</a>
+  <div class="navigation">
+    <ul class="menu">
+      <div class="close-btn"></div>
+      <li class="menu-item"><a href="/dashboard">Dashboard</a></li>
+      <li class="menu-item">
+        <a class="sub-btn" id="sub-button" href="#">Search <i class="fas fa-angle-down"></i></a>
+        <ul class="sub-menu nav-profile" id="sub-list" style="padding-left: 0;">
+          <li class="sub-item"><a href="/search-donor">Search Donor</a></li>
+          <li class="sub-item"><a href="/search-org">Search Organization</a></li>
+        </ul>
+      </li>
+      <li class="menu-item">
+        <a class="sub-btn" id="sub-button" href="#">Request for Blood <i class="fas fa-angle-down"></i></a>
+        <ul class="sub-menu nav-profile" id="sub-list" style="padding-left: 0;">
+          <li class="sub-item"><a href="/new-request">Add New Request</a></li>
+          <li class="sub-item"><a href="/request-feed">Request Feed</a></li>
+          <li class="sub-item"><a href="/my-profile?tab=request">My Requests</a></li>
+        </ul>
+      </li>
+      <li class="menu-item">
+        <a class="sub-btn" id="sub-button" href="#">Notification
+          <% if(typeof notification_count !='undefined' && notification_count !='0' ) { %>
+            <span class="badge badge-danger">
+              <%= notification_count %>
+            </span>
             <% } %>
-          </a>
-          <!-- <button class="sub-btn">Dropdown <i class="fas fa-angle-down"></i></button> -->
-          <ul class="sub-menu notif" id="sub-list" style="padding-left: 0;">
-            <% if(typeof notifications != 'undefined' ) { %>
+        </a>
+        <ul class="sub-menu notif" id="sub-list" style="padding-left: 0;">
+          <% if(typeof notifications !='undefined' ) { %>
             <% notifications.forEach(function(notif) { %>
               <li class="sub-item">
-                <% if(notif.resolved == 'no') { %>
-                  <a href="/notification-resolve?profileOf=<%= notif.profile_of %>&notificationID=<%= notif.notification_id %>"><i class="fas fa-bell"></i> <%= notif.name %> responded to one of your requests.</a>
+                <% if(notif.resolved=='no' ) { %>
+                  <a
+                    href="/notification-resolve?profileOf=<%= notif.profile_of %>&notificationID=<%= notif.notification_id %>"><i
+                      class="fas fa-bell"></i>
+                    <%= notif.name %> responded to one of your requests.
+                  </a>
                   <% } else { %>
-                    <a href="/notification-resolve?profileOf=<%= notif.profile_of %>&notificationID=<%= notif.notification_id %>"><i class="fas fa-bell-slash"></i> <%= notif.name %> responded to one of your requests.</a>
-                    <% } %>   
+                    <a
+                      href="/notification-resolve?profileOf=<%= notif.profile_of %>&notificationID=<%= notif.notification_id %>"><i
+                        class="fas fa-bell-slash"></i>
+                      <%= notif.name %> responded to one of your requests.
+                    </a>
+                    <% } %>
               </li>
-         
-   
+
+
               <% }) %>
-            <% } %>
-            
-            <!-- <li class="sub-item"><a href="#"><i class="fas fa-bell-slash"></i> Fairuz Shaiara Responded</a></li>
-            <li class="sub-item"><a href="#"><i class="fas fa-bell-slash"></i> Sartaj Ekram Responded</a></li>  -->
-          </ul>
-        </li>
-        <!-- <li class="menu-item"><a href="/dashboard">Notifications </a></li> -->
-        <li class="menu-item">
-          <a class="sub-btn" href="#"><%= typeof name != 'undefined' ? name : 'Username' %> <img src="/profile/<%= typeof photo != 'undefined' ? photo : 'avatar.png' %>" alt="User" class="navbar-rounded-circle"  > <i class="fas fa-angle-down"></i></a>
-          <!-- <button class="sub-btn">With Sub-dropdown <i class="fas fa-angle-down"></i></button> -->
-          <ul class="sub-menu nav-profile" style="padding-left: 0;">
-            <li class="sub-item"><a href="/my-profile">My Profile</a></li>
-            <li class="sub-item"><a href="/change-password">Change Password</a></li>
-            <li class="sub-item"><a href="/signout">Sign Out</a></li>
-            <!-- <li class="sub-item"><a href="#">Sub Item 04</a></li> -->
-            <!-- <li class="sub-item more">
-              <a class="more-btn" href="#">More Items <i class="fas fa-angle-right"></i></a>
-              <ul class="more-menu" style="padding-left: 0;">
-                <li class="more-item"><a href="#">More Item 01</a></li>
-                <li class="more-item"><a href="#">More Item 02</a></li>
-              </ul>
-            </li> -->
-          </ul>
-        </li>
-        <!-- <li class="menu-item"><a href="#">Services</a></li>
-        <li class="menu-item"><a href="#">About</a></li>
-        <li class="menu-item"><a href="#">Contact</a></li> -->
-      </ul>
-    </div>
-    <div class="menu-btn"></div>
+                <% } %>
+        </ul>
+      </li>
+      <li class="menu-item">
+        <a class="sub-btn" href="#">
+          <%= typeof name !='undefined' ? name : 'Username' %> <img
+              src="/profile/<%= typeof photo != 'undefined' ? photo : 'avatar.png' %>" alt="User"
+              class="navbar-rounded-circle"> <i class="fas fa-angle-down"></i>
+        </a>
+        <ul class="sub-menu nav-profile" style="padding-left: 0;">
+          <li class="sub-item"><a href="/my-profile">My Profile</a></li>
+          <li class="sub-item"><a href="/change-password">Change Password</a></li>
+          <li class="sub-item"><a href="/signout">Sign Out</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="menu-btn"></div>
 </header>
 
 <script type="text/javascript">
-    // jquery for toggle dropdown menus
-    $(document).ready(function () {
-      //toggle sub-menus
-      $(".sub-btn").click(function () {
-        $(this).next(".sub-menu").slideToggle();
-      });
-
-      //toggle more-menus
-      $(".more-btn").click(function () {
-        $(this).next(".more-menu").slideToggle();
-      });
+  // jquery for toggle dropdown menus
+  $(document).ready(function () {
+    //toggle sub-menus
+    $(".sub-btn").click(function () {
+      $(this).next(".sub-menu").slideToggle();
     });
 
-    //javascript for the responsive navigation menu
-    var menu = document.querySelector(".menu");
-    var menuBtn = document.querySelector(".menu-btn");
-    var closeBtn = document.querySelector(".close-btn");
-
-    menuBtn.addEventListener("click", () => {
-      menu.classList.add("active");
+    //toggle more-menus
+    $(".more-btn").click(function () {
+      $(this).next(".more-menu").slideToggle();
     });
+  });
 
-    closeBtn.addEventListener("click", () => {
-      menu.classList.remove("active");
-    });
+  //javascript for the responsive navigation menu
+  var menu = document.querySelector(".menu");
+  var menuBtn = document.querySelector(".menu-btn");
+  var closeBtn = document.querySelector(".close-btn");
 
-    //javascript for the navigation bar effects on scroll
-    window.addEventListener("scroll", function () {
-      var header = document.querySelector("header");
-      header.classList.toggle("sticky", window.scrollY > 0);
-    });
-  </script>
+  menuBtn.addEventListener("click", () => {
+    menu.classList.add("active");
+  });
 
-  <script>
-    window.addEventListener('scroll', function () {
-      let header = document.querySelector('header');
+  closeBtn.addEventListener("click", () => {
+    menu.classList.remove("active");
+  });
 
-      header.classList.toggle('scrolled', window.scrollY > 0);
-    })
-  </script>
+  //javascript for the navigation bar effects on scroll
+  window.addEventListener("scroll", function () {
+    var header = document.querySelector("header");
+    header.classList.toggle("sticky", window.scrollY > 0);
+  });
+</script>
 
+<script>
+  window.addEventListener('scroll', function () {
+    let header = document.querySelector('header');
+
+    header.classList.toggle('scrolled', window.scrollY > 0);
+  })
+</script>

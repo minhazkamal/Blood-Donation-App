@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 * {
     margin: 0;
     padding: 0;
@@ -7,10 +6,9 @@
     --primary-blue: #2f6690;
     --primary-pink: #b9375e;
     box-sizing: border-box;
-
-    /* font-size: 1em;  */
 }
-:root{
+
+:root {
     font-size: 100%;
     font-size: 16px;
     line-height: 1.5;
@@ -24,13 +22,9 @@ body {
     color: #2e323c;
     width: 100%;
     height: 100%;
-    /* background: url(https://images.unsplash.com/photo-1514451380751-c374d1d0d4d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxhbGx8fHx8fHx8fHwxNjI1MTIwMjYz&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit); */
-    /* position: relative; */
-    /* height: 100%; */
-    font-family: 'Montserrat',sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background: url(/img/waveNewRequest.png) no-repeat;
     background-size: cover;
-
 }
 
 .container {
@@ -44,7 +38,6 @@ body {
     padding: 30px;
     margin-top: 60px;
     margin-bottom: 50px;
-    
 }
 
 .account-settings .user-profile {
@@ -52,20 +45,20 @@ body {
     padding-bottom: 1rem;
     text-align: center;
 }
+
 .account-settings .user-profile .user-avatar {
     margin: 0 0 1rem 0;
 }
+
 .account-settings .user-profile .user-avatar img {
     width: 90px;
     height: 90px;
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
     border-radius: 100px;
-    /* border-style: solid; */
 }
-input[type="text"],input[type="email"],input[type="tel"],input[type="date"],input[type="textarea"]{
-    /* margin: 0 0 0.5rem 0; */
 
+input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="textarea"] {
     display: block;
     width: 100%;
     box-sizing: border-box;
@@ -78,19 +71,19 @@ input[type="text"],input[type="email"],input[type="tel"],input[type="date"],inpu
     font-weight: 500;
 }
 
-input[type="checkbox"]{
+input[type="checkbox"] {
     zoom: 1.25;
 }
 
-::placeholder{
+::placeholder {
     color: black;
     opacity: 0.75;
     text-align: left;
     word-wrap: break-word;
-    font-family: 'Montserrat',sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
-textarea{
+textarea {
     display: block;
     width: 100%;
     box-sizing: border-box;
@@ -103,20 +96,19 @@ textarea{
     word-wrap: break-word;
 }
 
-textarea::placeholder{
+textarea::placeholder {
     color: black;
     opacity: 0.75;
     text-align: left;
-    word-wrap: break-word; 
+    word-wrap: break-word;
 }
 
-.add-requirements{
+.add-requirements {
     padding-left: 14px;
     width: 97%;
 }
 
-
-.input-group mb-3{
+.input-group mb-3 {
     display: block;
     width: 100%;
     height: 15rem;
@@ -129,20 +121,18 @@ textarea::placeholder{
     font-size: 0.875rem;
 }
 
-.input-group-prepend{
+.input-group-prepend {
     padding: 0;
     border-radius: 4px;
 }
 
-.form-control{
+.form-control {
     background: transparent;
-    /* border: 1px solid #1a1919; */
     border-radius: 5px;
     box-sizing: border-box;
-    /* color: black; */
     font-weight: 500;
     font-size: 0.875rem;
-    border-color: black !important ;
+    border-color: black !important;
     margin-top: 3rem;
 }
 
@@ -153,16 +143,19 @@ textarea::placeholder{
     font-style: italic;
     color: #3b67b9;
 }
-h6{
+
+h6 {
     margin: 0 0 15px 0;
     color: #922546;
     font-weight: 700;
     font-size: 1rem;
 }
+
 .account-settings .about {
     margin: 2rem 0 0 0;
     text-align: center;
 }
+
 .account-settings .about h5 {
     margin: 0 0 15px 0;
     color: #922546;
@@ -174,15 +167,11 @@ h6{
     font-size: 0.825rem;
 }
 
-
-.btn dropdown-toggle{
+.btn dropdown-toggle {
     border: 1px solid black;
 }
 
-
-
-.btn1{
-
+.btn1 {
     background: #b9375e;
     color: white;
     font-weight: 500;
@@ -199,13 +188,12 @@ h6{
     display: inline;
 }
 
-.btn1:hover{
+.btn1:hover {
     background: #d34e76;
     cursor: pointer;
 }
 
-.btn2{
-
+.btn2 {
     background: #2f6690;
     color: white;
     font-weight: 500;
@@ -221,76 +209,62 @@ h6{
     width: 40%;
 }
 
-.btn2:hover{
+.btn2:hover {
     background: #3a7ca5;
     cursor: pointer;
 }
 
 @media(max-width:800px) {
-    .btn1{
+    .btn1 {
         width: 35%;
     }
 }
 
-.card-body{
+.card-body {
     padding: 4rem;
-    font-family: 'Montserrat',sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background: transparent !important;
     background: transparent !important;
-}
-h2{
-    text-align: center;
-    color: black;
-    font-family: 'Montserrat',sans-serif;
-    margin-bottom:4rem ;
 }
 
-.brandname{
+h2 {
+    text-align: center;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 4rem;
+}
+
+.brandname {
     display: inline;
 }
 
-
-
-#upload{
-    margin-top: 3rem; 
+#upload {
+    margin-top: 3rem;
     border-color: black;
     text-align: left;
     text-decoration-color: black;
 }
 
-.input-group-append{
-    margin-top: 3rem; 
+.input-group-append {
+    margin-top: 3rem;
 }
 
-hr{
+hr {
     border-width: 1px;
     background: rgba(0, 0, 0, 0.404);
     margin-bottom: 2rem;
 }
 
-.hr1{
+.hr1 {
     border-width: 0.5px;
     background: rgba(0, 0, 0, 0.404);
     margin-bottom: 2rem;
 }
 
-
-/* .btn.btn-secondary.dropdown-toggle{
-    display: inline;
-    box-sizing: border-box;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #c4c4c4;
-    /* padding: 1em; */
-   /* font-size: 0.875rem;
-    color: black;
-}*/
-
-.dropdown.show{
+.dropdown.show {
     margin-top: 2rem;
     display: flex;
-} 
-
+}
 
 #basic_dob_day, #basic_bg, #basic_gender, #basic_division, #basic_district, #basic_upazilla, #org_drop_down, .select2 {
     border-radius: 0.5rem;
@@ -318,76 +292,46 @@ button#no-results-btn {
     width: 100%;
     height: 100%;
     padding: 6px;
-  }
+}
 
 button#no-results-btn {
     border: 0;
     background-color: white;
     text-align: left;
-  }
+}
 
-  button#no-results-btn:hover {
+button#no-results-btn:hover {
     background-color: #5897fb;
-  }
+}
 
-#basic_dob_month{
+#basic_dob_month {
     border-radius: 0.5rem;
     border: 1px solid #1a1919;
     color: #2e323c;
     margin-top: 0;
 }
 
-#basic_dob_year{
+#basic_dob_year {
     border-radius: 0.5rem;
     border: 1px solid #1a1919;
     color: #2e323c;
     margin-top: 0;
 }
 
-.note{
-    font-family: 'Montserrat',sans-serif;
+.note {
+    font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     font-size: 15px;
     font-style: italic;
     margin-bottom: 2px;
 }
 
-
-.blood_group{
+.blood_group {
     border-radius: 0.5rem;
     border: 1px solid #1a1919;
     color: #2e323c;
     margin-top: 0;
 }
-
-
-
-/* form input[type="text"] {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #c4c4c4;
-    padding: 1em;
-    margin-bottom: 1.25rem;
-    font-size: 0.875rem;
-}
-
-form input[type="text"]::selection {
-    border: 2px solid var(--primary-pink);
-} */
-
-/* input:focus { 
-    outline: none !important;
-    border-color: var(--primary-pink);
-    box-shadow: 0 0 10px var(--primary-pink);
-} */
-/* textarea:focus { 
-    outline: none !important;
-    border-color: var(--primary-pink);
-    box-shadow: 0 0 10px var(--primary-pink);
-} */
 
 .address-details {
     min-height: 7rem;
@@ -396,25 +340,21 @@ form input[type="text"]::selection {
 a.tag_disabled {
     pointer-events: none;
     cursor: default;
-  }
-
-
+}
 
 /* #####################CSS for add new donation#####################  */
 
-.table-responsive{
+.table-responsive {
     max-width: 90%;
     margin: 0 auto;
-    /* font-size: 1rem; */
 }
 
-
-label{
+label {
     color: var(--primary-pink);
     font-weight: bold;
 }
 
-.checkbox-container input{
+.checkbox-container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -422,7 +362,7 @@ label{
     width: 0;
 }
 
-.checkbox-container{
+.checkbox-container {
     display: block;
     position: relative;
     padding-left: 2rem;
@@ -431,14 +371,14 @@ label{
     margin: 0 0 1.25rem 0;
 }
 
-.checkbox-container input:checked~ .checkmark{
+.checkbox-container input:checked~.checkmark {
     background-color: var(--primary-pink);
     border: 1px solid var(--primary-pink);
 }
 
 /* CSS for checkmark */
 
-.checkmark{
+.checkmark {
     position: absolute;
     width: 20px;
     height: 20px;
@@ -449,17 +389,17 @@ label{
     left: 0;
 }
 
-.checkmark:after{
+.checkmark:after {
     content: "";
     position: absolute;
     display: none;
 }
 
-.checkbox-container input:checked~ .checkmark:after{
+.checkbox-container input:checked~.checkmark:after {
     display: block;
 }
 
-.checkbox-container .checkmark:after{
+.checkbox-container .checkmark:after {
     border: solid white;
     border-width: 0 3px 3px 0;
     width: 6px;
@@ -469,32 +409,29 @@ label{
     transform: rotate(45deg);
 }
 
-
-#preloader{
+#preloader {
     height: 100vh;
     width: 100%;
     position: fixed;
     z-index: 1000;
     background: #fff url(/img/preloader.gif) no-repeat center center;
     background-size: 15%;
-  }
+}
 
-  ::-webkit-scrollbar {
-	width: 8px;
-	height: 3px;
-	border-left: 0;
-	background: rgba(255, 255, 255, 0);
-	border-radius: 1em;
-	
-  }
-  
-  ::-webkit-scrollbar-track {
-	background: none;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-	background: #3b363880;
-	border-radius: 0;
-	border-radius: 1em;
-  } 
-  
+::-webkit-scrollbar {
+    width: 8px;
+    height: 3px;
+    border-left: 0;
+    background: rgba(255, 255, 255, 0);
+    border-radius: 1em;
+}
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3b363880;
+    border-radius: 0;
+    border-radius: 1em;
+}

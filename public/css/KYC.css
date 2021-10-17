@@ -1,13 +1,5 @@
-/*
-*
-* ==========================================
-* CUSTOM UTIL CLASSES
-* ==========================================
-*
-*/
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-:root{
+:root {
     font-size: 100%;
     font-size: 16px;
     line-height: 1.5;
@@ -15,52 +7,37 @@
     --primary-blue: #2f6690;
 }
 
-html{
+html {
     height: 100%;
 }
 
-body{
+body {
     padding: 0;
     margin: 0;
-    font-family: 'Montserrat',sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 500;
 }
 
-h1{
+h1 {
     font-size: 2.25rem;
     font-weight: 700;
     color: black;
 }
 
-h2{
+h2 {
     margin-top: 1rem;
     font-size: 1.5rem;
     font-weight: 700;
 }
 
-a{
+a {
     text-decoration: none;
     color: var(--primary-blue);
 }
 
-a:hover{
+a:hover {
     text-decoration: underline;
 }
-
-/* .form-container {
-    display: flex;
-    flex-direction: row;
-    overflow: auto;
-}
-
-.front, .back{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    flex-grow: inherit;
-    overflow: auto;
-} */
 
 #upload-front {
     opacity: 0;
@@ -104,7 +81,6 @@ a:hover{
     transform: translate(-50%, -50%);
     font-size: 0.8rem;
     z-index: 1;
-    
 }
 
 .image-area img {
@@ -112,31 +88,21 @@ a:hover{
     position: relative;
 }
 
-.font-italic.text-center{
+.font-italic.text-center {
     color: rgba(0, 0, 0, 0.712);
-    font-family: 'Montserrat' ,sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 1.5em;
 }
 
-
-
-
-/*
-*
-* ==========================================
-* FOR DEMO PURPOSES
-* ==========================================
-*
-*/
 body {
     min-height: 100vh;
-    font-family: 'Montserrat',sans-serif;
+    font-family: 'Montserrat', sans-serif;
     /* background-color: #757f9a; */
     /* background-image: linear-gradient(147deg, #757f9a 0%, #d7dde8 100%); */
     background-image: url(/img/waveKYC.png);
     background-size: cover;
-    background-repeat: no-repeat;   
+    background-repeat: no-repeat;
 }
 
 .btn-pink {
@@ -149,13 +115,11 @@ body {
 }
 
 .btn-pink:hover {
-    
     color: white;
     background: var(--primary-pink);
 }
 
-
-.signup-btn{
+.signup-btn {
     margin: auto;
     display: block;
     width: 10rem;
@@ -173,41 +137,39 @@ body {
     margin-top: 2rem;
 }
 
-.signup-btn:hover{
+.signup-btn:hover {
     background: #3a7ca5;
     cursor: pointer;
 }
 
-.input-group.mb-3.px-2.py-2.bg-white.shadow-sm{
+.input-group.mb-3.px-2.py-2.bg-white.shadow-sm {
     border-radius: 1rem;
-    box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.47);
+    box-shadow: 0px 0px 18px 1px rgba(0, 0, 0, 0.47);
 }
 
-#preloader{
+#preloader {
     height: 100vh;
     width: 100%;
     position: fixed;
     z-index: 1000;
     background: #fff url(/img/preloader.gif) no-repeat center center;
     background-size: 15%;
-  }
+}
 
-  ::-webkit-scrollbar {
-	width: 8px;
-	height: 3px;
-	border-left: 0;
-	background: rgba(255, 255, 255, 0);
-	border-radius: 1em;
-	
-  }
-  
-  ::-webkit-scrollbar-track {
-	background: none;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-	background: #3b363880;
-	border-radius: 0;
-	border-radius: 1em;
-  } 
-  
+::-webkit-scrollbar {
+    width: 8px;
+    height: 3px;
+    border-left: 0;
+    background: rgba(255, 255, 255, 0);
+    border-radius: 1em;
+}
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3b363880;
+    border-radius: 0;
+    border-radius: 1em;
+}

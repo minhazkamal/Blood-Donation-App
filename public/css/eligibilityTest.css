@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 * {
   margin: 0;
   padding: 0;
@@ -8,9 +7,6 @@
   --primary-pink: #b9375e;
   box-sizing: border-box;
 }
-
-
-
 
 html {
   width: 100%;
@@ -59,7 +55,6 @@ body {
   transition: 0.5s ease-in-out;
   background-color: #ffb7c4;
   font-family: 'Montserrat', sans-serif;
-  /* border-radius: 10px; */
   -webkit-box-shadow: 1px 2px 4px -3px #000000;
   box-shadow: 1px 2px 4px -3px #000000;
 }
@@ -97,7 +92,7 @@ body {
   transition-delay: 0.2s;
 }
 
-.card.is-clicked .contentarrow{
+.card.is-clicked .contentarrow {
   transform: rotate(180deg);
 }
 
@@ -121,14 +116,7 @@ p {
 hr {
   border-width: 0.5px;
   background: rgba(0, 0, 0, 0.404);
-  /* margin-bottom: 2rem; */
 }
-
-/* .hr1 {
-  border-width: 0.5px;
-  background: rgba(0, 0, 0, 0.404);
-  margin-bottom: 2rem;
-} */
 
 .switch-field {
   display: flex;
@@ -395,7 +383,6 @@ input[type="date"] {
 .blobEligibility2 {
   width: 500px;
   height: 500px;
-  /* top: -20px; */
   right: -600px;
   position: absolute;
   z-index: -1;
@@ -407,14 +394,13 @@ input[type="date"] {
   .blobEligibility2 {
     width: 500px;
     height: 500px;
-    /* top: -100px; */
     right: -200px;
     position: absolute;
     z-index: -1;
     display: flex;
     flex-wrap: wrap;
   }
-  .donationIntervals{
+  .donationIntervals {
     font-size: x-large;
   }
 }
@@ -441,7 +427,6 @@ header {
 
 .scrolled {
   background: rgb(1, 42, 74);
-  /* background: linear-gradient(82deg, rgba(1, 42, 74, 1) 20%, rgba(42, 111, 151, 1) 80%); */
 }
 
 header .logo {
@@ -798,12 +783,11 @@ footer p {
   color: #999;
 }
 
-.footer-hr{
+.footer-hr {
   background-color: rgba(42, 111, 151, 1);
   border-width: 4px;
   border-radius: 10px;
 }
-
 
 @media (max-width:991px) {
   footer {
@@ -816,14 +800,14 @@ footer p {
   footer .footer-container .sec .aboutus, .quicklinks {
     width: 100%;
   }
-
-  footer .footer-container .sec.aboutus{
+  footer .footer-container .sec.aboutus {
     width: 100%;
   }
 }
+
 /* /////////////////////////////////////////////////// */
 
-#preloader{
+#preloader {
   height: 100vh;
   width: 100%;
   position: fixed;
@@ -838,7 +822,6 @@ footer p {
   border-left: 0;
   background: rgba(255, 255, 255, 0);
   border-radius: 1em;
-  
 }
 
 ::-webkit-scrollbar-track {
@@ -849,4 +832,4 @@ footer p {
   background: #3b363880;
   border-radius: 0;
   border-radius: 1em;
-} 
+}

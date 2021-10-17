@@ -17,382 +17,387 @@
 
 <body>
 	<div id="preloader"></div>
-	<% if(typeof profile_build == 'undefined' || profile_build != 'no') { %>
-	<%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo, notification_count: navbar.notification_count, notifiactions: notifications}) %>
-	<% } %>
+	<% if(typeof profile_build=='undefined' || profile_build !='no' ) { %>
+		<%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo, notification_count:
+			navbar.notification_count, notifiactions: notifications}) %>
+			<% } %>
 
-		<div class="container">
-			<form method="Post" enctype="multipart/form-data">
-				<div class="row gutters" style="padding-bottom: 5rem;">
-					<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
-						<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blobUpdateProf">
-							<path fill="#E1E1E1"
-								d="M59.7,-32.4C71.3,-14.4,70.4,12.8,58.3,34.2C46.3,55.6,23.2,71.1,1,70.6C-21.2,70,-42.4,53.4,-54.4,32C-66.3,10.7,-68.9,-15.3,-58.3,-32.7C-47.7,-50.2,-23.9,-59,0.1,-59.1C24.1,-59.2,48.1,-50.4,59.7,-32.4Z"
-								transform="translate(100 100)" />
-						</svg>
-						<section>
-							<h2>Edit your <div class="brandname" style="font-weight: 600;"> G L E A M </div> Profile
-							</h2>
+				<div class="container">
+					<form method="Post" enctype="multipart/form-data">
+						<div class="row gutters" style="padding-bottom: 5rem;">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+								<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="blobUpdateProf">
+									<path fill="#E1E1E1"
+										d="M59.7,-32.4C71.3,-14.4,70.4,12.8,58.3,34.2C46.3,55.6,23.2,71.1,1,70.6C-21.2,70,-42.4,53.4,-54.4,32C-66.3,10.7,-68.9,-15.3,-58.3,-32.7C-47.7,-50.2,-23.9,-59,0.1,-59.1C24.1,-59.2,48.1,-50.4,59.7,-32.4Z"
+										transform="translate(100 100)" />
+								</svg>
+								<section>
+									<h2>Edit your <div class="brandname" style="font-weight: 600;"> G L E A M </div>
+										Profile
+									</h2>
 
-						</section>
-
-						<!-- Profile Picture Upload -->
-						<div class="account-settings">
-							<div class="user-profile">
-								<div class="user-avatar">
-
-									<img id="imageResult" src="img/avatar.png" alt="">
-								</div>
-								<div style="display: none;" id="profile">
-									<input id="profile_build" type="text" value="<%= user.profile_build %>">
-									<input id="user_bg" type="text" value="<%= user.bg %>">
-									<input id="user_dob" type="date" value="<%= user.dob %>">
-									<input id="user_gender" type="text" value="<%= user.gender %>">
-									<input id="user_contact" type="text" value="<%= user.contact %>">
-									<input id="user_division" type="text" value="<%= user.division %>">
-									<input id="user_district" type="text" value="<%= user.district %>">
-									<input id="user_upazilla" type="text" value="<%= user.upazilla %>">
-									<input id="user_zipcode" type="text" value="<%= user.zipcode %>">
-									<input id="user_house" type="text" value="<%= user.house %>">
-									<input id="user_street" type="text" value="<%= user.street %>">
-									<input id="user_imgName" type="text" value="<%= user.imgName %>">
-									<input id="user_imgLink" type="text" value="<%= user.imgLink %>">
-									<input id="user_profession" type="text" value="<%= user.profession %>">
-								</div>
-
-								<section class="section-preview">
-
-									<div class="input-group mb-3">
-
-										<input class="form-control" name="avatar" type="file" id="upload"
-											onchange="readURL(this);" accept="image/png, image/jpeg, image/jpg">
-									</div>
 								</section>
 
-							</div>
-							<!-- Alert Message -->
-							<% if(typeof alert !='undefined' ) { %>
-								<% alert.forEach(function(error) { %>
-									<div class="alert alert-warning alert-dismissible fade show" role="alert">
-										<%= error.msg %>
-											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-												<span aria-hidden="true">×</span>
-											</button>
+								<!-- Profile Picture Upload -->
+								<div class="account-settings">
+									<div class="user-profile">
+										<div class="user-avatar">
+
+											<img id="imageResult" src="img/avatar.png" alt="">
+										</div>
+										<div style="display: none;" id="profile">
+											<input id="profile_build" type="text" value="<%= user.profile_build %>">
+											<input id="user_bg" type="text" value="<%= user.bg %>">
+											<input id="user_dob" type="date" value="<%= user.dob %>">
+											<input id="user_gender" type="text" value="<%= user.gender %>">
+											<input id="user_contact" type="text" value="<%= user.contact %>">
+											<input id="user_division" type="text" value="<%= user.division %>">
+											<input id="user_district" type="text" value="<%= user.district %>">
+											<input id="user_upazilla" type="text" value="<%= user.upazilla %>">
+											<input id="user_zipcode" type="text" value="<%= user.zipcode %>">
+											<input id="user_house" type="text" value="<%= user.house %>">
+											<input id="user_street" type="text" value="<%= user.street %>">
+											<input id="user_imgName" type="text" value="<%= user.imgName %>">
+											<input id="user_imgLink" type="text" value="<%= user.imgLink %>">
+											<input id="user_profession" type="text" value="<%= user.profession %>">
+										</div>
+
+										<section class="section-preview">
+
+											<div class="input-group mb-3">
+
+												<input class="form-control" name="avatar" type="file" id="upload"
+													onchange="readURL(this);" accept="image/png, image/jpeg, image/jpg">
+											</div>
+										</section>
+
 									</div>
-									<% }) %>
-										<% } %>
-						</div>
-
-						<hr>
-
-						<div class="row gutters">
-							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-								<h6 class="mb-2">Personal Details</h6>
-								<div class="input-container fname">
-									<input id="fname" name="fname" placeholder="First Name" value="<%-user.f_name%>"
-										type="text" required>
-								</div>
-								<div class="input-container lname">
-									<input id="lname" name="lname" placeholder="Last Name" value="<%-user.l_name%>"
-										type="text">
-								</div>
-								<div class="input-container lname">
-									<input id="contact" name="contact" placeholder="Contact Number (+88)"
-										title="Please give a valid phone number (018xxxxxxxx)"
-										pattern="[0]{1}[1]{1}[3-9]{1}[0-9]{8}" type="tel" required>
-								</div>
-								<div class="input-container lname">
-									<input id="email" name="email" placeholder="Email Address" value="<%-user.email%>"
-										type="email" readonly>
-								</div>
-								<div class="input-container lname">
-									<input id="profession" name="profession" placeholder="Profession" value=""
-										type="text">
+									<!-- Alert Message -->
+									<% if(typeof alert !='undefined' ) { %>
+										<% alert.forEach(function(error) { %>
+											<div class="alert alert-warning alert-dismissible fade show" role="alert">
+												<%= error.msg %>
+													<button type="button" class="close" data-dismiss="alert"
+														aria-label="Close">
+														<span aria-hidden="true">×</span>
+													</button>
+											</div>
+											<% }) %>
+												<% } %>
 								</div>
 
-							</div>
+								<hr>
 
-							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-
-								<h6 class="mb-2">Date of Birth</h6>
-								<div class="row">
-									<div class="col-md-6 mb-4" style="margin-bottom: 0.25 !important; ">
+								<div class="row gutters">
+									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+										<h6 class="mb-2">Personal Details</h6>
+										<div class="input-container fname">
+											<input id="fname" name="fname" placeholder="First Name"
+												value="<%-user.f_name%>" type="text" required>
+										</div>
 										<div class="input-container lname">
-											<input id="DOB" name="dob" type="date" style="margin-bottom: 0;" value=""
-												required>
+											<input id="lname" name="lname" placeholder="Last Name"
+												value="<%-user.l_name%>" type="text">
+										</div>
+										<div class="input-container lname">
+											<input id="contact" name="contact" placeholder="Contact Number (+88)"
+												title="Please give a valid phone number (018xxxxxxxx)"
+												pattern="[0]{1}[1]{1}[3-9]{1}[0-9]{8}" type="tel" required>
+										</div>
+										<div class="input-container lname">
+											<input id="email" name="email" placeholder="Email Address"
+												value="<%-user.email%>" type="email" readonly>
+										</div>
+										<div class="input-container lname">
+											<input id="profession" name="profession" placeholder="Profession" value=""
+												type="text">
+										</div>
+
+									</div>
+
+									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+
+										<h6 class="mb-2">Date of Birth</h6>
+										<div class="row">
+											<div class="col-md-6 mb-4" style="margin-bottom: 0.25 !important; ">
+												<div class="input-container lname">
+													<input id="DOB" name="dob" type="date" style="margin-bottom: 0;"
+														value="" required>
+												</div>
+											</div>
+
+										</div>
+										<h6 class="mb-2">Blood Group <div style="display: inline;" class="note">(You can
+												select
+												it only once.)</div>
+										</h6>
+										<div class="row">
+											<div class="col-md-6 mb-4">
+												<select name="blood_group" class="form-control" id="basic_bg"
+													tabindex="-1" "
+											aria-hidden=" true" required>
+													<option disabled selected value="">Blood Group</option>
+													<option value="A+">A+</option>
+													<option value="A-">A-</option>
+													<option value="B+">B+</option>
+													<option value="B-">B-</option>
+													<option value="O+">O+</option>
+													<option value="O-">O-</option>
+													<option value="AB+">AB+</option>
+													<option value="AB-">AB-</option>
+												</select>
+											</div>
+
+										</div>
+										<h6 class="mb-2">Gender</h6>
+										<div class="row">
+											<div class="col-md-6 mb-4">
+												<select name="gender" class="form-control" id="basic_gender"
+													tabindex="-1" "
+											aria-hidden=" true" required>
+													<option disabled selected value="">Gender</option>
+													<option value="Male">Male</option>
+													<option value="Female">Female</option>
+													<option value="Others">Others</option>
+												</select>
+
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+								<hr class="hr1" style="margin-top: 0; margin-bottom: 1rem;">
+								<div class="row gutters">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+										<h6 class="mt-3 mb-2 ">Address Details</h6>
+									</div>
+									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+										<div class="input-container lname">
+											<input id="house" name="house" placeholder="House (Optional)" type="text">
+										</div>
+										<div class="input-container lname">
+											<input id="street" name="street" placeholder="Street (Optional)"
+												type="text">
+										</div>
+
+
+
+									</div>
+									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="input-container lname">
+													<input id="zipcode" name="zipcode" style="margin-bottom: 0;"
+														placeholder="Zip Code (Optional)" type="text">
+												</div>
+											</div>
+											<div class="col-md-4 mb-4">
+												<select name="division" class="form-control" id="basic_division"
+													tabindex="-1" "
+											aria-hidden=" true" required>
+													<option disabled selected value="">Division</option>
+													<% divisions.forEach((division)=> { %>
+														<option value="<%= division.id %>">
+															<%=division.name %>
+														</option>
+														<% }) %>
+												</select>
+											</div>
+
+											<div class="col-md-4 mb-4">
+												<select name="district" class="form-control" id="basic_district"
+													tabindex="-1" "
+											aria-hidden=" true" required>
+													<option disabled selected value="">District</option>
+
+												</select>
+											</div>
+
+											<div class="col-md-4 mb-4">
+												<select name="upazilla" class="form-control" id="basic_upazilla"
+													tabindex="-1" "
+											aria-hidden=" true" required>
+													<option disabled selected value="">Upazilla</option>
+
+												</select>
+											</div>
+
+										</div>
+
+
+									</div>
+								</div>
+								<div id="output" style="display: none;">
+									<input id="latitude" name="lat" placeholder="House" type="text" value="">
+									<input id="longitude" name="lon" placeholder="House" type="text" value="">
+								</div>
+								<div class="row gutters">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+										<div class="text-right">
+											<button type="submit" class="btn2" style>Save
+												Changes</button>
 										</div>
 									</div>
-
-								</div>
-								<h6 class="mb-2">Blood Group <div style="display: inline;" class="note">(You can select
-										it only once.)</div>
-								</h6>
-								<div class="row">
-									<div class="col-md-6 mb-4">
-										<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
-											aria-hidden=" true" required>
-											<option disabled selected value="">Blood Group</option>
-											<option value="A+">A+</option>
-											<option value="A-">A-</option>
-											<option value="B+">B+</option>
-											<option value="B-">B-</option>
-											<option value="O+">O+</option>
-											<option value="O-">O-</option>
-											<option value="AB+">AB+</option>
-											<option value="AB-">AB-</option>
-										</select>
-									</div>
-
-								</div>
-								<!-- <div class="col-md-6 mb-4" style="padding-left: 0;">
-									<div class="input-container lname">
-										<input id="age" name="age" placeholder="Age(in years)" value="" type="text">
-									</div>
-								</div> -->
-								<h6 class="mb-2">Gender</h6>
-								<div class="row">
-									<div class="col-md-6 mb-4">
-										<select name="gender" class="form-control" id="basic_gender" tabindex="-1" "
-											aria-hidden=" true" required>
-											<option disabled selected value="">Gender</option>
-											<option value="Male">Male</option>
-											<option value="Female">Female</option>
-											<option value="Others">Others</option>
-										</select>
-
-									</div>
-								</div>
-
-							</div>
-
-						</div>
-						<hr class="hr1" style="margin-top: 0; margin-bottom: 1rem;">
-						<div class="row gutters">
-							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-								<h6 class="mt-3 mb-2 ">Address Details</h6>
-							</div>
-							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-								<div class="input-container lname">
-									<input id="house" name="house" placeholder="House (Optional)" type="text">
-								</div>
-								<div class="input-container lname">
-									<input id="street" name="street" placeholder="Street (Optional)" type="text">
-								</div>
-
-
-
-							</div>
-							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-								<div class="row">
-									<div class="col-md-12 mb-4">
-										<div class="input-container lname">
-											<input id="zipcode" name="zipcode" style="margin-bottom: 0;"
-												placeholder="Zip Code (Optional)" type="text">
-										</div>
-									</div>
-									<div class="col-md-4 mb-4">
-										<select name="division" class="form-control" id="basic_division" tabindex="-1" "
-											aria-hidden=" true" required>
-											<option disabled selected value="">Division</option>
-											<% divisions.forEach((division)=> { %>
-												<option value="<%= division.id %>">
-													<%=division.name %>
-												</option>
-												<% }) %>
-										</select>
-									</div>
-
-									<div class="col-md-4 mb-4">
-										<select name="district" class="form-control" id="basic_district" tabindex="-1" "
-											aria-hidden=" true" required>
-											<option disabled selected value="">District</option>
-
-										</select>
-									</div>
-
-									<div class="col-md-4 mb-4">
-										<select name="upazilla" class="form-control" id="basic_upazilla" tabindex="-1" "
-											aria-hidden=" true" required>
-											<option disabled selected value="">Upazilla</option>
-
-										</select>
-									</div>
-
-								</div>
-
-
-							</div>
-						</div>
-						<div id="output" style="display: none;">
-							<input id="latitude" name="lat" placeholder="House" type="text" value="">
-							<input id="longitude" name="lon" placeholder="House" type="text" value="">
-						</div>
-						<div class="row gutters">
-							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-								<div class="text-right">
-									<button type="submit" class="btn2" style>Save
-										Changes</button>
 								</div>
 							</div>
 						</div>
-					</div>
+					</form>
 				</div>
-			</form>
-		</div>
 
-		<%- include ("./partials/footer.ejs") %>
+				<%- include ("./partials/footer.ejs") %>
 
-		<script>
-            var loader = document.getElementById("preloader");
+					<script>
+						var loader = document.getElementById("preloader");
 
-            window.addEventListener("load", function(){
-                loader.style.display = "none";
-            })
-        </script>
+						window.addEventListener("load", function () {
+							loader.style.display = "none";
+						})
+					</script>
 
-			<script>
-				$(document).ready(function () {
-					if (navigator.geolocation) {
-						navigator.geolocation.getCurrentPosition(function (position) {
-							console.log(position);
-							$("#latitude").val(position.coords.latitude);
-							$("#longitude").val(position.coords.longitude);
-							if ($("#profile_build").val() === 'no') {
-								$.ajax({
-									type: 'GET',
-									data: { latitude: position.coords.latitude, longitude: position.coords.longitude },
-									url: '/map-box/reverse',
-									success: function (data) {
-										console.log(data);
-										$("#basic_division").val(data.division);
-										district();
-									}
-								});
-								$.ajax({
-									type: 'GET',
-									data: { latitude: position.coords.latitude, longitude: position.coords.longitude },
-									url: '/map-box/reverse',
-									success: function (data) {
-										// console.log(data);
-										if (data.district !== null) {
-											$('#basic_district').val(data.district);
-											upazilla();
-										}
-									}
-								});
-								$.ajax({
-									type: 'GET',
-									data: { latitude: position.coords.latitude, longitude: position.coords.longitude },
-									url: '/map-box/reverse',
-									success: function (data) {
-										// console.log(data);
-										if (data.upazilla !== null) $('#basic_upazilla').val(data.upazilla);
+					<script>
+						$(document).ready(function () {
+							if (navigator.geolocation) {
+								navigator.geolocation.getCurrentPosition(function (position) {
+									console.log(position);
+									$("#latitude").val(position.coords.latitude);
+									$("#longitude").val(position.coords.longitude);
+									if ($("#profile_build").val() === 'no') {
+										$.ajax({
+											type: 'GET',
+											data: { latitude: position.coords.latitude, longitude: position.coords.longitude },
+											url: '/map-box/reverse',
+											success: function (data) {
+												console.log(data);
+												$("#basic_division").val(data.division);
+												district();
+											}
+										});
+										$.ajax({
+											type: 'GET',
+											data: { latitude: position.coords.latitude, longitude: position.coords.longitude },
+											url: '/map-box/reverse',
+											success: function (data) {
+												// console.log(data);
+												if (data.district !== null) {
+													$('#basic_district').val(data.district);
+													upazilla();
+												}
+											}
+										});
+										$.ajax({
+											type: 'GET',
+											data: { latitude: position.coords.latitude, longitude: position.coords.longitude },
+											url: '/map-box/reverse',
+											success: function (data) {
+												// console.log(data);
+												if (data.upazilla !== null) $('#basic_upazilla').val(data.upazilla);
+											}
+										});
 									}
 								});
 							}
+
+							if ($("#profile_build").val() === 'yes' || $("#profile_build").val() == 'error') {
+								$("#basic_bg").val($("#user_bg").val());
+								$("#profession").val($("#user_profession").val());
+								$("#DOB").val($("#user_dob").val());
+								$("#house").val($("#user_house").val());
+								$("#contact").val($("#user_contact").val());
+								$("#basic_gender").val($("#user_gender").val());
+								// $("#basic_bg").val($("#user_bg").val());
+								$("#street").val($("#user_street").val());
+								$("#zipcode").val($("#user_zipcode").val());
+								$("#basic_division").val($("#user_division").val());
+								district();
+								$("#basic_district").val($("#user_district").val());
+								// console.log($("#user_district").val());
+								upazilla();
+								$("#basic_upazilla").val($("#user_upazilla").val());
+								// console.log($("#zipcode").val());
+							}
+
+							if ($("#profile_build").val() === 'yes') {
+								$('#basic_bg option:not(:selected)').attr('disabled', true);
+								$("#DOB").attr('readonly', 'readonly');
+								$('#imageResult').attr('src', $("#user_imgLink").val());
+							}
 						});
-					}
 
-					if ($("#profile_build").val() === 'yes' || $("#profile_build").val() == 'error') {
-						$("#basic_bg").val($("#user_bg").val());
-						$("#profession").val($("#user_profession").val());
-						$("#DOB").val($("#user_dob").val());
-						$("#house").val($("#user_house").val());
-						$("#contact").val($("#user_contact").val());
-						$("#basic_gender").val($("#user_gender").val());
-						// $("#basic_bg").val($("#user_bg").val());
-						$("#street").val($("#user_street").val());
-						$("#zipcode").val($("#user_zipcode").val());
-						$("#basic_division").val($("#user_division").val());
-						district();
-						$("#basic_district").val($("#user_district").val());
-						// console.log($("#user_district").val());
-						upazilla();
-						$("#basic_upazilla").val($("#user_upazilla").val());
-						// console.log($("#zipcode").val());
-					}
+						function district() {
+							var div_id = $('#basic_division').val();
+							// console.log(div_id);
 
-					if ($("#profile_build").val() === 'yes') {
-						$('#basic_bg option:not(:selected)').attr('disabled', true);
-						$("#DOB").attr('readonly', 'readonly');
-						$('#imageResult').attr('src', $("#user_imgLink").val());
-					}
-				});
-
-				function district() {
-					var div_id = $('#basic_division').val();
-					// console.log(div_id);
-
-					$.ajax({
-						type: 'GET',
-						data: { division_id: div_id },
-						url: '/address/districts',
-						async: false,
-						success: function (data) {
-							//console.log(data);
-							$('#basic_district').empty();
-							$('#basic_district').append('<option disabled selected value="">District</option>');
-							$.each(data, function (index, district) {
-								$('#basic_district').append("<option value = '" + district.id + "' >" + district.name + " </option>");
+							$.ajax({
+								type: 'GET',
+								data: { division_id: div_id },
+								url: '/address/districts',
+								async: false,
+								success: function (data) {
+									//console.log(data);
+									$('#basic_district').empty();
+									$('#basic_district').append('<option disabled selected value="">District</option>');
+									$.each(data, function (index, district) {
+										$('#basic_district').append("<option value = '" + district.id + "' >" + district.name + " </option>");
+									});
+								}
 							});
 						}
-					});
-				}
 
-				function upazilla() {
-					var dist_id = $('#basic_district').val();
-					//console.log(dist_id);
+						function upazilla() {
+							var dist_id = $('#basic_district').val();
+							//console.log(dist_id);
 
-					$.ajax({
-						type: 'GET',
-						data: { district_id: dist_id },
-						url: '/address/upazillas',
-						async: false,
-						success: function (data) {
-							// console.log(data);
-							$('#basic_upazilla').empty();
-							$('#basic_upazilla').append('<option disabled selected value="">Upazilla</option>');
-							$.each(data, function (index, upazilla) {
-								$('#basic_upazilla').append("<option value = '" + upazilla.id + "' >" + upazilla.name + " </option>");
+							$.ajax({
+								type: 'GET',
+								data: { district_id: dist_id },
+								url: '/address/upazillas',
+								async: false,
+								success: function (data) {
+									// console.log(data);
+									$('#basic_upazilla').empty();
+									$('#basic_upazilla').append('<option disabled selected value="">Upazilla</option>');
+									$.each(data, function (index, upazilla) {
+										$('#basic_upazilla').append("<option value = '" + upazilla.id + "' >" + upazilla.name + " </option>");
+									});
+								}
 							});
 						}
-					});
-				}
 
 
-				$(function () {
-					$('#basic_division').on("change", district);
-				});
+						$(function () {
+							$('#basic_division').on("change", district);
+						});
 
-				$(function () {
-					$('#basic_district').on("change", upazilla);
-				});
+						$(function () {
+							$('#basic_district').on("change", upazilla);
+						});
 
-				function readURL(input) {
-					console.log(input);
-					if (input.files && input.files[0]) {
-						console.log(input.files);
-						var reader = new FileReader();
+						function readURL(input) {
+							console.log(input);
+							if (input.files && input.files[0]) {
+								console.log(input.files);
+								var reader = new FileReader();
 
-						reader.onload = function (e) {
-							$('#imageResult')
-								.attr('src', e.target.result);
-						};
-						reader.readAsDataURL(input.files[0]);
-					}
-				}
+								reader.onload = function (e) {
+									$('#imageResult')
+										.attr('src', e.target.result);
+								};
+								reader.readAsDataURL(input.files[0]);
+							}
+						}
 
-			</script>
-			<script src="assets/js/jquery-3.2.1.min.js"></script>
-			<script src="assets/js/popper.min.js"></script>
-			<script src="assets/js/bootstrap.min.js"></script>
-			<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-				integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-				crossorigin="anonymous"></script>
-			<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-				integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-				crossorigin="anonymous"></script>
+					</script>
+					<script src="assets/js/jquery-3.2.1.min.js"></script>
+					<script src="assets/js/popper.min.js"></script>
+					<script src="assets/js/bootstrap.min.js"></script>
+					<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+						integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+						crossorigin="anonymous"></script>
+					<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+					<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+						integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+						crossorigin="anonymous"></script>
 
 </body>
 

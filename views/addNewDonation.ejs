@@ -13,27 +13,20 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-	<!-- jQuery -->
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-
-	<!-- Select2 CSS -->
-	<!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> -->
-
-	<!-- Select2 JS -->
-	<!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script> -->
 </head>
 
 <body>
 	<div id="preloader"></div>
-	<%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo, notification_count: navbar.notification_count, notifiactions: notifications}) %>
+	<%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo, notification_count:
+		navbar.notification_count, notifiactions: notifications}) %>
 		<div class="container">
 			<div id="manual-response">
 				<form method="Post">
 					<div class="row gutters" style="padding-bottom: 5rem;">
 						<div class="col-12">
 							<section style="margin-top:2rem;">
-								<h2 style="margin-bottom: 0 !important;">Keep Track of Your Donations in<div class="brandname"
-										style="font-weight: 600;"> G L E A M </div>
+								<h2 style="margin-bottom: 0 !important;">Keep Track of Your Donations in<div
+										class="brandname" style="font-weight: 600;"> G L E A M </div>
 									App
 								</h2>
 
@@ -116,9 +109,6 @@
 										<textarea name="complication" id="complication" cols="67" rows="3"
 											placeholder="Complications (if any)" value=""
 											style="resize: none;"></textarea>
-										<!-- <input id="complication" name="complication"
-										placeholder="Complications or Specific Requirements (if any)" value=""
-										type="textarea"> -->
 									</div>
 
 									<h6 class="mb-2">Date of Donation</h6>
@@ -130,9 +120,7 @@
 													required>
 											</div>
 										</div>
-
 									</div>
-
 								</div>
 
 							</div>
@@ -152,23 +140,16 @@
 											</div>
 										</div>
 									</div>
-									<!-- <div class="input-container lname">
-								<input id="house" name="house" placeholder="Name" type="text" required>
-								</div>
-								<div class="input-container lname">
-									<input id="street" name="street" placeholder="Street (Optional)" type="text">
-								</div> -->
+
 									<div class="org-details">
 										<div class="input-container cta">
 											<label class="checkbox-container">
-												<input type="checkbox" name="current_location" id="current-location" value="yes" onclick="fetchAddress()">
+												<input type="checkbox" name="current_location" id="current-location"
+													value="yes" onclick="fetchAddress()">
 												<span class="checkmark"></span>
 												I am in the place right now
 											</label>
 										</div>
-										<!-- <input type="checkbox" id="current-location" name="current_location" value="yes"
-											onclick="fetchAddress()">
-										<label for="current-location" style="display: inline;"> Are you in the location right now? </label><br> -->
 									</div>
 									<div class="row">
 										<div class="col-md-12 mb-4">
@@ -221,18 +202,7 @@
 											</div>
 										</div>
 									</div>
-
-
-
-
 								</div>
-								<!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-									<div class="input-container lname">
-										<textarea name="orgAddressDetails"
-											placeholder="Details about organization (if any)" id="orgAddressDetails"
-											cols="1" rows="7"></textarea>
-									</div>
-								</div> -->
 							</div>
 							<div id="output" style="display: none;">
 								<input id="latitude" name="lat" placeholder="Organization" type="text" value="">

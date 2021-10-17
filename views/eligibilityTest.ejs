@@ -35,7 +35,8 @@
 
 <body>
   <div id="preloader"></div>
-  <%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo, notification_count: navbar.notification_count, notifiactions: notifications}) %>
+  <%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo, notification_count:
+    navbar.notification_count, notifiactions: notifications}) %>
     <div class="container">
       <div class="container-card">
         <div class="card-heading">
@@ -48,10 +49,10 @@
               transform="translate(100 100)" />
           </svg>
           <h2>Comorbidities</h2>
-          <!-- <hr class="hr1"> -->
+
           <img src="/img/chevrons-down.svg" class="contentarrow" alt="">
           <div class="content">
-            <!-- <h4>Card One</h4> -->
+
             <p> Comorbidity is the presence of one or more additional conditions often co-occurring (that is,
               concomitant or concurrent) with a primary condition which describes the effect of all other
               conditions an individual patient might have other than the primary condition of interest. </p>
@@ -60,10 +61,10 @@
 
         <div class="card">
           <h2>Lifestyle</h2>
-          <!-- <hr class="hr1"> -->
+
           <img src="/img/chevrons-down.svg" class="contentarrow" alt="">
           <div class="content">
-            <!-- <h4>Card Two</h4> -->
+
             <p>Healthy life-style is a must for fit body. Sleeping on time, exercising, abstraining from nicotine,
               drugs and caffeine. Remember, a good lifestyle will always make one more eligible for blood donation. Not
               only that but also, a healthy lifestyle will let you live longer with less comorbidities.</p>
@@ -72,10 +73,10 @@
 
         <div class="card">
           <h2 class="donationIntervals">Donation Intervals</h2>
-          <!-- <hr class="hr1"> -->
+
           <img src="/img/chevrons-down.svg" class="contentarrow" alt="">
           <div class="content">
-            <!-- <h4>Card Three</h4> -->
+
             <p>Donating is good, but not too much. For a healthy person, donating two full bags of blood should have the
               interval of at least two months. For platelets, donation frequency is 7 days, up to 24 times/year. For
               plasma donation, the frequency is 28 days, up to 13 times/year.</p>
@@ -100,15 +101,12 @@
         <input id="user_last_donation" type="date" value="<%= user.last_donation %>">
       </div>
 
-
-
       <div class="container-form">
         <hr>
         <h1>Let us know about your Comorbidities.</h1>
         <form method="POST">
           <div class="row">
             <div class="form-left">
-              <!-- <form class="form"> -->
               <h3>Do you have asthma?</h3>
               <div class="switch-field">
                 <input type="radio" id="asthma-y" name="asthma" value="yes" required />
@@ -121,11 +119,9 @@
                   d="M51.2,-23.7C55.7,-2.7,41.4,17.3,24.1,28.9C6.8,40.5,-13.6,43.6,-23.4,35.7C-33.1,27.8,-32.2,8.8,-26.5,-13.8C-20.9,-36.4,-10.4,-62.6,6.4,-64.7C23.3,-66.8,46.6,-44.8,51.2,-23.7Z"
                   transform="translate(100 100)" />
               </svg>
-              <!-- </form> -->
             </div>
 
             <div class="form-right">
-              <!-- <form class="form"> -->
               <h3>Do you have high blood pressure?</h3>
               <div class="switch-field">
                 <input type="radio" id="highbp-y" name="highbp" value="yes" required />
@@ -133,16 +129,12 @@
                 <input type="radio" id="highbp-n" name="highbp" value="no" />
                 <label for="highbp-n">No</label>
               </div>
-
-              <!-- </form> -->
             </div>
           </div>
 
-          <!-- <hr> -->
+
           <div class="row">
             <div class="form-left">
-              <!-- <form class="form"> -->
-
               <h3>Do you have any cancer history?</h3>
               <div class="switch-field">
                 <input type="radio" id="cancer-y" name="cancer" value="yes" required />
@@ -150,13 +142,9 @@
                 <input type="radio" id="cancer-n" name="cancer" value="no" />
                 <label for="cancer-n">No</label>
               </div>
-
-              <!-- </form> -->
             </div>
 
             <div class="form-right">
-              <!-- <form class="form"> -->
-
               <h3>Do you have diabetes?</h3>
               <div class="switch-field">
                 <input type="radio" id="diabetes-y" name="diabetes" value="yes" required />
@@ -164,16 +152,12 @@
                 <input type="radio" id="diabetes-n" name="diabetes" value="no" />
                 <label for="diabetes-n">No</label>
               </div>
-
-              <!-- </form> -->
             </div>
           </div>
 
-          <!-- <hr> -->
+
           <div class="row">
             <div class="form-left">
-              <!-- <form class="form"> -->
-
               <h3>Do you have any heart disease?</h3>
               <div class="switch-field">
                 <input type="radio" id="HeartDisease-y" name="HeartDisease" value="yes" required />
@@ -181,13 +165,9 @@
                 <input type="radio" id="HeartDisease-n" name="HeartDisease" value="no" />
                 <label for="HeartDisease-n">No</label>
               </div>
-
-              <!-- </form> -->
             </div>
 
             <div class="form-right">
-              <!-- <form class="form"> -->
-
               <h3>Do you have Hepatitis?</h3>
               <div class="switch-field">
                 <input type="radio" id="Hepatitis-y" name="Hepatitis" value="yes" required />
@@ -195,16 +175,12 @@
                 <input type="radio" id="Hepatitis-n" name="Hepatitis" value="no" />
                 <label for="Hepatitis-n">No</label>
               </div>
-
-              <!-- </form> -->
             </div>
           </div>
 
-          <!-- <hr> -->
+
           <div class="row">
             <div class="form-left">
-              <!-- <form class="form"> -->
-
               <h3>Do you have Anemia?</h3>
               <div class="switch-field">
                 <input type="radio" id="anemia-y" name="anemia" value="yes" required />
@@ -212,13 +188,9 @@
                 <input type="radio" id="anemia-n" name="anemia" value="no" />
                 <label for="anemia-n">No</label>
               </div>
-
-              <!-- </form> -->
             </div>
 
             <div class="form-right">
-              <!-- <form class="form"> -->
-
               <h3>Do you have Tuberculosis(TB)?</h3>
               <div class="switch-field">
                 <input type="radio" id="Tuberculosis-y" name="Tuberculosis" value="yes" required />
@@ -226,8 +198,6 @@
                 <input type="radio" id="Tuberculosis-n" name="Tuberculosis" value="no" />
                 <label for="Tuberculosis-n">No</label>
               </div>
-
-              <!-- </form> -->
             </div>
           </div>
 
@@ -237,23 +207,16 @@
 
           <div class="row-lifestyle">
             <div class="form-left">
-              <!-- <form class="form"> -->
-
               <h3>How often do you smoke?</h3>
-
               <input type="range" class="custom-range" name="smoke" min="0" max="2" id="smokeRange">
               <div class="range">
                 <label for="">Never</label>
                 <label for="">Frequently</label>
                 <label for="">Extreme</label>
               </div>
-
-              <!-- </form> -->
             </div>
 
             <div class="form-right">
-              <!-- <form class="form"> -->
-
               <h3>How often do you drink?</h3>
               <input type="range" class="custom-range" name="drinking" min="0" max="2" id="drinkRange">
               <div class="range">
@@ -261,15 +224,11 @@
                 <label for="">Frequently</label>
                 <label for="">Extreme</label>
               </div>
-
-              <!-- </form> -->
             </div>
           </div>
 
           <div class="row-lifestyle">
             <div class="form-left">
-              <!-- <form class="form"> -->
-
               <h3>Are you in depression?</h3>
               <input type="range" class="custom-range" name="depression" min="0" max="2" id="depressionRange">
               <div class="range">
@@ -277,17 +236,12 @@
                 <label for="">Medium</label>
                 <label for="">Severe</label>
               </div>
-
-
-              <!-- </form> -->
             </div>
           </div>
           <hr>
 
           <div class="row-depression">
             <div class="form-left">
-              <!-- <form class="form"> -->
-
               <h3>When did you last donate?</h3>
               <div class="input-container cta">
                 <label class="checkbox-container">
@@ -301,28 +255,24 @@
                     required>
                 </div>
               </div>
-
-              <!-- </form> -->
             </div>
-
           </div>
-
       </div>
       <div class="btn">
         <button class="signup-btn" type="submit">Submit</button>
       </div>
       </form>
-
     </div>
+
     <%- include ("./partials/footer.ejs") %>
 
-    <script>
-      var loader = document.getElementById("preloader");
+      <script>
+        var loader = document.getElementById("preloader");
 
-      window.addEventListener("load", function(){
+        window.addEventListener("load", function () {
           loader.style.display = "none";
-      })
-  </script>
+        })
+      </script>
 
 
       <script>

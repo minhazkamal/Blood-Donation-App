@@ -1,17 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 body {
     margin: 0;
     padding-top: 40px;
     color: #2e323c;
-    /* background: url(https://images.unsplash.com/photo-1514451380751-c374d1d0d4d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxhbGx8fHx8fHx8fHwxNjI1MTIwMjYz&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit); */
-    /* position: relative; */
-    /* height: 100%; */
     background-size: cover;
-    font-family: 'Montserrat',sans-serif;
+    font-family: 'Montserrat', sans-serif;
     padding-bottom: 40px;
     background: url(/img/waveUpdateProfile.png) no-repeat;
-
 }
 
 .container {
@@ -31,9 +26,11 @@ body {
     padding-bottom: 1rem;
     text-align: center;
 }
+
 .account-settings .user-profile .user-avatar {
     margin: 0 0 1rem 0;
 }
+
 .account-settings .user-profile .user-avatar img {
     width: 200px;
     height: 200px;
@@ -41,11 +38,9 @@ body {
     -moz-border-radius: 100px;
     border-radius: 50%;
     border: 1px solid #999;
-    /* border-style: solid; */
 }
-input[type="text"],input[type="email"],input[type="tel"],input[type="date"]{
-    /* margin: 0 0 0.5rem 0; */
 
+input[type="text"], input[type="email"], input[type="tel"], input[type="date"] {
     display: block;
     width: 100%;
     box-sizing: border-box;
@@ -58,24 +53,22 @@ input[type="text"],input[type="email"],input[type="tel"],input[type="date"]{
     font-weight: 500;
 }
 
-
-::placeholder{
+::placeholder {
     color: black;
     opacity: 0.75;
     text-align: left;
     word-wrap: break-word;
-    font-family: 'Montserrat',sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
-input[type="textarea"]::placeholder{
+input[type="textarea"]::placeholder {
     color: black;
     opacity: 0.75;
     text-align: left;
     word-wrap: break-word;
 }
-input[type="textarea"]{
-    /* margin: 0 0 0.5rem 0; */
 
+input[type="textarea"] {
     display: block;
     width: 100%;
     height: 15rem;
@@ -89,7 +82,7 @@ input[type="textarea"]{
     word-wrap: break-word;
 }
 
-.input-group mb-3{
+.input-group mb-3 {
     display: block;
     width: 100%;
     height: 15rem;
@@ -102,20 +95,18 @@ input[type="textarea"]{
     font-size: 0.875rem;
 }
 
-.input-group-prepend{
+.input-group-prepend {
     padding: 0;
     border-radius: 4px;
 }
 
-.form-control{
+.form-control {
     background: transparent;
-    /* border: 1px solid #1a1919; */
     border-radius: 5px;
     box-sizing: border-box;
-    /* color: black; */
     font-weight: 500;
     font-size: 0.875rem;
-    border-color: black !important ;
+    border-color: black !important;
     margin-top: 3rem;
 }
 
@@ -126,16 +117,19 @@ input[type="textarea"]{
     font-style: italic;
     color: #3b67b9;
 }
-h6{
+
+h6 {
     margin: 0 0 15px 0;
     color: #922546;
     font-weight: 700;
     font-size: 1rem;
 }
+
 .account-settings .about {
     margin: 2rem 0 0 0;
     text-align: center;
 }
+
 .account-settings .about h5 {
     margin: 0 0 15px 0;
     color: #922546;
@@ -146,38 +140,12 @@ h6{
 .account-settings .about p {
     font-size: 0.825rem;
 }
-/* .form-control {
-    border: 1px solid #cfd1d8;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-    font-size: .825rem;
-    background: #ffffff00;
-    color: #2e323c;
-} */
 
-.btn dropdown-toggle{
+.btn dropdown-toggle {
     border: 1px solid black;
 }
 
-/* .card { */
-    /* background: rgba( 255, 255, 255, 1 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 16.0px );
-    -webkit-backdrop-filter: blur( 20.0px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    border: 1rem;
-    margin-bottom: 1rem; */
-     /* margin-top: 5rem;  */
-
-/* } */
-
-.btn1{
-
+.btn1 {
     background: #b9375e;
     color: white;
     font-weight: 500;
@@ -192,13 +160,12 @@ h6{
     margin-right: 1rem;
 }
 
-.btn1:hover{
+.btn1:hover {
     background: #d34e76;
     cursor: pointer;
 }
 
-.btn2{
-
+.btn2 {
     background: #2f6690;
     color: white;
     font-weight: 500;
@@ -214,109 +181,94 @@ h6{
     width: 100%;
 }
 
-.btn2:hover{
+.btn2:hover {
     background: #3a7ca5;
     cursor: pointer;
 }
 
-.card-body{
+.card-body {
     padding: 4rem;
-    font-family: 'Montserrat',sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background: transparent !important;
     background: transparent !important;
-}
-h2{
-    text-align: center;
-    color: black;
-    font-family: 'Montserrat',sans-serif;
-    margin-bottom:4rem ;
 }
 
-.brandname{
+h2 {
+    text-align: center;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 4rem;
+}
+
+.brandname {
     display: inline;
 }
 
-
-
-#upload{
-    margin-top: 3rem; 
+#upload {
+    margin-top: 3rem;
     border-color: black;
     text-align: left;
     text-decoration-color: black;
 }
 
-.input-group-append{
-    margin-top: 3rem; 
+.input-group-append {
+    margin-top: 3rem;
 }
 
-hr{
+hr {
     border-width: 1px;
     background: rgba(0, 0, 0, 0.404);
     margin-bottom: 2rem;
 }
 
-.hr1{
+.hr1 {
     border-width: 0.5px;
     background: rgba(0, 0, 0, 0.404);
     margin-bottom: 2rem;
 }
 
-
-/* .btn.btn-secondary.dropdown-toggle{
-    display: inline;
-    box-sizing: border-box;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #c4c4c4;
-    /* padding: 1em; */
-   /* font-size: 0.875rem;
-    color: black;
-}*/
-
-.dropdown.show{
+.dropdown.show {
     margin-top: 2rem;
     display: flex;
-} 
+}
 
-
-#basic_dob_day, #basic_bg, #basic_gender, #basic_division, #basic_district, #basic_upazilla{
+#basic_dob_day, #basic_bg, #basic_gender, #basic_division, #basic_district, #basic_upazilla {
     border-radius: 0.5rem;
     border: 1px solid #1a1919;
     color: #2e323c;
     margin-top: 0;
 }
 
-#basic_dob_month{
+#basic_dob_month {
     border-radius: 0.5rem;
     border: 1px solid #1a1919;
     color: #2e323c;
     margin-top: 0;
 }
 
-#basic_dob_year{
+#basic_dob_year {
     border-radius: 0.5rem;
     border: 1px solid #1a1919;
     color: #2e323c;
     margin-top: 0;
 }
 
-.note{
-    font-family: 'Montserrat',sans-serif;
+.note {
+    font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     font-size: 15px;
     font-style: italic;
     margin-bottom: 2px;
 }
 
-
-.blood_group{
+.blood_group {
     border-radius: 0.5rem;
     border: 1px solid #1a1919;
     color: #2e323c;
     margin-top: 0;
 }
 
-.blobUpdateProf{
+.blobUpdateProf {
     position: absolute;
     z-index: -1;
     width: 30rem;
@@ -327,7 +279,7 @@ hr{
 }
 
 @media screen and (max-width:1200px) {
-    .blobUpdateProf{
+    .blobUpdateProf {
         position: absolute;
         z-index: -1;
         width: 15rem;
@@ -337,7 +289,7 @@ hr{
 }
 
 @media screen and (max-width:992px) {
-    .blobUpdateProf{
+    .blobUpdateProf {
         position: absolute;
         z-index: -1;
         width: 15rem;
@@ -347,7 +299,7 @@ hr{
 }
 
 @media screen and (max-width:768px) {
-    .blobUpdateProf{
+    .blobUpdateProf {
         position: absolute;
         z-index: -1;
         width: 15rem;
@@ -357,7 +309,7 @@ hr{
 }
 
 @media screen and (max-width:575px) {
-    .blobUpdateProf{
+    .blobUpdateProf {
         position: absolute;
         z-index: -1;
         width: 15rem;
@@ -367,7 +319,7 @@ hr{
 }
 
 @media screen and (max-width:456px) {
-    .blobUpdateProf{
+    .blobUpdateProf {
         position: absolute;
         z-index: -1;
         width: 15rem;
@@ -377,7 +329,7 @@ hr{
 }
 
 @media screen and (max-width:416px) {
-    .blobUpdateProf{
+    .blobUpdateProf {
         position: absolute;
         z-index: -1;
         width: 15rem;
@@ -387,84 +339,77 @@ hr{
 }
 
 @media screen and (max-width:360px) {
-    .blobUpdateProf{
+    .blobUpdateProf {
         position: absolute;
         z-index: -1;
         width: 30rem;
         height: 30rem;
         right: 50rem;
         top: -9em;
-        
-}
-
-@media screen and (max-width:375px) {
-    .blobUpdateProf{
-        position: absolute;
-        z-index: -1;
-        width: 25rem;
-        height: 30rem;
-        left: 2rem;
-        
     }
+    @media screen and (max-width:375px) {
+        .blobUpdateProf {
+            position: absolute;
+            z-index: -1;
+            width: 25rem;
+            height: 30rem;
+            left: 2rem;
+        }
     }
-    body{
+    body {
         background: cover;
     }
 }
 
-
 @media screen and (max-width:320px) {
-    .blobUpdateProf{
+    .blobUpdateProf {
         position: absolute;
         z-index: -1;
         width: 15rem;
         height: 16rem;
         left: 2.5rem;
-        
     }
-    body{
+    body {
         background: cover;
     }
 }
 
 @media screen and (max-width:280px) {
-    .blobUpdateProf{
+    .blobUpdateProf {
         position: absolute;
         z-index: -1;
         width: 15rem;
         height: 18rem;
         left: 1rem;
     }
-    body{
+    body {
         background: cover;
     }
 }
 
-#preloader{
+#preloader {
     height: 100vh;
     width: 100%;
     position: fixed;
     z-index: 1000;
     background: #fff url(/img/preloader.gif) no-repeat center center;
     background-size: 15%;
-  }
+}
 
-  ::-webkit-scrollbar {
-	width: 8px;
-	height: 3px;
-	border-left: 0;
-	background: rgba(255, 255, 255, 0);
-	border-radius: 1em;
-	
-  }
-  
-  ::-webkit-scrollbar-track {
-	background: none;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-	background: #3b363880;
-	border-radius: 0;
-	border-radius: 1em;
-  } 
-  
+::-webkit-scrollbar {
+    width: 8px;
+    height: 3px;
+    border-left: 0;
+    background: rgba(255, 255, 255, 0);
+    border-radius: 1em;
+}
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3b363880;
+    border-radius: 0;
+    border-radius: 1em;
+}

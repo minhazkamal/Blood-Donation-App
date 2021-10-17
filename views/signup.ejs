@@ -77,7 +77,9 @@
                                 <div class="input-container password">
                                     <!-- <label for="password">Password</label> -->
                                     <input id="password" name="password" placeholder="Password" type="password"
-                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters" required>
+                                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+                                        title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters"
+                                        required>
                                     <span class="eye-password" onclick="toggleEyeButtonForPassword()">
                                         <i id="hide-eye-password" class="fa fa-eye"></i>
                                         <i id="hide-eye-slash-password" class="fa fa-eye-slash"></i>
@@ -94,25 +96,11 @@
                                     </span>
                                 </div>
 
-                                <!-- <div class="input-container cta">
-                        <label class="checkbox-container">
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                            Remember me
-                            <a href="#">Forgot Password?</a>
-                        </label>
-                    </div> -->
-
                                 <button class="signup-btn" type="submit">Sign Up</button>
 
                                 <h5 id="or-button" style="margin-top: 2rem; margin-bottom: 2rem;">or</h5>
-                                <!-- <h2 style="text-align: center;">Sign Up with</h2>     -->
                                 <div class="jumbotron text-center"
                                     style="background:transparent !important; padding: 0% !important; ">
-                                    <!-- <h1><span class="fa fa-lock"></span> Node Authentication</h1> -->
-                                    <!-- <h2>Sign Up with</h2> -->
-
-                                    <!-- <p>Login or Register with:</p> -->
 
                                     <a href="/signup-google" class="btn btn-outline-dark btn-block"><span
                                             class="fa fa-google"></span> Continue with Google</a>
@@ -135,7 +123,7 @@
     <script>
         var loader = document.getElementById("preloader");
 
-        window.addEventListener("load", function(){
+        window.addEventListener("load", function () {
             loader.style.display = "none";
         })
     </script>

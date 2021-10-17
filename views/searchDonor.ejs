@@ -233,7 +233,7 @@
             border: 2px solid #eaeaea;
             padding: 5px 10px;
             font-size: 12px;
-            
+
         }
 
         #searchWrapper {
@@ -253,17 +253,12 @@
 
 <body>
     <div id="preloader"></div>
-    <%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo, notification_count: navbar.notification_count, notifiactions: notifications}) %>
+    <%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo, notification_count:
+        navbar.notification_count, notifiactions: notifications}) %>
         <div class="main-container">
             <div class='sidebar'>
                 <div class='heading'>
                     <h1 style="font-family: 'Montserrat', sans serif;">Search Donors</h1>
-                    <!-- <form action="#">
-                    <div class="input-container email">
-                        <input id="email" name="email" placeholder="Organization Name" type="text">
-                    </div>
-                </form> -->
-
                 </div>
                 <div id="searchWrapper">
                     <input type="text" name="searchBar" id="searchBar" placeholder="Start typing for search" />
@@ -278,13 +273,13 @@
         <%- include ("./partials/footer.ejs") %>
 
 
-        <script>
-            var loader = document.getElementById("preloader");
+            <script>
+                var loader = document.getElementById("preloader");
 
-            window.addEventListener("load", function(){
-                loader.style.display = "none";
-            })
-        </script>
+                window.addEventListener("load", function () {
+                    loader.style.display = "none";
+                })
+            </script>
 
 
 
@@ -303,7 +298,7 @@
 
             <script>
                 var self_marker;
-                $(document).ready(function () {    
+                $(document).ready(function () {
                     if (navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(function (position) {
                             console.log(position);

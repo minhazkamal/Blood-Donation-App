@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
-:root{
+:root {
     font-size: 100%;
     font-size: 16px;
     line-height: 1.5;
@@ -8,34 +8,34 @@
     --primary-pink: #b9375e;
 }
 
-html{
+html {
     height: 100%;
 }
 
-body{
+body {
     padding: 0;
     margin: 0;
-    font-family: 'Montserrat',sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 500;
 }
 
-h1{
+h1 {
     font-size: 2.25rem;
     font-weight: 700;
 }
 
-h2{
+h2 {
     margin-top: 1rem;
     font-size: 1.5rem;
     font-weight: 700;
 }
 
-a{
+a {
     text-decoration: none;
     color: var(--primary-blue);
 }
 
-a:hover{
+a:hover {
     text-decoration: underline;
 }
 
@@ -48,23 +48,21 @@ a:hover{
     .brand-name {
         font-weight: 800;
         display: block;
-    }   
-    
+    }
 }
 
-
-.small{
+.small {
     font-size: 80%;
     text-align: center;
 }
 
-.split-screen{
+.split-screen {
     display: flex;
     flex-direction: column;
     overflow: auto;
 }
 
-.left, .right{
+.left, .right {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,21 +71,20 @@ a:hover{
     overflow: auto;
 }
 
-.copy{
+.copy {
     margin-top: 4rem;
 }
-.left{
-    /* background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.5)),url(https://images.unsplash.com/photo-1503455637927-730bce8583c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit); */
+
+.left {
     background-image: url(/img/wave.png);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     transform: rotateY(180deg);
-    /* transform: rotate(180deg); */
 }
 
-.left .copy{
+.left .copy {
     transform: rotateY(-180deg);
     margin: 2em;
     color: black;
@@ -96,31 +93,30 @@ a:hover{
     -moz-osx-font-smoothing: grayscale;
 }
 
-.left p{
+.left p {
     font-weight: 400;
     font-size: 1.25rem;
 }
 
-.right .copy{
+.right .copy {
     color: black;
     text-align: center;
 }
 
-.right .copy p{
+.right .copy p {
     margin: 1.5rem 0;
     font-size: 0.875rem;
 }
 
-.right form{
+.right form {
     width: 328px;
 }
 
-.right{
+.right {
     background-color: transparent;
 }
 
-form input[type="text"],form input[type="email"],
-form input[type="password"]{
+form input[type="text"], form input[type="email"], form input[type="password"] {
     display: block;
     width: 100%;
     box-sizing: border-box;
@@ -132,20 +128,22 @@ form input[type="password"]{
     font-size: 0.875rem;
 }
 
-label{
+label {
     display: block;
     margin-bottom: 0.5rem;
     font-size: 0.8rem;
 }
-label.checkbox-container{
+
+label.checkbox-container {
     display: flex;
     justify-content: space-between;
 }
 
-.input-container.password{
+.input-container.password {
     position: relative;
 }
-.input-container.password i{
+
+.input-container.password i {
     position: absolute;
     top: 12px;
     right: 16px;
@@ -153,11 +151,11 @@ label.checkbox-container{
     color: grey;
 }
 
-.input-container.password i:hover{
+.input-container.password i:hover {
     cursor: pointer;
 }
 
-.checkbox-container input{
+.checkbox-container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -165,7 +163,7 @@ label.checkbox-container{
     width: 0;
 }
 
-.checkbox-container{
+.checkbox-container {
     display: block;
     position: relative;
     padding-left: 2rem;
@@ -174,12 +172,12 @@ label.checkbox-container{
     margin: 0 0 1.25rem 0;
 }
 
-.checkbox-container input:checked~ .checkmark{
+.checkbox-container input:checked~.checkmark {
     background-color: var(--primary-blue);
     border: 1px solid var(--primary-blue);
 }
 
-.checkmark{
+.checkmark {
     position: absolute;
     width: 20px;
     height: 20px;
@@ -190,17 +188,17 @@ label.checkbox-container{
     left: 0;
 }
 
-.checkmark:after{
+.checkmark:after {
     content: "";
     position: absolute;
     display: none;
 }
 
-.checkbox-container input:checked~ .checkmark:after{
+.checkbox-container input:checked~.checkmark:after {
     display: block;
 }
 
-.checkbox-container .checkmark:after{
+.checkbox-container .checkmark:after {
     border: solid white;
     border-width: 0 3px 3px 0;
     width: 6px;
@@ -210,7 +208,7 @@ label.checkbox-container{
     transform: rotate(45deg);
 }
 
-.signup-btn{
+.signup-btn {
     display: block;
     width: 100%;
     background: var(--primary-blue);
@@ -226,22 +224,21 @@ label.checkbox-container{
     font-size: 0.875rem;
 }
 
-.signup-btn:hover{
+.signup-btn:hover {
     background: #3a7ca5;
     cursor: pointer;
 }
 
-#hide-eye-password, #hide-eye-confirm-password{
+#hide-eye-password, #hide-eye-confirm-password {
     display: none;
 }
 
 #or-button {
     overflow: hidden;
     text-align: center;
-  }
-  
-  #or-button:before,
-  #or-button:after {
+}
+
+#or-button:before, #or-button:after {
     background-color: rgb(182, 181, 181);
     content: "";
     display: inline-block;
@@ -249,17 +246,17 @@ label.checkbox-container{
     position: relative;
     vertical-align: middle;
     width: 50%;
-  }
+}
 
-  #or-button:before {
+#or-button:before {
     right: 0.5em;
     margin-left: -50%;
-  }
-  
-  #or-button:after {
+}
+
+#or-button:after {
     left: 0.5em;
     margin-right: -50%;
-  }
+}
 
 .fa-google {
     background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
@@ -267,68 +264,66 @@ label.checkbox-container{
     background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
-    }
+}
 
 .fa-facebook-square {
     color: #3b5998;
-    background-image: linear-gradient( to bottom, transparent 20%, white 20%, white 93%, transparent 93% );
+    background-image: linear-gradient( to bottom, transparent 20%, white 20%, white 93%, transparent 93%);
     background-size: 55%;
     background-position: 70% 0;
     background-repeat: no-repeat;
 }
 
-.blobSignup{
-    width: 400px;;
+.blobSignup {
+    width: 400px;
+    ;
     height: 400px;
     top: 200px;
     position: absolute;
     z-index: -1;
     right: 2px;
-
 }
-path{
+
+path {
     width: 500px;
     height: 500px;
 }
 
 @media screen and (min-width:900px) {
-    .split-screen{
+    .split-screen {
         flex-direction: row;
         height: 100vh;
     }
-    .left, .right{
+    .left, .right {
         display: flex;
         width: 100%;
         height: auto;
     }
-    
 }
 
-#preloader{
+#preloader {
     height: 100vh;
     width: 100%;
     position: fixed;
     z-index: 1000;
     background: #fff url(/img/preloader.gif) no-repeat center center;
     background-size: 15%;
-  }
+}
 
-  ::-webkit-scrollbar {
-	width: 8px;
-	height: 3px;
-	border-left: 0;
-	background: rgba(255, 255, 255, 0);
-	border-radius: 1em;
-	
-  }
-  
-  ::-webkit-scrollbar-track {
-	background: none;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-	background: #3b363880;
-	border-radius: 0;
-	border-radius: 1em;
-  } 
-  
+::-webkit-scrollbar {
+    width: 8px;
+    height: 3px;
+    border-left: 0;
+    background: rgba(255, 255, 255, 0);
+    border-radius: 1em;
+}
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3b363880;
+    border-radius: 0;
+    border-radius: 1em;
+}

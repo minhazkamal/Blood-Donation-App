@@ -6,7 +6,6 @@
   --primary-blue: #2f6690;
   --primary-pink: #b9375e;
   box-sizing: border-box;
-  /* font-size: 1em;  */
 }
 
 html, body {
@@ -63,13 +62,11 @@ html, body {
 }
 
 .card-02 {
-  /* z-index: -1; */
   background: rgb(243, 243, 243);
   position: relative;
   flex: 1;
   max-width: 1000px;
   height: 300px;
-  /* margin: 10px; */
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -84,7 +81,6 @@ html, body {
 }
 
 .card-01 {
-  /* z-index: -1; */
   background: rgb(243, 243, 243);
   position: relative;
   flex: 1;
@@ -105,7 +101,6 @@ html, body {
 }
 
 .profile {
-  /* z-index: 2; */
   background: #ffc3cc;
   width: 270px !important;
   height: 270px;
@@ -141,7 +136,6 @@ span.pt_name {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  /* align-items: center; */
 }
 
 .blood-group {
@@ -172,7 +166,6 @@ span.pt_name {
 
 i.fa-user-circle {
   margin-top: 15px;
-  /* z-index: 3; */
   color: rgba(0, 0, 0, 0.7);
 }
 
@@ -271,7 +264,6 @@ i.fa-user-circle {
 }
 
 .info {
-  /* margin-left: 1em; */
   width: 100%;
   font-size: 1.25em;
   letter-spacing: 1px;
@@ -285,10 +277,8 @@ i.fa-user-circle {
 
 .form-control {
   background: transparent;
-  /* border: 1px solid #1a1919; */
   border-radius: 5px;
   box-sizing: border-box;
-  /* color: black; */
   font-weight: 500;
   font-size: 0.875rem;
   border-color: black !important;
@@ -336,7 +326,6 @@ i.fa-user-circle {
     margin-right: 2em;
   }
   .profile {
-    /* z-index: 2; */
     background: #ffc3cc;
     max-width: 100%;
     max-height: 100%;
@@ -410,7 +399,6 @@ i.fa-user-circle {
 /* ///////////////////////////// */
 
 .main {
-  /* transform: translateY(-20em); */
   width: 100%;
   display: grid;
   grid-template-columns: 80% 20%;
@@ -467,7 +455,6 @@ i.fa-user-circle {
   z-index: 1;
   display: flex;
   background-color: rgba(0, 0, 0, .5);
-  /* visibility: hidden; */
   display: none;
   opacity: 0;
   transition: visibility 300ms, opacity 500ms;
@@ -510,10 +497,6 @@ i.fa-user-circle {
   display: block;
 }
 
-/* .popup-button{
-  visibility: hidden;
-} */
-
 @media (max-width: 1100px) {
   .main {
     transform: translateY(0);
@@ -533,9 +516,6 @@ i.fa-user-circle {
   .footer-container {
     display: none;
   }
-  /* .wrapper{
-        display: block;
-    } */
   .view-profile-btn {
     font-size: .83rem;
   }
@@ -545,14 +525,6 @@ i.fa-user-circle {
   .upper-container {
     height: 30%;
   }
-  /* .blobEligibility1{
-  width: 500px;
-  height: 450px;
-  top: -120px;
-  left: -80px;
-  position: absolute;
-  z-index: -1;
-} */
   .blobEligibility1 {
     display: none;
   }

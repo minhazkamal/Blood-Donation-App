@@ -13,252 +13,234 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-	<!-- jQuery -->
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-
-	<!-- Select2 CSS -->
-	<!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> -->
-
-	<!-- Select2 JS -->
-	<!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script> -->
 </head>
 
 <body>
 	<div id="preloader"></div>
-	<%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo, notification_count: navbar.notification_count, notifiactions: notifications}) %>
+	<%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo, notification_count:
+		navbar.notification_count, notifiactions: notifications}) %>
 		<div class="container">
 			<div id="manual-response">
 				<form method="Post">
-                    <fieldset id="form-fields">
-					<div class="row gutters" style="padding-bottom: 5rem;">
-						<div class="col-12">
-							<section style="margin-top:2rem;">
-								<h2 style="margin-bottom: 0 !important;">Add your donation in<div class="brandname"
-										style="font-weight: 600;"> G L E A M </div>
-									App
-								</h2>
+					<fieldset id="form-fields">
+						<div class="row gutters" style="padding-bottom: 5rem;">
+							<div class="col-12">
+								<section style="margin-top:2rem;">
+									<h2 style="margin-bottom: 0 !important;">Add your donation in<div class="brandname"
+											style="font-weight: 600;"> G L E A M </div>
+										App
+									</h2>
 
-							</section>
+								</section>
 
-							<!-- Profile Picture Upload -->
-							<div class="account-settings">
-								<div class="user-profile">
+								<!-- Profile Picture Upload -->
+								<div class="account-settings">
+									<div class="user-profile">
+
+									</div>
+
+									<!-- Alert Message -->
+									<% if(typeof alert !='undefined' ) { %>
+										<% alert.forEach(function(error) { %>
+											<div class="alert alert-warning alert-dismissible fade show" role="alert">
+												<%= error.msg %>
+													<button type="button" class="close" data-dismiss="alert"
+														aria-label="Close">
+														<span aria-hidden="true">×</span>
+													</button>
+											</div>
+											<% }) %>
+												<% } %>
 
 								</div>
 
-								<!-- Alert Message -->
-								<% if(typeof alert !='undefined' ) { %>
-									<% alert.forEach(function(error) { %>
-										<div class="alert alert-warning alert-dismissible fade show" role="alert">
-											<%= error.msg %>
-												<button type="button" class="close" data-dismiss="alert"
-													aria-label="Close">
-													<span aria-hidden="true">×</span>
-												</button>
+								<div style="display: none;" id="user">
+									<% if(typeof user !='undefined' ) { %>
+										<input id="user_type" type="text" value="<%= user.type %>">
+										<input id="user_pt_name" type="text" value="<%= user.pt_name %>">
+										<input id="user_pt_cp" type="text" value="<%= user.pt_contact_person %>">
+										<input id="user_pt_contact" type="text" value="<%= user.pt_contact %>">
+										<input id="user_complications" type="text" value="<%= user.pt_complication %>">
+										<input id="user_org" type="text" value="<%= user.org_id %>">
+										<input id="user_donation_date" type="text" value="<%= user.donation_date %>">
+										<% } %>
+								</div>
+
+								<hr>
+
+
+
+								<h6 class="mb-2" style="display: block;">Donation Details</h6>
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<div class="input-container fname">
+											<label for="pt_name">Patient's Name</label>
+											<input id="pt_name" name="pt_name" placeholder="Patient's Name" value=""
+												type="text">
 										</div>
-										<% }) %>
-											<% } %>
-
-							</div>
-
-							<div style="display: none;" id="user">
-								<% if(typeof user !='undefined' ) { %>
-									<input id="user_type" type="text" value="<%= user.type %>">
-									<input id="user_pt_name" type="text" value="<%= user.pt_name %>">
-									<input id="user_pt_cp" type="text" value="<%= user.pt_contact_person %>">
-									<input id="user_pt_contact" type="text" value="<%= user.pt_contact %>">
-									<input id="user_complications" type="text" value="<%= user.pt_complication %>">
-									<input id="user_org" type="text" value="<%= user.org_id %>">
-                                    <input id="user_donation_date" type="text" value="<%= user.donation_date %>">
-									<% } %>
-							</div>
-
-							<hr>
-
-
-
-							<h6 class="mb-2" style="display: block;">Donation Details</h6>
-							<div class="form-row">
-								<div class="form-group col-md-6">
-									<div class="input-container fname">
-										<label for="pt_name">Patient's Name</label>
-										<input id="pt_name" name="pt_name" placeholder="Patient's Name" value=""
-											type="text">
+									</div>
+									<div class="form-group col-md-6">
+										<div class="input-container lname">
+											<label for="cp_name">Emergency Contact Person</label>
+											<input id="cp_name" name="cp_name" placeholder="Emergency Contact Person"
+												value="" type="text">
+										</div>
 									</div>
 								</div>
-								<div class="form-group col-md-6">
-									<div class="input-container lname">
-										<label for="cp_name">Emergency Contact Person</label>
-										<input id="cp_name" name="cp_name" placeholder="Emergency Contact Person"
-											value="" type="text">
-									</div>
-								</div>
-							</div>
 
-							<div class="form-row">
-								<div class="form-group col-12">
-									<div class="input-container lname">
-										<label for="contact">Contact Number</label>
-										<input id="contact" name="cp_contact"
-											placeholder="Emergency Contact Number (+88)"
-											title="Please give a valid phone number (018xxxxxxxx)"
-											pattern="[0]{1}[1]{1}[3-9]{1}[0-9]{8}" maxlength="11" minlength="11"
-											type="tel">
-									</div>
-									<div class="input-container lname">
-										<label for="complication">Complications</label>
-										<textarea name="complication" id="complication" cols="67" rows="3"
-											placeholder="Complications (if any)" value=""
-											style="resize: none;"></textarea>
-										<!-- <input id="complication" name="complication"
+								<div class="form-row">
+									<div class="form-group col-12">
+										<div class="input-container lname">
+											<label for="contact">Contact Number</label>
+											<input id="contact" name="cp_contact"
+												placeholder="Emergency Contact Number (+88)"
+												title="Please give a valid phone number (018xxxxxxxx)"
+												pattern="[0]{1}[1]{1}[3-9]{1}[0-9]{8}" maxlength="11" minlength="11"
+												type="tel">
+										</div>
+										<div class="input-container lname">
+											<label for="complication">Complications</label>
+											<textarea name="complication" id="complication" cols="67" rows="3"
+												placeholder="Complications (if any)" value=""
+												style="resize: none;"></textarea>
+											<!-- <input id="complication" name="complication"
 										placeholder="Complications or Specific Requirements (if any)" value=""
 										type="textarea"> -->
-									</div>
-
-									<h6 class="mb-2">Date of Donation</h6>
-									<div class="row">
-										<div class="col-md-12 mb-4" style="margin-bottom: 0.25 !important; ">
-											<div class="input-container lname">
-												<input id="approx_donation" name="donation" type="date"
-													style="margin-bottom: 0;"
-													required disabled>
-											</div>
 										</div>
 
-									</div>
-
-								</div>
-
-							</div>
-							<hr class="hr1" style="margin-top: 0; margin-bottom: 1rem;">
-							<div class="row gutters">
-								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-									<h6 class="mt-3 mb-2 ">Organization Address</h6>
-								</div>
-								<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-									<div id="org-dropdown" class="row">
-										<div class="col-md-12 mb-4">
-											<div class="input-container lname">
-												<select name="org" class="form-control" id="org_drop_down" tabindex="-1" "
-											aria-hidden=" true" required>
-													<option disabled selected value="">Select an organization</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<!-- <div class="input-container lname">
-								<input id="house" name="house" placeholder="Name" type="text" required>
-								</div>
-								<div class="input-container lname">
-									<input id="street" name="street" placeholder="Street (Optional)" type="text">
-								</div> -->
-									<div class="org-details">
-										<input type="checkbox" id="current-location" name="current_location" value="yes"
-											onclick="fetchAddress()">
-										<label for="current-location"> Are you in the location right now? </label><br>
-									</div>
-									<div class="row">
-										<div class="col-md-12 mb-4">
-											<div class="input-container lname">
-												<input id="org-name" name="organization_name" style="margin-bottom: 0;"
-													placeholder="Name" type="text" disabled>
-												<div id='listings' class='listings'></div>
-											</div>
-										</div>
-
-										<div class="col-md-12 mb-4">
-											<div class="input-container lname">
-												<input id="street" name="street" placeholder="Street (Optional)"
-													type="text" disabled>
-											</div>
-										</div>
-									</div>
-									<div class="org-details">
+										<h6 class="mb-2">Date of Donation</h6>
 										<div class="row">
-											<div class="col-md-4 mb-4">
-												<select name="division" class="form-control" id="basic_division"
-													tabindex="-1" "
-											aria-hidden=" true">
-													<option disabled selected value="">Division</option>
-													<% divisions.forEach((division)=> { %>
-														<option value="<%= division.id %>">
-															<%=division.name %>
-														</option>
-														<% }) %>
-
-												</select>
+											<div class="col-md-12 mb-4" style="margin-bottom: 0.25 !important; ">
+												<div class="input-container lname">
+													<input id="approx_donation" name="donation" type="date"
+														style="margin-bottom: 0;" required disabled>
+												</div>
 											</div>
 
-											<div class="col-md-4 mb-4">
-												<select name="district" class="form-control" id="basic_district"
-													tabindex="-1" "
-											aria-hidden=" true">
-													<option disabled selected value="">District</option>
-
-												</select>
-											</div>
-
-											<div class="col-md-4 mb-4">
-												<select name="upazilla" class="form-control" id="basic_upazilla"
-													tabindex="-1" "
-											aria-hidden=" true">
-													<option disabled selected value="">Upazilla</option>
-
-												</select>
-											</div>
 										</div>
+
 									</div>
-
-
-
 
 								</div>
-								<!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-									<div class="input-container lname">
-										<textarea name="orgAddressDetails"
-											placeholder="Details about organization (if any)" id="orgAddressDetails"
-											cols="1" rows="7"></textarea>
+								<hr class="hr1" style="margin-top: 0; margin-bottom: 1rem;">
+								<div class="row gutters">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+										<h6 class="mt-3 mb-2 ">Organization Address</h6>
 									</div>
-								</div> -->
-							</div>
-							<div id="output" style="display: none;">
-								<input id="latitude" name="lat" placeholder="Organization" type="text" value="">
-								<input id="longitude" name="lon" placeholder="House" type="text" value="">
+									<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+										<div id="org-dropdown" class="row">
+											<div class="col-md-12 mb-4">
+												<div class="input-container lname">
+													<select name="org" class="form-control" id="org_drop_down"
+														tabindex="-1" "
+											aria-hidden=" true" required>
+														<option disabled selected value="">Select an organization
+														</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="org-details">
+											<input type="checkbox" id="current-location" name="current_location"
+												value="yes" onclick="fetchAddress()">
+											<label for="current-location"> Are you in the location right now?
+											</label><br>
+										</div>
+										<div class="row">
+											<div class="col-md-12 mb-4">
+												<div class="input-container lname">
+													<input id="org-name" name="organization_name"
+														style="margin-bottom: 0;" placeholder="Name" type="text"
+														disabled>
+													<div id='listings' class='listings'></div>
+												</div>
+											</div>
+
+											<div class="col-md-12 mb-4">
+												<div class="input-container lname">
+													<input id="street" name="street" placeholder="Street (Optional)"
+														type="text" disabled>
+												</div>
+											</div>
+										</div>
+										<div class="org-details">
+											<div class="row">
+												<div class="col-md-4 mb-4">
+													<select name="division" class="form-control" id="basic_division"
+														tabindex="-1" "
+											aria-hidden=" true">
+														<option disabled selected value="">Division</option>
+														<% divisions.forEach((division)=> { %>
+															<option value="<%= division.id %>">
+																<%=division.name %>
+															</option>
+															<% }) %>
+
+													</select>
+												</div>
+
+												<div class="col-md-4 mb-4">
+													<select name="district" class="form-control" id="basic_district"
+														tabindex="-1" "
+											aria-hidden=" true">
+														<option disabled selected value="">District</option>
+
+													</select>
+												</div>
+
+												<div class="col-md-4 mb-4">
+													<select name="upazilla" class="form-control" id="basic_upazilla"
+														tabindex="-1" "
+											aria-hidden=" true">
+														<option disabled selected value="">Upazilla</option>
+
+													</select>
+												</div>
+											</div>
+										</div>
+
+
+
+
+									</div>
+								</div>
+								<div id="output" style="display: none;">
+									<input id="latitude" name="lat" placeholder="Organization" type="text" value="">
+									<input id="longitude" name="lon" placeholder="House" type="text" value="">
+								</div>
 							</div>
 						</div>
-					</div>
-                </fieldset>
+					</fieldset>
 					<div class="row gutters">
 						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="text-center" id="is-updateable">
-                                <% if(user.is_update_attempted == 'no') { %>
-                                    <!-- <a href="/request/update/<%= user.encrypted_requestId %>"><span class="btn1">Update</span></a> -->
-                                    <button class="btn1" onclick="Update()" type="button" id="update-button">Update</button>
-                                    <!-- <button type="submit" style="display: none;" id="save-button"><span class="btn2">Save</span></a> -->
-                                <% } else { %>
-                                    <button type="submit" id="save-button" class="btn2">Save</button>
-                                <% } %>	
-                                
-                            </div>
+							<div class="text-center" id="is-updateable">
+								<% if(user.is_update_attempted=='no' ) { %>
+									<button class="btn1" onclick="Update()" type="button"
+										id="update-button">Update</button>
+									<% } else { %>
+										<button type="submit" id="save-button" class="btn2">Save</button>
+										<% } %>
+
+							</div>
 							<div class="text-center" id="update-attempted" style="display: none;">
 								<button type="submit" class="btn2" style>Save</button>
 							</div>
 						</div>
 					</div>
-                
+
 				</form>
 			</div>
 		</div>
 
 		<%- include ("./partials/footer.ejs") %>
 
-		<script>
-            var loader = document.getElementById("preloader");
+			<script>
+				var loader = document.getElementById("preloader");
 
-            window.addEventListener("load", function(){
-                loader.style.display = "none";
-            })
-        </script>
+				window.addEventListener("load", function () {
+					loader.style.display = "none";
+				})
+			</script>
 
 			<script>
 				$(document).ready(function () {
@@ -289,11 +271,11 @@
 						$("#cp_name").val($("#user_pt_cp").val());
 						$("#contact").val($("#user_pt_contact").val());
 						$("#basic_bg").val($("#user_pt_bg").val());
-						
+
 
 						$("#complication").val($("#user_complications").val());
-					
-						
+
+
 						$("#org-name").val($("#user_org_name").val());
 						$("#street").val($("#user_org_street").val());
 
@@ -318,19 +300,19 @@
 
 					}
 
-                    if ($("#user_type").val() === 'view') {
+					if ($("#user_type").val() === 'view') {
 
 						$("#pt_name").val($("#user_pt_name").val());
 						$("#cp_name").val($("#user_pt_cp").val());
 						$("#contact").val($("#user_pt_contact").val());
 						$("#complication").val($("#user_complications").val());
-                        $("#approx_donation").val($("#user_donation_date").val());
-                        //console.log($("#user_org").val());
+						$("#approx_donation").val($("#user_donation_date").val());
+						//console.log($("#user_org").val());
 
-                        $('#org_drop_down').val($("#user_org").val()).trigger('change');
+						$('#org_drop_down').val($("#user_org").val()).trigger('change');
 						//$('#org_drop_down').select2('val', $("#user_org").val());
-                        //console.log($('#org_drop_down').val());
-                        toggleOrgAddress();
+						//console.log($('#org_drop_down').val());
+						toggleOrgAddress();
 						if ($("#user_org").val() == '0') {
 							$(".org-details").show();
 
@@ -346,8 +328,8 @@
 							$("#street").attr('disabled', false);
 						}
 
-                        $('#form-fields').prop('disabled', true);
-                        $('#org_drop_down').prop("disabled", true);
+						$('#form-fields').prop('disabled', true);
+						$('#org_drop_down').prop("disabled", true);
 					}
 
 				});
@@ -416,7 +398,7 @@
 					});
 				}
 
-                function Update() {
+				function Update() {
 					$("#is-updateable").hide();
 					$("#update-attempted").show();
 					document.getElementById('form-fields').disabled = false;
@@ -445,8 +427,8 @@
 						document.getElementById("org-name").required = true;
 						document.getElementById("org-name").disabled = false;
 						document.getElementById("street").disabled = false;
-                        document.getElementById('org-name').value = '';
-                        document.getElementById('street').value = '';
+						document.getElementById('org-name').value = '';
+						document.getElementById('street').value = '';
 					}
 					else {
 						$(".org-details").hide();

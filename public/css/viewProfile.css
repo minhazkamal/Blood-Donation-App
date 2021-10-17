@@ -1,12 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-:root{
-    /* font-size: 100%;
-    font-size: 16px;
-    line-height: 1.5; */
+:root {
     --primary-pink: #b9375e;
     --primary-blue: #2f6690;
-    font-family: 'Montserrat',sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -25,13 +21,14 @@ body {
 
 .main-body {
     padding: 15px;
-    font-family: 'Montserrat',sans-serif;
-}
-.card {
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+    font-family: 'Montserrat', sans-serif;
 }
 
-.container{
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+}
+
+.container {
     margin-top: 7rem;
     margin-bottom: 5rem;
 }
@@ -44,7 +41,7 @@ body {
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    border: 0 solid rgba(0,0,0,.125);
+    border: 0 solid rgba(0, 0, 0, .125);
     border-radius: .25rem;
 }
 
@@ -53,19 +50,13 @@ body {
     min-height: 1px;
     padding: 1rem;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
-    
 }
-
 
 .gutters-sm {
     margin-right: -8px;
     margin-left: -8px;
 }
 
-/* .gutters-sm>.col, .gutters-sm>[class*=col-] {
-    padding-right: 8px;
-    padding-left: 8px;
-} */
 .mb-3, .my-3 {
     margin-bottom: 1rem!important;
 }
@@ -73,9 +64,11 @@ body {
 .bg-gray-300 {
     background-color: #e2e8f0;
 }
+
 .h-100 {
     height: 100%!important;
 }
+
 .shadow-none {
     box-shadow: none!important;
 }
@@ -85,6 +78,7 @@ h4, h1 {
 }
 
 /* CSS for the top table */
+
 .card-body2 {
     flex: 1 1 auto;
     min-height: 1px;
@@ -96,6 +90,7 @@ h4, h1 {
 .eligibility-score {
     color: rgb(201, 25, 25);
 }
+
 .no-of-responds {
     color: green;
 }
@@ -104,31 +99,29 @@ h4, h1 {
     color: purple;
 }
 
-#preloader{
+#preloader {
     height: 100vh;
     width: 100%;
     position: fixed;
     z-index: 1000;
     background: #fff url(/img/preloader.gif) no-repeat center center;
     background-size: 15%;
-  }
+}
 
-  ::-webkit-scrollbar {
-	width: 8px;
-	height: 3px;
-	border-left: 0;
-	background: rgba(255, 255, 255, 0);
-	border-radius: 1em;
-	
-  }
-  
-  ::-webkit-scrollbar-track {
-	background: none;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-	background: #3b363880;
-	border-radius: 0;
-	border-radius: 1em;
-  } 
-  
+::-webkit-scrollbar {
+    width: 8px;
+    height: 3px;
+    border-left: 0;
+    background: rgba(255, 255, 255, 0);
+    border-radius: 1em;
+}
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3b363880;
+    border-radius: 0;
+    border-radius: 1em;
+}

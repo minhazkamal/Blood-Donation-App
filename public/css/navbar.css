@@ -8,19 +8,17 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* background: #23252B; */
   background: rgb(1, 42, 74);
   background: linear-gradient(82deg, rgba(1, 42, 74, 1) 20%, rgba(42, 111, 151, 1) 80%);
   box-shadow: 0 5px 25px rgb(0 0 0 / 20%);
   padding: 0 150px;
   transition: 2s;
   transition-timing-function: linear;
-  font-family: 'Montserrat',sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .scrolled {
   background: rgb(1, 42, 74);
-  /* background: linear-gradient(82deg, rgba(1, 42, 74, 1) 20%, rgba(42, 111, 151, 1) 80%); */
 }
 
 header .logo {
@@ -87,7 +85,7 @@ header .navigation .menu {
   transition-property: transform, opacity;
 }
 
-.notif{
+.notif {
   max-height: 350px;
   overflow: scroll;
   overflow-x: hidden;
@@ -101,7 +99,6 @@ header .navigation .menu {
   border-left: 0;
   background: rgba(255, 255, 255, 0);
   border-radius: 1em;
-  
 }
 
 ::-webkit-scrollbar-track {
@@ -112,7 +109,7 @@ header .navigation .menu {
   background: #3b363880;
   border-radius: 0;
   border-radius: 1em;
-} 
+}
 
 header.sticky .menu-item .sub-menu {
   top: 60px;
@@ -137,7 +134,7 @@ header.sticky .menu-item .sub-menu {
   box-shadow: inset 0px -30px 5px -30px rgba(255, 255, 255, 0.2);
 }
 
-.nav-profile{
+.nav-profile {
   width: 200px;
 }
 
@@ -145,7 +142,6 @@ header.sticky .menu-item .sub-menu {
   color: #fff;
   font-size: 1em;
   text-decoration: none;
-  /* padding: 10px 20px; */
   padding-left: 9px;
   padding-right: 9px;
 }
@@ -154,7 +150,6 @@ header.sticky .menu-item .sub-menu {
   color: #fff;
   font-size: 1em;
   text-decoration: none;
-  /* padding: 15px 15px; */
 }
 
 .menu-item .sub-menu .sub-item:hover {
@@ -211,8 +206,6 @@ header.sticky .menu-item .sub-menu {
 }
 
 .signin-btn-navbar {
-  /* display: block; */
-  /* width: 100%; */
   display: inline-block;
   background: #48cae4;
   color: white;
@@ -235,6 +228,7 @@ header.sticky .menu-item .sub-menu {
   background: #90e0ef;
   cursor: pointer;
 }
+
 .signin {
   color: white;
   text-align: center;
@@ -249,9 +243,8 @@ header.sticky .menu-item .sub-menu {
   color: white;
   text-decoration: none;
 }
+
 .signup-btn-navbar {
-  /* display: block; */
-  /* width: 100%; */
   display: inline-block;
   background: #b9375e;
   color: white;
@@ -387,4 +380,3 @@ header.sticky .menu-item .sub-menu {
     padding: 10px 20px;
   }
 }
-

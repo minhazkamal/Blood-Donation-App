@@ -13,19 +13,13 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-	<!-- jQuery -->
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 
-	<!-- Select2 CSS -->
-	<!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> -->
-
-	<!-- Select2 JS -->
-	<!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script> -->
 </head>
 
 <body>
 	<div id="preloader"></div>
-	<%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo, notification_count: navbar.notification_count, notifiactions: notifications}) %>
+	<%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo, notification_count:
+		navbar.notification_count, notifiactions: notifications}) %>
 		<div class="container">
 			<form method="Post">
 				<fieldset id="form-fields">
@@ -127,9 +121,7 @@
 										<textarea name="complication" id="complication" cols="67" rows="7"
 											placeholder="Complications (if any)" value=""
 											style="resize: none;"></textarea>
-										<!-- <input id="complication" name="complication"
-										placeholder="Complications or Specific Requirements (if any)" value=""
-										type="textarea"> -->
+
 									</div>
 
 								</div>
@@ -161,25 +153,6 @@
 									</select>
 									<div class="row">
 										<div class="col-md-6 mb-4">
-											<!-- 
-										<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
-											aria-hidden=" true" disabled>
-											<option value="" selected>
-											</option>
-										</select>
-											<select name="blood_group" class="form-control" id="basic_bg" tabindex="-1" "
-											aria-hidden=" true" required>
-												<option disabled selected>Blood Group</option>
-												<option value="A+">A+</option>
-												<option value="A-">A-</option>
-												<option value="B+">B+</option>
-												<option value="B-">B-</option>
-												<option value="O+">O+</option>
-												<option value="O-">O-</option>
-												<option value="AB+">AB+</option>
-												<option value="AB-">AB-</option>
-											</select>
-										-->
 										</div>
 
 									</div>
@@ -219,12 +192,7 @@
 											</div>
 										</div>
 									</div>
-									<!-- <div class="input-container lname">
-								<input id="house" name="house" placeholder="Name" type="text" required>
-								</div>
-								<div class="input-container lname">
-									<input id="street" name="street" placeholder="Street (Optional)" type="text">
-								</div> -->
+
 									<div class="org-details">
 										<input type="checkbox" id="current-location" name="current_location" value="yes"
 											onclick="fetchAddress()">
