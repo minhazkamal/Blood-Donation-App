@@ -31,8 +31,11 @@
 <body>
 
     <div id="preloader"></div>
-
+    <% if (email == 'undefined') { %>
     <%- include ("./partials/navbar2.ejs") %>
+    <% } else { %>
+    <%- include ("./partials/navbar.ejs", {name: navbar.name, photo: navbar.photo, notification_count: navbar.notification_count, notifiactions: notifications}) %>
+    <% } %>    
         <!-- Swiper -->
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
