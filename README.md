@@ -68,7 +68,7 @@ localhost:<YOUR_PORT_NUMBER>
 * Now you will be able to see the features.
 
 ## Contributors
-[Minhaz Kamal](https://www.linkedin.com/in/minhazkamal/)
+[Minhaz Kamal](https://minhazkamal.github.io/)
 
 [Chowdhury Mohammad Abdullah](https://www.linkedin.com/in/chowdhury-mohammad-abdullah-a48473188/)
 
