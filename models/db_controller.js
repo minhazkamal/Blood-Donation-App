@@ -1,11 +1,12 @@
-var mysql = require('mysql');
-var express = require('express');
-var router = express.Router();
-var util = require('util');
-var bcrypt = require('bcrypt-nodejs');
-const { request } = require('express');
-var Cryptr = require('cryptr');
-var cryptr = new Cryptr(process.env.SECURITY_KEY);
+require('dotenv').config();
+const mysql = require('mysql');
+const express = require('express');
+const router = express.Router();
+const util = require('util');
+const bcrypt = require('bcryptjs'); // ✅ switched to bcryptjs
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.SECURITY_KEY);
+
 
 
 // con == db

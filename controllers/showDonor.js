@@ -1,91 +1,87 @@
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var db = require('../models/db_controller');
-var mail = require('../models/mail');
-var box = require('../models/mapbox');
-var mysql = require('mysql');
-var hl = require('handy-log');
-const { body, check, validationResult } = require('express-validator');
-var Cryptr = require('cryptr');
-var cryptr = new Cryptr(process.env.SECURITY_KEY);
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const db = require('../models/db_controller');
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.SECURITY_KEY);
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-router.get('/details', function (req, res) {
-    // req.session.email = 'minhaz.kamal9900@gmail.com';
-    db.getAllDiv()
-        .then(result => {
-            var div = result;
-            db.getAllDist()
-                .then(result => {
-                    var dist = result;
-                    db.getAllUpazilla()
-                        .then(result => {
-                            var upazilla = result;
-                            db.getUserAllInfoExceptMineWhoAreActive(req.session.email)
-                                .then(result => {
-                                    // console.log(div);
-                                    // console.log(dist);
-                                    // console.log(upazilla[518], upazilla[519], upazilla[520]);
-                                    // console.log(result);
-                                    var user = {
-                                        type: 'FeatureCollection',
-                                        features: []
-                                    };
+/**
+ * GET /user-mapdata/details
+ * Returns all active users (except the requester) with location info in GeoJSON format
+ */
+router.get('/details', async (req, res) => {
+  if (!req.session.email) {
+    return res.status(401).render('message.ejs', {
+      alert_type: 'danger',
+      message: `Your session has timed out. Please log in again.`,
+      type: 'verification'
+    });
+  }
 
-                                    for (var i = 0; i < result.length; i++) {
-                                        var Prop_Obj = {
-                                            user_id: cryptr.encrypt(result[i].id),
-                                            contact: result[i].contact,
-                                            name: result[i].first_name + ' ' + result[i].last_name,
-                                            address: result[i].house + ', ' + result[i].street + ', ' + upazilla.find(item => item.id === result[i].upazilla).name + ', ' + dist[result[i].district - 1].name + ', ' + div[result[i].division - 1].name,
-                                            bg: result[i].BG,
-                                            gender: result[i].gender
-                                        };
-                                        // var property = JSON.stringify(Prop_Obj);
+  try {
+    const [divisions, districts, upazillas, users] = await Promise.all([
+      db.getAllDiv(),
+      db.getAllDist(),
+      db.getAllUpazilla(),
+      db.getUserAllInfoExceptMineWhoAreActive(req.session.email)
+    ]);
 
-                                        var geo_Obj = {
-                                            type: 'Point',
-                                            coordinates: [result[i].lat, result[i].lon]
-                                        };
-                                        // var geo = JSON.stringify(geo_Obj);
+    const geojson = {
+      type: 'FeatureCollection',
+      features: users.map(user => {
+        const divisionName = divisions.find(d => d.id === user.division)?.name || '';
+        const districtName = districts.find(d => d.id === user.district)?.name || '';
+        const upazillaName = upazillas.find(u => u.id === user.upazilla)?.name || '';
 
-                                        var feat_Obj = {
-                                            type: 'Feature',
-                                            geometry: geo_Obj,
-                                            properties: Prop_Obj
-                                        };
-                                        // var feature = JSON.stringify(feat_Obj);
+        return {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [user.lat, user.lon]
+          },
+          properties: {
+            user_id: cryptr.encrypt(user.id),
+            contact: user.contact,
+            name: `${user.first_name} ${user.last_name}`,
+            address: `${user.house}, ${user.street}, ${upazillaName}, ${districtName}, ${divisionName}`,
+            bg: user.BG,
+            gender: user.gender
+          }
+        };
+      })
+    };
 
-                                        user.features.push(feat_Obj);
-                                    }
-
-                                    // console.log(user);
-                                    res.json(user);
-                                })
-
-                        })
-                })
-        })
+    res.json(geojson);
+  } catch (error) {
+    console.error('Error generating user map data:', error.message);
+    res.status(500).json({ error: 'Failed to generate user map data' });
+  }
 });
 
-router.get('/owner-details', function (req, res) {
-    // req.session.email = 'minhaz.kamal9900@gmail.com';
-    if (req.session.email) {
-        db.getUserAddress(req.session.email)
-            .then(result => {
-                var coord = {
-                    lat: result[0].lat,
-                    lon: result[0].lon
-                }
-                res.json(coord);
-            })
-    }
-    else {
-        res.render('message.ejs', { alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type: 'verification' });
-    }
-})
+/**
+ * GET /user-mapdata/owner-details
+ * Returns the lat/lon of the current session user
+ */
+router.get('/owner-details', async (req, res) => {
+  if (!req.session.email) {
+    return res.status(401).render('message.ejs', {
+      alert_type: 'danger',
+      message: `Your session has timed out. Please log in again.`,
+      type: 'verification'
+    });
+  }
+
+  try {
+    const result = await db.getUserAddress(req.session.email);
+    const { lat, lon } = result[0];
+    res.json({ lat, lon });
+  } catch (error) {
+    console.error('Error fetching owner location:', error.message);
+    res.status(500).json({ error: 'Failed to fetch user coordinates' });
+  }
+});
 
 module.exports = router;

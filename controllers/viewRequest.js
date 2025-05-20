@@ -1,278 +1,200 @@
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var db = require('../models/db_controller');
-var mail = require('../models/mail');
-var mysql = require('mysql');
-var hl = require('handy-log');
-var Cryptr = require('cryptr');
-var cryptr = new Cryptr(process.env.SECURITY_KEY);
-var fs = require('fs');
-var path = require('path');
-var multer = require('multer');
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const db = require('../models/db_controller');
+const mail = require('../models/mail');
+const mapbox = require('../models/mapbox');
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.SECURITY_KEY);
 const { body, check, validationResult } = require('express-validator');
-var mapbox = require('../models/mapbox');
-const { request } = require('express');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
-// router.use(multer().none());
 
-const validateDonation = (value, { req }) => {
+function validateDonation(value) {
+    if (!value) throw new Error('Approx Donation Date is empty');
 
-    // console.log(value);
-    if (value != '') {
+    const today = new Date();
+    const temp_donation = new Date(value);
 
-        // const [year, month, day] = value.split('-');
-        let temp_donation = new Date(value);
-        // temp_donation.setTime(temp_donation.getTime() - temp_donation.getTimezoneOffset() * 60 * 1000);
+    const todayTime = today.setHours(0, 0, 0, 0);
+    const donationTime = temp_donation.setHours(0, 0, 0, 0);
 
-        var today = new Date();
-        // today.setTime(today.getTime() - today.getTimezoneOffset() * 60 * 1000);
-
-        var today_timePortion = (today.getTime() - today.getTimezoneOffset() * 60 * 1000) % (3600 * 1000 * 24);
-        var temp_donation_timePortion = (temp_donation.getTime() - temp_donation.getTimezoneOffset() * 60 * 1000) % (3600 * 1000 * 24);
-
-
-        var temp_donation_dateonly = new Date(temp_donation - temp_donation_timePortion);
-        var today_dateonly = new Date(today - today_timePortion);
-
-        // console.log(temp_donation_dateonly);
-        // console.log(today_dateonly);
-
-        if (temp_donation_dateonly < today_dateonly) {
-            // console.log('YES!!!');
-            throw new Error('You can\'t set a previous date');
-        }
-
-        // var age = today.getFullYear() - year;
-        // var m = today.getMonth() - month;
-        // if (m < 0 || (m === 0 && today.getDate() < day)) {
-        //     age--;
-        // }
-        // if (age < 18) {
-        //     throw new Error('Your age must be greater than 18');
-        // }
+    if (donationTime < todayTime) {
+        throw new Error('You can\'t set a previous date');
     }
-    else throw new Error('Approx Donation Date is empty');
 
-    // }
-    // else
-    // {
-    //     throw new Error('Date of Birth is not valid');
-    // }
     return true;
 }
 
 function mysql2JsDate(str) {
-    var g = str;
-    // console.log(g);
-    return new Date(g.getTime() - (g.getTimezoneOffset() * 60000));
+    return new Date(str.getTime() - str.getTimezoneOffset() * 60000);
 }
 
 function mysql2JsLocal(str) {
-    var g = mysql2JsDate(str).toISOString().split(/[- : T]/);
-    var dob = g[0] + '-' + g[1] + '-' + g[2];
-    return dob;
+    const [y, m, d] = mysql2JsDate(str).toISOString().split('T')[0].split('-');
+    return `${y}-${m}-${d}`;
 }
 
+// GET - Load the view request page
+router.get('/:encrypted_id', (req, res) => {
+    const { encrypted_id } = req.params;
+    const id = cryptr.decrypt(encrypted_id);
 
-router.get('/:encrypted_id', function (req, res) {
-    // req.session.email = 'minhaz.kamal9900@gmail.com';
-    let { encrypted_id } = req.params;
-    let id = cryptr.decrypt(encrypted_id);
-    if (req.session.email) {
-        db.getDivisions()
-            .then(result => {
-                let div_result = result;
-                db.getAllFromRequests(id)
-                    .then(result => {
-                        let user = {
-                            type: 'view',
-                            request_id: result[0].id,
-                            post_by: result[0].post_by,
-                            post_by_id: result[0].post_by,
-                            patient: result[0].patient,
-                            cp: result[0].contact_person,
-                            contact: result[0].contact,
-                            approx_donation: mysql2JsLocal(result[0].approx_donation_date),
-                            bg: result[0].BG,
-                            complication: result[0].complication,
-                            requirements: result[0].requirements,
-                            quantity: result[0].quantity,
-                            org_id: result[0].organization_id,
-                            org_details: result[0].org_address_details,
-                            posted_on: mysql2JsLocal(result[0].posted_on),
-                            is_updateable: 'no',
-                            resolved: result[0].resolved,
-                            encrypted_requestId: cryptr.encrypt(result[0].id),
-                            is_update_attempted: 'no'
-                        }
-                        req.session.temp_user = user;
-                        req.session.div_results = div_result;
-                        db.getuserinfobyid(result[0].post_by)
-                            .then(result2 => {
-                                // console.log(result2);
-                                // console.log(req.session.email);
-                                if (result2[0].email == req.session.email) {
-                                    if (user.resolved == 'no') user.is_updateable = 'yes';
-                                }
-                                user.post_by = result2[0].first_name + ' ' + result2[0].last_name;
-                                db.NotificationUpdateDynamically(req, res)
-                                    .then(result => {
-                                        res.render('viewRequest.ejs', { user, divisions: div_result, navbar: req.session.navbar_info, notifications: req.session.notifications });
-                                    })
+    if (!req.session.email) {
+        return res.render('message.ejs', {
+            alert_type: 'danger',
+            message: `Your session has timed out. Please log in again.`,
+            type: 'verification'
+        });
+    }
 
-                            })
-                    })
-            })
-    }
-    else {
-        res.render('message.ejs', { alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type: 'verification' });
-    }
+    db.getDivisions().then(div_result => {
+        db.getAllFromRequests(id).then(result => {
+            const requestData = result[0];
+            const user = {
+                type: 'view',
+                request_id: requestData.id,
+                post_by: requestData.post_by,
+                post_by_id: requestData.post_by,
+                patient: requestData.patient,
+                cp: requestData.contact_person,
+                contact: requestData.contact,
+                approx_donation: mysql2JsLocal(requestData.approx_donation_date),
+                bg: requestData.BG,
+                complication: requestData.complication,
+                requirements: requestData.requirements,
+                quantity: requestData.quantity,
+                org_id: requestData.organization_id,
+                org_details: requestData.org_address_details,
+                posted_on: mysql2JsLocal(requestData.posted_on),
+                is_updateable: 'no',
+                resolved: requestData.resolved,
+                encrypted_requestId: cryptr.encrypt(requestData.id),
+                is_update_attempted: 'no'
+            };
+
+            req.session.temp_user = user;
+            req.session.div_results = div_result;
+
+            db.getuserinfobyid(requestData.post_by).then(userinfo => {
+                if (userinfo[0].email === req.session.email && requestData.resolved === 'no') {
+                    user.is_updateable = 'yes';
+                }
+
+                user.post_by = `${userinfo[0].first_name} ${userinfo[0].last_name}`;
+
+                db.NotificationUpdateDynamically(req, res).then(() => {
+                    res.render('viewRequest.ejs', {
+                        user,
+                        divisions: div_result,
+                        navbar: req.session.navbar_info,
+                        notifications: req.session.notifications
+                    });
+                });
+            });
+        });
+    });
 });
 
-
+// POST - Update the request
 router.post('/:encrypted_id', [
-    check('approx_donation', 'Date of Birth is Empty').notEmpty(),
-    check('approx_donation').custom(validateDonation),
-    check('blood_group', 'Blood Group field is empty').notEmpty(),
-    // check('division', 'Division field is empty').notEmpty(),
-    // check('district', 'District field is empty').notEmpty(),
-    // check('upazilla', 'Upazilla field is empty').notEmpty(),
-],
-    function (req, res) {
-        let { encrypted_id } = req.params;
-        let id = cryptr.decrypt(encrypted_id);
+    check('approx_donation').notEmpty().withMessage('Date of Birth is Empty').bail().custom(validateDonation),
+    check('blood_group', 'Blood Group field is empty').notEmpty()
+], (req, res) => {
+    const { encrypted_id } = req.params;
+    const id = cryptr.decrypt(encrypted_id);
 
-        let errors = validationResult(req)
+    const errors = validationResult(req);
+    const sess = req.session;
+    const input = req.body;
 
-        req.session.temp_user.cp = req.body.cp_name;
-        req.session.temp_user.cp_contact = req.body.cp_contact;
-        req.session.temp_user.pt_bg = req.body.blood_group;
-        req.session.temp_user.patient = req.body.pt_name;
-        req.session.temp_user.quantity = req.body.quantity;
-        req.session.temp_user.org_details = req.body.orgAddressDetails;
-        if (req.body.self_request == 'yes') req.session.temp_user.self_check = req.body.self_request;
-        else req.session.temp_user.self_check = 'no';
-        req.session.temp_user.org_id = req.body.org;
-        req.session.temp_user.complication = req.body.complication;
-        req.session.temp_user.requirements = req.body.requirements;
-        req.session.temp_user.is_update_attempted = 'yes';
+    sess.temp_user = {
+        ...sess.temp_user,
+        cp: input.cp_name,
+        cp_contact: input.cp_contact,
+        pt_bg: input.blood_group,
+        patient: input.pt_name,
+        quantity: input.quantity,
+        org_details: input.orgAddressDetails,
+        self_check: input.self_request === 'yes' ? 'yes' : 'no',
+        org_id: input.org,
+        complication: input.complication,
+        requirements: input.requirements,
+        is_update_attempted: 'yes',
+        house: input.organization_name,
+        street: input.street,
+        org_location: input.current_location === 'yes' ? 'yes' : 'no',
+        lat: input.current_location === 'yes' ? input.lat : '',
+        lon: input.current_location === 'yes' ? input.lon : '',
+        division: input.org === '0' ? input.division : '',
+        district: input.org === '0' ? input.district : '',
+        upazilla: input.org === '0' ? input.upazilla : ''
+    };
 
-        if (req.body.org == '0') {
-            if (req.body.current_location == 'yes') {
-                req.session.temp_user.org_location = req.body.current_location;
-                req.session.temp_user.lat = req.body.lat;
-                req.session.temp_user.lon = req.body.lon;
-            }
-            else {
-                req.session.temp_user.org_location = 'no';
-                req.session.temp_user.lat = '';
-                req.session.temp_user.lon = '';
-            }
+    if (!errors.isEmpty()) {
+        return db.NotificationUpdateDynamically(req, res).then(() => {
+            res.render('viewRequest', {
+                user: sess.temp_user,
+                alert: errors.array(),
+                divisions: sess.div_results,
+                navbar: sess.navbar_info,
+                notifications: sess.notifications
+            });
+        });
+    }
 
-            req.session.temp_user.division = req.body.division;
-            req.session.temp_user.district = req.body.district;
-            req.session.temp_user.upazilla = req.body.upazilla;
-        }
-        else {
-            req.session.temp_user.division = '';
-            req.session.temp_user.district = '';
-            req.session.temp_user.upazilla = '';
-        }
+    const donation_date = new Date(input.approx_donation);
+    const timeTrim = donation_date.getTime() - (donation_date.getTimezoneOffset() * 60000) % (3600 * 1000 * 24);
+    sess.temp_user.approx_date = new Date(donation_date - timeTrim);
+    sess.temp_user.posted_on = new Date(new Date().setHours(new Date().getHours() + 6))
+        .toISOString().slice(0, 19).replace('T', ' ');
 
-        req.session.temp_user.house = req.body.organization_name;
-        req.session.temp_user.street = req.body.street;
+    const organization = {
+        name: input.organization_name,
+        mobile: '',
+        street: input.street,
+        longitude: input.lon,
+        latitude: input.lat,
+        division: input.division,
+        district: input.district,
+        upazilla: input.upazilla
+    };
 
-        if (!errors.isEmpty()) {
-            //console.log(errors);
-            const alert = errors.array();
+    if (input.org === '0') {
+        db.getLocationNamesByIds({
+            division: input.division,
+            district: input.district,
+            upazilla: input.upazilla
+        }).then(locResult => {
+            const fullLocation = `${organization.name}, ${organization.street}, ${locResult[0].upazilla}, ${locResult[0].district}, ${locResult[0].division}`;
+            mapbox.forwardGeocoder(fullLocation).then(coord => {
+                if (!organization.latitude || !organization.longitude) {
+                    organization.latitude = coord.geometry.coordinates[0];
+                    organization.longitude = coord.geometry.coordinates[1];
+                }
 
-            req.session.temp_user.type = 'error';
-            console.log(req.session.temp_user, id);
-            db.NotificationUpdateDynamically(req, res)
-                .then(result => {
-                    res.render(`viewRequest`, { user: req.session.temp_user, alert, divisions: req.session.div_results, navbar: req.session.navbar_info, notifications: req.session.notifications });
-                })
-
-        }
-        else {
-            let donation_date = new Date(req.body.approx_donation);
-            var donation_date_timePortion = (donation_date.getTime() - donation_date.getTimezoneOffset() * 60 * 1000) % (3600 * 1000 * 24);
-            var donation_date_dateonly = new Date(donation_date - donation_date_timePortion);
-
-            req.session.temp_user.approx_date = donation_date_dateonly;
-
-            var organization = {
-                name: req.body.organization_name,
-                mobile: '',
-                street: req.body.street,
-                longitude: req.body.lon,
-                latitude: req.body.lat,
-                division: req.body.division,
-                district: req.body.district,
-                upazilla: req.body.upazilla
-            }
-
-            var address = {
-                division: req.body.division,
-                district: req.body.district,
-                upazilla: req.body.upazilla
-            }
-
-
-            let posted_on = new Date();
-            posted_on.setHours(posted_on.getHours() + 6);
-
-            req.session.temp_user.posted_on = posted_on.toISOString().slice(0, 19).replace('T', ' ');
-
-            // console.log(req.session.temp_user);
-            if (req.body.org == '0') {
-                db.getLocationNamesByIds(address)
-                    .then(result => {
-                        var location = organization.name + ', ' + organization.street + ', ' + result[0].upazilla + ', '
-                            + result[0].district + ', ' + result[0].division;
-                        mapbox.forwardGeocoder(location)
-                            .then(result => {
-                                if (organization.latitude == '' || organization.longitude == '') {
-                                    organization.latitude = result.geometry.coordinates[0];
-                                    organization.longitude = result.geometry.coordinates[1];
-                                }
-
-                                // console.log(organization);
-
-                                db.setOrgInput(organization, function (insert_id) {
-                                    req.session.temp_user.org = insert_id;
-                                    db.updateRequestById(req.session.temp_user, id)
-                                        .then(result => {
-                                            res.redirect('/my-profile?tab=request');
-                                        })
-                                })
-
-                            })
-
-                    })
-            }
-            else {
-                db.updateRequestById(req.session.temp_user, id)
-                    .then(result => {
+                db.setOrgInput(organization, insert_id => {
+                    sess.temp_user.org = insert_id;
+                    db.updateRequestById(sess.temp_user, id).then(() => {
                         res.redirect('/my-profile?tab=request');
-                    })
-            }
-        }
+                    });
+                });
+            });
+        });
+    } else {
+        db.updateRequestById(sess.temp_user, id).then(() => {
+            res.redirect('/my-profile?tab=request');
+        });
+    }
 
-        // console.log("Hello");
-        // console.log(req.body.latitude);
-        delete req.session.temp_user;
-        delete req.session.div_results;
-    });
+    delete sess.temp_user;
+    delete sess.div_results;
+});
 
+// GET - Return all organization info as JSON
+router.get('/all-org', (req, res) => {
+    db.getOrgInfo().then(result => res.json(result));
+});
 
-router.get('/all-org', function (req, res) {
-    db.getOrgInfo()
-        .then(result => {
-            res.json(result);
-        })
-})
 module.exports = router;

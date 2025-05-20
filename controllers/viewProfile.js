@@ -1,41 +1,30 @@
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var db = require('../models/db_controller');
-var mail = require('../models/mail');
-var mysql = require('mysql');
-var hl = require('handy-log');
-var Cryptr = require('cryptr');
-var cryptr = new Cryptr(process.env.SECURITY_KEY);
-var fs = require('fs');
-var path = require('path');
-var multer = require('multer');
-const { body, check, validationResult } = require('express-validator');
-var mapbox = require('../models/mapbox');
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const db = require('../models/db_controller');
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.SECURITY_KEY);
 
+// Middleware
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
-// router.use(multer().none());
 
+// Utility Functions
 function mysql2JsDate(str) {
-    var g = str;
-    //console.log(g);
-    return new Date(g.getTime() - (g.getTimezoneOffset() * 60000));
+    return new Date(str.getTime() - (str.getTimezoneOffset() * 60000));
 }
 
 function mysql2JsLocal(str) {
-    var g = mysql2JsDate(str).toISOString().split(/[- : T]/);
-    var dob = g[2] + '/' + g[1] + '/' + g[0];
-    return dob;
+    const [year, month, day] = mysql2JsDate(str).toISOString().split(/[- : T]/);
+    return `${day}/${month}/${year}`;
 }
 
-function yesORno(b) {
-    if (b=='yes') return 0;
-    else return 1;
+function yesORno(val) {
+    return val === 'yes' ? 0 : 1;
 }
 
 function calculateEligibilityScore(report) {
-    var total = 0;
+    let total = 0;
     total += yesORno(report[0].asthma);
     total += yesORno(report[0].high_bp);
     total += yesORno(report[0].cancer);
@@ -47,103 +36,73 @@ function calculateEligibilityScore(report) {
     total += 2 - parseInt(report[0].smoke);
     total += 2 - parseInt(report[0].drinking);
     total += 2 - parseInt(report[0].depression);
-
-    return Math.floor((total*10)/14);
+    return Math.floor((total * 10) / 14) || 0;
 }
 
-function calculate_age(dob) { 
-    var diff_ms = Date.now() - dob.getTime();
-    var age_dt = new Date(diff_ms); 
-  
-    return Math.abs(age_dt.getUTCFullYear() - 1970);
+function calculateAge(dob) {
+    const diff = Date.now() - dob.getTime();
+    return Math.abs(new Date(diff).getUTCFullYear() - 1970);
 }
 
-router.get('/:encrypted_id/', function (req, res) {
-    var responder = req.query.respond;
-    let { encrypted_id } = req.params;
-    let id = cryptr.decrypt(encrypted_id);
-    // console.log(id);
-    // req.session.email = 'minhaz.kamal9900@gmail.com';
-    let user = {
-        fullname: '',
-        contact: '',
-        email: '',
-        dob: '',
-        bg: '',
-        gender: '',
-        address: '',
-        eligibility_score: '',
-        requests_count: '',
-        donated: '',
-        img: '',
-        responder: 'no',
-        age: '',
-        profession: ''
+// Route: View User Profile by Encrypted ID
+router.get('/:encrypted_id', async (req, res) => {
+    if (!req.session.email) {
+        return res.render('message.ejs', {
+            alert_type: 'danger',
+            message: 'Your session has timed out. Please log in again.',
+            type: 'verification'
+        });
     }
-    if(responder) user.responder='yes';
-    //req.session.email='minhazkamal@iut-dhaka.edu';
-    if (req.session.email) {
-        db.getuserinfobyid(id)
-            .then(result => {
-                user.id = encrypted_id;
-                user.fullname = result[0].first_name + ' ' + result[0].last_name;
-                user.contact = '+88 ' + result[0].contact;
-                user.email = result[0].email;
-                user.dob = mysql2JsLocal(result[0].dob);
-                user.bg = result[0].BG;
-                user.gender = result[0].gender;
-                user.address = result[0].house + ', ' + result[0].street + ', ';
-                user.age = calculate_age(result[0].dob);
-                user.profession = result[0].profession;
-                // user.editLink = '/edit/'+result[0].id;
-                // user.editLink = '/profile-update';
 
-                let address = {
-                    division: result[0].division,
-                    district: result[0].district,
-                    upazilla: result[0].upazilla
-                }
+    const { encrypted_id } = req.params;
+    const responder = req.query.respond === 'yes' ? 'yes' : 'no';
+    const id = cryptr.decrypt(encrypted_id);
 
-                db.getProfilePic(id)
-                    .then(result1 => {
-                        user.img = `/profile/` + result1[0].profile_picture;
-                        db.getLocationNamesByIds(address)
-                            .then(result2 => {
-                                user.address += result2[0].upazilla + ', ' + result2[0].district + ', ' + result2[0].division
-                                db.countBloodRequests(user.email)
-                                    .then(result3 => {
-                                        if(result3) user.requests_count = result3[0].total_requests;
-                                        else user.requests_count = 0;
-                                        // user.requests_count = result3[0].total_requests;
-                                        db.getEligibilityReport(user.email)
-                                        .then(result4 => {
-                                            if(result4.length>0) user.eligibility_score = calculateEligibilityScore(result4);
-                                            else user.eligibility_score = 0;
+    try {
+        const [basic] = await db.getuserinfobyid(id);
+        const [{ profile_picture }] = await db.getProfilePic(id);
+        const [location] = await db.getLocationNamesByIds({
+            division: basic.division,
+            district: basic.district,
+            upazilla: basic.upazilla
+        });
 
-                                            db.countTotalDonation(user.email)
-                                            .then(result5 => {
-                                                if(result5) user.donated = result5[0].total_donation;
-                                                else user.donated = 0;
-                                                db.NotificationUpdateDynamically(req, res)
-                                .then(result => {
-                                    res.render('viewProfile.ejs', { user, navbar: req.session.navbar_info, notifications: req.session.notifications });
-                                })
-                                                
-                                            })
-                                        
-                                            
-                                            // console.log(user);
-                                            // res.render('myProfile.ejs', { user, tab });
-                                        })                                        
-                                    })
+        const [{ total_requests = 0 } = {}] = await db.countBloodRequests(basic.email);
+        const [eligibilityReport = {}] = await db.getEligibilityReport(basic.email);
+        const [{ total_donation = 0 } = {}] = await db.countTotalDonation(basic.email);
 
-                            })
-                    })
-            })
+        const user = {
+            id: encrypted_id,
+            fullname: `${basic.first_name} ${basic.last_name}`,
+            contact: `+88 ${basic.contact}`,
+            email: basic.email,
+            dob: mysql2JsLocal(basic.dob),
+            bg: basic.BG,
+            gender: basic.gender,
+            profession: basic.profession,
+            address: `${basic.house}, ${basic.street}, ${location.upazilla}, ${location.district}, ${location.division}`,
+            age: calculateAge(basic.dob),
+            img: `/profile/${profile_picture}`,
+            requests_count: total_requests,
+            eligibility_score: eligibilityReport ? calculateEligibilityScore([eligibilityReport]) : 0,
+            donated: total_donation,
+            responder
+        };
 
-    }
-    else {
-        res.render('message.ejs', { alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type: 'verification' });
+        await db.NotificationUpdateDynamically(req, res);
+        res.render('viewProfile.ejs', {
+            user,
+            navbar: req.session.navbar_info,
+            notifications: req.session.notifications
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.render('message.ejs', {
+            alert_type: 'danger',
+            message: 'Error fetching profile details. Please try again later.',
+            type: 'error'
+        });
     }
 });
 

@@ -1,99 +1,99 @@
-var express = require ('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var db = require ('../models/db_controller');
-var mail = require('../models/mail');
-var mysql = require('mysql');
-var hl = require('handy-log');
-var Cryptr = require('cryptr');
-var cryptr = new Cryptr(process.env.SECURITY_KEY);
-
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
 const { body, check, validationResult } = require('express-validator');
 
+const db = require('../models/db_controller');
+const mail = require('../models/mail');
+//const hl = require('handy-log');
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.SECURITY_KEY);
 
-
-router.use(bodyParser.urlencoded({extended : true}));
+router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-router.get('/', function(req,res){
-    res.render('signup.ejs');
+router.get('/', (req, res) => {
+  res.render('signup.ejs');
 });
 
-
-// Sign Up Form Validation
-router.post('/', [check('email', 'Email is empty').notEmpty(),
-check('email', 'Email is invalid').isEmail(),
-check('password', 'Password field is empty').notEmpty(),
-check('confirm_password', 'Confirm Password field is empty').notEmpty(),
-body('confirm_password').custom((value, { req }) => {
-
-    if (value !== req.body.password) {
-      throw new Error('Confirm Password does not match with Password');
-    }
-
-    // Indicates the success of this synchronous custom validator
-    return true;
-  }),
-  body('email').custom(value => {
-    return db.direct_query('SELECT COUNT(*) as emailCount FROM users WHERE email = ?', [value])
-    .then(value => {
-        if(value[0].emailCount == 1) {
+// 🚀 Sign Up POST Route with Validation
+router.post(
+  '/',
+  [
+    check('email', 'Email is empty').notEmpty(),
+    check('email', 'Email is invalid').isEmail(),
+    check('password', 'Password field is empty').notEmpty(),
+    check('confirm_password', 'Confirm Password field is empty').notEmpty(),
+    body('confirm_password').custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error('Confirm Password does not match with Password');
+      }
+      return true;
+    }),
+    body('email').custom(email => {
+      return db
+        .direct_query('SELECT COUNT(*) as emailCount FROM users WHERE email = ?', [email])
+        .then(result => {
+          if (result[0].emailCount == 1) {
             return Promise.reject('E-mail already in use');
-        }
-    });
-  })], function(req,res){
-    
-    var email = req.body.email;
-    var password = req.body.password;
-    var confirm_password = req.body.confirm_password;
-    var fname = req.body.fname;
-    var lname = req.body.lname;
-    var session = req.session;
-    //console.log(email, password, confirm_password, fname, lname, session);
+          }
+        });
+    }),
+  ],
+  async (req, res) => {
+    const { email, password, confirm_password, fname, lname } = req.body;
+    const session = req.session;
 
-    let errors = validationResult(req)
-
+    const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        //console.log(errors);
-        const alert = errors.array();
-        res.render('signup', {alert});
+      return res.render('signup', { alert: errors.array() });
     }
-    else {
-      let newUser = {
-      f_name: req.body.fname,
-      l_name: req.body.lname,
-      email: req.body.email,
+
+    const newUser = {
+      f_name: fname,
+      l_name: lname,
+      email,
       password,
       joined: new Date(),
-      provider: "self"
-      }
-      db.signup(newUser, function(insert_id, f_name){
-        //console.log(insert_id);
-        var encrypted_insert_id = cryptr.encrypt(insert_id);
-        let url = `http://localhost:${process.env.PORT}/activate/${encrypted_insert_id}`
-        //console.log(url);
-        let options = {
-          to: email,
-          subject: "Activate your GLEAM App account",
-          html: `<span>Hello, <b>${f_name}</b> <br>You received this message because you created an account on GLEAM App.</span><br><span>Click on button below to activate your account and explore.</span><br><br><a href='${url}' style='border: 1px solid #1b9be9; font-weight: 600; color: #fff; border-radius: 3px; cursor: pointer; outline: none; background: #1b9be9; padding: 4px 15px; display: inline-block; text-decoration: none;'>Activate</a>`
-        }
-        mail(options)
-          .then(m =>{
-            hl.success(m)
-            session.id = insert_id
-            session.email = email
-            session.email_verified = "no"
-            //res.json({ mssg: `Hello, ${session.email}!!`, success: true })
-            res.render('message.ejs', {alert_type: 'success', message: `A verification mail has been sent to this email: <b>${email}</b>`, type:'mail'})
-          })
-          .catch(me =>{
-            hl.error(me)
-            res.render('message.ejs', {alert_type: 'danger', message: `Error sending mail!`, type:'mail'})
-          })
-      });
-    }
-  }        
-);
+      provider: 'self',
+    };
 
+    db.signup(newUser, (insert_id, f_name) => {
+      const encryptedId = cryptr.encrypt(insert_id);
+      const url = `http://localhost:${process.env.PORT}/activate/${encryptedId}`;
+
+      const options = {
+        to: email,
+        subject: 'Activate your GLEAM App account',
+        html: `
+          <span>Hello, <b>${f_name}</b> <br>You received this message because you created an account on GLEAM App.</span><br>
+          <span>Click on button below to activate your account and explore.</span><br><br>
+          <a href='${url}' style='border: 1px solid #1b9be9; font-weight: 600; color: #fff; border-radius: 3px; cursor: pointer; background: #1b9be9; padding: 4px 15px; text-decoration: none;'>Activate</a>
+        `,
+      };
+
+      mail(options)
+        .then(() => {
+          hl.success('Verification mail sent');
+          session.id = insert_id;
+          session.email = email;
+          session.email_verified = 'no';
+          res.render('message.ejs', {
+            alert_type: 'success',
+            message: `A verification mail has been sent to this email: <b>${email}</b>`,
+            type: 'mail',
+          });
+        })
+        .catch(err => {
+          hl.error(err);
+          res.render('message.ejs', {
+            alert_type: 'danger',
+            message: 'Error sending mail!',
+            type: 'mail',
+          });
+        });
+    });
+  }
+);
 
 module.exports = router;

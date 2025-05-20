@@ -1,9 +1,9 @@
-import assertString from './util/assertString';
 import toDate from './toDate';
-export default function isAfter(str) {
-  var date = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : String(new Date());
-  assertString(str);
-  var comparison = toDate(date);
-  var original = toDate(str);
+export default function isAfter(date, options) {
+  // For backwards compatibility:
+  // isAfter(str [, date]), i.e. `options` could be used as argument for the legacy `date`
+  var comparisonDate = (options === null || options === void 0 ? void 0 : options.comparisonDate) || options || Date().toString();
+  var comparison = toDate(comparisonDate);
+  var original = toDate(date);
   return !!(original && comparison && original > comparison);
 }

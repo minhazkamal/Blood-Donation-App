@@ -1,52 +1,54 @@
-var express = require ('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var db = require ('../models/db_controller');
-var mail = require('../models/mail');
-var mysql = require('mysql');
-var hl = require('handy-log');
-const { body, check, validationResult } = require('express-validator');
-const session = require('express-session');
-var Cryptr = require('cryptr');
-var cryptr = new Cryptr(process.env.SECURITY_KEY);
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const db = require('../models/db_controller');
+const mail = require('../models/mail');
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.SECURITY_KEY);
 
-
-
-router.use(bodyParser.urlencoded({extended : true}));
+router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-//var user_id;
+// 📩 Email Verification Route
+router.get('/:encrypted_id', async (req, res) => {
+  try {
+    const { encrypted_id } = req.params;
+    const id = cryptr.decrypt(encrypted_id);
 
-router.get('/:encrypted_id', function(req,res){
-    //console.log('Email Verification');
-    let {encrypted_id} = req.params;
-    let id = cryptr.decrypt(encrypted_id);
-    //console.log(id);
-    db.isEmailVerified([id])
-    .then(result => {
-        //console.log(result);
-        if(result[0].email_verified == "yes") res.render('message.ejs', {alert_type: 'warning', message: `Email is already verified`, type:'verification'});
-        else {
-            //console.log('Email Verification');
-            db.verify_email([id], function (err, result, fields) {
-                if(err) throw err;
-                else
-                {
-                    //req.session.name = 'Hello' + id;
-                    //console.log(req.session.name);
-                    //user_id = id;
-                    res.render('message.ejs', {alert_type: 'success', message: `Your email is verified`, type:'verification'});
-                }
-            })
-        }
+    const result = await db.isEmailVerified([id]);
+
+    if (result[0].email_verified === 'yes') {
+      return res.render('message.ejs', {
+        alert_type: 'warning',
+        message: `Email is already verified`,
+        type: 'verification',
+      });
+    }
+
+    db.verify_email([id], (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.render('message.ejs', {
+          alert_type: 'danger',
+          message: `Something went wrong. Try again later.`,
+          type: 'verification',
+        });
+      }
+
+      return res.render('message.ejs', {
+        alert_type: 'success',
+        message: `Your email is verified`,
+        type: 'verification',
+      });
     });
+  } catch (err) {
+    console.error(err);
+    res.render('message.ejs', {
+      alert_type: 'danger',
+      message: `Invalid or expired verification link.`,
+      type: 'verification',
+    });
+  }
 });
-
-// router.post('/:id', function(req,res){
-//     let {id} = req.params;
-//     let user_id = id;
-//     let session = req.session.name;
-//     res.send(`email_activate.ejs ${user_id} ${session}`);
-// });
 
 module.exports = router;

@@ -1,85 +1,79 @@
-var express = require ('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var db = require ('../models/db_controller');
-var mail = require('../models/mail');
-var box = require('../models/mapbox');
-var mysql = require('mysql');
-var hl = require('handy-log');
-const { body, check, validationResult } = require('express-validator');
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const db = require('../models/db_controller');
+const box = require('../models/mapbox');
+const { query, validationResult } = require('express-validator');
 
-router.use(bodyParser.urlencoded({extended : true}));
+router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-router.get('/forward', function(req,res){
-    box.forwardGeocoder('311, West Shewrapara, Mirpur, Dhaka, Dhaka')
+/**
+ * GET /mapbox/forward
+ * Hardcoded forward geocoding (used for testing)
+ */
+router.get('/forward', async (req, res) => {
+  try {
+    const result = await box.forwardGeocoder('311, West Shewrapara, Mirpur, Dhaka, Dhaka');
+    res.json(result);
+  } catch (error) {
+    console.error('Forward geocode error:', error.message);
+    res.status(500).json({ error: 'Forward geocoding failed' });
+  }
 });
 
-router.get('/reverse', function(req,res){
-    var latitude = req.query.latitude;
-    var longitude = req.query.longitude;
-    let address = {
-        division: null,
-        district: null,
-        upazilla: null
+/**
+ * GET /mapbox/reverse?latitude=..&longitude=..
+ */
+router.get(
+  '/reverse',
+  [
+    query('latitude', 'Latitude is required').notEmpty(),
+    query('longitude', 'Longitude is required').notEmpty()
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
-    box.reverseGeocoder(latitude, longitude)
-    .then(response =>{
-        // console.log(response);
-        for(var i=0; i<response.features.length; i++)
-        {
-          if(response.features[i].id.includes('region'))
-          {
-            // console.log("Division: ", response.features[i].text);
-            address.division = response.features[i].text;
-          }
-          if(response.features[i].id.includes('district'))
-          {
-            // console.log("District: ", response.features[i].text);
-            address.district = response.features[i].text;
-          }
-          if(response.features[i].id.includes('locality'))
-          {
-            // console.log("Upazilla: ", response.features[i].text);
-            address.upazilla = response.features[i].text;
-          }  
-        }
-        
-        if(address.division)
-        {
-            // console.log(address);
-            db.getDivId(address.division)
-            .then(result => {
-                address.division = result[0].id;
-                if(address.district)
-                {
-                    db.getDistId(address.district, address.division)
-                    .then(result => {
-                        if(result.length>0) address.district = result[0].id;
-                        else address.district = null;
-                        if(address.upazilla && address.district !== null)
-                        {
-                            db.getUpazillaId(address.upazilla, address.district)
-                            .then(result => {
-                                if(result.length>0) address.upazilla = result[0].id;
-                                else address.upazilla = null;
-                                // console.log(address)
-                                res.json(address)
-                            })  
-                        }
-                    })
-                }
-                  
-            })
-            .catch(me => {
-                hl.error(me);
-            })
-            
-        }
-        // console.log(address);
-        // res.json(address)
-    })
 
-});
+    const { latitude, longitude } = req.query;
+    const address = {
+      division: null,
+      district: null,
+      upazilla: null
+    };
+
+    try {
+      const response = await box.reverseGeocoder(latitude, longitude);
+
+      response.features.forEach(feature => {
+        if (feature.id.includes('region')) address.division = feature.text;
+        if (feature.id.includes('district')) address.district = feature.text;
+        if (feature.id.includes('locality')) address.upazilla = feature.text;
+      });
+
+      if (!address.division) return res.json(address);
+
+      const divisionResult = await db.getDivId(address.division);
+      address.division = divisionResult[0]?.id || null;
+
+      if (address.district && address.division !== null) {
+        const districtResult = await db.getDistId(address.district, address.division);
+        address.district = districtResult[0]?.id || null;
+
+        if (address.upazilla && address.district !== null) {
+          const upazillaResult = await db.getUpazillaId(address.upazilla, address.district);
+          address.upazilla = upazillaResult[0]?.id || null;
+        }
+      }
+
+      res.json(address);
+    } catch (error) {
+      console.error('Reverse geocode error:', error.message);
+      res.status(500).json({ error: 'Reverse geocoding failed' });
+    }
+  }
+);
 
 module.exports = router;

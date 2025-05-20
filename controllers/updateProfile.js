@@ -1,17 +1,16 @@
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var db = require('../models/db_controller');
-var mail = require('../models/mail');
-var mysql = require('mysql');
-var hl = require('handy-log');
-var Cryptr = require('cryptr');
-var cryptr = new Cryptr(process.env.SECURITY_KEY);
-var fs = require('fs');
-var path = require('path');
-var multer = require('multer');
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const db = require('../models/db_controller');
+const mail = require('../models/mail');
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.SECURITY_KEY);
+const fs = require('fs');
+const path = require('path');
+const multer = require('multer');
 const { body, check, validationResult } = require('express-validator');
-var mapbox = require('../models/mapbox');
+const mapbox = require('../models/mapbox');
+
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
@@ -35,7 +34,7 @@ const storage = multer.diskStorage({
                 }
             })
             .catch(me => {
-                hl.error(me)
+                console.error(me)
                 //res.render('message.ejs', {alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type:'verification'});
             })
     }
@@ -403,7 +402,7 @@ router.post('/', validator, [
                                                                 })
                                                                 .catch(me => {
                                                                     console.log(me);
-                                                                    hl.error(me);
+                                                                    console.error(me);
 
                                                                     res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
                                                                 })
@@ -426,7 +425,7 @@ router.post('/', validator, [
                                                                 })
                                                                 .catch(me => {
                                                                     console.log(me);
-                                                                    hl.error(me);
+                                                                    console.error(me);
 
                                                                     res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
                                                                 })
@@ -440,7 +439,7 @@ router.post('/', validator, [
                 })
                 .catch(me => {
                     console.log(me);
-                    hl.error(me);
+                    console.error(me);
 
                     res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
                 })

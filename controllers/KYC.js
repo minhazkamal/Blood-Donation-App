@@ -1,200 +1,140 @@
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var db = require('../models/db_controller');
-var mail = require('../models/mail');
-var mysql = require('mysql');
-var hl = require('handy-log');
-var Cryptr = require('cryptr');
-var cryptr = new Cryptr(process.env.SECURITY_KEY);
-var fs = require('fs');
-var path = require('path');
-var multer = require('multer');
-const { createWorker } = require('tesseract.js');
-const tesseract = require('node-tesseract-ocr');
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const db = require('../models/db_controller');
+const mail = require('../models/mail');
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.SECURITY_KEY);
+const fs = require('fs');
+const path = require('path');
+const multer = require('multer');
 const { verify } = require('../models/nid_verify');
+const { check, body, validationResult } = require('express-validator');
 
-const config = {
-  lang: 'eng',
-  oem: 1,
-  psm: 3
-}
-
-const { body, check, validationResult } = require('express-validator');
-const { isBuffer } = require('util');
-
+// Middleware
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
+// File Upload Configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    if (file.fieldname === "front_side") {
-      var path = 'NID/front';
-      fs.mkdirSync(path, { recursive: true })
-      return cb(null, path)
-      // cb(null, 'NID/front')
-    }
-    else if (file.fieldname === "back_side") {
-      var path = 'NID/back';
-      fs.mkdirSync(path, { recursive: true })
-      return cb(null, path)
-      // cb(null, 'NID/back');
-    }
+    const subdir = file.fieldname === 'front_side' ? 'NID/front' : 'NID/back';
+    fs.mkdirSync(subdir, { recursive: true });
+    cb(null, subdir);
   },
   filename: (req, file, cb) => {
     db.getuserid(req.session.email)
       .then(result => {
         if (result.length > 0) {
           const encrypted_id = cryptr.encrypt(result[0].id);
-          //console.log(result[0].id, encrypted_id);
-          if (file.fieldname === "front_side") {
-            let file_name = encrypted_id + path.extname(file.originalname);
-            cb(null, file_name);
-          }
-          else if (file.fieldname === "back_side") {
-            let file_name = encrypted_id + path.extname(file.originalname);
-            cb(null, file_name);
-          }
+          const filename = encrypted_id + path.extname(file.originalname);
+          cb(null, filename);
         }
       })
-      .catch(me => {
-        hl.error(me)
-        //res.render('message.ejs', {alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type:'verification'});
-      })
+      .catch(err => {
+        console.error('User lookup failed:', err);
+        cb(new Error('Session error. Try again.'));
+      });
   }
 });
 
 const upload = multer({
   storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 10
-  },
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
   fileFilter: (req, file, cb) => {
-    checkFileType(req, file, cb);
+    if (
+      file.mimetype === 'image/png' ||
+      file.mimetype === 'image/jpg' ||
+      file.mimetype === 'image/jpeg' ||
+      file.mimetype === 'image/gif'
+    ) {
+      cb(null, true);
+    } else {
+      cb(new Error(`Invalid file type for ${file.fieldname}. Only images allowed.`));
+    }
   }
-}).fields(
-  [
-    {
-      name: 'front_side',
-      maxCount: 1
-    },
-    {
-      name: 'back_side', maxCount: 1
-    },
-  ]
-);
+}).fields([
+  { name: 'front_side', maxCount: 1 },
+  { name: 'back_side', maxCount: 1 }
+]);
 
-
-function checkFileType(req, file, cb) {
-  if (
-    file.mimetype === 'image/png' ||
-    file.mimetype === 'image/jpg' ||
-    file.mimetype === 'image/jpeg' ||
-    file.mimetype === 'image/gif'
-  ) { // check file type to be png, jpeg, or jpg
-    cb(null, true);
-  } else if (file.fieldname === 'front_side') {
-    // req.fileValidationError = 'File type of Front Side must be .png/.jpg/.jpeg/.gif';
-    cb(new Error("File format of Front side should be PNG,JPG,JPEG"), false);
-  }
-  else if (file.fieldname === 'back_side') {
-    // req.fileValidationError = 'File type of Back Side must be .png/.jpg/.jpeg/.gif';
-    cb(new Error("File format of Back side should be PNG,JPG,JPEG"), false); // else fails
-  }
-  else cb(null, false);
-}
-
-const validator = function (req, res, next) {
-  // Do some validation and verification here
+// Validator Middleware
+const validator = (req, res, next) => {
   try {
-    // const result = verify({ nidNumber, fullName, dob });
-    const result = {
-      isValid: true,
+    const result = verify({}); // Add params if needed
+    if (!result.isValid) {
+      return res.render('message.ejs', {
+        alert_type: 'danger',
+        message: 'NID verification failed.',
+        type: 'verification'
+      });
     }
-    if (result.isValid) {
-      upload(req, res, (err) => {
-        if (err) {
-          res.render('KYC', { alert: [{ msg: err.message }] });
-        }
-        else {
-          db.getuserid(req.session.email)
-            .then(result => {
-              let navbar_info = {
-                name: result[0].first_name,
-                photo: 'avatar.png',
-                notification_count: ''
-              }
-              req.session.navbar_info = navbar_info;
-              if (result.length > 0) {
-                let id = result[0].id;
-                db.getNID(result[0].id)
-                  .then(result => {
-                    // console.log(req.files.front_side[0].filename);
-                    try {
-                      if (result.length > 0) {
-                        fs.unlink('./NID/front/' + result[0].front, (err) => {
-                          if (err) throw err;
-                        });
-                        fs.unlink('./NID/back/' + result[0].back, (err) => {
-                          if (err) throw err;
-                        });
-                        // console.log("Previous files are deleted.");
 
-                        db.updateNID(req.files.front_side[0].filename, req.files.back_side[0].filename, id)
-                          .then(result => {
-                            if (result.affectedRows === 1) {
-                              res.redirect('/profile-update');
-                            }
-                            else {
-                              res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
-                            }
-                          })
-                      }
-                      else {
-                        db.setNID(req.files.front_side[0].filename, req.files.back_side[0].filename, id)
-                          .then(result => {
-                            // console.log(result.affectedRows);
-                            if (result.affectedRows === 1) {
-                              res.redirect('/profile-update');
-                            }
-                            else {
-                              res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
-                            }
-                          })
-                      }
-                    }
-                    catch (error) {
-                      console.log(error);
-                    }
-                  })
+    upload(req, res, err => {
+      if (err) {
+        return res.render('KYC', { alert: [{ msg: err.message }] });
+      }
+
+      db.getuserid(req.session.email)
+        .then(result => {
+          if (!result.length) {
+            return res.render('message.ejs', {
+              alert_type: 'danger',
+              message: 'Session expired. Please log in again.',
+              type: 'verification'
+            });
+          }
+
+          const id = result[0].id;
+          const front = req.files?.front_side?.[0]?.filename;
+          const back = req.files?.back_side?.[0]?.filename;
+
+          db.getNID(id).then(existing => {
+            if (existing.length > 0) {
+              const prev = existing[0];
+              try {
+                if (prev.front) fs.unlinkSync(`./NID/front/${prev.front}`);
+                if (prev.back) fs.unlinkSync(`./NID/back/${prev.back}`);
+              } catch (unlinkErr) {
+                console.warn('Failed to remove old files:', unlinkErr.message);
               }
-              else {
-                res.render('message.ejs', { alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type: 'verification' });
-              }
-            })
-          // console.log(req.session.email);
-          // res.redirect('/profile-update');
-        }
-      })
-    }
+
+              db.updateNID(front, back, id).then(result => {
+                if (result.affectedRows === 1) return res.redirect('/profile-update');
+                else throw new Error();
+              });
+            } else {
+              db.setNID(front, back, id).then(result => {
+                if (result.affectedRows === 1) return res.redirect('/profile-update');
+                else throw new Error();
+              });
+            }
+          }).catch(dbErr => {
+            console.error(dbErr);
+            res.render('message.ejs', {
+              alert_type: 'danger',
+              message: 'Error updating NID. Try again.',
+              type: 'mail'
+            });
+          });
+        });
+    });
   } catch (err) {
-    console.error(err.message);
-    res.render('message.ejs', { alert_type: 'danger', message: `Error!Try again later`, type: 'mail' });
+    console.error('Validator error:', err.message);
+    res.render('message.ejs', {
+      alert_type: 'danger',
+      message: 'Unexpected error. Try again.',
+      type: 'mail'
+    });
   }
-}
+};
 
-router.get('/', function (req, res) {
+// GET: KYC Form
+router.get('/', (req, res) => {
   res.render('KYC.ejs');
-  // if (req.session.email) {
-  //   res.render('KYC.ejs');
-  // }
-  // else {
-  //   res.render('message.ejs', { alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type: 'verification' });
-  // }
-
 });
 
+// POST: KYC Submission
+router.post('/', validator, (req, res) => {});
 
-router.post('/', validator, function (req, res) {
-});
 module.exports = router;

@@ -1,36 +1,39 @@
-const request = require('request-promise-native');
+const axios = require('axios');
 
 const verificationEndPoint = 'end_point';
 const subscriptionKey = process.env.subscriptionKey;
 
 async function verify({ nidNumber, fullName, dob }) {
-  let response = await request({
-    method: 'POST',
-    qs: {
-      national_id: nidNumber,
-      person_dob: dob,
-      person_fullname: fullName
-    },
-    url: verificationEndPoint,
-    headers: {
-      'Content-Type': 'application/json',
-      'Ocp-Apim-Subscription-Key': subscriptionKey
-    },
-    json: true
-  });
+  try {
+    const { data } = await axios.post(
+      verificationEndPoint,
+      {}, // Empty body if required
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Ocp-Apim-Subscription-Key': subscriptionKey
+        },
+        params: {
+          national_id: nidNumber,
+          person_dob: dob,
+          person_fullname: fullName
+        }
+      }
+    );
 
-  if (typeof response === 'string') {
-    response = response.replace(/'/g, '"');
-    response = JSON.parse(response);
+    let response = data;
+
+    if (typeof response === 'string') {
+      response = JSON.parse(response.replace(/'/g, '"'));
+    }
+
+    const isValid = response.passKyc && ['true', 'yes'].includes(String(response.passKyc).toLowerCase());
+
+    return { nid: nidNumber, valid: isValid };
+  } catch (error) {
+    console.error('NID verification failed:', error.message);
+    return { nid: nidNumber, valid: false, error: true };
   }
-
-  if (response.passKyc && (response.passKyc === 'true' || response.passKyc === 'yes')) {
-    return { nid: nidNumber, valid: true };
-  }
-
-  return { nid: nidNumber, valid: false };
 }
 
-module.exports = {
-  verify
-};
+module.exports = { verify };

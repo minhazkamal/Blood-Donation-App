@@ -1,41 +1,30 @@
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var db = require('../models/db_controller');
-var mail = require('../models/mail');
-var mysql = require('mysql');
-var hl = require('handy-log');
-var Cryptr = require('cryptr');
-var cryptr = new Cryptr(process.env.SECURITY_KEY);
-var fs = require('fs');
-var path = require('path');
-var multer = require('multer');
-const { body, check, validationResult } = require('express-validator');
-var mapbox = require('../models/mapbox');
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const db = require('../models/db_controller');
+const mail = require('../models/mail');
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.SECURITY_KEY);
+const { check, body, validationResult } = require('express-validator');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
-// router.use(multer().none());
 
 function mysql2JsDate(str) {
-    var g = str;
-    //console.log(g);
-    return new Date(g.getTime() - (g.getTimezoneOffset() * 60000));
+    return new Date(str.getTime() - str.getTimezoneOffset() * 60000);
 }
 
 function mysql2JsLocal(str) {
-    var g = mysql2JsDate(str).toISOString().split(/[- : T]/);
-    var dob = g[2] + '/' + g[1] + '/' + g[0];
-    return dob;
+    const g = mysql2JsDate(str).toISOString().split(/[- : T]/);
+    return `${g[2]}/${g[1]}/${g[0]}`;
 }
 
 function yesORno(b) {
-    if (b == 'yes') return 0;
-    else return 1;
+    return b === 'yes' ? 0 : 1;
 }
 
 function calculateEligibilityScore(report) {
-    var total = 0;
+    let total = 0;
     total += yesORno(report[0].asthma);
     total += yesORno(report[0].high_bp);
     total += yesORno(report[0].cancer);
@@ -47,22 +36,19 @@ function calculateEligibilityScore(report) {
     total += 2 - parseInt(report[0].smoke);
     total += 2 - parseInt(report[0].drinking);
     total += 2 - parseInt(report[0].depression);
-
     return Math.floor((total * 10) / 14);
 }
 
 function calculate_age(dob) {
-    var diff_ms = Date.now() - dob.getTime();
-    var age_dt = new Date(diff_ms);
-
+    const diff_ms = Date.now() - dob.getTime();
+    const age_dt = new Date(diff_ms);
     return Math.abs(age_dt.getUTCFullYear() - 1970);
 }
 
 router.get('/', function (req, res) {
-    var tab = req.query.tab;
-    // console.log(tab);
-    // req.session.email = 'minhaz.kamal9900@gmail.com';
-    let user = {
+    const tab = req.query.tab;
+
+    const user = {
         fullname: '',
         contact: '',
         email: '',
@@ -74,139 +60,112 @@ router.get('/', function (req, res) {
         requests_count: '',
         donated: '',
         img: '',
-        editLink: '',
+        editLink: '/profile-update',
         profession: '',
+    };
+
+    if (!req.session.email) {
+        return res.render('message.ejs', {
+            alert_type: 'danger',
+            message: `Your session has timed out. Please log in again.`,
+            type: 'verification'
+        });
     }
-    if (req.session.email) {
-        db.getUserAllInfo(req.session.email)
-            .then(result => {
-                let myId = result[0].id;
-                let myBG = result[0].BG;
-                user.fullname = result[0].first_name + ' ' + result[0].last_name;
-                user.contact = '+88 ' + result[0].contact;
-                user.email = req.session.email;
-                user.dob = mysql2JsLocal(result[0].dob);
-                user.bg = result[0].BG;
-                user.gender = result[0].gender;
-                user.address = result[0].house + ', ' + result[0].street + ', ';
-                // user.editLink = '/edit/'+result[0].id;
-                user.editLink = '/profile-update';
-                user.profession = result[0].profession;
-                user.age = calculate_age(result[0].dob);
 
-                let address = {
-                    division: result[0].division,
-                    district: result[0].district,
-                    upazilla: result[0].upazilla
-                }
+    db.getUserAllInfo(req.session.email)
+        .then(result => {
+            const myId = result[0].id;
+            const myBG = result[0].BG;
 
-                db.getProfilePic(result[0].id)
-                    .then(result1 => {
-                        user.img = `/profile/` + result1[0].profile_picture;
-                        db.getLocationNamesByIds(address)
-                            .then(result2 => {
-                                user.address += result2[0].upazilla + ', ' + result2[0].district + ', ' + result2[0].division
-                                db.countBloodRequests(req.session.email)
-                                    .then(result3 => {
-                                        if (result3) user.requests_count = result3[0].total_requests;
-                                        else user.requests_count = 0;
-                                        // user.requests_count = result3[0].total_requests;
-                                        db.getEligibilityReport(req.session.email)
-                                            .then(result4 => {
-                                                if (result4.length > 0) user.eligibility_score = calculateEligibilityScore(result4);
-                                                else user.eligibility_score = 0;
-                                                db.getRequestByPoster(req.session.email)
-                                                    .then(result5 => {
-                                                        var request = [];
+            Object.assign(user, {
+                fullname: `${result[0].first_name} ${result[0].last_name}`,
+                contact: `+88 ${result[0].contact}`,
+                email: req.session.email,
+                dob: mysql2JsLocal(result[0].dob),
+                bg: result[0].BG,
+                gender: result[0].gender,
+                address: `${result[0].house}, ${result[0].street}, `,
+                profession: result[0].profession,
+                age: calculate_age(result[0].dob)
+            });
 
-                                                        for (var i = 0; i < result5.length; i++) {
-                                                            // console.log(i);
-                                                            var eachrequest = {
-                                                                id: cryptr.encrypt(result5[i].id),
-                                                                serialID: i + 1,
-                                                                patient: result5[i].patient,
-                                                                location: result5[i].orgname + ', ' + result5[i].orgdetails,
-                                                                date: mysql2JsLocal(result5[i].date),
-                                                                bg: result5[i].bg,
-                                                                quantity: result5[i].quantity,
-                                                                resolved: result5[i].resolved
-                                                            }
+            const address = {
+                division: result[0].division,
+                district: result[0].district,
+                upazilla: result[0].upazilla
+            };
 
-                                                            request.push(eachrequest);
-                                                            // console.log(eachrequest);
-                                                            // console.log(request);
-                                                        }
-                                                        db.countTotalDonation(req.session.email)
-                                                            .then(result6 => {
-                                                                if (result6.length > 0) user.donated = result6[0].total_donation;
-                                                                else user.donated = 0;
+            db.getProfilePic(myId)
+                .then(result1 => {
+                    user.img = `/profile/${result1[0].profile_picture}`;
+                    db.getLocationNamesByIds(address)
+                        .then(result2 => {
+                            user.address += `${result2[0].upazilla}, ${result2[0].district}, ${result2[0].division}`;
+                            db.countBloodRequests(req.session.email)
+                                .then(result3 => {
+                                    user.requests_count = result3?.[0]?.total_requests || 0;
+                                    db.getEligibilityReport(req.session.email)
+                                        .then(result4 => {
+                                            user.eligibility_score = result4.length > 0 ? calculateEligibilityScore(result4) : 0;
+                                            db.getRequestByPoster(req.session.email)
+                                                .then(result5 => {
+                                                    const request = result5.map((item, i) => ({
+                                                        id: cryptr.encrypt(item.id),
+                                                        serialID: i + 1,
+                                                        patient: item.patient,
+                                                        location: `${item.orgname}, ${item.orgdetails}`,
+                                                        date: mysql2JsLocal(item.date),
+                                                        bg: item.bg,
+                                                        quantity: item.quantity,
+                                                        resolved: item.resolved
+                                                    }));
 
-                                                                db.getDonationByDonor(req.session.email)
-                                                                    .then(result7 => {
-                                                                        var donation = [];
+                                                    db.countTotalDonation(req.session.email)
+                                                        .then(result6 => {
+                                                            user.donated = result6?.[0]?.total_donation || 0;
+                                                            db.getDonationByDonor(req.session.email)
+                                                                .then(result7 => {
+                                                                    const donation = result7.map((item, i) => ({
+                                                                        donation_id: cryptr.encrypt(item.donation_id),
+                                                                        serialID: i + 1,
+                                                                        patient: item.patient,
+                                                                        location: `${item.orgname}, ${item.orgdetails}`,
+                                                                        date: mysql2JsLocal(item.date)
+                                                                    }));
 
-                                                                        for (var i = 0; i < result7.length; i++) {
-                                                                            // console.log(i);
-                                                                            var eachdonation = {
-                                                                                donation_id: cryptr.encrypt(result7[i].donation_id),
+                                                                    db.getRequestByResponder(myId)
+                                                                        .then(result8 => {
+                                                                            const response = result8.map((item, i) => ({
+                                                                                request_id: cryptr.encrypt(item.id),
                                                                                 serialID: i + 1,
-                                                                                patient: result7[i].patient,
-                                                                                location: result7[i].orgname + ', ' + result7[i].orgdetails,
-                                                                                date: mysql2JsLocal(result7[i].date),
-                                                                            }
+                                                                                patient: item.patient,
+                                                                                location: `${item.orgname}, ${item.orgdetails}`,
+                                                                                patient_bg: item.bg,
+                                                                                requester_bg: item.user_bg,
+                                                                                user_bg: myBG
+                                                                            }));
 
-                                                                            donation.push(eachdonation);
-                                                                            // console.log(eachrequest);
-                                                                            // console.log(request);
-                                                                        }
-
-                                                                        db.getRequestByResponder(myId)
-                                                                            .then(result8 => {
-                                                                                // console.log(result8);
-                                                                                var response = [];
-
-                                                                                for (var i = 0; i < result8.length; i++) {
-                                                                                    // console.log(i);
-                                                                                    var eachresponse = {
-                                                                                        request_id: cryptr.encrypt(result8[i].id),
-                                                                                        serialID: i + 1,
-                                                                                        patient: result8[i].patient,
-                                                                                        location: result8[i].orgname + ', ' + result8[i].orgdetails,
-                                                                                        patient_bg: result8[i].bg,
-                                                                                        requester_bg: result8[i].user_bg,
-                                                                                        user_bg: myBG
-                                                                                    }
-
-                                                                                    response.push(eachresponse);
-                                                                                    // console.log(eachrequest);
-                                                                                    // console.log(request);
-                                                                                }
-                                                                                // console.log(response);
-                                                                                db.NotificationUpdateDynamically(req, res)
-                                                                                    .then(result => {
-                                                                                        res.render('myProfile.ejs', { user, tab, request, navbar: req.session.navbar_info, donation, response, notifications: req.session.notifications });
-                                                                                    })
-
-                                                                            })
-
-                                                                    })
-
-
-                                                            })
-                                                    })
-                                                // console.log(user);
-                                                // res.render('myProfile.ejs', { user, tab });
-                                            })
-                                    })
-
-                            })
-                    })
-            })
-
-    }
-    else {
-        res.render('message.ejs', { alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type: 'verification' });
-    }
+                                                                            db.NotificationUpdateDynamically(req, res)
+                                                                                .then(() => {
+                                                                                    res.render('myProfile.ejs', {
+                                                                                        user,
+                                                                                        tab,
+                                                                                        request,
+                                                                                        navbar: req.session.navbar_info,
+                                                                                        donation,
+                                                                                        response,
+                                                                                        notifications: req.session.notifications
+                                                                                    });
+                                                                                });
+                                                                        });
+                                                                });
+                                                        });
+                                                });
+                                        });
+                                });
+                        });
+                });
+        });
 });
 
 module.exports = router;

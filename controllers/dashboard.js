@@ -1,117 +1,87 @@
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var db = require('../models/db_controller');
-var mail = require('../models/mail');
-var mysql = require('mysql');
-var hl = require('handy-log');
-const { body, check, validationResult } = require('express-validator');
-const session = require('express-session');
-var Cryptr = require('cryptr');
-var cryptr = new Cryptr(process.env.SECURITY_KEY);
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const db = require('../models/db_controller');
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.SECURITY_KEY);
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 function monthDiff(d1, d2) {
-    var months;
-    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    let months = (d2.getFullYear() - d1.getFullYear()) * 12;
     months -= d1.getMonth();
     months += d2.getMonth();
     months = Math.abs(months);
     return months <= 0 ? 0 : months;
 }
 
-router.get('/', function (req, res) {
-    // req.session.email = 'minhaz.kamal9900@gmail.com';
-    if (req.session.email) {
-        var navbar_info = {
-            name: '',
-            photo: '',
-            notification_count: '',
-        }
-
-        var user_status = {
-            eligibility: '',
-            active: '',
-            name: '',
-        }
-        db.getuserid(req.session.email)
-            .then(result => {
-                // console.log(result);
-                const uid = result[0].id;
-                user_status.name = result[0].first_name;
-                user_status.eligibility = result[0].eligibility_test;
-                db.getEligibilityReport(req.session.email)
-                    .then(result => {
-                        if (result.length > 0 && result[0].last_donation != null) {
-                            if (monthDiff(new Date(), result[0].last_donation) < 3) user_status.eligibility = 'not_eligible';
-                        }
-                        db.getActiveStatusById(uid)
-                            .then(result => {
-                                user_status.active = result[0].status;
-                                req.session.temp_user_status = user_status;
-                                db.getNameAndPhoto(req.session.email)
-                                    .then(result => {
-                                        // console.log(result);
-                                        navbar_info.name = result[0].first_name;
-                                        navbar_info.photo = result[0].profile_picture;
-                                        req.session.navbar_info = navbar_info;
-                                        db.NotificationUpdateDynamically(req, res)
-                                            .then(result => {
-                                                res.render('dashboard', { user_status, navbar: req.session.navbar_info, notifications: req.session.notifications });
-                                            })
-                                        // db.countNotificationByEmail(req.session.email)
-                                        //     .then(result => {
-                                        //         navbar_info.notification_count = result[0].notification_count;
-
-                                        //         req.session.navbar_info = navbar_info;
-                                        //         db.getNotificationByUsersEmail(req.session.email)
-                                        //             .then(result => {
-                                        //                 // console.log(result);
-
-                                        //                 var notification = [];
-
-                                        //                 for (var i = 0; i < result.length; i++) {
-                                        //                     // console.log(i);
-                                        //                     var eachnotification = {
-                                        //                         profile_of: cryptr.encrypt(result[i].profile_of),
-                                        //                         name: result[i].first_name + ' ' + result[i].last_name,
-                                        //                         resolved: result[i].resolved,
-                                        //                         notification_id: cryptr.encrypt(result[i].notification_id)
-                                        //                     }
-
-                                        //                     notification.push(eachnotification);
-                                        //                 }
-                                        //                 req.session.notifications = notification;
-                                        //                 // console.log(req.session.notifications);
-                                        //                 res.render('dashboard', { user_status, navbar: req.session.navbar_info, notifications: req.session.notifications });
-                                        //             })
-
-                                        //     })
-
-                                    })
-                            })
-                    })
-
-
-            })
-    }
-    else {
-        res.render('message.ejs', { alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type: 'verification' });
+// GET /dashboard
+router.get('/', async (req, res) => {
+    req.session.email= req.session.email || 'minhaz.kamal9900@gmail.com';
+    if (!req.session.email) {
+        return res.render('message.ejs', {
+            alert_type: 'danger',
+            message: `Your session has timed out. Please log in again.`,
+            type: 'verification'
+        });
     }
 
+    try {
+        const [userInfo] = await db.getuserid(req.session.email);
+
+        const uid = userInfo.id;
+        const user_status = {
+            name: userInfo.first_name,
+            eligibility: userInfo.eligibility_test,
+            active: ''
+        };
+
+        const [eligibility] = await db.getEligibilityReport(req.session.email);
+        if (eligibility?.last_donation) {
+            if (monthDiff(new Date(), eligibility.last_donation) < 3) {
+                user_status.eligibility = 'not_eligible';
+            }
+        }
+
+        const [activeStatus] = await db.getActiveStatusById(uid);
+        user_status.active = activeStatus.status;
+        req.session.temp_user_status = user_status;
+
+        const [profile] = await db.getNameAndPhoto(req.session.email);
+        const navbar_info = {
+            name: profile.first_name,
+            photo: profile.profile_picture,
+            notification_count: ''
+        };
+        req.session.navbar_info = navbar_info;
+
+        await db.NotificationUpdateDynamically(req, res);
+        return res.render('dashboard', {
+            user_status,
+            navbar: req.session.navbar_info,
+            notifications: req.session.notifications
+        });
+    } catch (error) {
+        console.error(error);
+        res.render('message.ejs', {
+            alert_type: 'danger',
+            message: `Something went wrong. Try again later.`,
+            type: 'mail'
+        });
+    }
 });
 
-router.get('/update-active', function (req, res) {
-    let value = req.query.value;
-    // console.log(req.session.email, value);
-    db.updateActiveStatus(req.session.email, value)
-        .then(result => {
-            // console.log(result);
-            res.json(result);
-        })
-})
-
+// GET /dashboard/update-active
+router.get('/update-active', async (req, res) => {
+    const value = req.query.value;
+    try {
+        const result = await db.updateActiveStatus(req.session.email, value);
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Update failed' });
+    }
+});
 
 module.exports = router;

@@ -1,91 +1,87 @@
-var express = require ('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var db = require ('../models/db_controller');
-var mail = require('../models/mail');
-var mysql = require('mysql');
-var hl = require('handy-log');
-const { body, check, validationResult } = require('express-validator');
-const { array } = require('prop-types');
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const db = require('../models/db_controller');
+const mail = require('../models/mail');
 const passport = require('passport');
+
 require('../models/passport-setup');
 
-router.use(bodyParser.urlencoded({extended : true}));
+router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
+// Optional: Protect route middleware
 const isLoggedIn = (req, res, next) => {
-    if (req.user) {
-        next();
-    } else {
-        res.sendStatus(401);
-    }
-}
+  if (req.user) next();
+  else res.sendStatus(401);
+};
 
-// Auth Routes
+// 🔐 Step 1: Start Google OAuth Login
 router.get('/', passport.authenticate('google-login', { scope: ['profile', 'email'] }));
 
-router.get('/callback', passport.authenticate('google-login', { failureRedirect: '/login-google/failed' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
+// 🔐 Step 2: Callback after Google Authentication
+router.get(
+  '/callback',
+  passport.authenticate('google-login', { failureRedirect: '/login-google/failed' }),
+  (req, res) => {
     res.redirect('/login-google/good/');
-    //res.render('profile.ejs',{name:req.user.displayName,pic:req.user.photos[0].value,email:req.user.emails[0].value});
   }
 );
 
-router.get('/failed', (req, res) => res.send('You Failed to log in!'));
+// ❌ Login Failed
+router.get('/failed', (req, res) => res.send('You failed to log in!'));
 
-router.get('/good/', (req, res) =>{
+// ✅ Login Success
+router.get('/good/', async (req, res) => {
+  try {
+    const user = req.session?.passport?.user;
 
-    //console.log("profile");
-    var user = req.session.passport.user;
-    //console.log(user);
-    db.EmailCheck(user.emails[0].value)
-    .then(result =>{
-        if(result[0].emailCount == 0) {
-            res.render('login', {alert: [{msg: 'Email doesn\'t exists'}]});
-        }
-        else{
-            req.session.email = user.emails[0].value;
-            db.getuserid(user.emails[0].value)
-            .then(result => {
-                //console.log(result[0].id);
-                db.isEmailVerified(result[0].id)
-                .then(result => {
-                  if(result[0].email_verified === 'yes' && result[0].profile_build === 'yes'){
-                 
-                  
-                    // Dashboard
-                    // res.send("Dash Board");
-                    res.redirect('/dashboard');
-          
-          
-          
-                  }
-                  else if(result[0].email_verified === "yes" && result[0].profile_build === "no"){
-          
-          
-                    // Profile Build
-                    // res.send("<h1>Home Page</h1><br><span>Under Progress....</span>");
-                    res.redirect('/KYC');
-                  }
-                  else{
-                    res.render('message.ejs', {alert_type: 'danger', message: `Please verify your email`, type:'mail'})
-                  }
-                })
-            .catch(me =>{
-              hl.error(me)
-              res.render('message.ejs', {alert_type: 'danger', message: `Error!Try again later`, type:'mail'})
-            })
-          })
-        }
-    })
-})
+    if (!user || !user.emails || !user.emails[0]) {
+      return res.render('message.ejs', {
+        alert_type: 'danger',
+        message: `Google login failed. Try again.`,
+        type: 'mail',
+      });
+    }
 
+    const email = user.emails[0].value;
+    const result = await db.EmailCheck(email);
+
+    if (result[0].emailCount === 0) {
+      return res.render('login', { alert: [{ msg: "Email doesn't exist" }] });
+    }
+
+    req.session.email = email;
+
+    const userData = await db.getuserid(email);
+    const verification = await db.isEmailVerified(userData[0].id);
+
+    if (verification[0].email_verified === 'yes' && verification[0].profile_build === 'yes') {
+      res.redirect('/dashboard'); // ✅ All set
+    } else if (verification[0].email_verified === 'yes' && verification[0].profile_build === 'no') {
+      res.redirect('/KYC'); // 🔧 Needs profile completion
+    } else {
+      res.render('message.ejs', {
+        alert_type: 'danger',
+        message: 'Please verify your email.',
+        type: 'mail',
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    res.render('message.ejs', {
+      alert_type: 'danger',
+      message: 'An unexpected error occurred. Please try again later.',
+      type: 'mail',
+    });
+  }
+});
+
+// 🚪 Logout
 router.get('/logout', (req, res) => {
-    req.session = null;
-    req.logout();
-    res.redirect('/');
-})
-
+  req.session = null;
+  req.logout();
+  res.redirect('/');
+});
 
 module.exports = router;

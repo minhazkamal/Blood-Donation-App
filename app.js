@@ -16,7 +16,7 @@ var expressValidator = require('express-validator');
 var sweetalert = require('sweetalert2');
 var port = process.env.PORT;
 var bodyParser = require('body-parser');
-var hl = require('handy-log');
+//var hl = require('handy-log');
 var app = express();
 var passport = require('passport');
 var cookieSession = require('cookie-session')
@@ -61,10 +61,6 @@ var statsForHome = require('./controllers/stats');
 // view engine
 app.set('view engine', 'ejs');
 
-// Initializes passport and passport sessions
-app.use(passport.initialize());
-app.use(passport.session());
-
 // middlewares
 app.use(express.static('./public'));
 app.use('/profile', express.static('profile'));
@@ -84,10 +80,14 @@ app.use(session({
     cookie: {maxAge: 1000*60*60*10}
 }));
 
+// Initializes passport and passport sessions
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 var server = app.listen(port, function () {
 
-    hl.rainbow('App Running');
+    console.log('App Running');
 });
 
 app.use('/', landing);

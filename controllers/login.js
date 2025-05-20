@@ -1,139 +1,109 @@
-var express = require ('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var db = require ('../models/db_controller');
-var mail = require('../models/mail');
-var mysql = require('mysql');
-var hl = require('handy-log');
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const db = require('../models/db_controller');
+const mail = require('../models/mail');
 const { body, check, validationResult } = require('express-validator');
-const { array } = require('prop-types');
 
-router.use(bodyParser.urlencoded({extended : true}));
+router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-router.get('/', function(req,res){
-  if(req.session.loggedin === true) {
+// 🔐 GET /login
+router.get('/', (req, res) => {
+  if (req.session.loggedin === true) {
     db.getuserid(req.session.email)
-    .then(result => {
-      //console.log(result[0].id);
-      db.isEmailVerified(result[0].id)
+      .then(result => db.isEmailVerified(result[0].id))
       .then(result => {
-        if(result[0].email_verified === 'yes' && result[0].profile_build === 'yes'){
-                 
-                  
-          // Dashboard
-          // res.send("Dash Board");
-          res.redirect('/dashboard');
-
-
-
-        }
-        else if(result[0].email_verified === "yes" && result[0].profile_build === "no"){
-
-
-          // Profile Build
-          // res.send("<h1>Home Page</h1><br><span>Under Progress....</span>");
-          res.redirect('/KYC');
-        }
-        else{
-          res.render('message.ejs', {alert_type: 'danger', message: `Please verify your email`, type:'mail'})
+        if (result[0].email_verified === 'yes' && result[0].profile_build === 'yes') {
+          return res.redirect('/dashboard');
+        } else if (result[0].profile_build === 'no') {
+          return res.redirect('/KYC');
+        } else {
+          return res.render('message.ejs', {
+            alert_type: 'danger',
+            message: 'Please verify your email',
+            type: 'mail',
+          });
         }
       })
-      .catch(me =>{
-        hl.error(me)
-        res.render('message.ejs', {alert_type: 'danger', message: `Error!Try again later`, type:'mail'})
-      })
-    })
-    .catch(me =>{
-      hl.error(me)
-      res.render('message.ejs', {alert_type: 'danger', message: `Error!Try again later`, type:'mail'})
-    })
+      .catch(err => {
+        console.error(err);
+        res.render('message.ejs', {
+          alert_type: 'danger',
+          message: 'Error! Try again later',
+          type: 'mail',
+        });
+      });
+  } else {
+    res.render('login.ejs');
   }
-  else{
-      res.render('login.ejs');
-    }
 });
 
-router.post('/', [check('email', 'Email is empty').notEmpty(),
-check('email', 'Email is invalid').isEmail(),
-check('password', 'Password field is empty').notEmpty(),
-body('email').custom(value => {
-    return db.direct_query('SELECT COUNT(*) as emailCount FROM users WHERE email = ?', [value])
-    .then(value => {
-        if(value[0].emailCount == 0) {
+// 🔐 POST /login
+router.post(
+  '/',
+  [
+    check('email', 'Email is empty').notEmpty(),
+    check('email', 'Email is invalid').isEmail(),
+    check('password', 'Password field is empty').notEmpty(),
+    body('email').custom(email => {
+      return db
+        .direct_query('SELECT COUNT(*) as emailCount FROM users WHERE email = ?', [email])
+        .then(result => {
+          if (result[0].emailCount === 0) {
             return Promise.reject("E-mail doesn't exist");
-        }
-    });
-  })], function(req,res){
-    
-    var email = req.body.email;
-    var password = req.body.password;
-    var session = req.session;
-    //console.log(email, password, confirm_password, fname, lname, session);
-
-    let errors = validationResult(req)
-    
-    if (!errors.isEmpty()) {
-      //console.log(errors);
-      const alert = errors.array();
-      res.render('login', {alert});
-    }
-    else {
-      let User = {
-      email: req.body.email,
-      password
-      }
-      db.credentialCheck(User)
-      .then(result =>{
-        if(result === false) {
-          res.render('login', {alert: [{msg: 'Your Password is wrong'}]});
-        }
-        else{
-          req.session.email = User.email;
-          //req.session.loggedin = true;
-          // console.log(req.body.remember);
-          if(req.body.remember == 'true'){
-            req.session.loggedin = true;
-            req.session.cookie.maxAge = 2628000000;
           }
-          db.getuserid(User.email)
-          .then(result => {
-            //console.log(result[0].id);
-            db.isEmailVerified(result[0].id)
-            .then(result => {
-              if(result[0].email_verified === 'yes' && result[0].profile_build === 'yes'){
-                 
-                  
-                // Dashboard
-                // res.send("Dash Board");
-                res.redirect('/dashboard');
-      
-      
-      
-              }
-              else if(result[0].email_verified === "yes" && result[0].profile_build === "no"){
-      
-      
-                // Profile Build
-                // res.send("<h1>Home Page</h1><br><span>Under Progress....</span>");
-                res.redirect('/KYC');
-              }
-              else{
-                res.render('message.ejs', {alert_type: 'danger', message: `Please verify your email`, type:'mail'})
-              }
-            })
-            .catch(me =>{
-              hl.error(me)
-              res.render('message.ejs', {alert_type: 'danger', message: `Error!Try again later`, type:'mail'})
-            })
-          })
+        });
+    }),
+  ],
+  (req, res) => {
+    const { email, password, remember } = req.body;
+    const session = req.session;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.render('login', { alert: errors.array() });
+    }
+
+    const user = { email, password };
+
+    db.credentialCheck(user)
+      .then(valid => {
+        if (!valid) {
+          return res.render('login', { alert: [{ msg: 'Your password is wrong' }] });
         }
+
+        session.email = user.email;
+        if (remember === 'true') {
+          session.loggedin = true;
+          session.cookie.maxAge = 2628000000; // 1 month
+        }
+
+        return db.getuserid(user.email)
+          .then(result => db.isEmailVerified(result[0].id))
+          .then(result => {
+            if (result[0].email_verified === 'yes' && result[0].profile_build === 'yes') {
+              return res.redirect('/dashboard');
+            } else if (result[0].profile_build === 'no') {
+              return res.redirect('/KYC');
+            } else {
+              return res.render('message.ejs', {
+                alert_type: 'danger',
+                message: 'Please verify your email',
+                type: 'mail',
+              });
+            }
+          });
       })
-    .catch(me =>{
-      hl.error(me)
-      res.render('message.ejs', {alert_type: 'danger', message: `Error!Try again later`, type:'mail'})
-    })
-  }      
-})
+      .catch(err => {
+        console.error(err);
+        res.render('message.ejs', {
+          alert_type: 'danger',
+          message: 'Error! Try again later',
+          type: 'mail',
+        });
+      });
+  }
+);
 
 module.exports = router;

@@ -1,124 +1,105 @@
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var db = require('../models/db_controller');
-var mail = require('../models/mail');
-var mysql = require('mysql');
-var hl = require('handy-log');
-var Cryptr = require('cryptr');
-var cryptr = new Cryptr(process.env.SECURITY_KEY);
-var fs = require('fs');
-var path = require('path');
-var multer = require('multer');
-const { body, check, validationResult } = require('express-validator');
-var mapbox = require('../models/mapbox');
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const db = require('../models/db_controller');
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.SECURITY_KEY);
 
+// Middleware
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
-// router.use(multer().none());
 
+// Utility Functions
 function mysql2JsDate(str) {
-    var g = str;
-    // console.log(g);
-    return new Date(g.getTime() - (g.getTimezoneOffset() * 60000));
+  return new Date(str.getTime() - (str.getTimezoneOffset() * 60000));
 }
 
 function mysql2JsLocal(str) {
-    var g = mysql2JsDate(str).toISOString().split(/[- : T]/);
-    var dob = g[2] + '/' + g[1] + '/' + g[0];
-    return dob;
+  const [year, month, day] = mysql2JsDate(str).toISOString().split(/[- : T]/);
+  return `${day}/${month}/${year}`;
 }
 
-function yesORno(b) {
-    if (b == 'yes') return 0;
-    else return 1;
+function yesORno(val) {
+  return val === 'yes' ? 0 : 1;
 }
 
 function calculateEligibilityScore(report) {
-    var total = 0;
-    total += yesORno(report[0].asthma);
-    total += yesORno(report[0].high_bp);
-    total += yesORno(report[0].cancer);
-    total += yesORno(report[0].diabetes);
-    total += yesORno(report[0].heart_disease);
-    total += yesORno(report[0].hepatitis);
-    total += yesORno(report[0].anemia);
-    total += yesORno(report[0].tuberculosis);
-    total += 2 - parseInt(report[0].smoke);
-    total += 2 - parseInt(report[0].drinking);
-    total += 2 - parseInt(report[0].depression);
-
-    return Math.floor((total * 10) / 14);
+  let total = 0;
+  total += yesORno(report[0].asthma);
+  total += yesORno(report[0].high_bp);
+  total += yesORno(report[0].cancer);
+  total += yesORno(report[0].diabetes);
+  total += yesORno(report[0].heart_disease);
+  total += yesORno(report[0].hepatitis);
+  total += yesORno(report[0].anemia);
+  total += yesORno(report[0].tuberculosis);
+  total += 2 - parseInt(report[0].smoke);
+  total += 2 - parseInt(report[0].drinking);
+  total += 2 - parseInt(report[0].depression);
+  return Math.floor((total * 10) / 14);
 }
 
+// GET: Request Feed Page
 router.get('/', function (req, res) {
-    if(req.session.email)
-    {
-        db.getDivisions()
-        .then(results => {
-            let div_result = results;
-            // console.log(results);
-            db.NotificationUpdateDynamically(req, res)
-                                .then(result => {
-                                    res.render('requestFeed.ejs', { divisions: div_result, navbar: req.session.navbar_info, notifications: req.session.notifications });
-                                })
-            
-        })
-    }
-    else {
-        res.render('message.ejs', { alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type: 'verification' });
-    }
-    
+  if (!req.session.email) {
+    return res.render('message.ejs', {
+      alert_type: 'danger',
+      message: `Your session has timed out. Please log in again.`,
+      type: 'verification'
+    });
+  }
+
+  db.getDivisions()
+    .then(divisions => {
+      db.NotificationUpdateDynamically(req, res)
+        .then(() => {
+          res.render('requestFeed.ejs', {
+            divisions,
+            navbar: req.session.navbar_info,
+            notifications: req.session.notifications
+          });
+        });
+    });
 });
 
+// GET: Request List (AJAX)
 router.get('/list', function (req, res) {
-    const offset = req.query.offset;
-    const bg = req.query.bg;
-    const div = req.query.div;
-    const dist = req.query.dist;
-    // console.log(offset, bg, div, dist);
-    // req.session.email = 'minhaz.kamal9900@gmail.com';
-    if(req.session.email) {
-    db.getuserid(req.session.email)
-        .then(result => {
-            var myId = result[0].id;
-            
-            db.getRequestsByOffset(offset, bg, div, dist, myId)
-                .then(result => {
-                    // console.log(result);
-                    var request = [];
-                    for (var i = 0; i < result.length; i++) {
-                        var each_request = {
-                            request_id: cryptr.encrypt(result[i].id),
-                            post_by_id: cryptr.encrypt(result[i].post_by),
-                            pt_name: result[i].patient,
-                            bg: result[i].BG,
-                            quantity: result[i].quantity,
-                            contact: result[i].contact,
-                            place: result[i].orgname + ', ' + result[i].orgdetails,
-                            requirement: result[i].requirement,
-                            complication: result[i].complication,
-                            approx_date: mysql2JsLocal(result[i].approx_date),
-                            responder_id: cryptr.encrypt(myId),
-                            posted_by_name: result[i].first_name + ' ' + result[i].last_name,
-                            profile_photo: result[i].photo,
-                            responder: 'others'
-                        }
+  const { offset, bg, div, dist } = req.query;
 
-                        if(result[i].post_by == myId) each_request.responder = 'self';
+  if (!req.session.email) {
+    return res.render('message.ejs', {
+      alert_type: 'danger',
+      message: `Your session has timed out. Please log in again.`,
+      type: 'verification'
+    });
+  }
 
-                        request.push(each_request);
-                    }
+  db.getuserid(req.session.email)
+    .then(user => {
+      const myId = user[0].id;
 
-                    // console.log(request);
-                    res.json(request);
-                })
-        })
-    }
-        else {
-            res.render('message.ejs', { alert_type: 'danger', message: `Your session has timed out. Please log in again.`, type: 'verification' });
-        }
+      db.getRequestsByOffset(offset, bg, div, dist, myId)
+        .then(results => {
+          const requestList = results.map((r, i) => ({
+            request_id: cryptr.encrypt(r.id),
+            post_by_id: cryptr.encrypt(r.post_by),
+            pt_name: r.patient,
+            bg: r.BG,
+            quantity: r.quantity,
+            contact: r.contact,
+            place: `${r.orgname}, ${r.orgdetails}`,
+            requirement: r.requirement,
+            complication: r.complication,
+            approx_date: mysql2JsLocal(r.approx_date),
+            responder_id: cryptr.encrypt(myId),
+            posted_by_name: `${r.first_name} ${r.last_name}`,
+            profile_photo: r.photo,
+            responder: r.post_by === myId ? 'self' : 'others'
+          }));
 
-})
+          res.json(requestList);
+        });
+    });
+});
 
 module.exports = router;

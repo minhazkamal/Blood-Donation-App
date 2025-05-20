@@ -1,71 +1,90 @@
-var express = require ('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var db = require ('../models/db_controller');
-var mail = require('../models/mail');
-var mysql = require('mysql');
-var hl = require('handy-log');
-const { body, check, validationResult } = require('express-validator');
-const { array } = require('prop-types');
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const db = require('../models/db_controller');
+const mail = require('../models/mail'); // Still required if sending follow-up emails
+//const hl = require('handy-log');
 const passport = require('passport');
+
 require('../models/passport-setup');
 
-router.use(bodyParser.urlencoded({extended : true}));
+router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
+// Optional middleware to protect routes
 const isLoggedIn = (req, res, next) => {
-    if (req.user) {
-        next();
-    } else {
-        res.sendStatus(401);
-    }
-}
+  if (req.user) {
+    next();
+  } else {
+    res.sendStatus(401);
+  }
+};
 
-// Auth Routes
+// 🔐 Step 1: Start Google OAuth flow
 router.get('/', passport.authenticate('google-signup', { scope: ['profile', 'email'] }));
 
-router.get('/callback', passport.authenticate('google-signup', { failureRedirect: '/signup-google/failed' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
+// 🔐 Step 2: Callback after Google confirms authentication
+router.get(
+  '/callback',
+  passport.authenticate('google-signup', { failureRedirect: '/signup-google/failed' }),
+  function (req, res) {
     res.redirect('/signup-google/good');
-    //res.render('profile.ejs',{name:req.user.displayName,pic:req.user.photos[0].value,email:req.user.emails[0].value});
   }
 );
 
+// ❌ OAuth failed
 router.get('/failed', (req, res) => res.send('You Failed to log in!'));
 
-router.get('/good', (req, res) =>{
+// ✅ OAuth success
+router.get('/good', async (req, res) => {
+  try {
+    const user = req.session?.passport?.user;
 
-    //console.log("profile");
-    var user = req.session.passport.user;
-    //console.log(user);
-    db.EmailCheck(user.emails[0].value)
-    .then(result =>{
-        if(result[0].emailCount == 1) {
-            res.render('signup', {alert: [{msg: 'Email already exists'}]});
-        }
-        else{
-        let newUser = {
-            f_name: user.given_name,
-            l_name: user.family_name,
-            email: user.emails[0].value,
-            joined: new Date(),
-            provider: "google"
-            }
-            db.signup(newUser, function(insert_id, f_name){
-                res.render('message.ejs', {alert_type: 'success', message: `Your account is verified`, type:'verification'});
-            })
-        }
-    })
-    //console.log(req.user.displayName);
-    //res.render('profile.ejs',{name:user.displayName, pic:user.photos[0].value, email:user.emails[0].value});
-})
+    if (!user || !user.emails || !user.emails[0]) {
+      return res.render('message.ejs', {
+        alert_type: 'danger',
+        message: `User information not available from Google.`,
+        type: 'verification',
+      });
+    }
 
+    const email = user.emails[0].value;
+    const existing = await db.EmailCheck(email);
+
+    if (existing[0].emailCount === 1) {
+      return res.render('signup', { alert: [{ msg: 'Email already exists' }] });
+    }
+
+    const newUser = {
+      f_name: user.given_name,
+      l_name: user.family_name,
+      email,
+      joined: new Date(),
+      provider: 'google',
+    };
+
+    db.signup(newUser, function (insert_id, f_name) {
+      res.render('message.ejs', {
+        alert_type: 'success',
+        message: `Your account is verified`,
+        type: 'verification',
+      });
+    });
+  } catch (error) {
+    hl.error(error);
+    res.render('message.ejs', {
+      alert_type: 'danger',
+      message: `Something went wrong during Google signup.`,
+      type: 'verification',
+    });
+  }
+});
+
+// 🚪 Logout route
 router.get('/logout', (req, res) => {
-    req.session = null;
-    req.logout();
-    res.redirect('/');
-})
-
+  req.session = null;
+  req.logout();
+  res.redirect('/');
+});
 
 module.exports = router;

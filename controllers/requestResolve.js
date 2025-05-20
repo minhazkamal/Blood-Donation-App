@@ -1,39 +1,29 @@
-var express = require ('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var db = require ('../models/db_controller');
-var mail = require('../models/mail');
-var mysql = require('mysql');
-var hl = require('handy-log');
-const { body, check, validationResult } = require('express-validator');
-const session = require('express-session');
-var Cryptr = require('cryptr');
-var cryptr = new Cryptr(process.env.SECURITY_KEY);
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
+const db = require('../models/db_controller');
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.SECURITY_KEY);
 
-
-
-router.use(bodyParser.urlencoded({extended : true}));
+router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-//var user_id;
+// Resolve the request using encrypted ID
+router.get('/:encrypted_id', (req, res) => {
+    const { encrypted_id } = req.params;
+    const id = cryptr.decrypt(encrypted_id);
 
-router.get('/:encrypted_id', function(req,res){
-    //console.log('Email Verification');
-    let {encrypted_id} = req.params;
-    let id = cryptr.decrypt(encrypted_id);
-    //console.log(id);
     db.resolveRequestById(id)
-    .then(result =>{
-        res.redirect('/my-profile?tab=request');
-    })
-        
+        .then(() => {
+            res.redirect('/my-profile?tab=request');
+        })
+        .catch(() => {
+            res.render('message.ejs', {
+                alert_type: 'danger',
+                message: 'Error resolving the request. Please try again later.',
+                type: 'mail'
+            });
+        });
 });
-
-// router.post('/:id', function(req,res){
-//     let {id} = req.params;
-//     let user_id = id;
-//     let session = req.session.name;
-//     res.send(`email_activate.ejs ${user_id} ${session}`);
-// });
 
 module.exports = router;
